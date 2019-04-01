@@ -19,12 +19,12 @@ static public class MyEvents extends beaver.Parser.Events {
 	report = new MyEvents();
 :};
 
-%terminals  BEGIN, END, IF, THEN, ELSEIF, OF, NEW, BLOCK, PROCED, SWITCH, CASE, DEFAULT, DO, WHILE, RETURN, READLN, PRINTLN;
+%terminals  BEGIN, END, IF, THEN, ELSEIF, OF, NEW, SWITCH, CASE, DEFAULT, DO, WHILE, RETURN, READLN, PRINTLN;
 %terminals PLUS, MINUS, TIMES, DIVIDED, LPAR, RPAR, EQUAL, COMMA, COLON, SEMICOLON, DBDOT, LBRACKET, RBRACKET, LCURLBR, RCURLBR, CIRCUMFLEX;
-%terminals LESS, LESSEQ, GREATER, GRATEREQ, DIFF, TESTEQ, DIFF, TRUE, FALSE, NULL;
+%terminals LESS, LESSEQ, GREATER, GRATEREQ, DIFF, TESTEQ, TRUE, FALSE, NULL;
 %termminals INT, STR, BOOL;
 %terminals ID, ARRAY, STRUCT, VAR;
-%terminals FUN;
+%terminals FUN, NOT, OR, AND;
 
 %right UNARY_MINUS, UNARY_NOT, UNARY_POINTER;
 %left TIMES, DIVIDED, PLUS, MINUS;
@@ -49,7 +49,7 @@ Program =
 //DECLARATION DES TYPES NOMMES
 
 Type_declaration_part =
-						| ’type ’ Type_declaration_list
+						| Type Type_declaration_list
 						;
 					
 Type_declaration_list =
@@ -58,18 +58,18 @@ Type_declaration_list =
 						;
 					
 Type_declaration =
-					IDENTIFIER  EQUAL type  SEMICOLON;
+					ID  EQUAL type  SEMICOLON;
 					
 					
 //DECLARATION DES TYPES					
 
 Type = 
-		simple_type
-		| named_type
-		| index_type
-		| array_type
-		| pointer_type
-		| structure_type
+		Simple_type
+		| Named_type
+		| Index_type
+		| Array_type
+		| Pointer_type
+		| Structure_type
 		;
 		
 Simple_type = 
@@ -155,7 +155,7 @@ Procedure_definition_list =
 							;
 
 Procedure_definition = 
-						Procedure_definition_head BLOCK
+						Procedure_definition_head Block
 						| Procedure_definition_head SEMICOLON
 						;
 

@@ -44,11 +44,12 @@ LineComment = "//" [^\r\n]* {LineTerminator}?
 	{String}		{ System.out.println("*** String: " + yytext()); return new Symbol(Terminals.STR, yyline, yycolumn); }
 	{Integer}		{ System.out.println("*** Integer: " + yytext()); return new Symbol(Terminals.INT, yyline, yycolumn); }
 	{Boolean}		{ System.out.println("*** Boolean: " + yytext()); return new Symbol(Terminals.BOOL, yyline, yycolumn); }
-	{Identifier}	{ System.out.println("*** " + yytext()); return new Symbol(Terminals.ID, yyline, yycolumn); }
+	{Identifier}	{ System.out.println("*** Identifier: " + yytext()); return new Symbol(Terminals.ID, yyline, yycolumn); }
 	"function"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.FUN, yyline, yycolumn); }
 	"struct"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.STRUCT, yyline, yycolumn); }
 	"array"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.ARRAY, yyline, yycolumn); }
 	"var" 			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.VAR, yyline, yycolumn); }
+	"type"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TYPE, yyline, yycolumn); }
 	
 	
 	"if"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.IF, yyline, yycolumn); }

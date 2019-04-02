@@ -1,41 +1,29 @@
-%package "ubordeaux.deptinfo.compilation.project.main";
-%class "Parser";
-%import "ubordeaux.deptinfo.compilation.project.node.*";
-%import "ubordeaux.deptinfo.compilation.project.type.*";
-%import "ubordeaux.deptinfo.compilation.project.environment.*";
+%import "abstractTree.*";
+%class "ParserExpr";
 
 %embed {: 
-	static class Events extends beaver.Parser.events {
-		public void syntaxError(Symbol token) {
-			System.err.format("*** Erreur de syntaxe en ligne %d, colonne %d. Token inattendu: %s\n",
-				Symbol.getLine(token.getStart()),
-				Symbol.getColumn(token.getStart()),
-				Terminals.NAMES[token.getId()]);
-		}
-	}
-	
-	public void semanticError(String msg, Symbol token) {
-			Systemrr.format("*** " + msg + " ligne %d, colonne %d\n",
-				Symbol.getLine(token.getStart()),
-				Symbol.getColumn(token.getStart()));
-		}
-		
-	private Environment typeEnvironment = new Environment("types");
-	private Environment procedureEnvironment = new Environment("procedures");
-	private StackEnvironment stackEnvironment = new StackEnvironment("local variables stack");
-	private String type_declaration_name;
-	
-:};
 
-%init {: 
-	report = new Events();
+static public class MyEvents extends beaver.Parser.Events {
+	
+	public void syntaxError(Symbol token) {
+		System.err.print("Erreur de syntaxe ligne ");
+		System.err.println(Symbol.getLine(token.getStart()));
+		System.err.print("Token inattendu: ");
+		System.err.println(Terminals.NAMES[token.getId()]);
+	}
+};
+
+:} ;
+
+%init {:
+	report = new MyEvents();
 :};
 
 %terminals  BEGIN, END, IF, THEN, ELSEIF, OF, NEW, SWITCH, CASE, DEFAULT, DO, WHILE, RETURN, READLN, PRINTLN;
 %terminals PLUS, MINUS, TIMES, DIVIDED, LPAR, RPAR, EQUAL, COMMA, COLON, SEMICOLON, DBDOT, LBRACKET, RBRACKET, LCURLBR, RCURLBR, CIRCUMFLEX;
 %terminals LESS, LESSEQ, GREATER, GRATEREQ, DIFF, TESTEQ, TRUE, FALSE, NULL;
 %termminals INT, STR, BOOL;
-%terminals ID, ARRAY, STRUCT, VAR, TYPE;
+%terminals ID, ARRAY, STRUCT, VAR;
 %terminals FUN, NOT, OR, AND;
 
 %right UNARY_MINUS, UNARY_NOT, UNARY_POINTER;
@@ -61,16 +49,16 @@ Program =
 //DECLARATION DES TYPES NOMMES
 
 Type_declaration_part =
-						| TYPE Type_declaration_list
+						| Type Type_declaration_list
 						;
 					
 Type_declaration_list =
 						Type_declaration_list  Type_declaration
-						| Type_declaration
+						| type_declaration
 						;
 					
 Type_declaration =
-					ID  EQUAL Type  SEMICOLON;
+					ID  EQUAL type  SEMICOLON;
 					
 					
 //DECLARATION DES TYPES					

@@ -6,6 +6,7 @@ import java.util.Map;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 
 //Gere les variables locales + globales
+@Deprecated 
 public class EnvironmentVariable {
 	
 	private Map <String, Type> table_local_variable;

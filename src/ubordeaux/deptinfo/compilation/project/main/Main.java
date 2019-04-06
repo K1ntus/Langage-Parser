@@ -1,6 +1,9 @@
-package fr.groupname.compilator;
+package ubordeaux.deptinfo.compilation.project.main;
 
 import java.io.FileReader;
+
+import ubordeaux.deptinfo.compilation.project.node.Node;
+
 
 //import ubordeaux.deptinfo.compilation.project.node.Node;
 
@@ -13,7 +16,7 @@ public class Main {
 				if (arg.equals("-checkType"))
 					checksType = true;
 			} else {
-				Scanner input = new Scanner(new FileReader(arg));
+				ScannerExpr input = new ScannerExpr(new FileReader(arg));
 				Parser parser = new Parser();
 				try {
 					System.err.println("*** Fichier " + arg);

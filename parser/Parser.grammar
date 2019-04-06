@@ -2,14 +2,16 @@
 // version 20190401
 //////////////////////////////////////////////////
 
-%package "fr.groupname.compilator.main";
+%package "ubordeaux.deptinfo.compilation.project.main";
 %class "Parser";
-%import "fr.groupname.compilator.tree.*";
-%import "fr.groupname.compilator.type.*";
+
+%import "ubordeaux.deptinfo.compilation.project.node.*";
+%import "ubordeaux.deptinfo.compilation.project.type.*";
+
 %import "fr.groupname.compilator.environment.*";
 
 %embed {: 
-	static class Events extends beaver.Parser.events {
+	static class Events extends beaver.Parser.Events {
 		public void syntaxError(Symbol token) {
 			System.err.format("*** Erreur de syntaxe en ligne %d, colonne %d. Token inattendu: %s\n",
 				Symbol.getLine(token.getStart()),
@@ -19,7 +21,7 @@
 	}
 	
 	public void semanticError(String msg, Symbol token) {
-			Systemrr.format("*** " + msg + " ligne %d, colonne %d\n",
+			System.err.format("*** " + msg + " ligne %d, colonne %d\n",
 				Symbol.getLine(token.getStart()),
 				Symbol.getColumn(token.getStart()));
 		}
@@ -36,23 +38,33 @@
 :};
 
 // KEYWORDS
-%terminals TOKEN_TYPE, TOKEN_STRING, TOKEN_INTEGER, TOKEN_BOOLEAN, TOKEN_ARRAY, TOKEN_OF, TOKEN_STRUCT;
-%terminals TOKEN_VAR, TOKEN_PROCEDURE, TOKEN_FUNCTION, TOKEN_BEGIN, TOKEN_END, TOKEN_NEW, TOKEN_DISPOSE;
-%terminals TOKEN_PRINTLN, TOKEN_READLN, TOKEN_RETURN, TOKEN_IF, TOKEN_THEN, TOKEN_ELSE, TOKEN_WHILE, TOKEN_DO;
-%terminals TOKEN_SWITCH, TOKEN_CASE, TOKEN_DEFAULT;
+%terminals TOKEN_TYPE, TOKEN_STRING, TOKEN_INTEGER, TOKEN_BOOLEAN, TOKEN_ARRAY, TOKEN_OF, TOKEN_STRUCT;	//OK
+%terminals TOKEN_VAR, TOKEN_PROCEDURE, TOKEN_FUNCTION, TOKEN_BEGIN, TOKEN_END, TOKEN_NEW, TOKEN_DISPOSE;	//OK
+
+%terminals TOKEN_PRINTLN, TOKEN_READLN, TOKEN_RETURN, TOKEN_IF, TOKEN_THEN, TOKEN_ELSE, TOKEN_WHILE, TOKEN_DO;	//OK
+%terminals TOKEN_SWITCH, TOKEN_CASE, TOKEN_DEFAULT;	//OK
 
 // PONCTS
-%terminals TOKEN_SEMIC, TOKEN_DOTDOT, TOKEN_COLON, TOKEN_COMMA;
-%terminals TOKEN_LPAR, TOKEN_RPAR, TOKEN_LBRACKET, TOKEN_RBRACKET, TOKEN_LBRACE, TOKEN_RBRACE;
+%terminals TOKEN_SEMIC, TOKEN_DOTDOT, TOKEN_COLON, TOKEN_COMMA; //OK
+%terminals TOKEN_LPAR, TOKEN_RPAR, TOKEN_LBRACKET, TOKEN_RBRACKET, TOKEN_LBRACE, TOKEN_RBRACE;	//OK
 
 // OPERATORS
 %terminals TOKEN_AFF, TOKEN_CIRC;
-%terminals TOKEN_PLUS, TOKEN_MINUS, TOKEN_TIMES, TOKEN_DIV;
-%terminals TOKEN_AND, TOKEN_OR, TOKEN_NOT;
-%terminals TOKEN_LT, TOKEN_LE, TOKEN_GT, TOKEN_GE, TOKEN_EQ, TOKEN_NE;
+%terminals TOKEN_PLUS, TOKEN_MINUS, TOKEN_TIMES, TOKEN_DIV;	//OK
+%terminals TOKEN_AND, TOKEN_OR, TOKEN_NOT;	//OK
+%terminals TOKEN_LT, TOKEN_LE, TOKEN_GT, TOKEN_GE, TOKEN_EQ, TOKEN_NE;	//OK
 
 // LITERALS
-%terminals TOKEN_IDENTIFIER, TOKEN_LIT_INTEGER, TOKEN_LIT_STRING, TOKEN_TRUE, TOKEN_FALSE, TOKEN_NULL; 
+%terminals TOKEN_IDENTIFIER, TOKEN_LIT_INTEGER, TOKEN_LIT_STRING, TOKEN_TRUE, TOKEN_FALSE, TOKEN_NULL; //OK
+
+
+//PRIOTITIES
+%right TOKEN_AFF, TOKEN_CIRC;
+%left TOKEN_AND, TOKEN_NOT, TOKEN_OR;
+%left TOKEN_PLUS, TOKEN_MINUS, TOKEN_TIMES, TOKEN_DIV;
+%left TOKEN_LT, TOKEN_LE, TOKEN_GT, TOKEN_GE, TOKEN_EQ, TOKEN_NE;
+
+%left TOKEN_ELSE, TOKEN_IF;
 
 /***
 * A completer
@@ -126,7 +138,7 @@ simple_type=
 	;
 	
 named_type=
-	TOKEN_IDENTIFIER	empty
+	TOKEN_IDENTIFIER /*empty*/
 	;
 	
 index_type=
@@ -135,7 +147,7 @@ index_type=
 	;
 	
 enumerated_type=
-	TOKEN_LPAR identifier_listist TOKEN_RPAR 
+	TOKEN_LPAR identifier_list TOKEN_RPAR 
 	;
 	
 subrange_type= 
@@ -239,7 +251,7 @@ block=
 	;
 
 statement_list=
-	statement_listl statement
+	statement_list statement
 	| statement
 	;
 	

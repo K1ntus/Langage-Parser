@@ -43,9 +43,11 @@
 			<fileset dir="lib" includes="jflex-full-1.7.0.jar" />
 		</path>
 		<java classname="ubordeaux.deptinfo.compilation.project.main.Main" classpath="bin" classpathref="beaverclasspath" output="data/output">
-			<arg value="data/testParser-1.lea" />
+			<arg value="data/prog1.lea" />
+			<!--
 			<arg value="-checkType" />
 			<arg value="data/testType-1.lea" />
+			-->
 		</java>
 	</target>
 

@@ -25,10 +25,8 @@ private String annotation_type = "";
 
 Identifier = [:jletter:] [:jletterdigit:]*
 
-//Integer = [0-9]+
-//String = \"[^\"]*\";
-Integer = "integer"
-String = " string"
+Integer = [0-9]+
+String = \"[^\"]*\";
 
 
 Boolean = true|false
@@ -52,9 +50,9 @@ LineComment = "//" [^\r\n]* {LineTerminator}?
 	"array"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_ARRAY, yyline, yycolumn); }
 	"type"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_TYPE, yyline, yycolumn); }
 	"of"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_OF, yyline, yycolumn); }
-	"int"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_INTEGER, yyline, yycolumn); }
-	"string"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_STRING, yyline, yycolumn); }
-	"boolean"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_BOOLEAN, yyline, yycolumn); }
+	"integer"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_INTEGER, yyline, yycolumn); }
+	"string"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_STRING, yyline, yycolumn); }
+	"boolean"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_BOOLEAN, yyline, yycolumn); }
 	
 	
 	"new"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_NEW, yyline, yycolumn); }

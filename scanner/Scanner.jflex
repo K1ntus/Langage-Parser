@@ -108,7 +108,7 @@ LineComment = "//" [^\r\n]* {LineTerminator}?
 	"||"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_OR, yyline, yycolumn); }
 	"&&"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_AND, yyline, yycolumn); }
 	
-	"=" 	        { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_EQ, yyline, yycolumn); }
+	"=" 	        { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_AFF, yyline, yycolumn); }
 	
 	
 	{String}		{ System.out.println("*** String: " + yytext()); return new Symbol(Terminals.TOKEN_LIT_STRING, yyline, yycolumn); }

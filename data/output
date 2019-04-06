@@ -8,7 +8,27 @@
 *** Identifier: a
 *** =
 *** Integer: 100
+*** ;
 *** while
-*** Erreur de syntaxe en ligne 0, colonne 5. Token inattendu: TOKEN_WHILE
 *** (
-*** Erreur de syntaxe: data/prog1.lea:Cannot recover from the syntax error
+*** Identifier: a
+*** >=
+*** Integer: 0
+*** )
+*** do
+*** begin
+*** println
+*** (
+*** Identifier: a
+*** )
+*** ;
+*** Identifier: a
+*** =
+*** Identifier: a
+*** -
+*** Integer: 1
+*** ;
+*** end
+*** end
+
+*** Analyse syntaxique ok

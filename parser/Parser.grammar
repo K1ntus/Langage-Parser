@@ -7,6 +7,7 @@
 
 %import "java.util.Iterator";
 %import "java.util.List";
+%import "java.util.Scanner";
 %import "ubordeaux.deptinfo.compilation.project.node.*";
 %import "ubordeaux.deptinfo.compilation.project.type.*";
 
@@ -99,10 +100,14 @@
 ***/
 %typeof TOKEN_LIT_INTEGER = "Integer";
 %typeof TOKEN_LIT_STRING, TOKEN_IDENTIFIER = "String";
-%typeof type = "Type";
+%typeof println_statement = "void";
 
-%typeof variable_access, expression = "NodeExp";
+%typeof type = "Type";
+%typeof feature_type = "TypeFeature";
+%typeof feature_list_type = "TypeFeatureList";
+
 %typeof statement = "Node";
+%typeof variable_access, expression = "NodeExp";
 %typeof literal  = "NodeLiteral";
 %typeof case_statement = "NodeCase";
 
@@ -143,7 +148,7 @@ type=
 	| index_type	
 	| array_type		
 	| pointer_type	//OK
-	| structure_type.t 	//{: return new TypeStruct(t);	:}
+	| structure_type.t 	//OK
 	;
 	
 //OK
@@ -186,17 +191,19 @@ pointer_type=
 	;
 	
 structure_type=
-	TOKEN_STRUCT TOKEN_LBRACE feature_list_type TOKEN_RBRACE
+	TOKEN_STRUCT TOKEN_LBRACE feature_list_type.list TOKEN_RBRACE	{:	return new TypeStruct(list); :}
 	;
 	
+	
 feature_list_type=
-	feature_list_type feature_type
-	| feature_type
+	feature_list_type.list feature_type.elem	{: list.add(elem); return list; :}
+	| feature_type.elem			{: TypeFeatureList list = new TypeFeatureList(elem); return list; :}
 	;
 	
 feature_type=
-	TOKEN_IDENTIFIER TOKEN_COLON type TOKEN_SEMIC
+	TOKEN_IDENTIFIER.id TOKEN_COLON type.t TOKEN_SEMIC	{: return new TypeFeature(id, t); :}
 	;
+	
 	
 //Partie avant le begin ou on declare les variables globales (ou apres les locals)
 variable_declaration_part= 
@@ -212,6 +219,7 @@ variable_declaration_list=
 variable_declaration=
 	identifier_list.list TOKEN_COLON type.t TOKEN_SEMIC 	
 	;
+	
 	
 //OK
 identifier_list=
@@ -283,8 +291,8 @@ simple_statement=
 	| procedure_statement
 	| new_statement			//OK
 	| dispose_statement		//OK
-	| println_statement
-	| readln_statement
+	| println_statement		//OK
+	| readln_statement		//OK
 	| return_statement		//OK
 	;
 	
@@ -328,12 +336,30 @@ dispose_statement=
 	TOKEN_DISPOSE variable_access.node TOKEN_SEMIC	{: return new NodeDispose(node); :}
 	;
 	
+//OK
 println_statement=
-	TOKEN_PRINTLN expression TOKEN_SEMIC
+	TOKEN_PRINTLN expression.e TOKEN_SEMIC	
+		{: 
+			return new NodeCallFct(
+				"println", 
+				new TypeFunct("println", 
+					new TypeTuple(new TypeString()), 
+					new TypeVoid()),
+				new NodeList(e));
+		:}
 	;	
-	
+
+//OK	
 readln_statement=
-	TOKEN_READLN expression TOKEN_SEMIC
+	TOKEN_READLN expression.e TOKEN_SEMIC	
+		{: 
+			return new NodeCallFct(
+				"readln", 
+				new TypeFunct("readln", 
+					new TypeTuple(), 
+					e.getType()),
+				new NodeList());
+		:}
 	;
 
 //OK	
@@ -392,7 +418,7 @@ expression=
 	| TOKEN_MINUS expression.e					{: return new NodeOp("u_minus", e); :}
 	| expression.e1 TOKEN_OR expression.e2		{: return new NodeRel("or", e1, e2); :}
 	| expression.e1 TOKEN_AND expression.e2		{: return new NodeRel("an", e1, e2); :}
-	| TOKEN_NOT expression
+	| TOKEN_NOT expression.e					{: return new NodeRel("no", e, new NodeLiteral(new TypeBoolean(), false)); :}
 	| expression.e1 TOKEN_LT expression.e2		{: return new NodeRel("lt", e1, e2); :} 
 	| expression.e1 TOKEN_LE expression.e2		{: return new NodeRel("le", e1, e2); :} 
 	| expression.e1 TOKEN_GT expression.e2		{: return new NodeRel("gt", e1, e2); :} 

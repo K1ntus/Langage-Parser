@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Iterator;
 import ubordeaux.deptinfo.compilation.project.type.*;
 import fr.groupname.compilator.environment.*;
+import java.util.Scanner;
 import beaver.*;
 import java.util.ArrayList;
 import ubordeaux.deptinfo.compilation.project.node.*;
@@ -183,18 +184,38 @@ public class Parser extends beaver.Parser {
 					 return new TypePointer(t);
 				}
 			},
-			RETURN4,	// [27] structure_type = TOKEN_STRUCT TOKEN_LBRACE feature_list_type TOKEN_RBRACE; returns 'TOKEN_RBRACE' although none is marked
-			new Action() {	// [28] feature_list_type = feature_list_type feature_type
+			new Action() {	// [27] structure_type = TOKEN_STRUCT TOKEN_LBRACE feature_list_type.list TOKEN_RBRACE
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 2]); return _symbols[offset + 1];
+					final Symbol _symbol_list = _symbols[offset + 3];
+					final TypeFeatureList list = (TypeFeatureList) _symbol_list.value;
+						return new TypeStruct(list);
 				}
 			},
-			new Action() {	// [29] feature_list_type = feature_type
+			new Action() {	// [28] feature_list_type = feature_list_type.list feature_type.elem
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1]); return new Symbol(lst);
+					final Symbol _symbol_list = _symbols[offset + 1];
+					final TypeFeatureList list = (TypeFeatureList) _symbol_list.value;
+					final Symbol _symbol_elem = _symbols[offset + 2];
+					final TypeFeature elem = (TypeFeature) _symbol_elem.value;
+					 list.add(elem); return list;
 				}
 			},
-			RETURN4,	// [30] feature_type = TOKEN_IDENTIFIER TOKEN_COLON type TOKEN_SEMIC; returns 'TOKEN_SEMIC' although none is marked
+			new Action() {	// [29] feature_list_type = feature_type.elem
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol _symbol_elem = _symbols[offset + 1];
+					final TypeFeature elem = (TypeFeature) _symbol_elem.value;
+					 TypeFeatureList list = new TypeFeatureList(elem); return list;
+				}
+			},
+			new Action() {	// [30] feature_type = TOKEN_IDENTIFIER.id TOKEN_COLON type.t TOKEN_SEMIC
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol _symbol_id = _symbols[offset + 1];
+					final String id = (String) _symbol_id.value;
+					final Symbol _symbol_t = _symbols[offset + 3];
+					final Type t = (Type) _symbol_t.value;
+					 return new TypeFeature(id, t);
+				}
+			},
 			Action.NONE,  	// [31] variable_declaration_part = 
 			RETURN2,	// [32] variable_declaration_part = TOKEN_VAR variable_declaration_list; returns 'variable_declaration_list' although none is marked
 			new Action() {	// [33] variable_declaration_list = variable_declaration_list.list variable_declaration.var
@@ -330,8 +351,32 @@ public class Parser extends beaver.Parser {
 					 return new NodeDispose(node);
 				}
 			},
-			RETURN3,	// [74] println_statement = TOKEN_PRINTLN expression TOKEN_SEMIC; returns 'TOKEN_SEMIC' although none is marked
-			RETURN3,	// [75] readln_statement = TOKEN_READLN expression TOKEN_SEMIC; returns 'TOKEN_SEMIC' although none is marked
+			new Action() {	// [74] println_statement = TOKEN_PRINTLN expression.e TOKEN_SEMIC
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol _symbol_e = _symbols[offset + 2];
+					final NodeExp e = (NodeExp) _symbol_e.value;
+					 
+			return new NodeCallFct(
+				"println", 
+				new TypeFunct("println", 
+					new TypeTuple(new TypeString()), 
+					new TypeVoid()),
+				new NodeList(e));
+				}
+			},
+			new Action() {	// [75] readln_statement = TOKEN_READLN expression.e TOKEN_SEMIC
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol _symbol_e = _symbols[offset + 2];
+					final NodeExp e = (NodeExp) _symbol_e.value;
+					 
+			return new NodeCallFct(
+				"readln", 
+				new TypeFunct("readln", 
+					new TypeTuple(), 
+					e.getType()),
+				new NodeList());
+				}
+			},
 			new Action() {	// [76] return_statement = TOKEN_RETURN expression.node TOKEN_SEMIC
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_node = _symbols[offset + 2];
@@ -477,7 +522,13 @@ public class Parser extends beaver.Parser {
 					 return new NodeRel("an", e1, e2);
 				}
 			},
-			RETURN2,	// [99] expression = TOKEN_NOT expression; returns 'expression' although none is marked
+			new Action() {	// [99] expression = TOKEN_NOT expression.e
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol _symbol_e = _symbols[offset + 2];
+					final NodeExp e = (NodeExp) _symbol_e.value;
+					 return new NodeRel("no", e, new NodeLiteral(new TypeBoolean(), false));
+				}
+			},
 			new Action() {	// [100] expression = expression.e1 TOKEN_LT expression.e2
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_e1 = _symbols[offset + 1];

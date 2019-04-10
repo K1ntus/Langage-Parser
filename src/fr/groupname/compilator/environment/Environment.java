@@ -29,11 +29,11 @@ public class Environment {
 
 	public void putVariable(String t, Type n) {
 		table.put(t, n);
-		System.out.println("Enregistre " + name + ": " + n.toString());
+		System.out.println("** Enregistre " + name + ": " + n.toString());
 	}
 
 	public Type getVariableValue(String t) {
-		System.out.println("Retrouve " + name + ": " + t + " " + table.get(t));
+		System.out.println("** Retrouve " + name + ": " + t + " " + table.get(t));
 		return table.get(t);
 	}
 	

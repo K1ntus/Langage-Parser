@@ -338,7 +338,8 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_e2 = _symbols[offset + 3];
 					final NodeExp e2 = (NodeExp) _symbol_e2.value;
 					  
-																//stackEnvironment.add_node_to_latest_portability(new NodeId(str, t), new NodeLiteral(t, 0));
+																System.out.println(e1 + " <- " + e2); 
+																//stackEnvironment.add_node_to_latest_portability(e1, e2);
 																return new NodeAssign(e1, e2);
 				}
 			},
@@ -354,20 +355,20 @@ public class Parser extends beaver.Parser {
 			},
 			Action.NONE,  	// [69] expression_part = 
 			Action.RETURN,	// [70] expression_part = expression_list
-			new Action() {	// [71] expression_list = expression_list.list TOKEN_COMMA expression.expr
+			new Action() {	// [71] expression_list = expression_list.root TOKEN_COMMA expression.elt
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_list = _symbols[offset + 1];
-					final NodeList list = (NodeList) _symbol_list.value;
-					final Symbol _symbol_expr = _symbols[offset + 3];
-					final NodeExp expr = (NodeExp) _symbol_expr.value;
-					 list.add(expr); return list;
+					final Symbol _symbol_root = _symbols[offset + 1];
+					final NodeList root = (NodeList) _symbol_root.value;
+					final Symbol _symbol_elt = _symbols[offset + 3];
+					final NodeExp elt = (NodeExp) _symbol_elt.value;
+					 root.add(elt); return root;
 				}
 			},
 			new Action() {	// [72] expression_list = expression.expr
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_expr = _symbols[offset + 1];
 					final NodeExp expr = (NodeExp) _symbol_expr.value;
-					 NodeList list = new NodeList(); list.add(expr); return list;
+					 return new NodeList(expr);
 				}
 			},
 			new Action() {	// [73] new_statement = TOKEN_NEW variable_access.node TOKEN_SEMIC
@@ -417,7 +418,7 @@ public class Parser extends beaver.Parser {
 					 return new NodeReturn(node);
 				}
 			},
-			Action.RETURN,	// [78] structured_statement = block
+			Action.RETURN,	// [78] structured_statement = block.n
 			Action.RETURN,	// [79] structured_statement = if_statement
 			Action.RETURN,	// [80] structured_statement = while_statement
 			Action.RETURN,	// [81] structured_statement = switch_statement
@@ -628,7 +629,13 @@ public class Parser extends beaver.Parser {
 					 return new NodeRel("ne", e1, e2);
 				}
 			},
-			RETURN3,	// [107] expression = TOKEN_LPAR expression TOKEN_RPAR; returns 'TOKEN_RPAR' although none is marked
+			new Action() {	// [107] expression = TOKEN_LPAR expression.e TOKEN_RPAR
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol _symbol_e = _symbols[offset + 2];
+					final NodeExp e = (NodeExp) _symbol_e.value;
+					 return e;
+				}
+			},
 			Action.RETURN,	// [108] expression = procedure_expression
 			Action.RETURN,	// [109] expression = variable_access
 			Action.RETURN,	// [110] expression = literal

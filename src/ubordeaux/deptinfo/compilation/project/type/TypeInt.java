@@ -21,7 +21,7 @@ public final class TypeInt extends TypeAtomic {
 
 	@Override
 	public String toString() {
-		return super.toString() + '_' + getConst_value();
+		return super.toString();// + '_' + getConst_value();
 	}
 
 	public Integer getConst_value() {

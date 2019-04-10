@@ -31,5 +31,9 @@ public final class NodeLiteral extends NodeExp {
 	public NodeLiteral clone() {
 		return new NodeLiteral(type, value);
 	}
+	
+	public Object getValue() {
+		return value;
+	}
 
 }

@@ -201,7 +201,7 @@ structure_type=
 	
 feature_list_type=
 	feature_list_type.list feature_type.elem	{: list.add(elem); return list; :}
-	| feature_type.elem			{: TypeFeatureList list = new TypeFeatureList(elem); return list; :}
+	| feature_type.elem							{: TypeFeatureList list = new TypeFeatureList(elem); return list; :}
 	;
 	
 feature_type=
@@ -287,7 +287,7 @@ argt=
 block=
 	variable_declaration_part 		//Inserer varaible dans stack environnement
 	TOKEN_BEGIN	push_stackenv		//On empile stackenv
-	statement_list.list 					//commentaire daube du cul, pas ecouter: Inserer variable dans env
+	statement_list.list 			
 	TOKEN_END	pop_stackenv 	{: return _symbol_list; :}	//On depile stackenv et return
 	;
 pop_stackenv  =		{:	stackEnvironment.getEnvironment().pop(); return new EmptySymbol();	:}	;
@@ -298,13 +298,7 @@ statement_list=
 	statement_list.root statement.elt	{: root.add(elt); return root; :}
 	| statement.elt	{: return new NodeList(elt); :}
 	;
-/*
-* c) pour implementer une liste, faites comme ceci:
-* xxx_list=
-*	xxx_list.list xxx.elt {: list.add(elt); return list; :}
-*	| xxx.elt {: MyList list = new MyList(); list.add(elt); return list; :}
-*	;
-*/
+
 
 statement=
 	simple_statement	
@@ -325,7 +319,8 @@ simple_statement=
 assignment_statement=
 	variable_access.e1 TOKEN_AFF expression.e2 TOKEN_SEMIC	
 															{:  
-																//stackEnvironment.add_node_to_latest_portability(new NodeId(str, t), new NodeLiteral(t, 0));
+																System.out.println(e1 + " <- " + e2); 
+																//stackEnvironment.add_node_to_latest_portability(e1, e2);
 																return new NodeAssign(e1, e2); 
 															:}
 	;
@@ -351,8 +346,8 @@ expression_part=
 
 //OK	
 expression_list=
-	expression_list.list TOKEN_COMMA expression.expr	{: list.add(expr); return list; :}
-	| expression.expr									{: NodeList list = new NodeList(); list.add(expr); return list; :}
+	expression_list.root TOKEN_COMMA expression.elt	{: root.add(elt); return root; :}
+	| expression.expr									{: return new NodeList(expr); :}
 	;
 
 //OK	
@@ -432,7 +427,7 @@ case_statement=
 	;
 	
 	
-//Recup les valeurs stockees dans les environnements
+//Recup les valeurs stockees dans les environnements (ou pas, à check)
 variable_access=
 	TOKEN_IDENTIFIER.name		{: return new NodeId(name, new TypeInt());	:}
 	| variable_access.var TOKEN_LBRACKET expression.e TOKEN_RBRACKET
@@ -454,7 +449,7 @@ expression=
 	| expression.e1 TOKEN_GE expression.e2		{: return new NodeRel("ge", e1, e2); :} 	
 	| expression.e1 TOKEN_EQ expression.e2		{: return new NodeRel("eq", e1, e2); :} 
 	| expression.e1 TOKEN_NE expression.e2		{: return new NodeRel("ne", e1, e2); :} 
-	| TOKEN_LPAR expression TOKEN_RPAR
+	| TOKEN_LPAR expression.e TOKEN_RPAR		{: return e; :}
 	| procedure_expression
 	| variable_access		//OK
 	| literal				//OK

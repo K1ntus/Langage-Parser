@@ -1,29 +1,17 @@
 *** Fichier data/prog1.lea
-*** type
-*** chaine
-*** =
-*** string
-*** ;
-*** entier
-*** =
-*** integer
-*** ;
-*** booleen
-*** =
-*** boolean
-*** ;
 *** var
 *** a
 *** :
 *** integer
 *** ;
 *** begin
-* Enregistre ID(TypeInt_null, a)
+* Enregistre ID(TypeInt, a)
 *** a
 *** =
 *** 100
 *** ;
 *** while
+ID(TypeInt, a) <- LIT(TypeInt, 100)
 *** (
 *** a
 *** >=
@@ -43,8 +31,11 @@
 *** 1
 *** ;
 *** end
+ID(TypeInt, a) <- NodeOp(ID(TypeInt, a), LIT(TypeInt, 1))
 *** end
 
 *** Analyse syntaxique ok
-Arbre: 
-NodeList(NodeAssign(ID(TypeInt_null, a), LIT(TypeInt_null, 100)), NodeWhile(NULL, NodeList(println_NodeCallFct(NodeList(NULL)), NodeAssign(ID(TypeInt_null, a), NodeOp(ID(TypeInt_null, a), LIT(TypeInt_null, 1))))))
+
+
+Arbre Principal: 
+NodeList(NodeAssign(ID(TypeInt, a), LIT(TypeInt, 100)), NodeWhile(NodeRel(ID(TypeInt, a), LIT(TypeInt, 0)), NodeList(println_NodeCallFct(NodeList(ID(TypeInt, a))), NodeAssign(ID(TypeInt, a), NodeOp(ID(TypeInt, a), LIT(TypeInt, 1))))))

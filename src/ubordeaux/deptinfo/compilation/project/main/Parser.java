@@ -2,10 +2,13 @@ package ubordeaux.deptinfo.compilation.project.main;
 
 import java.util.List;
 import java.util.Iterator;
+import java.util.Map;
 import ubordeaux.deptinfo.compilation.project.type.*;
 import fr.groupname.compilator.environment.*;
 import java.util.Scanner;
+import java.util.HashMap;
 import beaver.*;
+import java.util.Stack;
 import java.util.ArrayList;
 import ubordeaux.deptinfo.compilation.project.node.*;
 

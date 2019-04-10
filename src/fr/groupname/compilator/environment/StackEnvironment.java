@@ -64,16 +64,33 @@ public class StackEnvironment {
 		return true;
 	}
 	
+	
 	public void add_node_to_latest_portability(NodeId id, NodeLiteral n) {
 		System.out.println("* Enregistre " + id.toString());
 		this.get_last_portability().put(id, n);
 	}
-	
+
+
 	/*
 	public void new_portability(NodeLiteral first) {
 		List<NodeLiteral> array = new ArrayList<>();
 		array.add(first);
 		environment_variable_value.push(array);
 	}*/
+	
+	/**
+	 * @return the environment
+	 */
+	public Stack<Map<NodeId, NodeLiteral>> getEnvironment() {
+		return environment;
+	}
+
+	/**
+	 * @param environment the environment to set
+	 */
+	public void setEnvironment(Stack<Map<NodeId, NodeLiteral>> environment) {
+		this.environment = environment;
+	}
+	
 	
 }

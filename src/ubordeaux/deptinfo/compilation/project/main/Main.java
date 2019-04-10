@@ -21,6 +21,9 @@ public class Main {
 				Parser parser = new Parser();
 				try {
 					System.err.println("*** Fichier " + arg);
+					//System.err.println("[INFO] $   : single line comment.");
+					System.err.println("[INFO] $$  : multiple line comment.");
+					System.err.println("[INFO] $$$ : documentation comment.\n\n");
 					Node result = (Node) parser.parse(input);
 					System.err.println("*** Analyse syntaxique ok");
 					if (checksType) {

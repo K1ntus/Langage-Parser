@@ -43,9 +43,9 @@ HexaValue = 0x[a-fA-F0-9_]*
 
 <YYINITIAL> {
 
-	"/**"			{System.out.println("*** Documentation Comment:"); yybegin(COMMENT_DOC);}
-	"/*"			{System.out.println("*** Multiple Lines Comment:"); yybegin(COMMENT);}
-	{LineComment}	{System.out.print("*** LineComment: " + yytext()); }
+	"/**"			{System.out.println("$$$"); yybegin(COMMENT_DOC);}
+	"/*"			{System.out.println("$$"); yybegin(COMMENT);}
+	{LineComment}	{System.out.print(yytext()); }
 	
 	"struct"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_STRUCT, yyline, yycolumn); }
 	"array"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_ARRAY, yyline, yycolumn); }
@@ -127,14 +127,14 @@ HexaValue = 0x[a-fA-F0-9_]*
 
 
 <COMMENT>{
-	"*/" {System.out.println("End of the Multiple Lines Comment !"); yybegin(YYINITIAL);}
-	[^]|\n {System.out.print(yytext());}
+	"*/" 		{System.out.println("$$"); yybegin(YYINITIAL);}
+	[^]|\n 		{System.out.print(yytext());}
 }
 
 <COMMENT_DOC>{
 	"@"	{yybegin(ANNOTATION);}
 	
-	"*/" {System.out.println("End of the Documentation"); yybegin(YYINITIAL);}
+	"*/" {System.out.println("$$$"); yybegin(YYINITIAL);}
 	
 	[^]|\n {System.out.print(yytext());}
 }

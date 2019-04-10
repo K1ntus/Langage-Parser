@@ -1,4 +1,8 @@
-
+/* First program used to test the 
+compilator !
+//Can change the tested one with the build.xml
+file '"!
+*/
 type
 chaine = string;
 entier = integer;

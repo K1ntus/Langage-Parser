@@ -1,26 +1,71 @@
 package fr.groupname.compilator.environment;
 
-public class Environment {
+import java.util.HashMap;
+import java.util.Map;
 
-	private EnvironmentEnum env_enum;
-	private TypeEnvironment env_type;
-	private EnvironmentFunction env_function;
-	private EnvironmentVariable env_variable;
+import ubordeaux.deptinfo.compilation.project.type.Type;
+
+public class Environment {
+	private String name;
+	private Map<String, Type> table;
+
 	
 	public Environment(){
-		this.env_enum = new EnvironmentEnum();
-		this.env_type = new TypeEnvironment();
-		this.env_function = new EnvironmentFunction();
-		this.env_variable = new EnvironmentVariable();
+		table = new HashMap<String, Type>();
 	}
 	
 	/**
-	 * 
-	 * 
-	 * 
-	 * @param environment_type (equals: "types", "procedures"
+	 * @param environment_type (equals: "types", "procedures")
 	 */
-	public Environment(String environment_type) {
-		
+	public Environment(String name) {
+		this();
+		this.name = name;
+	}
+	
+	
+	
+
+	
+
+	public void putVariable(String t, Type n) {
+		table.put(t, n);
+		System.out.println("Enregistre " + name + ": " + n.toString());
+	}
+
+	public Type getVariableValue(String t) {
+		System.out.println("Retrouve " + name + ": " + t + " " + table.get(t));
+		return table.get(t);
+	}
+	
+	
+	
+	
+	
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @return the env
+	 */
+	public Map<String, Type> getEnv() {
+		return table;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @param env the env to set
+	 */
+	public void setEnv(Map<String, Type> env) {
+		this.table = env;
 	}
 }

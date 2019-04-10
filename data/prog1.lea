@@ -1,3 +1,9 @@
+
+type
+chaine = string;
+entier = integer;
+booleen = boolean;
+
 var
 a: integer;
 

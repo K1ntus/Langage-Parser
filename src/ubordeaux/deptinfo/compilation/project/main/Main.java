@@ -2,6 +2,7 @@ package ubordeaux.deptinfo.compilation.project.main;
 
 import java.io.FileReader;
 
+import fr.groupname.compilator.environment.StackEnvironment;
 import ubordeaux.deptinfo.compilation.project.node.Node;
 
 
@@ -28,6 +29,10 @@ public class Main {
 						else
 							System.err.println("*** Typage correct");
 					}
+
+					System.out.println("\n\nArbre Principal: ");
+					System.out.println(result.toString());
+					
 				} catch (beaver.Parser.Exception e) {
 					System.err.println("*** Erreur de syntaxe: " + arg + ":" + e.getMessage());
 				}

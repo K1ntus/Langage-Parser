@@ -13,7 +13,8 @@ public final class NodeId extends NodeExp {
 	}
 
 	public String toString() {
-		return this.getClass().getSimpleName() + "#" + name + ':' + type + '#';
+		return "ID("+type+", "+name+")";
+		//return this.getClass().getSimpleName() + "#" + name + ':' + type + '#';
 	}
 
 	@Override

@@ -1070,10 +1070,7 @@ private String annotation_type = "";
             // fall through
           case 95: break;
           case 27: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn, new Integer(
-																																	Integer.decode(yytext())
-																																		)
-																																	);
+            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn, new Integer(Integer.decode(yytext())) );
             } 
             // fall through
           case 96: break;

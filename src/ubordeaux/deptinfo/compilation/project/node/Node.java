@@ -38,7 +38,12 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 				first = false;
 			else
 				ret += ", ";
-			ret += elt.toString();
+			try {
+				ret += elt.toString(); 
+			}
+			catch(NullPointerException e) {
+				ret+= "NULL";
+			}
 		}
 		if (elts.size() > 0)
 			ret += ')';

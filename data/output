@@ -1,56 +1,50 @@
-*** Fichier data/progr2.lea
-*** LineComment: //
-*** LineComment: // gestion des variables statiques
-*** LineComment: //
+*** Fichier data/prog1.lea
+*** type
+*** chaine
+*** =
+*** string
+*** ;
+*** entier
+*** =
+*** integer
+*** ;
+*** booleen
+*** =
+*** boolean
+*** ;
 *** var
-*** x
-*** ,
-*** y
+*** a
 *** :
 *** integer
 *** ;
-*** b
-* Enregistre NodeId#x:TypeInt_null#
-* Enregistre NodeId#y:TypeInt_null#
-*** :
-*** boolean
-*** ;
-*** c
-* Enregistre NodeId#b:TypeBoolean#
-*** :
-*** string
-*** ;
-*** d
-* Enregistre NodeId#c:TypeString#
-*** :
-*** array
-*** [
-*** 1
-*** ..
-*** 10
-*** ]
-*** of
-*** string
-*** ;
 *** begin
-* Enregistre NodeId#d:TypeString#
-*** x
+* Enregistre ID(TypeInt_null, a)
+*** a
 *** =
-*** 1234564789
+*** 100
 *** ;
-*** LineComment: // 0x4995F6B5
-*** y
-*** =
-*** 0x7FFFFFFF
+*** while
+*** (
+*** a
+*** >=
+*** 0
+*** )
+*** do
+*** begin
+*** println
+*** (
+*** a
+*** )
 *** ;
-*** b
+*** a
 *** =
-*** true
+*** a
+*** -
+*** 1
 *** ;
-*** c
-*** =
-*** "a";
-*** d
-*** Erreur de syntaxe en ligne 0, colonne 13. Token inattendu: TOKEN_IDENTIFIER
-*** [
-*** Erreur de syntaxe: data/progr2.lea:Cannot recover from the syntax error
+*** end
+*** end
+
+*** Analyse syntaxique ok
+Arbre: 
+NodeList(NodeAssign(ID(TypeInt_null, a), LIT(TypeInt_null, 100)), NodeWhile(NULL, NodeList(println_NodeCallFct(NodeList(NULL)), NodeAssign(ID(TypeInt_null, a), NodeOp(ID(TypeInt_null, a), LIT(TypeInt_null, 1))))))

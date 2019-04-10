@@ -338,7 +338,7 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_e2 = _symbols[offset + 3];
 					final NodeExp e2 = (NodeExp) _symbol_e2.value;
 					  
-																System.out.println(e1 + " <- " + e2); 
+																//System.out.println(e1 + " <- " + e2); 
 																//stackEnvironment.add_node_to_latest_portability(e1, e2);
 																return new NodeAssign(e1, e2);
 				}

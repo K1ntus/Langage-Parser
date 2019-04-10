@@ -319,7 +319,7 @@ simple_statement=
 assignment_statement=
 	variable_access.e1 TOKEN_AFF expression.e2 TOKEN_SEMIC	
 															{:  
-																System.out.println(e1 + " <- " + e2); 
+																//System.out.println(e1 + " <- " + e2); 
 																//stackEnvironment.add_node_to_latest_portability(e1, e2);
 																return new NodeAssign(e1, e2); 
 															:}

@@ -1,41 +1,88 @@
-*** Fichier data/prog1.lea
+*** Fichier data/progr4.lea
+*** LineComment: //
+*** LineComment: // Structure de contrôle
+*** LineComment: //
+*** LineComment: //
 *** var
-*** a
+*** x
+*** ,
+*** y
 *** :
 *** integer
 *** ;
 *** begin
-* Enregistre ID(TypeInt, a)
-*** a
+* Enregistre ID(TypeInt, x)
+* Enregistre ID(TypeInt, y)
+*** x
 *** =
-*** 100
+*** 1
 *** ;
 *** while
-ID(TypeInt, a) <- LIT(TypeInt, 100)
 *** (
-*** a
-*** >=
-*** 0
+*** x
+*** <=
+*** 10
 *** )
 *** do
 *** begin
 *** println
 *** (
-*** a
+*** x
 *** )
 *** ;
-*** a
+*** if
+*** (
+*** x
+*** ==
+*** 10
+*** )
+*** then
+*** y
 *** =
-*** a
+*** 1
+*** ;
+*** while
+*** (
+*** y
+*** <=
+*** 5
+*** )
+*** do
+*** begin
+*** println
+*** (
 *** -
+*** 1000
+*** -
+*** y
+*** )
+*** ;
+*** y
+*** =
+*** y
+*** +
 *** 1
 *** ;
 *** end
-ID(TypeInt, a) <- NodeOp(ID(TypeInt, a), LIT(TypeInt, 1))
+*** else
+*** Erreur de syntaxe en ligne 0, colonne 18. Token inattendu: TOKEN_ELSE
+*** println
+*** (
+*** X
+0,18-0,2: Recovered: removed unexpected token #56
+*** )
+*** ;
+*** x
+*** =
+*** x
+*** +
+*** 1
+*** ;
+*** end
 *** end
 
 *** Analyse syntaxique ok
 
 
 Arbre Principal: 
-NodeList(NodeAssign(ID(TypeInt, a), LIT(TypeInt, 100)), NodeWhile(NodeRel(ID(TypeInt, a), LIT(TypeInt, 0)), NodeList(println_NodeCallFct(NodeList(ID(TypeInt, a))), NodeAssign(ID(TypeInt, a), NodeOp(ID(TypeInt, a), LIT(TypeInt, 1))))))
+NodeList(NodeAssign(ID(TypeInt, x), LIT(TypeInt, 1)), NodeWhile(NodeRel(ID(TypeInt, x), LIT(TypeInt, 10)), NodeList(println_NodeCallFct(NodeList(ID(TypeInt, x))), NodeIf(NodeRel(ID(TypeInt, x), LIT(TypeInt, 10)), NodeAssign(ID(TypeInt, y), LIT(TypeInt, 1))), NodeWhile(NodeRel(ID(TypeInt, y), LIT(TypeInt, 5)), NodeList(println_NodeCallFct(NodeList(NodeOp(NodeOp(LIT(TypeInt, 1000)), ID(TypeInt, y)))), NodeAssign(ID(TypeInt, y), NodeOp(ID(TypeInt, y), LIT(TypeInt, 1))))), println_NodeCallFct(NodeList(ID(TypeInt, X))), NodeAssign(ID(TypeInt, x), NodeOp(ID(TypeInt, x), LIT(TypeInt, 1))))))

@@ -111,9 +111,10 @@
 %typeof literal  = "NodeLiteral";
 %typeof case_statement = "NodeCase";
 
-%typeof expression_list, variable_declaration_list = "NodeList";
+%typeof expression_list = "NodeList";
 %typeof case_statement_list = "NodeCaseList";
 %typeof identifier_list = "IdentifierList";
+
 	
 program=
 	type_declaration_part
@@ -205,26 +206,57 @@ feature_type=
 	;
 	
 	
-//Partie avant le begin ou on declare les variables globales (ou apres les locals)
+//Partie avant le begin ou on declare les variables du prgm
 variable_declaration_part= 
 	/* empty */ 
-	| TOKEN_VAR variable_declaration_list //On les ajoute a l'environnement
+	| TOKEN_VAR variable_declaration_list 
 	;
 	
 variable_declaration_list=
-	variable_declaration_list.list variable_declaration.var		//{: list.add(var); return list; :}
-	| variable_declaration.var									//{: NodeList list = new NodeList(); list.add(var); return list; :}
+	variable_declaration_list variable_declaration	//On concatene
+	| variable_declaration						
 	;
 	
 variable_declaration=
-	identifier_list.list TOKEN_COLON type.t TOKEN_SEMIC 	
+	identifier_list.id_list TOKEN_COLON type.t TOKEN_SEMIC 	
+															{:
+																for(String str : id_list){
+																	stackEnvironment.add_node_to_latest_portability(new NodeId(str, t), new NodeLiteral(t, 0));
+																}
+																
+																return _symbol_id_list;
+															:}
+															
+															
+															/*{: 	
+																ArrayList<NodeId> list = new ArrayList<>();
+																for(String str : id_list){
+																	list.add(new NodeId(str, t));
+																}
+																return list;
+															:}
+	
+	
+															{: 
+																try{
+																	stackEnvironment.add_identifier_node_list(list, t); 
+																} catch(ClassNotFoundException e) {
+																	System.err.print(e);
+																}
+																return t;
+															:}*/
 	;
 	
 	
 //OK
 identifier_list=
-	identifier_list.list TOKEN_COMMA TOKEN_IDENTIFIER.id		{: list.add(id); return list; :}
-	| TOKEN_IDENTIFIER.id										{: IdentifierList list = new IdentifierList(); list.add(id); return list; :}
+	identifier_list.list TOKEN_COMMA TOKEN_IDENTIFIER.id		{: 
+																	System.out.println("New ID to stack: " + id);
+																	list.add(id); return list; :}
+	| TOKEN_IDENTIFIER.name										{: 
+																	System.out.println("New ID to stack: " + name);
+																	return new IdentifierList(name); 
+																:}
 	;
 	
 procedure_definition_part=

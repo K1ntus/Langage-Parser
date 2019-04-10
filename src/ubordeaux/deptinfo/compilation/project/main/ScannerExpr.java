@@ -918,12 +918,12 @@ private String annotation_type = "";
             // fall through
           case 69: break;
           case 2: 
-            { System.out.println("*** Identifier: " + yytext()); return new Symbol(Terminals.TOKEN_IDENTIFIER, yyline, yycolumn);
+            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_IDENTIFIER, yyline, yycolumn);
             } 
             // fall through
           case 70: break;
           case 3: 
-            { System.out.println("*** Integer: " + yytext()); return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn);
+            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn);
             } 
             // fall through
           case 71: break;
@@ -1103,7 +1103,7 @@ private String annotation_type = "";
             // fall through
           case 106: break;
           case 39: 
-            { System.out.println("*** String: " + yytext()); return new Symbol(Terminals.TOKEN_LIT_STRING, yyline, yycolumn);
+            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_STRING, yyline, yycolumn);
             } 
             // fall through
           case 107: break;

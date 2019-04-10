@@ -111,9 +111,9 @@ LineComment = "//" [^\r\n]* {LineTerminator}?
 	"=" 	        { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_AFF, yyline, yycolumn); }
 	
 	
-	{String}		{ System.out.println("*** String: " + yytext()); return new Symbol(Terminals.TOKEN_LIT_STRING, yyline, yycolumn); }
-	{Integer}		{ System.out.println("*** Integer: " + yytext()); return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn); }
-	{Identifier}	{ System.out.println("*** Identifier: " + yytext()); return new Symbol(Terminals.TOKEN_IDENTIFIER, yyline, yycolumn); }
+	{Identifier}	{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_IDENTIFIER, yyline, yycolumn); }
+	{String}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_STRING, yyline, yycolumn); }
+	{Integer}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn); }
 	
 	
 	"^"				{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_CIRC, yyline, yycolumn); }

@@ -218,35 +218,48 @@ public class Parser extends beaver.Parser {
 			},
 			Action.NONE,  	// [31] variable_declaration_part = 
 			RETURN2,	// [32] variable_declaration_part = TOKEN_VAR variable_declaration_list; returns 'variable_declaration_list' although none is marked
-			new Action() {	// [33] variable_declaration_list = variable_declaration_list.list variable_declaration.var
+			new Action() {	// [33] variable_declaration_list = variable_declaration_list variable_declaration
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_list = _symbols[offset + 1];
-					final NodeList list = (NodeList) _symbol_list.value;
-					final Symbol var = _symbols[offset + 2];
 					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 2]); return _symbols[offset + 1];
 				}
 			},
-			new Action() {	// [34] variable_declaration_list = variable_declaration.var
+			new Action() {	// [34] variable_declaration_list = variable_declaration
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol var = _symbols[offset + 1];
 					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1]); return new Symbol(lst);
 				}
 			},
-			RETURN3,	// [35] variable_declaration = identifier_list.list TOKEN_COLON type.t TOKEN_SEMIC; returns 't' although more are marked
+			new Action() {	// [35] variable_declaration = identifier_list.id_list TOKEN_COLON type.t TOKEN_SEMIC
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol _symbol_id_list = _symbols[offset + 1];
+					final IdentifierList id_list = (IdentifierList) _symbol_id_list.value;
+					final Symbol _symbol_t = _symbols[offset + 3];
+					final Type t = (Type) _symbol_t.value;
+					
+																for(String str : id_list){
+																	stackEnvironment.add_node_to_latest_portability(new NodeId(str, t), new NodeLiteral(t, 0));
+																}
+																
+																return _symbol_id_list;
+				}
+			},
 			new Action() {	// [36] identifier_list = identifier_list.list TOKEN_COMMA TOKEN_IDENTIFIER.id
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_list = _symbols[offset + 1];
 					final IdentifierList list = (IdentifierList) _symbol_list.value;
 					final Symbol _symbol_id = _symbols[offset + 3];
 					final String id = (String) _symbol_id.value;
-					 list.add(id); return list;
+					 
+																	System.out.println("New ID to stack: " + id);
+																	list.add(id); return list;
 				}
 			},
-			new Action() {	// [37] identifier_list = TOKEN_IDENTIFIER.id
+			new Action() {	// [37] identifier_list = TOKEN_IDENTIFIER.name
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_id = _symbols[offset + 1];
-					final String id = (String) _symbol_id.value;
-					 IdentifierList list = new IdentifierList(); list.add(id); return list;
+					final Symbol _symbol_name = _symbols[offset + 1];
+					final String name = (String) _symbol_name.value;
+					 
+																	System.out.println("New ID to stack: " + name);
+																	return new IdentifierList(name);
 				}
 			},
 			Action.NONE,  	// [38] procedure_definition_part = 

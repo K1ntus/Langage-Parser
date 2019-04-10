@@ -918,7 +918,7 @@ private String annotation_type = "";
             // fall through
           case 69: break;
           case 2: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_IDENTIFIER, yyline, yycolumn );
+            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_IDENTIFIER, yyline, yycolumn, new String(yytext()) );
             } 
             // fall through
           case 70: break;
@@ -1033,7 +1033,7 @@ private String annotation_type = "";
             // fall through
           case 92: break;
           case 25: 
-            { System.out.println("*** LineComment: " + yytext());
+            { System.out.print("*** LineComment: " + yytext());
             } 
             // fall through
           case 93: break;

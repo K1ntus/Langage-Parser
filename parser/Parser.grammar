@@ -139,11 +139,11 @@ type_declaration_list=
 	;
 	
 type_declaration=
-	type_declaration_head TOKEN_AFF type TOKEN_SEMIC 
+	type_declaration_head.name TOKEN_AFF type.t TOKEN_SEMIC {: return new NodeId(name, t); :}
 	;
 	
 type_declaration_head=
-	TOKEN_IDENTIFIER 
+	TOKEN_IDENTIFIER
 	;
 	
 type=
@@ -176,8 +176,8 @@ enumerated_type=
 	;
 	
 subrange_type= 
-	TOKEN_LIT_INTEGER.t1 TOKEN_DOTDOT TOKEN_LIT_INTEGER.t2	{: return new TypeEnumRange(new TypeItemEnum(t1, t1.toString()), new TypeItemEnum(t2, t2.toString())); :}
-	| TOKEN_IDENTIFIER.t1 TOKEN_DOTDOT TOKEN_IDENTIFIER.t2
+	TOKEN_LIT_INTEGER TOKEN_DOTDOT TOKEN_LIT_INTEGER//	{: return new TypeEnumRange(new TypeItemEnum(t1, t1.toString()), new TypeItemEnum(t2, t2.toString())); :}
+	| TOKEN_IDENTIFIER TOKEN_DOTDOT TOKEN_IDENTIFIER
 	;
 	
 array_type=
@@ -254,10 +254,10 @@ variable_declaration=
 //OK
 identifier_list=
 	identifier_list.list TOKEN_COMMA TOKEN_IDENTIFIER.id		{: 
-																	System.out.println("New ID to stack: " + id);
+																	//System.out.println("New ID to stack: " + id);
 																	list.add(id); return list; :}
 	| TOKEN_IDENTIFIER.name										{: 
-																	System.out.println("New ID to stack: " + name);
+																	//System.out.println("New ID to stack: " + name);
 																	return new IdentifierList(name); 
 																:}
 	;
@@ -310,7 +310,7 @@ block=
 	statement_list 
 	TOKEN_END	//push_stackenv 	//On depile stackenv
 	;
-//pop_stackenv=	{:	stackEnvironment.getEnvironment().pop();	:}	;
+//pop_stackenv=		{:	stackEnvironment.getEnvironment().pop();	:}	;
 
 //push_stackenv=	{:	stackEnvironment.getEnvironment().push(new HashMap<NodeId, NodeLiteral>()); :}	;
 
@@ -443,7 +443,7 @@ case_statement=
 	
 //Recup les valeurs stockees dans les environnements
 variable_access=
-	TOKEN_IDENTIFIER.name		//{: return new NodeId(name, new TypeString());	:}//pas bon 
+	TOKEN_IDENTIFIER.name		{: return new NodeId(name, new TypeString());	:}//pas bon 
 	| variable_access.var TOKEN_LBRACKET expression.e TOKEN_RBRACKET
 	| expression.e TOKEN_CIRC	//{: return new NodePtrAccess(e);	:}
 	;

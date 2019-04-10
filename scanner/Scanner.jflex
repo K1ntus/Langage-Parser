@@ -44,7 +44,7 @@ LineComment = "//" [^\r\n]* {LineTerminator}?
 
 	"/**"			{System.out.println("*** Documentation Comment:"); yybegin(COMMENT_DOC);}
 	"/*"			{System.out.println("*** Multiple Lines Comment:"); yybegin(COMMENT);}
-	{LineComment}	{System.out.println("*** LineComment: " + yytext()); }
+	{LineComment}	{System.out.print("*** LineComment: " + yytext()); }
 	
 	"struct"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_STRUCT, yyline, yycolumn); }
 	"array"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_ARRAY, yyline, yycolumn); }
@@ -111,7 +111,7 @@ LineComment = "//" [^\r\n]* {LineTerminator}?
 	"=" 	        { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_AFF, yyline, yycolumn); }
 	
 	
-	{Identifier}	{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_IDENTIFIER, yyline, yycolumn ); }
+	{Identifier}	{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_IDENTIFIER, yyline, yycolumn, new String(yytext()) ); }
 	{String}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_STRING, yyline, yycolumn, new String(yytext()) ); }
 	{Integer}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn, new Integer(yytext()) ); }
 	

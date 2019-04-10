@@ -1,33 +1,83 @@
-*** Fichier data/prog1.lea
+*** Fichier data/progr4.lea
+*** LineComment: //
+*** LineComment: // Structure de contrôle
+*** LineComment: //
+*** LineComment: //
 *** var
-*** a
+*** x
+*** ,
+*** y
 *** :
-New ID to stack: null
 *** integer
 *** ;
 *** begin
-* Enregistre NodeId#null:TypeInt_null#
-*** a
+* Enregistre NodeId#x:TypeInt_null#
+* Enregistre NodeId#y:TypeInt_null#
+*** x
 *** =
-*** 100
+*** 1
 *** ;
 *** while
 *** (
-*** a
-*** >=
-*** 0
+*** x
+*** <=
+*** 10
 *** )
 *** do
 *** begin
 *** println
 *** (
-*** a
+*** x
 *** )
 *** ;
-*** a
+*** if
+*** (
+*** x
+*** ==
+*** 10
+*** )
+*** then
+*** begin
+*** y
 *** =
-*** a
+*** 1
+*** ;
+*** while
+*** (
+*** y
+*** <=
+*** 5
+*** )
+*** do
+*** begin
+*** println
+*** (
 *** -
+*** 1000
+*** -
+*** y
+*** )
+*** ;
+*** y
+*** =
+*** y
+*** +
+*** 1
+*** ;
+*** end
+*** end
+*** else
+*** Erreur de syntaxe en ligne 0, colonne 19. Token inattendu: TOKEN_ELSE
+*** println
+*** (
+*** X
+0,19-0,6: Recovered: removed unexpected token #56
+*** )
+*** ;
+*** x
+*** =
+*** x
+*** +
 *** 1
 *** ;
 *** end

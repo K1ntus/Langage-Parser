@@ -71,12 +71,6 @@ public class Parser extends beaver.Parser {
 		}
 	};
 
-	static final Action RETURN4 = new Action() {
-		public Symbol reduce(Symbol[] _symbols, int offset) {
-			return _symbols[offset + 4];
-		}
-	};
-
 	static final Action RETURN3 = new Action() {
 		public Symbol reduce(Symbol[] _symbols, int offset) {
 			return _symbols[offset + 3];
@@ -92,6 +86,12 @@ public class Parser extends beaver.Parser {
 	static final Action RETURN7 = new Action() {
 		public Symbol reduce(Symbol[] _symbols, int offset) {
 			return _symbols[offset + 7];
+		}
+	};
+
+	static final Action RETURN4 = new Action() {
+		public Symbol reduce(Symbol[] _symbols, int offset) {
+			return _symbols[offset + 4];
 		}
 	};
  
@@ -133,7 +133,15 @@ public class Parser extends beaver.Parser {
 					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1]); return new Symbol(lst);
 				}
 			},
-			RETURN4,	// [5] type_declaration = type_declaration_head TOKEN_AFF type TOKEN_SEMIC; returns 'TOKEN_SEMIC' although none is marked
+			new Action() {	// [5] type_declaration = type_declaration_head.name TOKEN_AFF type.t TOKEN_SEMIC
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol _symbol_name = _symbols[offset + 1];
+					final String name = (String) _symbol_name.value;
+					final Symbol _symbol_t = _symbols[offset + 3];
+					final Type t = (Type) _symbol_t.value;
+					 return new NodeId(name, t);
+				}
+			},
 			Action.RETURN,	// [6] type_declaration_head = TOKEN_IDENTIFIER
 			Action.RETURN,	// [7] type = simple_type
 			Action.RETURN,	// [8] type = named_type
@@ -166,16 +174,8 @@ public class Parser extends beaver.Parser {
 			Action.RETURN,	// [17] index_type = enumerated_type.enum
 			Action.RETURN,	// [18] index_type = subrange_type.subr
 			RETURN2,	// [19] enumerated_type = TOKEN_LPAR identifier_list.list TOKEN_RPAR
-			new Action() {	// [20] subrange_type = TOKEN_LIT_INTEGER.t1 TOKEN_DOTDOT TOKEN_LIT_INTEGER.t2
-				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_t1 = _symbols[offset + 1];
-					final Integer t1 = (Integer) _symbol_t1.value;
-					final Symbol _symbol_t2 = _symbols[offset + 3];
-					final Integer t2 = (Integer) _symbol_t2.value;
-					 return new TypeEnumRange(new TypeItemEnum(t1, t1.toString()), new TypeItemEnum(t2, t2.toString()));
-				}
-			},
-			RETURN3,	// [21] subrange_type = TOKEN_IDENTIFIER.t1 TOKEN_DOTDOT TOKEN_IDENTIFIER.t2; returns 't2' although more are marked
+			RETURN3,	// [20] subrange_type = TOKEN_LIT_INTEGER TOKEN_DOTDOT TOKEN_LIT_INTEGER; returns 'TOKEN_LIT_INTEGER' although none is marked
+			RETURN3,	// [21] subrange_type = TOKEN_IDENTIFIER TOKEN_DOTDOT TOKEN_IDENTIFIER; returns 'TOKEN_IDENTIFIER' although none is marked
 			RETURN6,	// [22] array_type = TOKEN_ARRAY TOKEN_LBRACKET range_type.range TOKEN_RBRACKET TOKEN_OF type.t; returns 't' although more are marked
 			Action.RETURN,	// [23] range_type = enumerated_type
 			Action.RETURN,	// [24] range_type = subrange_type
@@ -252,7 +252,7 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_id = _symbols[offset + 3];
 					final String id = (String) _symbol_id.value;
 					 
-																	System.out.println("New ID to stack: " + id);
+																	//System.out.println("New ID to stack: " + id);
 																	list.add(id); return list;
 				}
 			},
@@ -261,7 +261,7 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_name = _symbols[offset + 1];
 					final String name = (String) _symbol_name.value;
 					 
-																	System.out.println("New ID to stack: " + name);
+																	//System.out.println("New ID to stack: " + name);
 																	return new IdentifierList(name);
 				}
 			},
@@ -474,7 +474,13 @@ public class Parser extends beaver.Parser {
 					 return new NodeCase("default", state);
 				}
 			},
-			Action.RETURN,	// [89] variable_access = TOKEN_IDENTIFIER.name
+			new Action() {	// [89] variable_access = TOKEN_IDENTIFIER.name
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol _symbol_name = _symbols[offset + 1];
+					final String name = (String) _symbol_name.value;
+					 return new NodeId(name, new TypeString());
+				}
+			},
 			RETURN3,	// [90] variable_access = variable_access.var TOKEN_LBRACKET expression.e TOKEN_RBRACKET; returns 'e' although more are marked
 			Action.RETURN,	// [91] variable_access = expression.e TOKEN_CIRC
 			new Action() {	// [92] expression = expression.e1 TOKEN_PLUS expression.e2

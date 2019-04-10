@@ -1,7 +1,6 @@
-*** Fichier data/progr4.lea
+*** Fichier data/progr2.lea
 *** LineComment: //
-*** LineComment: // Structure de contrôle
-*** LineComment: //
+*** LineComment: // gestion des variables statiques
 *** LineComment: //
 *** var
 *** x
@@ -10,77 +9,48 @@
 *** :
 *** integer
 *** ;
-*** begin
+*** b
 * Enregistre NodeId#x:TypeInt_null#
 * Enregistre NodeId#y:TypeInt_null#
-*** x
-*** =
-*** 1
+*** :
+*** boolean
 *** ;
-*** while
-*** (
-*** x
-*** <=
+*** c
+* Enregistre NodeId#b:TypeBoolean#
+*** :
+*** string
+*** ;
+*** d
+* Enregistre NodeId#c:TypeString#
+*** :
+*** array
+*** [
+*** 1
+*** ..
 *** 10
-*** )
-*** do
+*** ]
+*** of
+*** string
+*** ;
 *** begin
-*** println
-*** (
-*** x
-*** )
-*** ;
-*** if
-*** (
-*** x
-*** ==
-*** 10
-*** )
-*** then
-*** begin
-*** y
-*** =
-*** 1
-*** ;
-*** while
-*** (
-*** y
-*** <=
-*** 5
-*** )
-*** do
-*** begin
-*** println
-*** (
-*** -
-*** 1000
-*** -
-*** y
-*** )
-*** ;
-*** y
-*** =
-*** y
-*** +
-*** 1
-*** ;
-*** end
-*** end
-*** else
-*** Erreur de syntaxe en ligne 0, colonne 19. Token inattendu: TOKEN_ELSE
-*** println
-*** (
-*** X
-0,19-0,6: Recovered: removed unexpected token #56
-*** )
-*** ;
+* Enregistre NodeId#d:TypeString#
 *** x
 *** =
-*** x
-*** +
-*** 1
+*** 1234564789
 *** ;
-*** end
-*** end
-
-*** Analyse syntaxique ok
+*** LineComment: // 0x4995F6B5
+*** y
+*** =
+*** 0x7FFFFFFF
+*** ;
+*** b
+*** =
+*** true
+*** ;
+*** c
+*** =
+*** "a";
+*** d
+*** Erreur de syntaxe en ligne 0, colonne 13. Token inattendu: TOKEN_IDENTIFIER
+*** [
+*** Erreur de syntaxe: data/progr2.lea:Cannot recover from the syntax error

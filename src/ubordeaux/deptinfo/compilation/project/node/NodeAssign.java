@@ -6,7 +6,7 @@ public final class NodeAssign extends Node {
 
 	public NodeAssign(NodeExp lhs, NodeExp rhs) {
 		super(lhs, rhs);
-		//System.out.println("***** Assignment: " + this.toString());
+		//System.out.println("* Assignment: " + this.toString());
 	}
 
 	@Override

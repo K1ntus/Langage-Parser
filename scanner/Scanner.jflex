@@ -34,6 +34,7 @@ Boolean = true|false
 
 LineTerminator = \r|\n|\r\n
 LineComment = "//" [^\r\n]* {LineTerminator}?
+HexaValue = 0x[a-fA-F0-9_]*
 
 
 
@@ -110,10 +111,14 @@ LineComment = "//" [^\r\n]* {LineTerminator}?
 	
 	"=" 	        { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_AFF, yyline, yycolumn); }
 	
-	
 	{Identifier}	{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_IDENTIFIER, yyline, yycolumn, new String(yytext()) ); }
 	{String}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_STRING, yyline, yycolumn, new String(yytext()) ); }
 	{Integer}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn, new Integer(yytext()) ); }
+	{HexaValue}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn, new Integer(
+																																	Integer.decode(yytext())
+																																		)
+																																	); 
+																																}
 	
 	
 	"^"				{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_CIRC, yyline, yycolumn); }

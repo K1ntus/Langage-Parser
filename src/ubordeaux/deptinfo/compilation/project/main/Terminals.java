@@ -49,9 +49,9 @@ public class Terminals {
 	static public final short TOKEN_RBRACKET = 41;
 	static public final short TOKEN_COMMA = 42;
 	static public final short TOKEN_END = 43;
-	static public final short TOKEN_AFF = 44;
-	static public final short TOKEN_FUNCTION = 45;
-	static public final short TOKEN_PROCEDURE = 46;
+	static public final short TOKEN_FUNCTION = 44;
+	static public final short TOKEN_PROCEDURE = 45;
+	static public final short TOKEN_AFF = 46;
 	static public final short TOKEN_DOTDOT = 47;
 	static public final short TOKEN_CASE = 48;
 	static public final short TOKEN_DEFAULT = 49;
@@ -108,9 +108,9 @@ public class Terminals {
 		"TOKEN_RBRACKET",
 		"TOKEN_COMMA",
 		"TOKEN_END",
-		"TOKEN_AFF",
 		"TOKEN_FUNCTION",
 		"TOKEN_PROCEDURE",
+		"TOKEN_AFF",
 		"TOKEN_DOTDOT",
 		"TOKEN_CASE",
 		"TOKEN_DEFAULT",

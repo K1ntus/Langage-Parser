@@ -139,20 +139,16 @@ type_declaration_list=
 	;
 	
 type_declaration=
-	type_declaration_head.name TOKEN_AFF type.t TOKEN_SEMIC {: return new NodeId(name, t); :}
-	;
-	
-type_declaration_head=
-	TOKEN_IDENTIFIER
+	TOKEN_IDENTIFIER.name TOKEN_AFF type.t TOKEN_SEMIC {: return new NodeId(name, t); :}
 	;
 	
 type=
-	simple_type		//OK
-	| named_type	//OK
+	simple_type			//OK
+	| named_type		//OK
 	| index_type	
 	| array_type		
-	| pointer_type	//OK
-	| structure_type.t 	//OK
+	| pointer_type		//OK
+	| structure_type 	//OK
 	;
 	
 //OK
@@ -229,25 +225,6 @@ variable_declaration=
 																
 																return _symbol_id_list;
 															:}
-															
-															
-															/*{: 	
-																ArrayList<NodeId> list = new ArrayList<>();
-																for(String str : id_list){
-																	list.add(new NodeId(str, t));
-																}
-																return list;
-															:}
-	
-	
-															{: 
-																try{
-																	stackEnvironment.add_identifier_node_list(list, t); 
-																} catch(ClassNotFoundException e) {
-																	System.err.print(e);
-																}
-																return t;
-															:}*/
 	;
 	
 	
@@ -305,8 +282,8 @@ argt=
 	;
 	
 block=
-	variable_declaration_part 	//Inserer varaible dans environnement
-	TOKEN_BEGIN	//pop_stackenv	//On empile stackenv
+	variable_declaration_part 		//Inserer varaible dans environnement
+	TOKEN_BEGIN	//pop_stackenv		//On empile stackenv
 	statement_list 
 	TOKEN_END	//push_stackenv 	//On depile stackenv
 	;
@@ -336,7 +313,11 @@ simple_statement=
 	
 //OK
 assignment_statement=
-	variable_access.e1 TOKEN_AFF expression.e2 TOKEN_SEMIC	{:  return new NodeAssign(e1, e2); :}
+	variable_access.e1 TOKEN_AFF expression.e2 TOKEN_SEMIC	
+															{:  
+																//stackEnvironment.add_node_to_latest_portability(new NodeId(str, t), new NodeLiteral(t, 0));
+																return new NodeAssign(e1, e2); 
+															:}
 	;
 	
 procedure_statement=
@@ -443,9 +424,9 @@ case_statement=
 	
 //Recup les valeurs stockees dans les environnements
 variable_access=
-	TOKEN_IDENTIFIER.name		{: return new NodeId(name, new TypeString());	:}//pas bon 
+	TOKEN_IDENTIFIER.name		{: return new NodeId(name, new TypeInt());	:}
 	| variable_access.var TOKEN_LBRACKET expression.e TOKEN_RBRACKET
-	| expression.e TOKEN_CIRC	//{: return new NodePtrAccess(e);	:}
+	| expression.e TOKEN_CIRC	{: return new NodePtrAccess(e);	:}
 	;
 	
 expression=
@@ -465,12 +446,12 @@ expression=
 	| expression.e1 TOKEN_NE expression.e2		{: return new NodeRel("ne", e1, e2); :} 
 	| TOKEN_LPAR expression TOKEN_RPAR
 	| procedure_expression
-	| variable_access
+	| variable_access		//OK
 	| literal				//OK
 	;
 	
 literal=
-	TOKEN_LIT_INTEGER.e		{: return new NodeLiteral(new TypeInt(e), e);			:}
+	TOKEN_LIT_INTEGER.e		{: return new NodeLiteral(new TypeInt(), e);			:}
 	| TOKEN_LIT_STRING.e	{: return new NodeLiteral(new TypeString(), e);			:}
 	| TOKEN_TRUE			{: return new NodeLiteral(new TypeBoolean(), true);		:}
 	| TOKEN_FALSE			{: return new NodeLiteral(new TypeBoolean(), false);	:}

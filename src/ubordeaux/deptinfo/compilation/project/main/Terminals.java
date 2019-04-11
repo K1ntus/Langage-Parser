@@ -2,7 +2,7 @@ package ubordeaux.deptinfo.compilation.project.main;
 
 /**
  * This class lists terminals used by the
- * grammar specified in "parser.grammar".
+ * grammar specified in "Parser.grammar".
  */
 public class Terminals {
 	static public final short EOF = 0;

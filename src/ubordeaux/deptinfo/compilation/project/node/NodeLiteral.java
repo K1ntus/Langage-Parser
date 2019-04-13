@@ -13,7 +13,7 @@ public final class NodeLiteral extends NodeExp {
 	}
 
 	public String toString() {
-		return "LIT("+type+", "+value+")";
+		return "NodeLiteral("+type+", "+value+")";
 		//return this.getClass().getSimpleName() + '#' + value + ':' + type + '#';
 	}
 
@@ -34,6 +34,10 @@ public final class NodeLiteral extends NodeExp {
 	
 	public Object getValue() {
 		return value;
+	}
+	
+	public Type getType() {
+		return type;
 	}
 
 }

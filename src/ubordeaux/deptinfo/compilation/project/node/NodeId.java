@@ -31,5 +31,9 @@ public final class NodeId extends NodeExp {
 	public NodeId clone() {
 		return new NodeId(name, type);
 	}
+	
+	public String getName() {
+		return name;
+	}
 
 }

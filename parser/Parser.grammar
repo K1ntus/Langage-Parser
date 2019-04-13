@@ -70,7 +70,7 @@
 //PRIOTITIES
 %right TOKEN_CIRC, TOKEN_NOT;
 %left TOKEN_AND, TOKEN_AFF, TOKEN_OR;
-%left TOKEN_PLUS, TOKEN_MINUS, TOKEN_TIMES, TOKEN_DIV;
+%right TOKEN_PLUS, TOKEN_MINUS, TOKEN_TIMES, TOKEN_DIV;
 %left TOKEN_LT, TOKEN_LE, TOKEN_GT, TOKEN_GE, TOKEN_EQ, TOKEN_NE;
 
 %left TOKEN_ELSE, TOKEN_IF;
@@ -104,23 +104,27 @@
 *
 ***/
 %typeof TOKEN_LIT_INTEGER = "Integer";
-%typeof TOKEN_LIT_STRING, TOKEN_IDENTIFIER = "String";
+%typeof TOKEN_LIT_STRING, TOKEN_IDENTIFIER, type_declaration = "String";
 %typeof println_statement = "void";
 
 %typeof type = "Type";
 %typeof feature_type = "TypeFeature";
+%typeof range_type = "TypeRange";
 %typeof feature_list_type = "TypeFeatureList";
 
 %typeof statement = "Node";
-%typeof statement_list, expression_list = "NodeList";
+%typeof literal  = "NodeLiteral";
+%typeof variable_access, expression = "NodeExp";
+%typeof case_statement = "NodeCase";
+%typeof argt = "NodeId";
+
+%typeof statement_list, expression_list, argt_list = "NodeList";
 %typeof case_statement_list = "NodeCaseList";
 %typeof identifier_list = "IdentifierList";
 
-%typeof variable_access, expression = "NodeExp";
-%typeof literal  = "NodeLiteral";
-%typeof case_statement = "NodeCase";
 
-%typeof range_type = "TypeTuple";
+
+
 
 
 //%typeof pop_stackenv, push_stackenv = "Void";
@@ -129,11 +133,15 @@ program=
 	type_declaration_part			//Type env
 	variable_declaration_part 		//Type var
 	procedure_definition_part		//Type procedure
-	TOKEN_BEGIN	push_stackenv							//On empile stackenv
-	statement_list.l 									//Inserer variable dans env
-	TOKEN_END	pop_stackenv {: return _symbol_l; :}	//On depile stackenv
+	TOKEN_BEGIN	//push_stackenv		//On empile stackenv
+	statement_list.l 				//Inserer variable dans env
+	TOKEN_END	//pop_stackenv 		//On depile stackenv
+	{: return _symbol_l; :}	
 	;
 	
+/*
+Declaration named type
+*/
 type_declaration_part= 
 	/* empty */	
 	| TOKEN_TYPE type_declaration_list
@@ -145,13 +153,20 @@ type_declaration_list=
 	;
 	
 type_declaration=
-	TOKEN_IDENTIFIER.name TOKEN_AFF type.t TOKEN_SEMIC //{: typeEnvironment.putVariable(name, t); return new NodeId(name, t);:}
+	TOKEN_IDENTIFIER.name TOKEN_AFF type.t TOKEN_SEMIC 		{:
+																
+																//stackEnvironment.add_node_to_latest_portability(new NodeId(name, t), new NodeLiteral(t, 0));
+																return new EmptySymbol();
+															:}
 	;
 	
+/* 
+Type definition 
+*/
 type=
 	simple_type			//OK
 	| named_type		//OK
-	| index_type	
+	| index_type		//OK
 	| array_type		
 	| pointer_type		//OK
 	| structure_type 	//OK
@@ -169,24 +184,24 @@ named_type=
 	;
 	
 index_type=
-	enumerated_type.enum
-	| subrange_type
+	enumerated_type	//OK
+	| subrange_type	//OK
 	;
 	
 enumerated_type=
-	TOKEN_LPAR identifier_list.list TOKEN_RPAR 					{: TypeTuple res = new TypeTuple();
-																	int i = 0;
-																	for(String str : list){
-																		res.add(new TypeItemEnum(i, str));
-																		i++;
-																	}
-																	return res;
-																:}
+	TOKEN_LPAR identifier_list.list TOKEN_RPAR 	{: return new TypeEnumRange(new TypeItemEnum(0, list.first()), new TypeItemEnum(0, list.last())); :}
 	;
 	
 subrange_type= 
-	TOKEN_LIT_INTEGER.min TOKEN_DOTDOT TOKEN_LIT_INTEGER.max	{: return new TypeEnumRange(new TypeItemEnum(min, min.toString()), new TypeItemEnum(max, max.toString())); :}
-	| TOKEN_IDENTIFIER.min TOKEN_DOTDOT TOKEN_IDENTIFIER.max	{: return new TypeEnumRange(new TypeItemEnum(0, min), new TypeItemEnum(0, max)); :}
+	TOKEN_LIT_INTEGER.min TOKEN_DOTDOT TOKEN_LIT_INTEGER.max		{: return new TypeArrayRange(new TypeInt(min), new TypeInt(max)); :}
+	| TOKEN_IDENTIFIER.id_min TOKEN_DOTDOT TOKEN_IDENTIFIER.id_max	/*{:	
+																		try { 
+																			return new TypeArrayRange(stackEnvironment.getLiteralFromId(id_min), stackEnvironment.getTypeFromId(id_max));
+																		} catch (NoSuchFieldException e) {
+																			return new TypeArrayRange(null, null);
+																		}
+																		
+																	:}*/
 	;
 	
 array_type=
@@ -195,8 +210,8 @@ array_type=
 	
 range_type=
 	enumerated_type	//OK
-	| subrange_type.ter		{: return new TypeTuple(ter); :}//OK
-	| named_type.ter		{: return new TypeTuple(ter); :}//OK
+	| subrange_type	//OK
+	| named_type	//OK
 	;
 	
 pointer_type=
@@ -218,6 +233,12 @@ feature_type=
 	;
 	
 	
+	
+/*
+Declaration typed variable
+
+normalement OK
+*/
 //Partie avant le begin ou on declare les variables du prgm
 variable_declaration_part= 
 	/* empty */ 
@@ -232,16 +253,15 @@ variable_declaration_list=
 variable_declaration=
 	identifier_list.id_list TOKEN_COLON type.t TOKEN_SEMIC 	
 															{:
+																//System.out.println("+ Enregistre variable: "+ id_list.first());
 																for(String str : id_list){
-																	stackEnvironment.add_node_to_latest_portability(new NodeId(str, t), new NodeLiteral(t, 0));
+																	stackEnvironment.add_node_to_latest_portability(str, new NodeLiteral(t, 0));
 																}
 																
 																return _symbol_id_list;
 															:}
 	;
 	
-	
-//OK
 identifier_list=
 	identifier_list.list TOKEN_COMMA TOKEN_IDENTIFIER.id		{: 
 																	//System.out.println("New ID to stack: " + id);
@@ -252,6 +272,10 @@ identifier_list=
 																:}
 	;
 	
+	
+/*
+Declaration AND Definition of procedure and functions
+*/
 procedure_definition_part=
 	| procedure_definition_list
 	;
@@ -274,6 +298,7 @@ procedure_declaration_head=
 	procedure_head
 	;
 	
+//Definition
 procedure_head=
 	TOKEN_PROCEDURE TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR 
 	| TOKEN_FUNCTION TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR TOKEN_COLON type
@@ -281,31 +306,39 @@ procedure_head=
 	
 argt_part=
 	/* empty */
-	| argt_list.a
+	| argt_list
 	;
 	
 argt_list=
-	argt_list TOKEN_COMMA argt
-	| argt
+	argt_list.l TOKEN_COMMA argt.elem		{: l.add(elem); return l; :}
+	| argt.elem								{: NodeList l = new NodeList(elem); return l; :}
 	;
 	
 argt=
-	TOKEN_IDENTIFIER TOKEN_COLON type
+	TOKEN_IDENTIFIER.id TOKEN_COLON type.t	{: return new NodeId(id, t); :}
 	;
 	
+/*
+Blocs
+*/
 block=
 	variable_declaration_part 		//Inserer varaible dans stack environnement
-	TOKEN_BEGIN	push_stackenv		//On empile stackenv
+	TOKEN_BEGIN	//push_stackenv		//On empile stackenv
 	statement_list.list 			
-	TOKEN_END	pop_stackenv 	{: return _symbol_list; :}	//On depile stackenv et return
+	TOKEN_END	//pop_stackenv 	
+	{: return _symbol_list; :}	//On depile stackenv et return
 	;
 pop_stackenv  =		{:	stackEnvironment.getEnvironment().pop(); return new EmptySymbol();	:}	;
 
-push_stackenv =		{:	stackEnvironment.getEnvironment().push(new HashMap<NodeId, NodeLiteral>()); return new EmptySymbol(); :}	;
+push_stackenv =		{:	stackEnvironment.getEnvironment().push(new HashMap<str, NodeLiteral>()); return new EmptySymbol(); :}	;
 
+
+/*
+Instructions
+*/
 statement_list=
 	statement_list.root statement.elt	{: root.add(elt); return root; :}
-	| statement.elt	{: return new NodeList(elt); :}
+	| statement.elt						{: return new NodeList(elt); :}
 	;
 
 
@@ -315,7 +348,7 @@ statement=
 	;
 	
 simple_statement=
-	assignment_statement	//OK
+	assignment_statement.e	{: System.out.println("assignment: "+e); return e; :}
 	| procedure_statement
 	| new_statement			//OK
 	| dispose_statement		//OK
@@ -340,9 +373,9 @@ procedure_statement=
 	
 	
 //NOT FINISHED
-//faudrait match si les params sont valides avant
+//faudrait match si les params sont valides aussi
 procedure_expression=
-	TOKEN_IDENTIFIER.func_name TOKEN_LPAR expression_part.args TOKEN_RPAR	{: return new NodeCallFct(func_name, new TypeFunct(func_name, new TypeTuple(), null), args); :}	//Remplacer type int par celle se trouvant dans environment avec func_name
+	TOKEN_IDENTIFIER.func_name TOKEN_LPAR expression_part.args TOKEN_RPAR	{: return new NodeCallFct(func_name, new TypeFunct(null, null, null), args); :}	//Remplacer type int par celle se trouvant dans environment avec func_name
 	;
 	
 	
@@ -355,18 +388,18 @@ expression_part=
 
 //OK	
 expression_list=
-	expression_list.root TOKEN_COMMA expression.elt	{: root.add(elt); return root; :}
-	| expression.expr								{: return new NodeList(expr); :}
+	expression_list.root TOKEN_COMMA expression.elt		{: root.add(elt); return root; :}
+	| expression.expr									{: return new NodeList(expr); :}
 	;
 
 //OK	
 new_statement=
-	TOKEN_NEW variable_access.node TOKEN_SEMIC			{: return new NodeNew(node); :}
+	TOKEN_NEW variable_access.node TOKEN_SEMIC		{: return new NodeNew(node); :}
 	;
 	
 //OK
 dispose_statement=
-	TOKEN_DISPOSE variable_access.node TOKEN_SEMIC		{: return new NodeDispose(node); :}
+	TOKEN_DISPOSE variable_access.node TOKEN_SEMIC	{: return new NodeDispose(node); :}
 	;
 	
 //OK
@@ -401,7 +434,7 @@ return_statement=
 	;
 	
 structured_statement=
-	block.n
+	block
 	| if_statement		//OK
 	| while_statement	//OK
 	| switch_statement	//OK
@@ -436,11 +469,25 @@ case_statement=
 	;
 	
 	
+/*
+Expressions
+
+normalement OK
+*/
 //Recup les valeurs stockees dans les environnements (ou pas, a check)
 variable_access=
-	TOKEN_IDENTIFIER.name		{: return new NodeId(name, new TypeInt());	:}
-	| variable_access.var TOKEN_LBRACKET expression.e TOKEN_RBRACKET
-	| expression.e TOKEN_CIRC	{: return new NodePtrAccess(e);	:}
+	TOKEN_IDENTIFIER.name		{:	
+										try{
+											System.out.println("Variable: " + name +" found.");
+											System.out.println("Value: " + stackEnvironment.getLiteralFromId(name).getValue());
+											return stackEnvironment.getLiteralFromId(name);  
+										} catch (NoSuchFieldException e) {
+											System.out.println(e);
+											return new NodeLiteral(null, -1);
+										}
+								:}
+	| variable_access.var TOKEN_LBRACKET expression.e TOKEN_RBRACKET		{: return new NodeArrayAccess(var, e); :}//Tableau
+	| expression.e TOKEN_CIRC	{: return new NodePtrAccess(e);	:}			//Pointeur
 	;
 	
 expression=
@@ -462,8 +509,13 @@ expression=
 	| procedure_expression
 	| variable_access		//OK
 	| literal				//OK
-	;
+	; 
 	
+/*
+Literal Expression
+
+normalement OK
+*/
 literal=
 	TOKEN_LIT_INTEGER.e		{: return new NodeLiteral(new TypeInt(), e);			:}
 	| TOKEN_LIT_STRING.e	{: return new NodeLiteral(new TypeString(), e);			:}

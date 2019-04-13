@@ -1,0 +1,291 @@
+
+
+
+*************************************************
+*** Fichier data/progr1.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+$$
+ First program used to test the 
+compilator !
+//Can change the tested one with the build.xml
+file '"!
+$$
+*** type
+*** chaine
+*** =
+*** string
+*** ;
+*** entier
+*** =
+*** integer
+*** ;
+*** booleen
+*** =
+*** boolean
+*** ;
+*** var
+*** a
+*** :
+*** integer
+*** ;
+*** begin
+* Enregistre a
+*** a
+*** =
+Variable: a found.
+Value: 0
+*** 100
+*** ;
+*** while
+assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100))
+*** (
+*** a
+*** >=
+Variable: a found.
+Value: 0
+*** 0
+*** )
+*** do
+*** begin
+*** println
+*** (
+*** a
+*** )
+Variable: a found.
+Value: 0
+*** ;
+*** a
+*** =
+Variable: a found.
+Value: 0
+*** a
+*** -
+Variable: a found.
+Value: 0
+*** 1
+*** ;
+*** end
+assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)))
+*** end
+
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeWhile
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100)), NodeWhile(NodeRel(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 0)), NodeList(println_NodeCallFct(NodeList(NodeLiteral(TypeInt, 0))), NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))))))
+
+
+
+*************************************************
+*** Fichier data/progr2.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// gestion des variables statiques
+//
+*** var
+*** x
+*** ,
+*** y
+*** :
+*** integer
+*** ;
+*** b
+* Enregistre x
+* Enregistre y
+*** :
+*** boolean
+*** ;
+*** c
+* Enregistre b
+*** :
+*** string
+*** ;
+*** d
+* Enregistre c
+*** :
+*** array
+*** [
+*** 1
+*** ..
+*** 10
+*** ]
+*** of
+*** string
+*** ;
+*** begin
+* Enregistre d
+*** x
+*** =
+Variable: x found.
+Value: 0
+*** 1234564789
+*** ;
+// 0x4995F6B5
+*** y
+assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1234564789))
+*** =
+Variable: y found.
+Value: 0
+*** 0x7FFFFFFF
+*** ;
+*** b
+assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 2147483647))
+*** =
+Variable: b found.
+Value: 0
+*** true
+*** ;
+*** c
+assignment: NodeAssign(NodeLiteral(TypeBoolean, 0), NodeLiteral(TypeBoolean, true))
+*** =
+Variable: c found.
+Value: 0
+*** "a";
+*** d
+*** Erreur de syntaxe en ligne 0, colonne 13. Token inattendu: TOKEN_IDENTIFIER
+*** [
+*** Erreur de syntaxe: data/progr2.lea:Cannot recover from the syntax error
+
+
+
+*************************************************
+*** Fichier data/progr4.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// Structure de contrôle
+//
+//
+*** var
+*** x
+*** ,
+*** y
+*** :
+*** integer
+*** ;
+*** begin
+* Enregistre x
+* Enregistre y
+*** x
+*** =
+Variable: x found.
+Value: 0
+*** 1
+*** ;
+*** while
+assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))
+*** (
+*** x
+*** <=
+Variable: x found.
+Value: 0
+*** 10
+*** )
+*** do
+*** begin
+*** println
+*** (
+*** x
+*** )
+Variable: x found.
+Value: 0
+*** ;
+*** if
+*** (
+*** x
+*** ==
+Variable: x found.
+Value: 0
+*** 10
+*** )
+*** then
+*** begin
+*** y
+*** =
+Variable: y found.
+Value: 0
+*** 1
+*** ;
+*** while
+assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))
+*** (
+*** y
+*** <=
+Variable: y found.
+Value: 0
+*** 5
+*** )
+*** do
+*** begin
+*** println
+*** (
+*** -
+*** 1000
+*** -
+*** y
+*** )
+Variable: y found.
+Value: 0
+*** ;
+*** y
+*** =
+Variable: y found.
+Value: 0
+*** y
+*** +
+Variable: y found.
+Value: 0
+*** 1
+*** ;
+*** end
+assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)))
+*** end
+*** else
+*** Erreur de syntaxe en ligne 0, colonne 19. Token inattendu: TOKEN_ELSE
+*** println
+*** (
+*** X
+0,19-0,6: Recovered: removed unexpected token #56
+*** )
+Variable: X found.
+java.lang.NoSuchFieldException: Count:1[ERROR]Aucune variable similaire stackee trouvee
+*** ;
+*** x
+*** =
+Variable: x found.
+Value: 0
+*** x
+*** +
+Variable: x found.
+Value: 0
+*** 1
+*** ;
+*** end
+assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)))
+*** end
+
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeWhile
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)), NodeWhile(NodeRel(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 10)), NodeList(println_NodeCallFct(NodeList(NodeLiteral(TypeInt, 0))), NodeIf(NodeRel(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 10)), NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)), NodeWhile(NodeRel(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 5)), NodeList(println_NodeCallFct(NodeList(NodeOp(NodeOp(NodeLiteral(TypeInt, 1000), NodeLiteral(TypeInt, 0))))), NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))))))), println_NodeCallFct(NodeList(NodeLiteral(null, -1))), NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))))))

@@ -12,22 +12,22 @@ import ubordeaux.deptinfo.compilation.project.type.Type;
 
 
 //Local variable stack
-public class StackEnvironment {
-	private Stack<Map<String, NodeLiteral>> environment;
+public class StackEnvironment_old {
+	private Stack<Map<NodeId, NodeLiteral>> environment;
 
-	public StackEnvironment() {		
+	public StackEnvironment_old() {		
 		environment = new Stack<>();
 		
 	}
 	
 	//Input: "local variables stack"
-	public StackEnvironment(String str) {
+	public StackEnvironment_old(String str) {
 		this();
 	}
 	
-	public Map<String, NodeLiteral> get_last_portability(){
+	public Map<NodeId, NodeLiteral> get_last_portability(){
 		if(environment.isEmpty())
-			return environment.push(new HashMap<String, NodeLiteral>());
+			return environment.push(new HashMap<NodeId, NodeLiteral>());
 		return environment.peek();
 	}
 	
@@ -49,30 +49,35 @@ public class StackEnvironment {
 	}
 	*/
 	
+	public void add_identifier_node_list(IdentifierList id_list, Type t) throws ClassNotFoundException {
+		//TODO
+		throw new ClassNotFoundException("Cannot save this identifier for type: " + t);
+	}
 	
-	public void add_node_to_latest_portability(String id, NodeLiteral n) {
+	public boolean is_existing_variable(NodeId n) {
+		//TODO
+		return true;
+	}
+	
+	
+	public void add_node_to_latest_portability(NodeId id, NodeLiteral n) {
 		System.out.println("* Enregistre " + id.toString());
 		this.get_last_portability().put(id, n);
 	}
 
+	public NodeLiteral getLiteralFromId(NodeId id) {
+		return environment.peek().get(id);
+	}
 
 	public NodeLiteral getLiteralFromId(String id) throws NoSuchFieldException {
-		NodeLiteral res = environment.peek().get(id);
-		if(res == null)
-			throw new NoSuchFieldException("Count:"+environment.size()+ "[ERROR]Aucune variable similaire stackee trouvee");
-		return res;
-		
-		/*
-		for(Entry<String, NodeLiteral> entry : environment.peek().entrySet()) {
+		for(Entry<NodeId, NodeLiteral> entry : environment.peek().entrySet()) {
 			if(entry.getKey().getName() == id)
 				return entry.getValue();
 		}
-		*/
 
-		//throw new NoSuchFieldException("Count:"+environment.size()+ "[ERROR]Aucune variable similaire stackee trouvee");
+		throw new NoSuchFieldException("Count:"+environment.size()+ "[ERROR]Aucune variable similaire stackee trouvee");
 	}
 	
-	/*
 	public Type getTypeFromId(String id) throws NoSuchFieldException {
 		for(Entry<NodeId, NodeLiteral> entry : environment.peek().entrySet()) {
 			System.out.println("Key: " + entry.getKey().getName());
@@ -82,19 +87,18 @@ public class StackEnvironment {
 
 		throw new NoSuchFieldException("Count:"+environment.size()+ "[ERROR]Aucune variable similaire stackee trouvee");
 	}
-*/
 	
 	/**
 	 * @return the environment
 	 */
-	public Stack<Map<String, NodeLiteral>> getEnvironment() {
+	public Stack<Map<NodeId, NodeLiteral>> getEnvironment() {
 		return environment;
 	}
 
 	/**
 	 * @param environment the environment to set
 	 */
-	public void setEnvironment(Stack<Map<String, NodeLiteral>> environment) {
+	public void setEnvironment(Stack<Map<NodeId, NodeLiteral>> environment) {
 		this.environment = environment;
 	}
 	

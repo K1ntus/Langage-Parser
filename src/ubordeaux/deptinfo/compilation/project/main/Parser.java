@@ -73,12 +73,6 @@ public class Parser extends beaver.Parser {
 		}
 	};
 
-	static final Action RETURN6 = new Action() {
-		public Symbol reduce(Symbol[] _symbols, int offset) {
-			return _symbols[offset + 6];
-		}
-	};
-
 	static final Action RETURN5 = new Action() {
 		public Symbol reduce(Symbol[] _symbols, int offset) {
 			return _symbols[offset + 5];
@@ -165,14 +159,60 @@ public class Parser extends beaver.Parser {
 				}
 			},
 			Action.RETURN,	// [16] index_type = enumerated_type.enum
-			Action.RETURN,	// [17] index_type = subrange_type.subr
-			RETURN2,	// [18] enumerated_type = TOKEN_LPAR identifier_list.list TOKEN_RPAR
-			RETURN3,	// [19] subrange_type = TOKEN_LIT_INTEGER TOKEN_DOTDOT TOKEN_LIT_INTEGER; returns 'TOKEN_LIT_INTEGER' although none is marked
-			RETURN3,	// [20] subrange_type = TOKEN_IDENTIFIER TOKEN_DOTDOT TOKEN_IDENTIFIER; returns 'TOKEN_IDENTIFIER' although none is marked
-			RETURN6,	// [21] array_type = TOKEN_ARRAY TOKEN_LBRACKET range_type.range TOKEN_RBRACKET TOKEN_OF type.t; returns 't' although more are marked
+			Action.RETURN,	// [17] index_type = subrange_type
+			new Action() {	// [18] enumerated_type = TOKEN_LPAR identifier_list.list TOKEN_RPAR
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol _symbol_list = _symbols[offset + 2];
+					final IdentifierList list = (IdentifierList) _symbol_list.value;
+					 TypeTuple res = new TypeTuple();
+																	int i = 0;
+																	for(String str : list){
+																		res.add(new TypeItemEnum(i, str));
+																		i++;
+																	}
+																	return res;
+				}
+			},
+			new Action() {	// [19] subrange_type = TOKEN_LIT_INTEGER.min TOKEN_DOTDOT TOKEN_LIT_INTEGER.max
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol _symbol_min = _symbols[offset + 1];
+					final Integer min = (Integer) _symbol_min.value;
+					final Symbol _symbol_max = _symbols[offset + 3];
+					final Integer max = (Integer) _symbol_max.value;
+					 return new TypeEnumRange(new TypeItemEnum(min, min.toString()), new TypeItemEnum(max, max.toString()));
+				}
+			},
+			new Action() {	// [20] subrange_type = TOKEN_IDENTIFIER.min TOKEN_DOTDOT TOKEN_IDENTIFIER.max
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol _symbol_min = _symbols[offset + 1];
+					final String min = (String) _symbol_min.value;
+					final Symbol _symbol_max = _symbols[offset + 3];
+					final String max = (String) _symbol_max.value;
+					 return new TypeEnumRange(new TypeItemEnum(0, min), new TypeItemEnum(0, max));
+				}
+			},
+			new Action() {	// [21] array_type = TOKEN_ARRAY TOKEN_LBRACKET range_type.range TOKEN_RBRACKET TOKEN_OF type.t
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol _symbol_range = _symbols[offset + 3];
+					final TypeTuple range = (TypeTuple) _symbol_range.value;
+					final Symbol _symbol_t = _symbols[offset + 6];
+					final Type t = (Type) _symbol_t.value;
+					 return new TypeArray(range, t);
+				}
+			},
 			Action.RETURN,	// [22] range_type = enumerated_type
-			Action.RETURN,	// [23] range_type = subrange_type
-			Action.RETURN,	// [24] range_type = named_type
+			new Action() {	// [23] range_type = subrange_type.ter
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol ter = _symbols[offset + 1];
+					 return new TypeTuple(ter);
+				}
+			},
+			new Action() {	// [24] range_type = named_type.ter
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol ter = _symbols[offset + 1];
+					 return new TypeTuple(ter);
+				}
+			},
 			new Action() {	// [25] pointer_type = TOKEN_CIRC type.t
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_t = _symbols[offset + 2];
@@ -350,7 +390,7 @@ public class Parser extends beaver.Parser {
 					final String func_name = (String) _symbol_func_name.value;
 					final Symbol _symbol_args = _symbols[offset + 3];
 					final NodeList args = (NodeList) _symbol_args.value;
-					 return new NodeCallFct(func_name, new TypeFunct(null, null, null), args);
+					 return new NodeCallFct(func_name, new TypeFunct(func_name, new TypeTuple(), null), args);
 				}
 			},
 			Action.NONE,  	// [69] expression_part = 
@@ -457,7 +497,7 @@ public class Parser extends beaver.Parser {
 					final NodeExp root = (NodeExp) _symbol_root.value;
 					final Symbol _symbol_case_list = _symbols[offset + 4];
 					final NodeCaseList case_list = (NodeCaseList) _symbol_case_list.value;
-					 return new NodeSwitch(root, new NodeList(case_list));
+					 return new NodeSwitch(root, case_list);
 				}
 			},
 			new Action() {	// [86] case_statement_list = case_statement_list.list case_statement.item

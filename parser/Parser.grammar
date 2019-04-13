@@ -120,6 +120,8 @@
 %typeof literal  = "NodeLiteral";
 %typeof case_statement = "NodeCase";
 
+%typeof range_type = "TypeTuple";
+
 
 //%typeof pop_stackenv, push_stackenv = "Void";
 
@@ -168,26 +170,33 @@ named_type=
 	
 index_type=
 	enumerated_type.enum
-	| subrange_type.subr
+	| subrange_type
 	;
 	
 enumerated_type=
-	TOKEN_LPAR identifier_list.list TOKEN_RPAR 
+	TOKEN_LPAR identifier_list.list TOKEN_RPAR 					{: TypeTuple res = new TypeTuple();
+																	int i = 0;
+																	for(String str : list){
+																		res.add(new TypeItemEnum(i, str));
+																		i++;
+																	}
+																	return res;
+																:}
 	;
 	
 subrange_type= 
-	TOKEN_LIT_INTEGER TOKEN_DOTDOT TOKEN_LIT_INTEGER//	{: return new TypeEnumRange(new TypeItemEnum(t1, t1.toString()), new TypeItemEnum(t2, t2.toString())); :}
-	| TOKEN_IDENTIFIER TOKEN_DOTDOT TOKEN_IDENTIFIER
+	TOKEN_LIT_INTEGER.min TOKEN_DOTDOT TOKEN_LIT_INTEGER.max	{: return new TypeEnumRange(new TypeItemEnum(min, min.toString()), new TypeItemEnum(max, max.toString())); :}
+	| TOKEN_IDENTIFIER.min TOKEN_DOTDOT TOKEN_IDENTIFIER.max	{: return new TypeEnumRange(new TypeItemEnum(0, min), new TypeItemEnum(0, max)); :}
 	;
 	
 array_type=
-	TOKEN_ARRAY TOKEN_LBRACKET range_type.range TOKEN_RBRACKET TOKEN_OF type.t
+	TOKEN_ARRAY TOKEN_LBRACKET range_type.range TOKEN_RBRACKET TOKEN_OF type.t	{: return new TypeArray(range, t); :}
 	;
 	
 range_type=
-	enumerated_type	
-	| subrange_type	
-	| named_type	//OK
+	enumerated_type	//OK
+	| subrange_type.ter		{: return new TypeTuple(ter); :}//OK
+	| named_type.ter		{: return new TypeTuple(ter); :}//OK
 	;
 	
 pointer_type=
@@ -331,9 +340,9 @@ procedure_statement=
 	
 	
 //NOT FINISHED
-//faudrait match si les params sont valides aussi
+//faudrait match si les params sont valides avant
 procedure_expression=
-	TOKEN_IDENTIFIER.func_name TOKEN_LPAR expression_part.args TOKEN_RPAR	{: return new NodeCallFct(func_name, new TypeFunct(null, null, null), args); :}	//Remplacer type int par celle se trouvant dans environment avec func_name
+	TOKEN_IDENTIFIER.func_name TOKEN_LPAR expression_part.args TOKEN_RPAR	{: return new NodeCallFct(func_name, new TypeFunct(func_name, new TypeTuple(), null), args); :}	//Remplacer type int par celle se trouvant dans environment avec func_name
 	;
 	
 	
@@ -347,17 +356,17 @@ expression_part=
 //OK	
 expression_list=
 	expression_list.root TOKEN_COMMA expression.elt	{: root.add(elt); return root; :}
-	| expression.expr									{: return new NodeList(expr); :}
+	| expression.expr								{: return new NodeList(expr); :}
 	;
 
 //OK	
 new_statement=
-	TOKEN_NEW variable_access.node TOKEN_SEMIC	{: return new NodeNew(node); :}
+	TOKEN_NEW variable_access.node TOKEN_SEMIC			{: return new NodeNew(node); :}
 	;
 	
 //OK
 dispose_statement=
-	TOKEN_DISPOSE variable_access.node TOKEN_SEMIC	{: return new NodeDispose(node); :}
+	TOKEN_DISPOSE variable_access.node TOKEN_SEMIC		{: return new NodeDispose(node); :}
 	;
 	
 //OK
@@ -411,7 +420,7 @@ while_statement=
 
 //OK	
 switch_statement=
-	TOKEN_SWITCH expression.root TOKEN_BEGIN case_statement_list.case_list TOKEN_END	{: return new NodeSwitch(root, new NodeList(case_list));	:}
+	TOKEN_SWITCH expression.root TOKEN_BEGIN case_statement_list.case_list TOKEN_END	{: return new NodeSwitch(root, case_list);	:}
 	;
 
 //OK	
@@ -427,7 +436,7 @@ case_statement=
 	;
 	
 	
-//Recup les valeurs stockees dans les environnements (ou pas, à check)
+//Recup les valeurs stockees dans les environnements (ou pas, a check)
 variable_access=
 	TOKEN_IDENTIFIER.name		{: return new NodeId(name, new TypeInt());	:}
 	| variable_access.var TOKEN_LBRACKET expression.e TOKEN_RBRACKET

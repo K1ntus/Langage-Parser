@@ -386,7 +386,7 @@ public class Parser extends beaver.Parser {
 					final String func_name = (String) _symbol_func_name.value;
 					final Symbol _symbol_args = _symbols[offset + 3];
 					final NodeList args = (NodeList) _symbol_args.value;
-					 return new NodeCallFct(func_name, new TypeFunct(null, null, null), args);
+					 return new NodeCallFct(func_name, new TypeFunct(func_name, null, null), args);
 				}
 			},
 			Action.NONE,  	// [67] expression_part = 

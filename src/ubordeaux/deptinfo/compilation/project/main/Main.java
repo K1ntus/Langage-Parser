@@ -36,6 +36,7 @@ public class Main {
 
 					System.out.println("\n\nArbre Principal: ");
 					System.out.println(result.toString());
+					result.toDot("data/output_tree");
 					
 				} catch (beaver.Parser.Exception e) {
 					System.err.println("*** Erreur de syntaxe: " + arg + ":" + e.getMessage());

@@ -375,7 +375,7 @@ procedure_statement=
 //NOT FINISHED
 //faudrait match si les params sont valides aussi
 procedure_expression=
-	TOKEN_IDENTIFIER.func_name TOKEN_LPAR expression_part.args TOKEN_RPAR	{: return new NodeCallFct(func_name, new TypeFunct(null, null, null), args); :}	//Remplacer type int par celle se trouvant dans environment avec func_name
+	TOKEN_IDENTIFIER.func_name TOKEN_LPAR expression_part.args TOKEN_RPAR	{: return new NodeCallFct(func_name, new TypeFunct(func_name, null, null), args); :}	//Remplacer type int par celle se trouvant dans environment avec func_name
 	;
 	
 	

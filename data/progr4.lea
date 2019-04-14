@@ -1,89 +1,25 @@
-digraph Stree {
-node_59 [shape="ellipse", label="NodeList"];
-node_58 [shape="ellipse", label="NodeAssign"];
-node_55 [shape="ellipse", label="NodeLiteral 0"];
-node_58 -> node_55;
-node_57 [shape="ellipse", label="NodeLiteral 1"];
-node_58 -> node_57;
-node_59 -> node_58;
-node_89 [shape="ellipse", label="NodeWhile"];
-node_61 [shape="ellipse", label="NodeRel"];
-node_55 [shape="ellipse", label="NodeLiteral 0"];
-node_61 -> node_55;
-node_60 [shape="ellipse", label="NodeLiteral 10"];
-node_61 -> node_60;
-node_89 -> node_61;
-node_64 [shape="ellipse", label="NodeList"];
-node_63 [shape="ellipse", label="NodeCallFct println()"];
-node_62 [shape="ellipse", label="NodeList"];
-node_55 [shape="ellipse", label="NodeLiteral 0"];
-node_62 -> node_55;
-node_63 -> node_62;
-node_64 -> node_63;
-node_88 [shape="ellipse", label="NodeIf"];
-node_66 [shape="ellipse", label="NodeRel"];
-node_55 [shape="ellipse", label="NodeLiteral 0"];
-node_66 -> node_55;
-node_65 [shape="ellipse", label="NodeLiteral 10"];
-node_66 -> node_65;
-node_88 -> node_66;
-node_69 [shape="ellipse", label="NodeList"];
-node_68 [shape="ellipse", label="NodeAssign"];
-node_56 [shape="ellipse", label="NodeLiteral 0"];
-node_68 -> node_56;
-node_67 [shape="ellipse", label="NodeLiteral 1"];
-node_68 -> node_67;
-node_69 -> node_68;
-node_81 [shape="ellipse", label="NodeWhile"];
-node_71 [shape="ellipse", label="NodeRel"];
-node_56 [shape="ellipse", label="NodeLiteral 0"];
-node_71 -> node_56;
-node_70 [shape="ellipse", label="NodeLiteral 5"];
-node_71 -> node_70;
-node_81 -> node_71;
-node_77 [shape="ellipse", label="NodeList"];
-node_76 [shape="ellipse", label="NodeCallFct println()"];
-node_75 [shape="ellipse", label="NodeList"];
-node_74 [shape="ellipse", label="NodeOp"];
-node_73 [shape="ellipse", label="NodeOp"];
-node_72 [shape="ellipse", label="NodeLiteral 1000"];
-node_73 -> node_72;
-node_56 [shape="ellipse", label="NodeLiteral 0"];
-node_73 -> node_56;
-node_74 -> node_73;
-node_75 -> node_74;
-node_76 -> node_75;
-node_77 -> node_76;
-node_80 [shape="ellipse", label="NodeAssign"];
-node_56 [shape="ellipse", label="NodeLiteral 0"];
-node_80 -> node_56;
-node_79 [shape="ellipse", label="NodeOp"];
-node_56 [shape="ellipse", label="NodeLiteral 0"];
-node_79 -> node_56;
-node_78 [shape="ellipse", label="NodeLiteral 1"];
-node_79 -> node_78;
-node_80 -> node_79;
-node_77 -> node_80;
-node_81 -> node_77;
-node_69 -> node_81;
-node_84 [shape="ellipse", label="NodeCallFct println()"];
-node_83 [shape="ellipse", label="NodeList"];
-node_82 [shape="ellipse", label="NodeLiteral X"];
-node_83 -> node_82;
-node_84 -> node_83;
-node_69 -> node_84;
-node_87 [shape="ellipse", label="NodeAssign"];
-node_55 [shape="ellipse", label="NodeLiteral 0"];
-node_87 -> node_55;
-node_86 [shape="ellipse", label="NodeOp"];
-node_55 [shape="ellipse", label="NodeLiteral 0"];
-node_86 -> node_55;
-node_85 [shape="ellipse", label="NodeLiteral 1"];
-node_86 -> node_85;
-node_87 -> node_86;
-node_69 -> node_87;
-node_88 -> node_69;
-node_64 -> node_88;
-node_89 -> node_64;
-node_59 -> node_89;
-}
+//
+// Structure de contrôle
+//
+//
+
+var
+   x, y : integer;
+   
+begin
+   x = 1;
+   while (x <= 10) do begin
+      println (x);
+      if (x==10) then begin
+	 y = 1;
+	 while (y <= 5) do begin
+	    println (-1000-y);
+	    y = y + 1;
+	    end
+      else
+	 println ("X");
+      x = x + 1;
+     end
+   end
+   
+end

@@ -17,4 +17,10 @@ public final class NodeCaseList extends NodeExp {
 		return new NodeCaseList();
 	}
 
+	@Override
+	public void generateIntermediateCode() {
+		// TODO Auto-generated method stub
+		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		
+	}
 }

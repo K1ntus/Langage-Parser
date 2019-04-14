@@ -40,4 +40,10 @@ public final class NodeLiteral extends NodeExp {
 		return type;
 	}
 
+	@Override
+	public void generateIntermediateCode() {
+		// TODO Auto-generated method stub
+		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		
+	}
 }

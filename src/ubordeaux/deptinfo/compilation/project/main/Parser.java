@@ -258,7 +258,6 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_t = _symbols[offset + 3];
 					final Type t = (Type) _symbol_t.value;
 					
-																//System.out.println("+ Enregistre variable: "+ id_list.first());
 																for(String str : id_list){
 																	stackEnvironment.add_node_to_latest_portability(str, new NodeLiteral(t, 0));
 																}
@@ -312,14 +311,14 @@ public class Parser extends beaver.Parser {
 					final NodeList l = (NodeList) _symbol_l.value;
 					final Symbol _symbol_elem = _symbols[offset + 3];
 					final NodeId elem = (NodeId) _symbol_elem.value;
-					 l.add(elem); return l;
+					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 3].value); return _symbols[offset + 1];
 				}
 			},
 			new Action() {	// [50] argt_list = argt.elem
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_elem = _symbols[offset + 1];
 					final NodeId elem = (NodeId) _symbol_elem.value;
-					 NodeList l = new NodeList(elem); return l;
+					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1].value); return new Symbol(lst);
 				}
 			},
 			new Action() {	// [51] argt = TOKEN_IDENTIFIER.id TOKEN_COLON type.t
@@ -430,7 +429,7 @@ public class Parser extends beaver.Parser {
 			return new NodeCallFct(
 				"println", 
 				new TypeFunct("println", 
-					new TypeTuple(new TypeString()), 
+					new TypeTuple(), 
 					new TypeVoid()),
 				new NodeList(e));
 				}
@@ -536,7 +535,7 @@ public class Parser extends beaver.Parser {
 						
 										try{
 											System.out.println("Variable: " + name +" found.");
-											System.out.println("Value: " + stackEnvironment.getLiteralFromId(name).getValue());
+											//System.out.println("Value: " + stackEnvironment.getLiteralFromId(name).getValue());
 											return stackEnvironment.getLiteralFromId(name);  
 										} catch (NoSuchFieldException e) {
 											System.out.println(e);

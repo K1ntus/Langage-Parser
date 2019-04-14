@@ -105,7 +105,6 @@
 ***/
 %typeof TOKEN_LIT_INTEGER = "Integer";
 %typeof TOKEN_LIT_STRING, TOKEN_IDENTIFIER, type_declaration = "String";
-%typeof println_statement = "void";
 
 %typeof type = "Type";
 %typeof feature_type = "TypeFeature";
@@ -121,6 +120,8 @@
 %typeof statement_list, expression_list, argt_list = "NodeList";
 %typeof case_statement_list = "NodeCaseList";
 %typeof identifier_list = "IdentifierList";
+
+%typeof readln_statement, println_statement, procedure_expression = "NodeCallFct";
 
 
 
@@ -167,7 +168,7 @@ type=
 	simple_type			//OK
 	| named_type		//OK
 	| index_type		//OK
-	| array_type		
+	| array_type		//OK
 	| pointer_type		//OK
 	| structure_type 	//OK
 	;
@@ -253,7 +254,6 @@ variable_declaration_list=
 variable_declaration=
 	identifier_list.id_list TOKEN_COLON type.t TOKEN_SEMIC 	
 															{:
-																//System.out.println("+ Enregistre variable: "+ id_list.first());
 																for(String str : id_list){
 																	stackEnvironment.add_node_to_latest_portability(str, new NodeLiteral(t, 0));
 																}
@@ -310,8 +310,8 @@ argt_part=
 	;
 	
 argt_list=
-	argt_list.l TOKEN_COMMA argt.elem		{: l.add(elem); return l; :}
-	| argt.elem								{: NodeList l = new NodeList(elem); return l; :}
+	argt_list.l TOKEN_COMMA argt.elem		//{: l.add(elem); return l; :}
+	| argt.elem								//{: NodeList l = new NodeList(elem); return l; :}
 	;
 	
 argt=
@@ -409,7 +409,7 @@ println_statement=
 			return new NodeCallFct(
 				"println", 
 				new TypeFunct("println", 
-					new TypeTuple(new TypeString()), 
+					new TypeTuple(), 
 					new TypeVoid()),
 				new NodeList(e));
 		:}
@@ -479,7 +479,7 @@ variable_access=
 	TOKEN_IDENTIFIER.name		{:	
 										try{
 											System.out.println("Variable: " + name +" found.");
-											System.out.println("Value: " + stackEnvironment.getLiteralFromId(name).getValue());
+											//System.out.println("Value: " + stackEnvironment.getLiteralFromId(name).getValue());
 											return stackEnvironment.getLiteralFromId(name);  
 										} catch (NoSuchFieldException e) {
 											System.out.println(e);

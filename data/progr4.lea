@@ -16,10 +16,10 @@ begin
 	    println (-1000-y);
 	    y = y + 1;
 	    end
-         end
       else
 	 println ("X");
       x = x + 1;
+     end
    end
    
 end

@@ -36,4 +36,10 @@ public class NodeRel extends NodeExp {
 		return new NodeRel(name, (Node) getOp1().clone(), (Node) getOp2().clone());
 	};
 
+	@Override
+	public void generateIntermediateCode() {
+		// TODO Auto-generated method stub
+		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		
+	}
 }

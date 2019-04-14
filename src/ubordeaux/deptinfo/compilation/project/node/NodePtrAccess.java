@@ -30,4 +30,10 @@ public final class NodePtrAccess extends NodeExp {
 		return new NodePtrAccess((NodeExp) this.get(0).clone());
 	}
 
+	@Override
+	public void generateIntermediateCode() {
+		// TODO Auto-generated method stub
+		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		
+	}
 }

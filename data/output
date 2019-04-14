@@ -36,7 +36,6 @@ $$
 *** a
 *** =
 Variable: a found.
-Value: 0
 *** 100
 *** ;
 *** while
@@ -45,7 +44,6 @@ assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100))
 *** a
 *** >=
 Variable: a found.
-Value: 0
 *** 0
 *** )
 *** do
@@ -55,16 +53,13 @@ Value: 0
 *** a
 *** )
 Variable: a found.
-Value: 0
 *** ;
 *** a
 *** =
 Variable: a found.
-Value: 0
 *** a
 *** -
 Variable: a found.
-Value: 0
 *** 1
 *** ;
 *** end
@@ -129,7 +124,6 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100)), NodeWhi
 *** x
 *** =
 Variable: x found.
-Value: 0
 *** 1234564789
 *** ;
 // 0x4995F6B5
@@ -137,26 +131,118 @@ Value: 0
 assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1234564789))
 *** =
 Variable: y found.
-Value: 0
 *** 0x7FFFFFFF
 *** ;
 *** b
 assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 2147483647))
 *** =
 Variable: b found.
-Value: 0
 *** true
 *** ;
 *** c
 assignment: NodeAssign(NodeLiteral(TypeBoolean, 0), NodeLiteral(TypeBoolean, true))
 *** =
 Variable: c found.
-Value: 0
-*** "a";
+*** ;
 *** d
-*** Erreur de syntaxe en ligne 0, colonne 13. Token inattendu: TOKEN_IDENTIFIER
+assignment: NodeAssign(NodeLiteral(TypeString, 0), NodeLiteral(TypeString, a))
 *** [
-*** Erreur de syntaxe: data/progr2.lea:Cannot recover from the syntax error
+Variable: d found.
+*** 1
+*** ]
+*** =
+*** ;
+*** d
+assignment: NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 1)), NodeLiteral(TypeString, A))
+*** [
+Variable: d found.
+*** 2
+*** ]
+*** =
+*** ;
+*** d
+assignment: NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 2)), NodeLiteral(TypeString, B))
+*** [
+Variable: d found.
+*** 3
+*** ]
+*** =
+*** ;
+*** d
+assignment: NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 3)), NodeLiteral(TypeString, C))
+*** [
+Variable: d found.
+*** 10
+*** ]
+*** =
+*** ;
+*** println
+assignment: NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 10)), NodeLiteral(TypeString, Z))
+*** x
+*** ;
+Variable: x found.
+*** println
+*** y
+*** ;
+Variable: y found.
+*** println
+*** b
+*** ;
+Variable: b found.
+*** println
+*** c
+*** ;
+Variable: c found.
+*** println
+*** d
+*** [
+Variable: d found.
+*** 2
+*** ]
+*** ;
+*** end
+
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeAssign
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeAssign
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeAssign
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+--- CheckType NodeLiteral
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+--- CheckType NodeLiteral
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+--- CheckType NodeLiteral
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+--- CheckType NodeLiteral
+--- CheckType NodeCallFct
+*** Erreur de typage: pas le même nombre de paramètres 
+--- CheckType NodeCallFct
+*** Erreur de typage: pas le même nombre de paramètres 
+--- CheckType NodeCallFct
+*** Erreur de typage: pas le même nombre de paramètres 
+--- CheckType NodeCallFct
+*** Erreur de typage: pas le même nombre de paramètres 
+--- CheckType NodeCallFct
+*** Erreur de typage: pas le même nombre de paramètres 
+*** Erreur de typage
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1234564789)), NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 2147483647)), NodeAssign(NodeLiteral(TypeBoolean, 0), NodeLiteral(TypeBoolean, true)), NodeAssign(NodeLiteral(TypeString, 0), NodeLiteral(TypeString, a)), NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 1)), NodeLiteral(TypeString, A)), NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 2)), NodeLiteral(TypeString, B)), NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 3)), NodeLiteral(TypeString, C)), NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 10)), NodeLiteral(TypeString, Z)), println_NodeCallFct(NodeList(NodeLiteral(TypeInt, 0))), println_NodeCallFct(NodeList(NodeLiteral(TypeInt, 0))), println_NodeCallFct(NodeList(NodeLiteral(TypeBoolean, 0))), println_NodeCallFct(NodeList(NodeLiteral(TypeString, 0))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 2)))))
 
 
 
@@ -183,7 +269,6 @@ Value: 0
 *** x
 *** =
 Variable: x found.
-Value: 0
 *** 1
 *** ;
 *** while
@@ -192,7 +277,6 @@ assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))
 *** x
 *** <=
 Variable: x found.
-Value: 0
 *** 10
 *** )
 *** do
@@ -202,14 +286,12 @@ Value: 0
 *** x
 *** )
 Variable: x found.
-Value: 0
 *** ;
 *** if
 *** (
 *** x
 *** ==
 Variable: x found.
-Value: 0
 *** 10
 *** )
 *** then
@@ -217,7 +299,6 @@ Value: 0
 *** y
 *** =
 Variable: y found.
-Value: 0
 *** 1
 *** ;
 *** while
@@ -226,7 +307,6 @@ assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))
 *** y
 *** <=
 Variable: y found.
-Value: 0
 *** 5
 *** )
 *** do
@@ -239,43 +319,35 @@ Value: 0
 *** y
 *** )
 Variable: y found.
-Value: 0
 *** ;
 *** y
 *** =
 Variable: y found.
-Value: 0
 *** y
 *** +
 Variable: y found.
-Value: 0
 *** 1
 *** ;
 *** end
 assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)))
-*** end
 *** else
-*** Erreur de syntaxe en ligne 0, colonne 19. Token inattendu: TOKEN_ELSE
+*** Erreur de syntaxe en ligne 0, colonne 18. Token inattendu: TOKEN_ELSE
 *** println
 *** (
-*** X
-0,19-0,6: Recovered: removed unexpected token #56
+0,18-0,6: Recovered: removed unexpected token #56
 *** )
-Variable: X found.
-java.lang.NoSuchFieldException: Count:1[ERROR]Aucune variable similaire stackee trouvee
 *** ;
 *** x
 *** =
 Variable: x found.
-Value: 0
 *** x
 *** +
 Variable: x found.
-Value: 0
 *** 1
 *** ;
 *** end
 assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)))
+*** end
 *** end
 
 *** Analyse syntaxique ok
@@ -288,4 +360,4 @@ assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), 
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)), NodeWhile(NodeRel(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 10)), NodeList(println_NodeCallFct(NodeList(NodeLiteral(TypeInt, 0))), NodeIf(NodeRel(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 10)), NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)), NodeWhile(NodeRel(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 5)), NodeList(println_NodeCallFct(NodeList(NodeOp(NodeOp(NodeLiteral(TypeInt, 1000), NodeLiteral(TypeInt, 0))))), NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))))))), println_NodeCallFct(NodeList(NodeLiteral(null, -1))), NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))))))
+NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)), NodeWhile(NodeRel(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 10)), NodeList(println_NodeCallFct(NodeList(NodeLiteral(TypeInt, 0))), NodeIf(NodeRel(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 10)), NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)), NodeWhile(NodeRel(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 5)), NodeList(println_NodeCallFct(NodeList(NodeOp(NodeOp(NodeLiteral(TypeInt, 1000), NodeLiteral(TypeInt, 0))))), NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))))), println_NodeCallFct(NodeList(NodeLiteral(TypeString, X))), NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))))))))

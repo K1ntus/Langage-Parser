@@ -59,7 +59,7 @@ public class StackEnvironment {
 	public NodeLiteral getLiteralFromId(String id) throws NoSuchFieldException {
 		NodeLiteral res = environment.peek().get(id);
 		if(res == null)
-			throw new NoSuchFieldException("Count:"+environment.size()+ "[ERROR]Aucune variable similaire stackee trouvee");
+			throw new NoSuchFieldException("[ERROR]Aucune variable similaire stackee trouvee"+"\n[ERROR]Stack Layer:"+environment.size());
 		return res;
 		
 		/*

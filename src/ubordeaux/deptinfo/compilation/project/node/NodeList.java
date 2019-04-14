@@ -40,4 +40,10 @@ public final class NodeList extends Node {
 		return node;
 	}
 
+	@Override
+	public void generateIntermediateCode() {
+		// TODO Auto-generated method stub
+		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		
+	}
 }

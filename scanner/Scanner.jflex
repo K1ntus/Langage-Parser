@@ -18,6 +18,8 @@ import beaver.Scanner;
 %column
 
 %{
+      StringBuffer string = new StringBuffer();
+      
 private String annotation_buffer = "";
 private String annotation_type = "";
 %}
@@ -38,7 +40,7 @@ HexaValue = 0x[a-fA-F0-9_]*
 
 
 
-%state COMMENT, COMMENT_DOC, ANNOTATION
+%state COMMENT, COMMENT_DOC, ANNOTATION, STRING
 %%
 
 <YYINITIAL> {
@@ -46,6 +48,9 @@ HexaValue = 0x[a-fA-F0-9_]*
 	"/**"			{System.out.println("$$$"); yybegin(COMMENT_DOC);}
 	"/*"			{System.out.println("$$"); yybegin(COMMENT);}
 	{LineComment}	{System.out.print(yytext()); }
+	
+	\"                             { string.setLength(0); yybegin(STRING); }
+	//{String}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_STRING, yyline, yycolumn, new String(yytext()) ); }
 	
 	"struct"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_STRUCT, yyline, yycolumn); }
 	"array"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_ARRAY, yyline, yycolumn); }
@@ -110,20 +115,30 @@ HexaValue = 0x[a-fA-F0-9_]*
 	"&&"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_AND, yyline, yycolumn); }
 	
 	"=" 	        { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_AFF, yyline, yycolumn); }
+	"^"				{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_CIRC, yyline, yycolumn); }
 	
-	{String}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_STRING, yyline, yycolumn, new String(yytext()) ); }
 	{Identifier}	{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_IDENTIFIER, yyline, yycolumn, new String(yytext()) ); }
 	{Integer}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn, new Integer(yytext()) ); }
 	{HexaValue}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn, new Integer(Integer.decode(yytext())) ); }
 	
 	
-	"^"				{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_CIRC, yyline, yycolumn); }
 	
 	[^]|\n	{}	//EOF
 }
 
 
 
+<STRING> {
+      \"                             { yybegin(YYINITIAL); 
+                                       return new Symbol(Terminals.TOKEN_LIT_STRING, yyline, yycolumn, new String(string)); }
+      [^\n\r\"\\]+                   { string.append( yytext() ); }
+      \\t                            { string.append('\t'); }
+      \\n                            { string.append('\n'); }
+
+      \\r                            { string.append('\r'); }
+      \\\"                           { string.append('\"'); }
+      \\                             { string.append('\\'); }
+}
 
 
 <COMMENT>{

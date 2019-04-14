@@ -17,4 +17,10 @@ public final class NodeDispose extends Node {
 		return new NodeDispose((Node) this.get(0).clone());
 	}
 
+	@Override
+	public void generateIntermediateCode() {
+		// TODO Auto-generated method stub
+		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		
+	}
 }

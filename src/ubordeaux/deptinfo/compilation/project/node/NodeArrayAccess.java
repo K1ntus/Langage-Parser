@@ -44,4 +44,11 @@ public final class NodeArrayAccess extends NodeExp {
 		return new NodeArrayAccess((NodeExp) get(0).clone(), (Node) get(1).clone());
 	}
 
+	@Override
+	public void generateIntermediateCode() {
+		// TODO Auto-generated method stub
+		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		
+	}
+
 }

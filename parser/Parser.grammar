@@ -36,7 +36,7 @@
 		}
 		
 	private Environment typeEnvironment = new Environment("types");
-	private Environment procedureEnvironment = new Environment("procedures");
+	private Environment procedureEnvironment = new Environment("procedures");	//String et Type ?
 	private StackEnvironment stackEnvironment = new StackEnvironment("local variables stack");
 	private String type_declaration_name;
 	

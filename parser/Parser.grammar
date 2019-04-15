@@ -134,9 +134,9 @@ program=
 	type_declaration_part			//Type env
 	variable_declaration_part 		//Type var
 	procedure_definition_part		//Type procedure
-	TOKEN_BEGIN	//push_stackenv		//On empile stackenv
+	TOKEN_BEGIN	push_stackenv		//On empile stackenv
 	statement_list.l 				//Inserer variable dans env
-	TOKEN_END	//pop_stackenv 		//On depile stackenv
+	TOKEN_END	pop_stackenv 		//On depile stackenv
 	{: return _symbol_l; :}	
 	;
 	
@@ -197,7 +197,7 @@ subrange_type=
 	TOKEN_LIT_INTEGER.min TOKEN_DOTDOT TOKEN_LIT_INTEGER.max		{: return new TypeArrayRange(new TypeInt(min), new TypeInt(max)); :}
 	| TOKEN_IDENTIFIER.id_min TOKEN_DOTDOT TOKEN_IDENTIFIER.id_max	/*{:	
 																		try { 
-																			return new TypeArrayRange(stackEnvironment.getLiteralFromId(id_min), stackEnvironment.getTypeFromId(id_max));
+																			return new TypeArrayRange(stackEnvironment.get_node_reachable(id_min), stackEnvironment.getTypeFromId(id_max));
 																		} catch (NoSuchFieldException e) {
 																			return new TypeArrayRange(null, null);
 																		}
@@ -323,14 +323,14 @@ Blocs
 */
 block=
 	variable_declaration_part 		//Inserer varaible dans stack environnement
-	TOKEN_BEGIN	//push_stackenv		//On empile stackenv
+	TOKEN_BEGIN	push_stackenv		//On empile stackenv
 	statement_list.list 			
-	TOKEN_END	//pop_stackenv 	
+	TOKEN_END	pop_stackenv 	
 	{: return _symbol_list; :}	//On depile stackenv et return
 	;
-pop_stackenv  =		{:	stackEnvironment.getEnvironment().pop(); return new EmptySymbol();	:}	;
+pop_stackenv  =		{:	System.out.println("[STACK] Poped one more stack layer"); stackEnvironment.getEnvironment().pop(); return new EmptySymbol();	:}	;
 
-push_stackenv =		{:	stackEnvironment.getEnvironment().push(new HashMap<str, NodeLiteral>()); return new EmptySymbol(); :}	;
+push_stackenv =		{:	System.out.println("[STACK] Pushed one more stack layer"); stackEnvironment.getEnvironment().push(new HashMap<String, NodeLiteral>()); return new EmptySymbol(); :}	;
 
 
 /*
@@ -348,7 +348,7 @@ statement=
 	;
 	
 simple_statement=
-	assignment_statement.e	{: System.out.println("assignment: "+e); return e; :}
+	assignment_statement.e	{: System.out.println("[STATE] assignment: "+e); return e; :}
 	| procedure_statement
 	| new_statement			//OK
 	| dispose_statement		//OK
@@ -407,11 +407,11 @@ println_statement=
 	TOKEN_PRINTLN expression.e TOKEN_SEMIC	
 		{: 
 			return new NodeCallFct(
-				"println", 
-				new TypeFunct("println", 
-					new TypeTuple(), 
-					new TypeVoid()),
-				new NodeList(e));
+				"println", 					//fonction name
+				new TypeFunct("println", 	//Un string jsp a quoi il sert
+					new TypeTuple(), 	//Type parametres
+					new TypeVoid()),	//Return type
+				new NodeList(e));		//Args
 		:}
 	;	
 
@@ -422,7 +422,7 @@ readln_statement=
 			return new NodeCallFct(
 				"readln", 
 				new TypeFunct("readln", 
-					new TypeTuple(), 
+					new TypeTuple(e.getType()), 
 					e.getType()),
 				new NodeList());
 		:}
@@ -478,9 +478,8 @@ normalement OK
 variable_access=
 	TOKEN_IDENTIFIER.name		{:	
 										try{
-											System.out.println("Variable: " + name +" found.");
-											//System.out.println("Value: " + stackEnvironment.getLiteralFromId(name).getValue());
-											return stackEnvironment.getLiteralFromId(name);  
+											System.out.println("[VARIABLE]" + name +" found.");
+											return stackEnvironment.get_node_reachable(name);  
 										} catch (NoSuchFieldException e) {
 											System.out.println(e);
 											return new NodeLiteral(null, -1);

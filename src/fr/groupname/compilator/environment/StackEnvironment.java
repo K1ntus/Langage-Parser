@@ -1,14 +1,13 @@
 package fr.groupname.compilator.environment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Stack;
 
-import ubordeaux.deptinfo.compilation.project.node.NodeId;
 import ubordeaux.deptinfo.compilation.project.node.NodeLiteral;
-import ubordeaux.deptinfo.compilation.project.type.IdentifierList;
-import ubordeaux.deptinfo.compilation.project.type.Type;
 
 
 //Local variable stack
@@ -31,23 +30,31 @@ public class StackEnvironment {
 		return environment.peek();
 	}
 	
-	/*
 	//haut vers bas, faut get le last equals sinon modifier et utiliser listIterator+hasPrevious
-	public Node get_node_reachable(Node cmp) throws NoSuchFieldException {
-		Iterator<List<NodeLiteral>> it = environment_variable_value.iterator();
+	public NodeLiteral get_node_reachable(String id) throws NoSuchFieldException {
+		int layer = 0;
+		NodeLiteral res = null;
+		Iterator<Map<String, NodeLiteral>> it = environment.iterator();
+		
 		while(it.hasNext()) {
-			List<NodeLiteral> list = it.next();
+			Map<String, NodeLiteral> map = it.next();
 			
-			for(Node n : list) {
-				if (n.equals(cmp))
-					return n;
-				
+			try {
+				res = getLiteralFromId(id, map);
+			} catch (NoSuchFieldException e) {
+				continue;
 			}
+			layer +=1;
+			
+		}
+		if(res != null) {
+			System.out.println("[STACK] Stack Layer: " +layer);
+			return res;
 		}
 		throw new NoSuchFieldException("Aucune variable similaire stackee trouvee");
 			
 	}
-	*/
+	
 	
 	
 	public void add_node_to_latest_portability(String id, NodeLiteral n) {
@@ -56,20 +63,11 @@ public class StackEnvironment {
 	}
 
 
-	public NodeLiteral getLiteralFromId(String id) throws NoSuchFieldException {
-		NodeLiteral res = environment.peek().get(id);
+	public NodeLiteral getLiteralFromId(String id, Map<String, NodeLiteral> map) throws NoSuchFieldException {
+		NodeLiteral res = map.get(id);
 		if(res == null)
 			throw new NoSuchFieldException("[ERROR]Aucune variable similaire stackee trouvee"+"\n[ERROR]Stack Layer:"+environment.size());
 		return res;
-		
-		/*
-		for(Entry<String, NodeLiteral> entry : environment.peek().entrySet()) {
-			if(entry.getKey().getName() == id)
-				return entry.getValue();
-		}
-		*/
-
-		//throw new NoSuchFieldException("Count:"+environment.size()+ "[ERROR]Aucune variable similaire stackee trouvee");
 	}
 	
 	/*

@@ -385,3 +385,29 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1234564789)), 
 
 Arbre Principal: 
 NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)), NodeWhile(NodeRel(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 10)), NodeList(println_NodeCallFct(NodeList(NodeLiteral(TypeInt, 0))), NodeIf(NodeRel(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 10)), NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)), NodeWhile(NodeRel(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 5)), NodeList(println_NodeCallFct(NodeList(NodeOp(NodeOp(NodeLiteral(TypeInt, 1000), NodeLiteral(TypeInt, 0))))), NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))))), println_NodeCallFct(NodeList(NodeLiteral(TypeString, X))), NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))))))))
+
+
+
+*************************************************
+*** Fichier data/progr5.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+*** var
+*** x
+*** :
+*** integer
+*** ;
+*** function
+* Enregistre x
+*** sum
+*** (
+*** i
+*** :
+*** integer
+*** ,
+*** j
+*** :
+*** integer
+*** )

@@ -30,6 +30,7 @@ public final class NodeList extends Node {
 	public int size() {
 		return this.elts.size();
 	}
+	
 
 	@Override
 	public NodeList clone() {

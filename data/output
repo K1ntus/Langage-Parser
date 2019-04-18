@@ -38,12 +38,10 @@
 *** (
 *** i
 *** +
-[VARIABLE]i found.
-java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** j
 *** )
-[VARIABLE]j found.
-java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** ;
 *** end
 *** function
@@ -67,57 +65,46 @@ java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** (
 *** i
 *** !=
-[VARIABLE]i found.
-java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** j
 *** )
-[VARIABLE]j found.
-java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** do
 *** if
 *** (
 *** i
 *** >
-[VARIABLE]i found.
-java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** j
 *** )
-[VARIABLE]j found.
-java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** then
 *** i
 *** =
-[VARIABLE]i found.
-java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** i
 *** -
-[VARIABLE]i found.
-java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** j
 *** ;
-[VARIABLE]j found.
-java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** else
-[STATE] assignment: NodeAssign(NodeLiteral(null, -1), NodeOp(NodeLiteral(null, -1), NodeLiteral(null, -1)))
+[STATE] assignment: NodeAssign(NodeLiteral(TypeVoid, null), NodeOp(NodeLiteral(TypeVoid, null), NodeLiteral(TypeVoid, null)))
 *** j
 *** =
-[VARIABLE]j found.
-java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** j
 *** -
-[VARIABLE]j found.
-java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** i
 *** ;
-[VARIABLE]i found.
-java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** return
-[STATE] assignment: NodeAssign(NodeLiteral(null, -1), NodeOp(NodeLiteral(null, -1), NodeLiteral(null, -1)))
+[STATE] assignment: NodeAssign(NodeLiteral(TypeVoid, null), NodeOp(NodeLiteral(TypeVoid, null), NodeLiteral(TypeVoid, null)))
 *** (
 *** i
 *** )
-[VARIABLE]i found.
-java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** ;
 *** end
 *** begin
@@ -126,15 +113,12 @@ java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** x
 [STACK] Pushed one more stack layer
 *** =
-[VARIABLE]x found.
 [STACK] Variable: x found at Layer: 1
 *** 5
 *** ;
-*** x
+//x = sum(3, 5);
+*** println
 [STATE] assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 5))
-*** =
-[VARIABLE]x found.
-[STACK] Variable: x found at Layer: 1
 *** sum
 *** (
 *** 3
@@ -142,37 +126,6 @@ java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** 5
 *** )
 *** ;
-funct: sum found.
+funct:     sum found.
+funct_type:() -> TypeInt Defined: true Name: sum
 *** println
-[STATE] assignment: NodeAssign(NodeLiteral(TypeInt, 0), sum_NodeCallFct(NodeList(NodeLiteral(TypeInt, 3), NodeLiteral(TypeInt, 5))))
-*** sum
-*** (
-*** 3
-*** ,
-*** 5
-*** )
-*** ;
-funct: sum found.
-*** println
-*** (
-*** pgcd
-*** (
-*** 78
-*** ,
-*** 90
-*** )
-*** )
-funct: pgcd found.
-*** ;
-*** end
-
-[STACK] Poped one more stack layer
-*** Analyse syntaxique ok
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeLiteral
---- CheckType NodeLiteral
---- CheckType NodeAssign
---- CheckType NodeLiteral
---- CheckType NodeCallFct
---- CheckType NodeLiteral

@@ -90,7 +90,7 @@ public class Parser extends beaver.Parser {
 		}
 		
 	private TypeEnvironment typeEnvironment = new TypeEnvironment("types");
-	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment("procedures");	//String et Type ?
+	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment("procedures");
 	private StackEnvironment stackEnvironment = new StackEnvironment("local variables stack");
 	private String type_declaration_name;
 
@@ -232,7 +232,7 @@ public class Parser extends beaver.Parser {
 					final String id = (String) _symbol_id.value;
 					final Symbol _symbol_t = _symbols[offset + 3];
 					final Type t = (Type) _symbol_t.value;
-					 return new TypeFeature(id, t);
+					 System.out.println("FEATURES"); return new TypeFeature(id, t);
 				}
 			},
 			Action.NONE,  	// [31] variable_declaration_part = 
@@ -297,7 +297,7 @@ public class Parser extends beaver.Parser {
 					final NodeCallFct node_fct = (NodeCallFct) _symbol_node_fct.value;
 					final Symbol _symbol_fct_content = _symbols[offset + 2];
 					final NodeList fct_content = (NodeList) _symbol_fct_content.value;
-					 procedureEnvironment.putVariable(node_fct, fct_content); return new EmptySymbol();
+					 node_fct.getTypeFunct().setDefined(true); procedureEnvironment.putVariable(node_fct, fct_content); return new EmptySymbol();
 				}
 			},
 			new Action() {	// [43] procedure_definition = procedure_declaration_head.node_fct TOKEN_SEMIC
@@ -316,18 +316,21 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_args = _symbols[offset + 4];
 					final NodeList args = (NodeList) _symbol_args.value;
 					
-																							TypeTuple tuple_param_type = new TypeTuple();
-																							
-																							Iterator<Node> it = args.iterator();
-																							while(it.hasNext()){
-																								NodeId current_elem = (NodeId) it.next();
-																								Type tp = current_elem.getType();
-																								tuple_param_type.add(tp);
-																							}
-																							
-																							TypeFunct type_function = new TypeFunct(funct_name, tuple_param_type, new TypeVoid());
-																						
-																							return new NodeCallFct(funct_name, type_function, new NodeList());
+				/*
+				TypeTuple tuple_param_type = new TypeTuple();
+				TypeTuple tuple_param_type_raw = new TypeTuple();
+				
+				Iterator<Node> it = args.iterator();
+				while(it.hasNext()){
+					NodeId current_elem = (NodeId) it.next();
+					Type tp = current_elem.getType();
+					tuple_param_type.add(tp);
+				}
+				*/
+				
+				TypeFunct type_function = new TypeFunct(funct_name, new TypeTuple(), new TypeVoid());
+			
+				return new NodeCallFct(funct_name, type_function, new NodeList());
 				}
 			},
 			new Action() {	// [47] procedure_head = TOKEN_FUNCTION TOKEN_IDENTIFIER.funct_name TOKEN_LPAR argt_part.args TOKEN_RPAR TOKEN_COLON type.t
@@ -339,18 +342,20 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_t = _symbols[offset + 7];
 					final Type t = (Type) _symbol_t.value;
 					
-																											TypeTuple tuple_param_type = new TypeTuple();
-																											
-																											Iterator<Node> it = args.iterator();
-																											while(it.hasNext()){
-																												NodeId current_elem = (NodeId) it.next();
-																												Type tp = current_elem.getType();
-																												tuple_param_type.add(tp);
-																											}
-																											
-																											TypeFunct type_function = new TypeFunct(funct_name, tuple_param_type, t);
-																										
-																											return new NodeCallFct(funct_name, type_function, new NodeList());
+				/*
+				TypeTuple tuple_param_type = new TypeTuple();
+				TypeTuple tuple_param_type_raw = new TypeTuple();
+				
+				Iterator<Node> it = args.iterator();
+				while(it.hasNext()){
+					NodeId current_elem = (NodeId) it.next();
+					Type tp = current_elem.getType();
+					tuple_param_type.add(tp);
+				}*/
+				
+				TypeFunct type_function = new TypeFunct(funct_name, new TypeTuple(), t);
+			
+				return new NodeCallFct(funct_name, type_function, new NodeList());
 				}
 			},
 			Action.NONE,  	// [48] argt_part = 
@@ -447,7 +452,8 @@ public class Parser extends beaver.Parser {
 					 
 																				try{
 																					NodeCallFct fct = procedureEnvironment.getNodeFct(func_name);
-																					System.out.println("funct: " + func_name + " found.");
+																					System.out.println("funct:     " + func_name + " found.");
+																					System.out.println("funct_type:" + fct.getTypeFunct().toString());
 																					return new NodeCallFct(func_name, fct.getTypeFunct(), args);
 																				}catch(NoSuchFieldException e){
 																					System.out.println("Procedure Expression: " + e);
@@ -487,17 +493,38 @@ public class Parser extends beaver.Parser {
 					 return new NodeDispose(node);
 				}
 			},
-			new Action() {	// [76] println_statement = TOKEN_PRINTLN expression.e TOKEN_SEMIC
+			new Action() {	// [76] println_statement = TOKEN_PRINTLN expression.args TOKEN_SEMIC
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_e = _symbols[offset + 2];
-					final NodeExp e = (NodeExp) _symbol_e.value;
+					final Symbol _symbol_args = _symbols[offset + 2];
+					final NodeExp args = (NodeExp) _symbol_args.value;
 					 
+			TypeTuple args_type = new TypeTuple();
+			TypeTuple args_type_raw = new TypeTuple();
+			//System.out.println("Typeraw: " + args.getType().toString());
+			//System.out.println("Typeraw: " + new TypeTuple(args.getType()).toString());
+
+			for(Node n : args.getList()) {
+				NodeLiteral t = (NodeLiteral) n;
+				args_type.add(t.getType());
+			}/*
+			if(args.getType() != null){
+				args_type_raw = new TypeTuple(args.getType());
+			}*/
+			
+			return new NodeCallFct(
+					"println",
+					new TypeFunct("println", args_type_raw, new TypeVoid()),
+					new NodeList(args));
+		
+			
+			/*
 			return new NodeCallFct(
 				"println", 					//fonction name
 				new TypeFunct("println", 	//Un string jsp a quoi il sert
 					new TypeTuple(), 	//Type parametres
 					new TypeVoid()),	//Return type
 				new NodeList(e));		//Args
+			*/
 				}
 			},
 			new Action() {	// [77] readln_statement = TOKEN_READLN expression.e TOKEN_SEMIC
@@ -600,11 +627,11 @@ public class Parser extends beaver.Parser {
 					final String name = (String) _symbol_name.value;
 						
 										try{
-											System.out.println("[VARIABLE]" + name +" found.");
+											//System.out.println("[VARIABLE]" + name +" found.");
 											return stackEnvironment.get_node_reachable(name);  
 										} catch (NoSuchFieldException e) {
-											System.out.println(e);
-											return new NodeLiteral(null, -1);
+											System.out.println("Variable [" + name + "]: "+ e);
+											return new NodeLiteral(new TypeVoid(), null);
 										}
 				}
 			},

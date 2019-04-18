@@ -105,7 +105,7 @@
 *
 ***/
 %typeof TOKEN_LIT_INTEGER = "Integer";
-%typeof TOKEN_LIT_STRING, TOKEN_IDENTIFIER, type_declaration = "String";
+%typeof TOKEN_LIT_STRING, TOKEN_IDENTIFIER, TOKEN_FUNCTION, type_declaration = "String";
 
 %typeof type = "Type";
 %typeof feature_type = "TypeFeature";
@@ -122,7 +122,7 @@
 %typeof case_statement_list = "NodeCaseList";
 %typeof identifier_list = "IdentifierList";
 
-%typeof readln_statement, println_statement, procedure_expression = "NodeCallFct";
+%typeof readln_statement, println_statement, procedure_expression, procedure_definition_part = "NodeCallFct";
 
 
 
@@ -311,8 +311,19 @@ procedure_declaration_head=
 	
 //Definition
 procedure_head=
-	TOKEN_PROCEDURE TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR 
-	| TOKEN_FUNCTION TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR TOKEN_COLON type
+	TOKEN_PROCEDURE.p TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR 	
+	| TOKEN_FUNCTION TOKEN_IDENTIFIER.id TOKEN_LPAR argt_part.args TOKEN_RPAR TOKEN_COLON type.t {:																								int n =0;
+																									TypeTuple tuple = new TypeTuple();
+																									/*
+																									for(NodeId elt : args){
+																										Type tp = elt.getType();
+																										tuple.TypeTuple(TypeString, tp);
+																										
+																									}*/
+																									TypeFunct t1 = new TypeFunct(id, tuple, t);
+																								
+																									return new NodeCallFct(id,t1,args);
+																									:}
 	;
 	
 argt_part=

@@ -2,207 +2,153 @@
 
 
 *************************************************
-*** Fichier data/progr1.lea
+*** Fichier data/progr7.lea
 [INFO] $$  : multiple line comment.
 [INFO] $$$ : documentation comment.
 
 
+//
+// tableaux
+// 
 *** var
-*** a
+*** week
 *** :
-*** integer
-*** ;
-*** begin
-* Enregistre a
-*** a
-[STACK] Pushed one more stack layer
-*** =
-[VARIABLE]a found.
-[STACK] Stack Layer: 1
-*** 100
-*** ;
-*** while
-[STATE] assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100))
-*** (
-*** a
-*** >=
-[VARIABLE]a found.
-[STACK] Stack Layer: 1
+*** array
+*** [
 *** 0
-*** )
-*** do
-*** begin
-*** println
-[STACK] Pushed one more stack layer
-*** (
-*** a
-*** )
-[VARIABLE]a found.
-[STACK] Stack Layer: 1
-*** ;
-*** a
-*** =
-[VARIABLE]a found.
-[STACK] Stack Layer: 1
-*** a
-*** -
-[VARIABLE]a found.
-[STACK] Stack Layer: 1
-*** 1
-*** ;
-*** end
-[STATE] assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)))
-*** end
-[STACK] Poped one more stack layer
-
-[STACK] Poped one more stack layer
-*** Analyse syntaxique ok
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeLiteral
---- CheckType NodeLiteral
---- CheckType NodeWhile
-*** Typage correct
-
-
-Arbre Principal: 
-NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100)), NodeWhile(NodeRel(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 0)), NodeList(println_NodeCallFct(NodeList(NodeLiteral(TypeInt, 0))), NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))))))
-
-
-
-*************************************************
-*** Fichier data/progr2.lea
-[INFO] $$  : multiple line comment.
-[INFO] $$$ : documentation comment.
-
-
-//
-// gestion des variables statiques
-//
-*** var
-*** x
-*** ,
-*** y
-*** :
-*** integer
-*** ;
-*** b
-* Enregistre x
-* Enregistre y
-*** :
-*** boolean
-*** ;
-*** c
-* Enregistre b
-*** :
+*** ..
+*** 6
+*** ]
+*** of
 *** string
 *** ;
-*** d
-* Enregistre c
+*** year
+* Enregistre week
 *** :
 *** array
 *** [
 *** 1
 *** ..
-*** 10
+*** 7
+*** ]
+*** of
+*** array
+*** [
+*** 1
+*** ..
+*** 31
+*** ]
+*** of
+*** array
+*** [
+*** 1
+*** ..
+*** 12
 *** ]
 *** of
 *** string
 *** ;
 *** begin
-* Enregistre d
-*** x
+* Enregistre year
+*** week
 [STACK] Pushed one more stack layer
-*** =
-[VARIABLE]x found.
-[STACK] Stack Layer: 1
-*** 1234564789
-*** ;
-// 0x4995F6B5
-*** y
-[STATE] assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1234564789))
-*** =
-[VARIABLE]y found.
-[STACK] Stack Layer: 1
-*** 0x7FFFFFFF
-*** ;
-*** b
-[STATE] assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 2147483647))
-*** =
-[VARIABLE]b found.
-[STACK] Stack Layer: 1
-*** true
-*** ;
-*** c
-[STATE] assignment: NodeAssign(NodeLiteral(TypeBoolean, 0), NodeLiteral(TypeBoolean, true))
-*** =
-[VARIABLE]c found.
-[STACK] Stack Layer: 1
-*** ;
-*** d
-[STATE] assignment: NodeAssign(NodeLiteral(TypeString, 0), NodeLiteral(TypeString, a))
 *** [
-[VARIABLE]d found.
+[VARIABLE]week found.
+[STACK] Stack Layer: 1
+*** 0
+*** ]
+*** =
+*** ;
+*** week
+[STATE] assignment: NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 0)), NodeLiteral(TypeString, M))
+*** [
+[VARIABLE]week found.
 [STACK] Stack Layer: 1
 *** 1
 *** ]
 *** =
 *** ;
-*** d
-[STATE] assignment: NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 1)), NodeLiteral(TypeString, A))
+*** week
+[STATE] assignment: NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 1)), NodeLiteral(TypeString, T))
 *** [
-[VARIABLE]d found.
+[VARIABLE]week found.
 [STACK] Stack Layer: 1
 *** 2
 *** ]
 *** =
 *** ;
-*** d
-[STATE] assignment: NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 2)), NodeLiteral(TypeString, B))
+*** year
+[STATE] assignment: NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 2)), NodeLiteral(TypeString, W))
 *** [
-[VARIABLE]d found.
+[VARIABLE]year found.
 [STACK] Stack Layer: 1
+*** 2
+*** ]
+*** [
+*** 17
+*** ]
+*** [
 *** 3
 *** ]
 *** =
 *** ;
-*** d
-[STATE] assignment: NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 3)), NodeLiteral(TypeString, C))
+*** year
+[STATE] assignment: NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString))), 0), NodeLiteral(TypeInt, 2)), NodeLiteral(TypeInt, 17)), NodeLiteral(TypeInt, 3)), NodeLiteral(TypeString, X))
 *** [
-[VARIABLE]d found.
+[VARIABLE]year found.
 [STACK] Stack Layer: 1
-*** 10
+*** 4
+*** ]
+*** [
+*** 22
+*** ]
+*** [
+*** 7
 *** ]
 *** =
 *** ;
 *** println
-[STATE] assignment: NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 10)), NodeLiteral(TypeString, Z))
-*** x
-*** ;
-[VARIABLE]x found.
-[STACK] Stack Layer: 1
-*** println
-*** y
-*** ;
-[VARIABLE]y found.
-[STACK] Stack Layer: 1
-*** println
-*** b
-*** ;
-[VARIABLE]b found.
-[STACK] Stack Layer: 1
-*** println
-*** c
-*** ;
-[VARIABLE]c found.
-[STACK] Stack Layer: 1
-*** println
-*** d
+[STATE] assignment: NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString))), 0), NodeLiteral(TypeInt, 4)), NodeLiteral(TypeInt, 22)), NodeLiteral(TypeInt, 7)), NodeLiteral(TypeString, V))
+*** (
+*** year
 *** [
-[VARIABLE]d found.
+[VARIABLE]year found.
 [STACK] Stack Layer: 1
 *** 2
 *** ]
+*** [
+*** 17
+*** ]
+*** [
+*** 3
+*** ]
+*** )
+*** ;
+*** println
+*** (
+*** year
+*** [
+[VARIABLE]year found.
+[STACK] Stack Layer: 1
+*** 2
+*** ]
+*** [
+*** 17
+*** ]
+*** [
+*** 4
+*** ]
+*** )
+*** ;
+*** println
+*** (
+*** week
+*** [
+[VARIABLE]week found.
+[STACK] Stack Layer: 1
+*** 1
+*** ]
+*** )
 *** ;
 *** end
 
@@ -210,18 +156,6 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100)), NodeWhi
 *** Analyse syntaxique ok
 --- CheckType NodeList
 --- CheckType NodeAssign
---- CheckType NodeLiteral
---- CheckType NodeLiteral
---- CheckType NodeAssign
---- CheckType NodeLiteral
---- CheckType NodeLiteral
---- CheckType NodeAssign
---- CheckType NodeLiteral
---- CheckType NodeLiteral
---- CheckType NodeAssign
---- CheckType NodeLiteral
---- CheckType NodeLiteral
---- CheckType NodeAssign
 --- CheckType NodeArrayAccess
 --- CheckType NodeLiteral
 --- CheckType NodeAssign
@@ -232,156 +166,3 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100)), NodeWhi
 --- CheckType NodeLiteral
 --- CheckType NodeAssign
 --- CheckType NodeArrayAccess
---- CheckType NodeLiteral
---- CheckType NodeCallFct
-*** Erreur de typage: pas le même nombre de paramètres 
---- CheckType NodeCallFct
-*** Erreur de typage: pas le même nombre de paramètres 
---- CheckType NodeCallFct
-*** Erreur de typage: pas le même nombre de paramètres 
---- CheckType NodeCallFct
-*** Erreur de typage: pas le même nombre de paramètres 
---- CheckType NodeCallFct
-*** Erreur de typage: pas le même nombre de paramètres 
-*** Erreur de typage
-
-
-Arbre Principal: 
-NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1234564789)), NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 2147483647)), NodeAssign(NodeLiteral(TypeBoolean, 0), NodeLiteral(TypeBoolean, true)), NodeAssign(NodeLiteral(TypeString, 0), NodeLiteral(TypeString, a)), NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 1)), NodeLiteral(TypeString, A)), NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 2)), NodeLiteral(TypeString, B)), NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 3)), NodeLiteral(TypeString, C)), NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 10)), NodeLiteral(TypeString, Z)), println_NodeCallFct(NodeList(NodeLiteral(TypeInt, 0))), println_NodeCallFct(NodeList(NodeLiteral(TypeInt, 0))), println_NodeCallFct(NodeList(NodeLiteral(TypeBoolean, 0))), println_NodeCallFct(NodeList(NodeLiteral(TypeString, 0))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 2)))))
-
-
-
-*************************************************
-*** Fichier data/progr4.lea
-[INFO] $$  : multiple line comment.
-[INFO] $$$ : documentation comment.
-
-
-//
-// Structure de contrôle
-//
-//
-*** var
-*** x
-*** ,
-*** y
-*** :
-*** integer
-*** ;
-*** begin
-* Enregistre x
-* Enregistre y
-*** x
-[STACK] Pushed one more stack layer
-*** =
-[VARIABLE]x found.
-[STACK] Stack Layer: 1
-*** 1
-*** ;
-*** while
-[STATE] assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))
-*** (
-*** x
-*** <=
-[VARIABLE]x found.
-[STACK] Stack Layer: 1
-*** 10
-*** )
-*** do
-*** begin
-*** println
-[STACK] Pushed one more stack layer
-*** (
-*** x
-*** )
-[VARIABLE]x found.
-[STACK] Stack Layer: 1
-*** ;
-*** if
-*** (
-*** x
-*** ==
-[VARIABLE]x found.
-[STACK] Stack Layer: 1
-*** 10
-*** )
-*** then
-*** begin
-*** y
-[STACK] Pushed one more stack layer
-*** =
-[VARIABLE]y found.
-[STACK] Stack Layer: 1
-*** 1
-*** ;
-*** while
-[STATE] assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))
-*** (
-*** y
-*** <=
-[VARIABLE]y found.
-[STACK] Stack Layer: 1
-*** 5
-*** )
-*** do
-*** begin
-*** println
-[STACK] Pushed one more stack layer
-*** (
-*** -
-*** 1000
-*** -
-*** y
-*** )
-[VARIABLE]y found.
-[STACK] Stack Layer: 1
-*** ;
-*** y
-*** =
-[VARIABLE]y found.
-[STACK] Stack Layer: 1
-*** y
-*** +
-[VARIABLE]y found.
-[STACK] Stack Layer: 1
-*** 1
-*** ;
-*** end
-[STATE] assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)))
-*** else
-[STACK] Poped one more stack layer
-*** Erreur de syntaxe en ligne 0, colonne 18. Token inattendu: TOKEN_ELSE
-*** println
-*** (
-0,18-0,6: Recovered: removed unexpected token #56
-*** )
-*** ;
-*** x
-*** =
-[VARIABLE]x found.
-[STACK] Stack Layer: 1
-*** x
-*** +
-[VARIABLE]x found.
-[STACK] Stack Layer: 1
-*** 1
-*** ;
-*** end
-[STATE] assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)))
-*** end
-[STACK] Poped one more stack layer
-*** end
-[STACK] Poped one more stack layer
-
-[STACK] Poped one more stack layer
-*** Analyse syntaxique ok
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeLiteral
---- CheckType NodeLiteral
---- CheckType NodeWhile
-*** Typage correct
-
-
-Arbre Principal: 
-NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)), NodeWhile(NodeRel(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 10)), NodeList(println_NodeCallFct(NodeList(NodeLiteral(TypeInt, 0))), NodeIf(NodeRel(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 10)), NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)), NodeWhile(NodeRel(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 5)), NodeList(println_NodeCallFct(NodeList(NodeOp(NodeOp(NodeLiteral(TypeInt, 1000), NodeLiteral(TypeInt, 0))))), NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))))), println_NodeCallFct(NodeList(NodeLiteral(TypeString, X))), NodeAssign(NodeLiteral(TypeInt, 0), NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1))))))))

@@ -16,11 +16,11 @@ public class Terminals {
 	static public final short TOKEN_FALSE = 8;
 	static public final short TOKEN_NULL = 9;
 	static public final short TOKEN_CIRC = 10;
-	static public final short TOKEN_PLUS = 11;
-	static public final short TOKEN_TIMES = 12;
-	static public final short TOKEN_DIV = 13;
-	static public final short TOKEN_OR = 14;
-	static public final short TOKEN_AND = 15;
+	static public final short TOKEN_OR = 11;
+	static public final short TOKEN_AND = 12;
+	static public final short TOKEN_PLUS = 13;
+	static public final short TOKEN_TIMES = 14;
+	static public final short TOKEN_DIV = 15;
 	static public final short TOKEN_BEGIN = 16;
 	static public final short TOKEN_SEMIC = 17;
 	static public final short TOKEN_LT = 18;
@@ -59,9 +59,9 @@ public class Terminals {
 	static public final short TOKEN_LBRACE = 51;
 	static public final short TOKEN_RBRACE = 52;
 	static public final short TOKEN_THEN = 53;
-	static public final short TOKEN_DO = 54;
-	static public final short TOKEN_TYPE = 55;
-	static public final short TOKEN_ELSE = 56;
+	static public final short TOKEN_ELSE = 54;
+	static public final short TOKEN_DO = 55;
+	static public final short TOKEN_TYPE = 56;
 
 	static public final String[] NAMES = {
 		"EOF",
@@ -75,11 +75,11 @@ public class Terminals {
 		"TOKEN_FALSE",
 		"TOKEN_NULL",
 		"TOKEN_CIRC",
+		"TOKEN_OR",
+		"TOKEN_AND",
 		"TOKEN_PLUS",
 		"TOKEN_TIMES",
 		"TOKEN_DIV",
-		"TOKEN_OR",
-		"TOKEN_AND",
 		"TOKEN_BEGIN",
 		"TOKEN_SEMIC",
 		"TOKEN_LT",
@@ -118,8 +118,8 @@ public class Terminals {
 		"TOKEN_LBRACE",
 		"TOKEN_RBRACE",
 		"TOKEN_THEN",
+		"TOKEN_ELSE",
 		"TOKEN_DO",
-		"TOKEN_TYPE",
-		"TOKEN_ELSE"
+		"TOKEN_TYPE"
 	};
 }

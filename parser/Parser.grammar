@@ -7,6 +7,7 @@
 
 %import "java.util.Iterator";
 %import "java.util.List";
+%import "java.util.Vector";
 %import "java.util.Scanner";
 %import "java.util.HashMap";
 %import "java.util.Map";
@@ -68,12 +69,12 @@
 
 
 //PRIOTITIES
-%right TOKEN_CIRC, TOKEN_NOT;
+%right TOKEN_CIRC, TOKEN_NOT, TOKEN_ELSE;
 %left TOKEN_AND, TOKEN_AFF, TOKEN_OR;
-%right TOKEN_PLUS, TOKEN_MINUS, TOKEN_TIMES, TOKEN_DIV;
+%left TOKEN_PLUS, TOKEN_MINUS, TOKEN_TIMES, TOKEN_DIV;
 %left TOKEN_LT, TOKEN_LE, TOKEN_GT, TOKEN_GE, TOKEN_EQ, TOKEN_NE;
 
-%left TOKEN_ELSE, TOKEN_IF;
+%left TOKEN_IF;
 
 /***
 * A completer
@@ -142,21 +143,22 @@ program=
 	
 /*
 Declaration named type
+
+normalement OK
 */
 type_declaration_part= 
 	/* empty */	
 	| TOKEN_TYPE type_declaration_list
 	;
-	
+
 type_declaration_list=
 	type_declaration_list type_declaration
 	| type_declaration
 	;
-	
+
 type_declaration=
 	TOKEN_IDENTIFIER.name TOKEN_AFF type.t TOKEN_SEMIC 		{:
-																
-																//stackEnvironment.add_node_to_latest_portability(new NodeId(name, t), new NodeLiteral(t, 0));
+																typeEnvironment.putVariable(name, t);
 																return new EmptySymbol();
 															:}
 	;
@@ -188,11 +190,22 @@ index_type=
 	enumerated_type	//OK
 	| subrange_type	//OK
 	;
-	
-enumerated_type=
-	TOKEN_LPAR identifier_list.list TOKEN_RPAR 	{: return new TypeEnumRange(new TypeItemEnum(0, list.first()), new TypeItemEnum(0, list.last())); :}
+
+enumerated_type=//{: return new TypeEnumRange(new TypeItemEnum(0, list.first()), new TypeItemEnum(0, list.last())); :} //OLD
+	init_enumerated_type TOKEN_LPAR identifier_list.id_l TOKEN_RPAR	{: 
+																			Vector<Type> array_tmp = new Vector<>();
+																			int const_id = 0;
+																			for(String identifier : id_l) {
+																				array_tmp.add(new TypeItemEnum(const_id, identifier));
+																				const_id +=1;
+																			}
+																			return new TypeTuple(array_tmp);
+																		:}
 	;
 	
+init_enumerated_type= 
+	;
+
 subrange_type= 
 	TOKEN_LIT_INTEGER.min TOKEN_DOTDOT TOKEN_LIT_INTEGER.max		{: return new TypeArrayRange(new TypeInt(min), new TypeInt(max)); :}
 	| TOKEN_IDENTIFIER.id_min TOKEN_DOTDOT TOKEN_IDENTIFIER.id_max	/*{:	
@@ -216,11 +229,11 @@ range_type=
 	;
 	
 pointer_type=
-	TOKEN_CIRC type.t	{: return new TypePointer(t);	:}
+	TOKEN_CIRC type.t	{: return new TypePointer(t); :}
 	;
 	
 structure_type=
-	TOKEN_STRUCT TOKEN_LBRACE feature_list_type.list TOKEN_RBRACE	{:	return new TypeStruct(list); :}
+	TOKEN_STRUCT TOKEN_LBRACE feature_list_type.list TOKEN_RBRACE	{: return new TypeStruct(list); :}
 	;
 	
 	
@@ -264,10 +277,8 @@ variable_declaration=
 	
 identifier_list=
 	identifier_list.list TOKEN_COMMA TOKEN_IDENTIFIER.id		{: 
-																	//System.out.println("New ID to stack: " + id);
 																	list.add(id); return list; :}
 	| TOKEN_IDENTIFIER.name										{: 
-																	//System.out.println("New ID to stack: " + name);
 																	return new IdentifierList(name); 
 																:}
 	;
@@ -318,6 +329,8 @@ argt=
 	TOKEN_IDENTIFIER.id TOKEN_COLON type.t	{: return new NodeId(id, t); :}
 	;
 	
+	
+	
 /*
 Blocs
 */
@@ -325,8 +338,8 @@ block=
 	variable_declaration_part 		//Inserer varaible dans stack environnement
 	TOKEN_BEGIN	push_stackenv		//On empile stackenv
 	statement_list.list 			
-	TOKEN_END	pop_stackenv 	
-	{: return _symbol_list; :}	//On depile stackenv et return
+	TOKEN_END	pop_stackenv 		//On depile stackenv et return
+	{: return _symbol_list; :}
 	;
 pop_stackenv  =		{:	System.out.println("[STACK] Poped one more stack layer"); stackEnvironment.getEnvironment().pop(); return new EmptySymbol();	:}	;
 
@@ -359,10 +372,7 @@ simple_statement=
 	
 //OK
 assignment_statement=
-	variable_access.e1 TOKEN_AFF expression.e2 TOKEN_SEMIC	
-															{:  
-																//System.out.println(e1 + " <- " + e2); 
-																//stackEnvironment.add_node_to_latest_portability(e1, e2);
+	variable_access.e1 TOKEN_AFF expression.e2 TOKEN_SEMIC	{:  
 																return new NodeAssign(e1, e2); 
 															:}
 	;

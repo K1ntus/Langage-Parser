@@ -46,24 +46,25 @@
 			<!--
 			<arg value="-checkType" />
 			<arg value="data/progr1.lea" />
+			
 			<arg value="-checkType" />
 			<arg value="data/progr2.lea" />
+			
 			<arg value="-checkType" />
 			<arg value="data/progr3.lea" />
+			
 			<arg value="-checkType" />
 			<arg value="data/progr4.lea" />
-<<<<<<< HEAD
 			-->
 			<arg value="-checkType" />
+			<arg value="data/progr5.lea" />
+			<!--
+			<arg value="-checkType" />
 			<arg value="data/progr7.lea" />
-			<!-- 
+			
 			<arg value="-checkType" />
 			<arg value="data/progr8.lea" />
 			-->
-=======
-			<arg value="-checkType" />
-			<arg value="data/progr5.lea" />
->>>>>>> 9cff71f0edeb130cb29dd35cb634cfa2f2f456b3
 		</java>
 	</target>
 

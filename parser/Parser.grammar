@@ -37,7 +37,7 @@
 		}
 		
 	private Environment typeEnvironment = new Environment("types");
-	private Environment procedureEnvironment = new Environment("procedures");	//String et Type ?
+	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment();	//String et Type ?
 	private StackEnvironment stackEnvironment = new StackEnvironment("local variables stack");
 	private String type_declaration_name;
 	
@@ -69,12 +69,13 @@
 
 
 //PRIOTITIES
-%right TOKEN_CIRC, TOKEN_NOT, TOKEN_ELSE;
+%right TOKEN_CIRC, TOKEN_NOT;
+%left TOKEN_ELSE;
 %left TOKEN_AND, TOKEN_AFF, TOKEN_OR;
 %left TOKEN_PLUS, TOKEN_MINUS, TOKEN_TIMES, TOKEN_DIV;
 %left TOKEN_LT, TOKEN_LE, TOKEN_GT, TOKEN_GE, TOKEN_EQ, TOKEN_NE;
 
-%left TOKEN_IF;
+%right TOKEN_IF;
 
 /***
 * A completer
@@ -118,11 +119,11 @@
 %typeof case_statement = "NodeCase";
 %typeof argt = "NodeId";
 
-%typeof statement_list, expression_list, argt_list = "NodeList";
+%typeof statement_list, expression_list, argt_list, block = "NodeList";
 %typeof case_statement_list = "NodeCaseList";
 %typeof identifier_list = "IdentifierList";
 
-%typeof readln_statement, println_statement, procedure_expression, procedure_definition_part = "NodeCallFct";
+%typeof readln_statement, println_statement, procedure_expression, procedure_head = "NodeCallFct";
 
 
 
@@ -297,12 +298,12 @@ procedure_definition_list=
 	;
 	
 procedure_definition=
-	procedure_definition_head block
+	procedure_definition_head.node_fct block.fct_content	{: procedureEnvironment.putVariable(node_fct, fct_content); return new EmptySymbol(); :}
 	| procedure_declaration_head TOKEN_SEMIC
 	;
 
 procedure_definition_head=
-	procedure_head
+	procedure_head	
 	;
 	
 procedure_declaration_head=
@@ -311,29 +312,56 @@ procedure_declaration_head=
 	
 //Definition
 procedure_head=
-	TOKEN_PROCEDURE.p TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR 	
-	| TOKEN_FUNCTION TOKEN_IDENTIFIER.id TOKEN_LPAR argt_part.args TOKEN_RPAR TOKEN_COLON type.t {:																								int n =0;
-																									TypeTuple tuple = new TypeTuple();
-																									/*
-																									for(NodeId elt : args){
-																										Type tp = elt.getType();
-																										tuple.TypeTuple(TypeString, tp);
+	TOKEN_PROCEDURE TOKEN_IDENTIFIER.funct_name TOKEN_LPAR argt_part.args TOKEN_RPAR 	{:
+																							TypeTuple tuple_param_type = new TypeTuple();
+																							
+																							Iterator<Node> it = args.iterator();
+																							while(it.hasNext()){
+																								NodeId current_elem = (NodeId) it.next();
+																								Type tp = current_elem.getType();
+																								tuple_param_type.add(tp);
+																							}
+																							
+																							TypeFunct type_function = new TypeFunct(funct_name, tuple_param_type, new TypeVoid());
+																						
+																							return new NodeCallFct(funct_name, type_function, new NodeList());
+																						:}
+																		
+	| TOKEN_FUNCTION TOKEN_IDENTIFIER.funct_name TOKEN_LPAR argt_part.args TOKEN_RPAR TOKEN_COLON type.t {:
+																											TypeTuple tuple_param_type = new TypeTuple();
+																											
+																											Iterator<Node> it = args.iterator();
+																											while(it.hasNext()){
+																												NodeId current_elem = (NodeId) it.next();
+																												Type tp = current_elem.getType();
+																												tuple_param_type.add(tp);
+																											}
+																											
+																											TypeFunct type_function = new TypeFunct(funct_name, tuple_param_type, t);
 																										
-																									}*/
-																									TypeFunct t1 = new TypeFunct(id, tuple, t);
-																								
-																									return new NodeCallFct(id,t1,args);
-																									:}
+																											return new NodeCallFct(funct_name, type_function, new NodeList());
+																										:}
 	;
 	
+	
+/*
+
+* c) pour implementer une liste, faites comme ceci:
+* xxx_list=
+*	xxx_list.list xxx.elt {: list.add(elt); return list; :}
+*	| xxx.elt {: MyList list = new MyList(); list.add(elt); return list; :}
+*	;
+*	
+
+*/
 argt_part=
 	/* empty */
 	| argt_list
 	;
 	
 argt_list=
-	argt_list.l TOKEN_COMMA argt.elem		//{: l.add(elem); return l; :}
-	| argt.elem								//{: NodeList l = new NodeList(elem); return l; :}
+	argt_list.nl TOKEN_COMMA argt.elem		{: nl.add(elem); return nl; :}
+	| argt.elem								{: NodeList nl = new NodeList(elem); return nl; :}
 	;
 	
 argt=

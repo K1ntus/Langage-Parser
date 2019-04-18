@@ -90,7 +90,7 @@ public class Parser extends beaver.Parser {
 		}
 		
 	private Environment typeEnvironment = new Environment("types");
-	private Environment procedureEnvironment = new Environment("procedures");	//String et Type ?
+	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment();	//String et Type ?
 	private StackEnvironment stackEnvironment = new StackEnvironment("local variables stack");
 	private String type_declaration_name;
 
@@ -291,60 +291,78 @@ public class Parser extends beaver.Parser {
 					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1]); return new Symbol(lst);
 				}
 			},
-<<<<<<< HEAD
-			RETURN2,	// [42] procedure_definition = procedure_definition_head block; returns 'block' although none is marked
+			new Action() {	// [42] procedure_definition = procedure_definition_head.node_fct block.fct_content
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol _symbol_node_fct = _symbols[offset + 1];
+					final NodeCallFct node_fct = (NodeCallFct) _symbol_node_fct.value;
+					final Symbol _symbol_fct_content = _symbols[offset + 2];
+					final NodeList fct_content = (NodeList) _symbol_fct_content.value;
+					 procedureEnvironment.putVariable(node_fct, fct_content); return new EmptySymbol();
+				}
+			},
 			RETURN2,	// [43] procedure_definition = procedure_declaration_head TOKEN_SEMIC; returns 'TOKEN_SEMIC' although none is marked
 			Action.RETURN,	// [44] procedure_definition_head = procedure_head
 			Action.RETURN,	// [45] procedure_declaration_head = procedure_head
-			RETURN5,	// [46] procedure_head = TOKEN_PROCEDURE TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR; returns 'TOKEN_RPAR' although none is marked
-			RETURN7,	// [47] procedure_head = TOKEN_FUNCTION TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR TOKEN_COLON type; returns 'type' although none is marked
-			Action.NONE,  	// [48] argt_part = 
-			Action.RETURN,	// [49] argt_part = argt_list
-			new Action() {	// [50] argt_list = argt_list.l TOKEN_COMMA argt.elem
-=======
-			RETURN2,	// [41] procedure_definition = procedure_definition_head block; returns 'block' although none is marked
-			RETURN2,	// [42] procedure_definition = procedure_declaration_head TOKEN_SEMIC; returns 'TOKEN_SEMIC' although none is marked
-			Action.RETURN,	// [43] procedure_definition_head = procedure_head
-			Action.RETURN,	// [44] procedure_declaration_head = procedure_head
-			Action.RETURN,	// [45] procedure_head = TOKEN_PROCEDURE.p TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR
-			new Action() {	// [46] procedure_head = TOKEN_FUNCTION TOKEN_IDENTIFIER.id TOKEN_LPAR argt_part.args TOKEN_RPAR TOKEN_COLON type.t
+			new Action() {	// [46] procedure_head = TOKEN_PROCEDURE TOKEN_IDENTIFIER.funct_name TOKEN_LPAR argt_part.args TOKEN_RPAR
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_id = _symbols[offset + 2];
-					final String id = (String) _symbol_id.value;
+					final Symbol _symbol_funct_name = _symbols[offset + 2];
+					final String funct_name = (String) _symbol_funct_name.value;
+					final Symbol _symbol_args = _symbols[offset + 4];
+					final NodeList args = (NodeList) _symbol_args.value;
+					
+																							TypeTuple tuple_param_type = new TypeTuple();
+																							
+																							Iterator<Node> it = args.iterator();
+																							while(it.hasNext()){
+																								NodeId current_elem = (NodeId) it.next();
+																								Type tp = current_elem.getType();
+																								tuple_param_type.add(tp);
+																							}
+																							
+																							TypeFunct type_function = new TypeFunct(funct_name, tuple_param_type, new TypeVoid());
+																						
+																							return new NodeCallFct(funct_name, type_function, new NodeList());
+				}
+			},
+			new Action() {	// [47] procedure_head = TOKEN_FUNCTION TOKEN_IDENTIFIER.funct_name TOKEN_LPAR argt_part.args TOKEN_RPAR TOKEN_COLON type.t
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol _symbol_funct_name = _symbols[offset + 2];
+					final String funct_name = (String) _symbol_funct_name.value;
 					final Symbol _symbol_args = _symbols[offset + 4];
 					final NodeList args = (NodeList) _symbol_args.value;
 					final Symbol _symbol_t = _symbols[offset + 7];
 					final Type t = (Type) _symbol_t.value;
-																													int n =0;
-																									TypeTuple tuple = new TypeTuple();
-																									/*
-																									for(NodeId elt : args){
-																										Type tp = elt.getType();
-																										tuple.TypeTuple(TypeString, tp);
+					
+																											TypeTuple tuple_param_type = new TypeTuple();
+																											
+																											Iterator<Node> it = args.iterator();
+																											while(it.hasNext()){
+																												NodeId current_elem = (NodeId) it.next();
+																												Type tp = current_elem.getType();
+																												tuple_param_type.add(tp);
+																											}
+																											
+																											TypeFunct type_function = new TypeFunct(funct_name, tuple_param_type, t);
 																										
-																									}*/
-																									TypeFunct t1 = new TypeFunct(id, tuple, t);
-																								
-																									return new NodeCallFct(id,t1,args);
+																											return new NodeCallFct(funct_name, type_function, new NodeList());
 				}
 			},
-			Action.NONE,  	// [47] argt_part = 
-			Action.RETURN,	// [48] argt_part = argt_list
-			new Action() {	// [49] argt_list = argt_list.l TOKEN_COMMA argt.elem
->>>>>>> 9cff71f0edeb130cb29dd35cb634cfa2f2f456b3
+			Action.NONE,  	// [48] argt_part = 
+			Action.RETURN,	// [49] argt_part = argt_list
+			new Action() {	// [50] argt_list = argt_list.nl TOKEN_COMMA argt.elem
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_l = _symbols[offset + 1];
-					final NodeList l = (NodeList) _symbol_l.value;
+					final Symbol _symbol_nl = _symbols[offset + 1];
+					final NodeList nl = (NodeList) _symbol_nl.value;
 					final Symbol _symbol_elem = _symbols[offset + 3];
 					final NodeId elem = (NodeId) _symbol_elem.value;
-					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 3].value); return _symbols[offset + 1];
+					 nl.add(elem); return nl;
 				}
 			},
 			new Action() {	// [51] argt_list = argt.elem
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_elem = _symbols[offset + 1];
 					final NodeId elem = (NodeId) _symbol_elem.value;
-					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1].value); return new Symbol(lst);
+					 NodeList nl = new NodeList(elem); return nl;
 				}
 			},
 			new Action() {	// [52] argt = TOKEN_IDENTIFIER.id TOKEN_COLON type.t

@@ -142,6 +142,7 @@ java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** 5
 *** )
 *** ;
+java.lang.NoSuchFieldException: Aucune fonction: sumtrouvee.
 *** println
 [STATE] assignment: NodeAssign(NodeLiteral(TypeInt, 0), sum_NodeCallFct(NodeList(NodeLiteral(TypeInt, 3), NodeLiteral(TypeInt, 5))))
 *** sum
@@ -151,6 +152,7 @@ java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** 5
 *** )
 *** ;
+java.lang.NoSuchFieldException: Aucune fonction: sumtrouvee.
 *** println
 *** (
 *** pgcd
@@ -160,6 +162,7 @@ java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** 90
 *** )
 *** )
+java.lang.NoSuchFieldException: Aucune fonction: pgcdtrouvee.
 *** ;
 *** end
 
@@ -172,3 +175,13 @@ java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 --- CheckType NodeAssign
 --- CheckType NodeLiteral
 --- CheckType NodeCallFct
+*** Erreur de typage: pas le même nombre de paramètres 
+--- CheckType NodeCallFct
+*** Erreur de typage: pas le même nombre de paramètres 
+--- CheckType NodeCallFct
+*** Erreur de typage: pas le même nombre de paramètres 
+*** Erreur de typage
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 5)), NodeAssign(NodeLiteral(TypeInt, 0), sum_NodeCallFct(NodeList(NodeLiteral(TypeInt, 3), NodeLiteral(TypeInt, 5)))), println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral(TypeInt, 3), NodeLiteral(TypeInt, 5))))), println_NodeCallFct(NodeList(pgcd_NodeCallFct(NodeList(NodeLiteral(TypeInt, 78), NodeLiteral(TypeInt, 90))))))

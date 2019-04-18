@@ -25,6 +25,10 @@ public final class NodeCallFct extends NodeExp {
 		this.name = name;
 		this.type = type;
 	}
+	
+	public TypeFunct getTypeFunct() {
+		return (TypeFunct) this.type;
+	}
 
 	public Type getType() {
 		return ((TypeFunct) this.type).getRet();
@@ -89,5 +93,8 @@ public final class NodeCallFct extends NodeExp {
 		
 	}
 
+	public String getName() {
+		return name;
+	}
 
 }

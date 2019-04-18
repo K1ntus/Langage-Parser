@@ -5,6 +5,7 @@ import java.util.Map;
 
 import ubordeaux.deptinfo.compilation.project.node.NodeCallFct;
 import ubordeaux.deptinfo.compilation.project.node.NodeList;
+import ubordeaux.deptinfo.compilation.project.type.Type;
 
 public class ProcedureEnvironment {
 	private Map<NodeCallFct, NodeList> table;
@@ -29,7 +30,21 @@ public class ProcedureEnvironment {
 		System.out.println("** Enregistre fct:" + fct_node.toString());		
 	}
 	
+
+
+	public NodeList getVariableValue(NodeCallFct t) {
+		System.out.println("** Retrouve fct:" + t.toString());
+		return table.get(t);
+	}
 	
+	public NodeCallFct getNodeFct(String fct_name) throws NoSuchFieldException {
+		for(NodeCallFct node_fct : table.keySet()) {
+			if(node_fct.getName() == fct_name) {
+				return node_fct;
+			}
+		}
+		throw new NoSuchFieldException("Aucune fonction: " + fct_name + "trouvee.");
+	}
 	
 	
 	/**

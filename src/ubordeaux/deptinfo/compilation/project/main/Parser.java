@@ -300,7 +300,13 @@ public class Parser extends beaver.Parser {
 					 procedureEnvironment.putVariable(node_fct, fct_content); return new EmptySymbol();
 				}
 			},
-			RETURN2,	// [43] procedure_definition = procedure_declaration_head TOKEN_SEMIC; returns 'TOKEN_SEMIC' although none is marked
+			new Action() {	// [43] procedure_definition = procedure_declaration_head.node_fct TOKEN_SEMIC
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol _symbol_node_fct = _symbols[offset + 1];
+					final NodeCallFct node_fct = (NodeCallFct) _symbol_node_fct.value;
+					 procedureEnvironment.putVariable(node_fct, new NodeList()); return new EmptySymbol();
+				}
+			},
 			Action.RETURN,	// [44] procedure_definition_head = procedure_head
 			Action.RETURN,	// [45] procedure_declaration_head = procedure_head
 			new Action() {	// [46] procedure_head = TOKEN_PROCEDURE TOKEN_IDENTIFIER.funct_name TOKEN_LPAR argt_part.args TOKEN_RPAR
@@ -438,7 +444,14 @@ public class Parser extends beaver.Parser {
 					final String func_name = (String) _symbol_func_name.value;
 					final Symbol _symbol_args = _symbols[offset + 3];
 					final NodeList args = (NodeList) _symbol_args.value;
-					 return new NodeCallFct(func_name, new TypeFunct(func_name, null, null), args);
+					 
+																				try{
+																					NodeCallFct fct = procedureEnvironment.getNodeFct(func_name);
+																					return new NodeCallFct(func_name, fct.getTypeFunct(), args);
+																				}catch(NoSuchFieldException e){
+																					System.out.println(e);
+																					return new NodeCallFct(func_name, new TypeFunct(func_name, new TypeTuple(), new TypeVoid()), args);
+																				}
 				}
 			},
 			Action.NONE,  	// [70] expression_part = 

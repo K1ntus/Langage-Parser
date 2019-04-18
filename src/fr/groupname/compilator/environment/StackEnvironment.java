@@ -48,13 +48,21 @@ public class StackEnvironment {
 			
 		}
 		if(res != null) {
-			System.out.println("[STACK] Stack Layer: " +layer);
+			System.out.println("[STACK] Variable: "+ id +" found at Layer: " +layer);
 			return res;
 		}
 		throw new NoSuchFieldException("Aucune variable similaire stackee trouvee");
 			
 	}
 	
+
+	public NodeLiteral getLiteralFromId(String id, Map<String, NodeLiteral> map) throws NoSuchFieldException {
+		NodeLiteral res = map.get(id);
+		if(res == null)
+			throw new NoSuchFieldException("[ERROR]Aucune variable similaire stackee trouvee"+"\n[ERROR]Stack Size:"+environment.size());
+		return res;
+	}
+
 	
 	
 	public void add_node_to_latest_portability(String id, NodeLiteral n) {
@@ -63,24 +71,6 @@ public class StackEnvironment {
 	}
 
 
-	public NodeLiteral getLiteralFromId(String id, Map<String, NodeLiteral> map) throws NoSuchFieldException {
-		NodeLiteral res = map.get(id);
-		if(res == null)
-			throw new NoSuchFieldException("[ERROR]Aucune variable similaire stackee trouvee"+"\n[ERROR]Stack Layer:"+environment.size());
-		return res;
-	}
-	
-	/*
-	public Type getTypeFromId(String id) throws NoSuchFieldException {
-		for(Entry<NodeId, NodeLiteral> entry : environment.peek().entrySet()) {
-			System.out.println("Key: " + entry.getKey().getName());
-			if(entry.getKey().getName() == id)
-				return entry.getValue().getType();
-		}
-
-		throw new NoSuchFieldException("Count:"+environment.size()+ "[ERROR]Aucune variable similaire stackee trouvee");
-	}
-*/
 	
 	/**
 	 * @return the environment

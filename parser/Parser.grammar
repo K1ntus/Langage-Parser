@@ -36,8 +36,8 @@
 				Symbol.getColumn(token.getStart()));
 		}
 		
-	private Environment typeEnvironment = new Environment("types");
-	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment();	//String et Type ?
+	private TypeEnvironment typeEnvironment = new TypeEnvironment("types");
+	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment("procedures");	//String et Type ?
 	private StackEnvironment stackEnvironment = new StackEnvironment("local variables stack");
 	private String type_declaration_name;
 	
@@ -278,7 +278,8 @@ variable_declaration=
 	
 identifier_list=
 	identifier_list.list TOKEN_COMMA TOKEN_IDENTIFIER.id		{: 
-																	list.add(id); return list; :}
+																	list.add(id); return list; 
+																:}
 	| TOKEN_IDENTIFIER.name										{: 
 																	return new IdentifierList(name); 
 																:}
@@ -427,9 +428,10 @@ procedure_expression=
 	TOKEN_IDENTIFIER.func_name TOKEN_LPAR expression_part.args TOKEN_RPAR	{: 
 																				try{
 																					NodeCallFct fct = procedureEnvironment.getNodeFct(func_name);
+																					System.out.println("funct: " + func_name + " found.");
 																					return new NodeCallFct(func_name, fct.getTypeFunct(), args);
 																				}catch(NoSuchFieldException e){
-																					System.out.println(e);
+																					System.out.println("Procedure Expression: " + e);
 																					return new NodeCallFct(func_name, new TypeFunct(func_name, new TypeTuple(), new TypeVoid()), args);
 																				}
 																				
@@ -452,12 +454,12 @@ expression_list=
 
 //OK	
 new_statement=
-	TOKEN_NEW variable_access.node TOKEN_SEMIC		{: return new NodeNew(node); :}
+	TOKEN_NEW variable_access.node TOKEN_SEMIC			{: return new NodeNew(node); :}
 	;
 	
 //OK
 dispose_statement=
-	TOKEN_DISPOSE variable_access.node TOKEN_SEMIC	{: return new NodeDispose(node); :}
+	TOKEN_DISPOSE variable_access.node TOKEN_SEMIC		{: return new NodeDispose(node); :}
 	;
 	
 //OK

@@ -5,19 +5,19 @@ import java.util.Map;
 
 import ubordeaux.deptinfo.compilation.project.type.Type;
 
-public class Environment {
+public class TypeEnvironment {
 	private String name;
 	private Map<String, Type> table;
 
 	
-	public Environment(){
+	public TypeEnvironment(){
 		table = new HashMap<String, Type>();
 	}
 	
 	/**
 	 * @param environment_type (equals: "types", "procedures")
 	 */
-	public Environment(String name) {
+	public TypeEnvironment(String name) {
 		this();
 		this.name = name;
 	}

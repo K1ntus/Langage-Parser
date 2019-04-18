@@ -32,18 +32,21 @@ public class ProcedureEnvironment {
 	
 
 
-	public NodeList getVariableValue(NodeCallFct t) {
+	public NodeCallFct getVariableValue(NodeCallFct t) throws NoSuchFieldException {
 		System.out.println("** Retrouve fct:" + t.toString());
-		return table.get(t);
+		String name = t.getName();
+		return getNodeFct(name);
 	}
 	
 	public NodeCallFct getNodeFct(String fct_name) throws NoSuchFieldException {
 		for(NodeCallFct node_fct : table.keySet()) {
-			if(node_fct.getName() == fct_name) {
+			String funct_tested = node_fct.getName();
+			//System.out.println("Current function name tested: " + funct_tested);
+			if(funct_tested.equals(fct_name)) {
 				return node_fct;
 			}
 		}
-		throw new NoSuchFieldException("Aucune fonction: " + fct_name + "trouvee.");
+		throw new NoSuchFieldException("Aucune fonction: " + fct_name + " trouvee.");
 	}
 	
 	

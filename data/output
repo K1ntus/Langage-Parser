@@ -127,14 +127,14 @@ java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 [STACK] Pushed one more stack layer
 *** =
 [VARIABLE]x found.
-[STACK] Stack Layer: 1
+[STACK] Variable: x found at Layer: 1
 *** 5
 *** ;
 *** x
 [STATE] assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 5))
 *** =
 [VARIABLE]x found.
-[STACK] Stack Layer: 1
+[STACK] Variable: x found at Layer: 1
 *** sum
 *** (
 *** 3
@@ -142,7 +142,7 @@ java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** 5
 *** )
 *** ;
-java.lang.NoSuchFieldException: Aucune fonction: sumtrouvee.
+funct: sum found.
 *** println
 [STATE] assignment: NodeAssign(NodeLiteral(TypeInt, 0), sum_NodeCallFct(NodeList(NodeLiteral(TypeInt, 3), NodeLiteral(TypeInt, 5))))
 *** sum
@@ -152,7 +152,7 @@ java.lang.NoSuchFieldException: Aucune fonction: sumtrouvee.
 *** 5
 *** )
 *** ;
-java.lang.NoSuchFieldException: Aucune fonction: sumtrouvee.
+funct: sum found.
 *** println
 *** (
 *** pgcd
@@ -162,7 +162,7 @@ java.lang.NoSuchFieldException: Aucune fonction: sumtrouvee.
 *** 90
 *** )
 *** )
-java.lang.NoSuchFieldException: Aucune fonction: pgcdtrouvee.
+funct: pgcd found.
 *** ;
 *** end
 
@@ -175,13 +175,4 @@ java.lang.NoSuchFieldException: Aucune fonction: pgcdtrouvee.
 --- CheckType NodeAssign
 --- CheckType NodeLiteral
 --- CheckType NodeCallFct
-*** Erreur de typage: pas le même nombre de paramètres 
---- CheckType NodeCallFct
-*** Erreur de typage: pas le même nombre de paramètres 
---- CheckType NodeCallFct
-*** Erreur de typage: pas le même nombre de paramètres 
-*** Erreur de typage
-
-
-Arbre Principal: 
-NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 5)), NodeAssign(NodeLiteral(TypeInt, 0), sum_NodeCallFct(NodeList(NodeLiteral(TypeInt, 3), NodeLiteral(TypeInt, 5)))), println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral(TypeInt, 3), NodeLiteral(TypeInt, 5))))), println_NodeCallFct(NodeList(pgcd_NodeCallFct(NodeList(NodeLiteral(TypeInt, 78), NodeLiteral(TypeInt, 90))))))
+--- CheckType NodeLiteral

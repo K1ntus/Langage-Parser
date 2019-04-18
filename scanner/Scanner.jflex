@@ -49,7 +49,7 @@ HexaValue = 0x[a-fA-F0-9_]*
 	"/*"			{System.out.println("$$"); yybegin(COMMENT);}
 	{LineComment}	{System.out.print(yytext()); }
 	
-	\"                             { string.setLength(0); yybegin(STRING); }
+	\"              { string.setLength(0); yybegin(STRING); }
 	//{String}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_STRING, yyline, yycolumn, new String(yytext()) ); }
 	
 	"struct"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_STRUCT, yyline, yycolumn); }

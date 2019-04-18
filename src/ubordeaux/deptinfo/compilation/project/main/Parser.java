@@ -89,8 +89,8 @@ public class Parser extends beaver.Parser {
 				Symbol.getColumn(token.getStart()));
 		}
 		
-	private Environment typeEnvironment = new Environment("types");
-	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment();	//String et Type ?
+	private TypeEnvironment typeEnvironment = new TypeEnvironment("types");
+	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment("procedures");	//String et Type ?
 	private StackEnvironment stackEnvironment = new StackEnvironment("local variables stack");
 	private String type_declaration_name;
 
@@ -447,9 +447,10 @@ public class Parser extends beaver.Parser {
 					 
 																				try{
 																					NodeCallFct fct = procedureEnvironment.getNodeFct(func_name);
+																					System.out.println("funct: " + func_name + " found.");
 																					return new NodeCallFct(func_name, fct.getTypeFunct(), args);
 																				}catch(NoSuchFieldException e){
-																					System.out.println(e);
+																					System.out.println("Procedure Expression: " + e);
 																					return new NodeCallFct(func_name, new TypeFunct(func_name, new TypeTuple(), new TypeVoid()), args);
 																				}
 				}

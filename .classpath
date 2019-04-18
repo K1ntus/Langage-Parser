@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/autofs/unityaccount/cremi/sportejoie/Bureau/S6/Compilation/td3/lib/beaver-0.9.11/lib/beaver-ant.jar"/>
+	<classpathentry kind="lib" path="/autofs/unityaccount/cremi/sportejoie/Bureau/S6/Compilation/td3/lib/beaver-0.9.11/lib/beaver-ant-0.9.11.jar"/>
+	<classpathentry kind="lib" path="/autofs/unityaccount/cremi/sportejoie/Bureau/S6/Compilation/td3/lib/beaver-0.9.11/lib/beaver-cc.jar"/>
+	<classpathentry kind="lib" path="/autofs/unityaccount/cremi/sportejoie/Bureau/S6/Compilation/td3/lib/beaver-0.9.11/lib/beaver-cc-0.9.11.jar"/>
+	<classpathentry kind="lib" path="/autofs/unityaccount/cremi/sportejoie/Bureau/S6/Compilation/td3/lib/beaver-0.9.11/lib/beaver-rt.jar"/>
+	<classpathentry kind="lib" path="/autofs/unityaccount/cremi/sportejoie/Bureau/S6/Compilation/td3/lib/beaver-0.9.11/lib/beaver-rt-0.9.11.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

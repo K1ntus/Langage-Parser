@@ -9,5 +9,8 @@ public class StmList {
 		this.head = head;
 		this.tail = tail;
 	}
-
+	
+	public String toString() {
+		return ("StmList(" + head.toString() + ",fin de liste )");
+	}
 }

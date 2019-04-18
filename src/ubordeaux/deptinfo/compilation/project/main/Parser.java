@@ -9,6 +9,7 @@ import java.util.Stack;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 import java.util.Map;
 import beaver.*;
 import fr.groupname.compilator.special.*;
@@ -74,6 +75,10 @@ public class Parser extends beaver.Parser {
 		}
 	};
  
+	public HashMap<String,Node> symtab = new HashMap<String,Node> ();	//ref du td6 a completer
+	
+	public Stm statement;	//pour utiliser les methodes... a completer
+	
 	static class Events extends beaver.Parser.Events {
 		public void syntaxError(Symbol token) {
 			System.err.format("*** Erreur de syntaxe en ligne %d, colonne %d. Token inattendu: %s\n",
@@ -99,11 +104,25 @@ public class Parser extends beaver.Parser {
 	public Parser() {
 		super(PARSING_TABLES);
 		actions = new Action[] {
-			new Action() {	// [0] program = type_declaration_part variable_declaration_part procedure_definition_part TOKEN_BEGIN push_stackenv statement_list.l TOKEN_END pop_stackenv
+			new Action() {	// [0] program = type_declaration_part.tp variable_declaration_part.vp procedure_definition_part.pp TOKEN_BEGIN push_stackenv.pu statement_list.l TOKEN_END pop_stackenv.pop
 				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol tp = _symbols[offset + 1];
+					final Symbol vp = _symbols[offset + 2];
+					final Symbol _symbol_pp = _symbols[offset + 3];
+					final NodeCallFct pp = (NodeCallFct) _symbol_pp.value;
+					final Symbol pu = _symbols[offset + 5];
 					final Symbol _symbol_l = _symbols[offset + 6];
 					final NodeList l = (NodeList) _symbol_l.value;
-					 return _symbol_l;
+					final Symbol pop = _symbols[offset + 8];
+					 return _symbol_l; 
+		/*
+		tp.toString(statement);
+		vp.toString(statement);
+		pp.toString(statement);
+		pu.toString(statement);
+      System.out.format ("Programme :\n%s\n", statement.toString ());
+      return (l);
+      */
 				}
 			},
 			Action.NONE,  	// [1] type_declaration_part = 
@@ -291,23 +310,12 @@ public class Parser extends beaver.Parser {
 					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1]); return new Symbol(lst);
 				}
 			},
-<<<<<<< HEAD
 			RETURN2,	// [42] procedure_definition = procedure_definition_head block; returns 'block' although none is marked
 			RETURN2,	// [43] procedure_definition = procedure_declaration_head TOKEN_SEMIC; returns 'TOKEN_SEMIC' although none is marked
 			Action.RETURN,	// [44] procedure_definition_head = procedure_head
 			Action.RETURN,	// [45] procedure_declaration_head = procedure_head
-			RETURN5,	// [46] procedure_head = TOKEN_PROCEDURE TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR; returns 'TOKEN_RPAR' although none is marked
-			RETURN7,	// [47] procedure_head = TOKEN_FUNCTION TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR TOKEN_COLON type; returns 'type' although none is marked
-			Action.NONE,  	// [48] argt_part = 
-			Action.RETURN,	// [49] argt_part = argt_list
-			new Action() {	// [50] argt_list = argt_list.l TOKEN_COMMA argt.elem
-=======
-			RETURN2,	// [41] procedure_definition = procedure_definition_head block; returns 'block' although none is marked
-			RETURN2,	// [42] procedure_definition = procedure_declaration_head TOKEN_SEMIC; returns 'TOKEN_SEMIC' although none is marked
-			Action.RETURN,	// [43] procedure_definition_head = procedure_head
-			Action.RETURN,	// [44] procedure_declaration_head = procedure_head
-			Action.RETURN,	// [45] procedure_head = TOKEN_PROCEDURE.p TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR
-			new Action() {	// [46] procedure_head = TOKEN_FUNCTION TOKEN_IDENTIFIER.id TOKEN_LPAR argt_part.args TOKEN_RPAR TOKEN_COLON type.t
+			Action.RETURN,	// [46] procedure_head = TOKEN_PROCEDURE.p TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR
+			new Action() {	// [47] procedure_head = TOKEN_FUNCTION TOKEN_IDENTIFIER.id TOKEN_LPAR argt_part.args TOKEN_RPAR TOKEN_COLON type.t
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_id = _symbols[offset + 2];
 					final String id = (String) _symbol_id.value;
@@ -320,18 +328,17 @@ public class Parser extends beaver.Parser {
 																									/*
 																									for(NodeId elt : args){
 																										Type tp = elt.getType();
-																										tuple.TypeTuple(TypeString, tp);
-																										
-																									}*/
+																										tuple.TypeTuple(elt, tp);
+																									}
+																									*/
 																									TypeFunct t1 = new TypeFunct(id, tuple, t);
-																								
+																									
 																									return new NodeCallFct(id,t1,args);
 				}
 			},
-			Action.NONE,  	// [47] argt_part = 
-			Action.RETURN,	// [48] argt_part = argt_list
-			new Action() {	// [49] argt_list = argt_list.l TOKEN_COMMA argt.elem
->>>>>>> 9cff71f0edeb130cb29dd35cb634cfa2f2f456b3
+			Action.NONE,  	// [48] argt_part = 
+			Action.RETURN,	// [49] argt_part = argt_list
+			new Action() {	// [50] argt_list = argt_list.l TOKEN_COMMA argt.elem
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_l = _symbols[offset + 1];
 					final NodeList l = (NodeList) _symbol_l.value;

@@ -14,6 +14,7 @@
 %import "java.util.Stack";
 %import "ubordeaux.deptinfo.compilation.project.node.*";
 %import "ubordeaux.deptinfo.compilation.project.type.*";
+%import "ubordeaux.deptinfo.compilation.project.intermediateCode.*";
 
 %import "fr.groupname.compilator.environment.*";
 %import "fr.groupname.compilator.special.*";
@@ -21,6 +22,10 @@
 
 
 %embed {: 
+	public HashMap<String,Node> symtab = new HashMap<String,Node> ();	//ref du td6 a completer
+	
+	public Stm statement;	//pour utiliser les methodes... a completer
+	
 	static class Events extends beaver.Parser.Events {
 		public void syntaxError(Symbol token) {
 			System.err.format("*** Erreur de syntaxe en ligne %d, colonne %d. Token inattendu: %s\n",
@@ -124,21 +129,31 @@
 
 %typeof readln_statement, println_statement, procedure_expression, procedure_definition_part = "NodeCallFct";
 
-
-
-
-
-
 //%typeof pop_stackenv, push_stackenv = "Void";
 
-program=
-	type_declaration_part			//Type env
-	variable_declaration_part 		//Type var
-	procedure_definition_part		//Type procedure
-	TOKEN_BEGIN	push_stackenv		//On empile stackenv
+
+
+
+
+
+
+program=   
+	type_declaration_part.tp			//Type env
+	variable_declaration_part.vp 		//Type var
+	procedure_definition_part.pp		//Type procedure
+	TOKEN_BEGIN	push_stackenv.pu		//On empile stackenv
 	statement_list.l 				//Inserer variable dans env
-	TOKEN_END	pop_stackenv 		//On depile stackenv
-	{: return _symbol_l; :}	
+	TOKEN_END	pop_stackenv.pop 		//On depile stackenv
+	{: return _symbol_l; 
+		/*
+		tp.toString(statement);
+		vp.toString(statement);
+		pp.toString(statement);
+		pu.toString(statement);
+      System.out.format ("Programme :\n%s\n", statement.toString ());
+      return (l);
+      */
+    :}	
 	;
 	
 /*
@@ -317,11 +332,11 @@ procedure_head=
 																									/*
 																									for(NodeId elt : args){
 																										Type tp = elt.getType();
-																										tuple.TypeTuple(TypeString, tp);
-																										
-																									}*/
+																										tuple.TypeTuple(elt, tp);
+																									}
+																									*/
 																									TypeFunct t1 = new TypeFunct(id, tuple, t);
-																								
+																									
 																									return new NodeCallFct(id,t1,args);
 																									:}
 	;

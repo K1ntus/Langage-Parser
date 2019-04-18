@@ -10,6 +10,10 @@ public abstract class Stm implements IntermediateCode {
 		// TODO Auto-generated method stub
 		System.err.println("TODO: " + this.getClass().getSimpleName() + ".canonicalTransformation()()");
 	}
+	
+	public String toString() {
+		return "stm jsp";
+	}
 
 
 }

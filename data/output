@@ -17,6 +17,7 @@
 *** a
 *** =
 [STACK] Variable: a found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** 100
 *** ;
 *** while
@@ -24,6 +25,7 @@
 *** a
 *** >=
 [STACK] Variable: a found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** 0
 *** )
 *** do
@@ -33,13 +35,16 @@
 *** a
 *** )
 [STACK] Variable: a found at Layer: 3
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** ;
 *** a
 *** =
 [STACK] Variable: a found at Layer: 3
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** a
 *** -
 [STACK] Variable: a found at Layer: 3
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** 1
 *** ;
 *** end
@@ -95,6 +100,7 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100)), NodeWhi
 *** ..
 *** 10
 *** ]
+TypeArrayRange[TypeInt..TypeInt]
 *** of
 *** string
 *** ;
@@ -103,26 +109,31 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100)), NodeWhi
 *** x
 *** =
 [STACK] Variable: x found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** 1234564789
 *** ;
 // 0x4995F6B5
 *** y
 *** =
 [STACK] Variable: y found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** 0x7FFFFFFF
 *** ;
 *** b
 *** =
 [STACK] Variable: b found at Layer: 2
+[VARIABLE]NodeLiteral(TypeBoolean, 0) found.
 *** true
 *** ;
 *** c
 *** =
 [STACK] Variable: c found at Layer: 2
+[VARIABLE]NodeLiteral(TypeString, 0) found.
 *** ;
 *** d
 *** [
 [STACK] Variable: d found at Layer: 2
+[VARIABLE]NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0) found.
 *** 1
 *** ]
 *** =
@@ -130,6 +141,7 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100)), NodeWhi
 *** d
 *** [
 [STACK] Variable: d found at Layer: 2
+[VARIABLE]NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0) found.
 *** 2
 *** ]
 *** =
@@ -137,6 +149,7 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100)), NodeWhi
 *** d
 *** [
 [STACK] Variable: d found at Layer: 2
+[VARIABLE]NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0) found.
 *** 3
 *** ]
 *** =
@@ -144,6 +157,7 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100)), NodeWhi
 *** d
 *** [
 [STACK] Variable: d found at Layer: 2
+[VARIABLE]NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0) found.
 *** 10
 *** ]
 *** =
@@ -153,6 +167,7 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100)), NodeWhi
 *** x
 *** +
 [STACK] Variable: x found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** 5
 *** )
 *** ;
@@ -160,14 +175,17 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100)), NodeWhi
 *** y
 *** ;
 [STACK] Variable: y found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** println
 *** b
 *** ;
 [STACK] Variable: b found at Layer: 2
+[VARIABLE]NodeLiteral(TypeBoolean, 0) found.
 *** println
 *** c
 *** ;
 [STACK] Variable: c found at Layer: 2
+[VARIABLE]NodeLiteral(TypeString, 0) found.
 //println d[2];
 *** end
 
@@ -188,23 +206,23 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100)), NodeWhi
 --- CheckType NodeAssign
 --- CheckType NodeArrayAccess
 --- CheckType NodeLiteral
-Checktype invalid.
-* elem:NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 1)), NodeLiteral(TypeString, A))
+- Checktype invalid: 
+- elem:NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 1)), NodeLiteral(TypeString, A))
 --- CheckType NodeAssign
 --- CheckType NodeArrayAccess
 --- CheckType NodeLiteral
-Checktype invalid.
-* elem:NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 2)), NodeLiteral(TypeString, B))
+- Checktype invalid: 
+- elem:NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 2)), NodeLiteral(TypeString, B))
 --- CheckType NodeAssign
 --- CheckType NodeArrayAccess
 --- CheckType NodeLiteral
-Checktype invalid.
-* elem:NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 3)), NodeLiteral(TypeString, C))
+- Checktype invalid: 
+- elem:NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 3)), NodeLiteral(TypeString, C))
 --- CheckType NodeAssign
 --- CheckType NodeArrayAccess
 --- CheckType NodeLiteral
-Checktype invalid.
-* elem:NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 10)), NodeLiteral(TypeString, Z))
+- Checktype invalid: 
+- elem:NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 10)), NodeLiteral(TypeString, Z))
 --- CheckType NodeCallFct
 --- CheckType NodeOp
 --- CheckType NodeCallFct
@@ -244,6 +262,7 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1234564789)), 
 *** x
 *** =
 [STACK] Variable: x found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** 1
 *** ;
 *** while
@@ -251,6 +270,7 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1234564789)), 
 *** x
 *** <=
 [STACK] Variable: x found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** 10
 *** )
 *** do
@@ -260,12 +280,14 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1234564789)), 
 *** x
 *** )
 [STACK] Variable: x found at Layer: 3
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** ;
 *** if
 *** (
 *** x
 *** ==
 [STACK] Variable: x found at Layer: 3
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** 10
 *** )
 *** then
@@ -273,6 +295,7 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1234564789)), 
 *** y
 *** =
 [STACK] Variable: y found at Layer: 4
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** 1
 *** ;
 *** while
@@ -280,6 +303,7 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1234564789)), 
 *** y
 *** <=
 [STACK] Variable: y found at Layer: 4
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** 5
 *** )
 *** do
@@ -292,13 +316,16 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1234564789)), 
 *** y
 *** )
 [STACK] Variable: y found at Layer: 5
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** ;
 *** y
 *** =
 [STACK] Variable: y found at Layer: 5
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** y
 *** +
 [STACK] Variable: y found at Layer: 5
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** 1
 *** ;
 *** end
@@ -312,9 +339,11 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1234564789)), 
 *** x
 *** =
 [STACK] Variable: x found at Layer: 4
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** x
 *** +
 [STACK] Variable: x found at Layer: 4
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** 1
 *** ;
 *** end
@@ -441,11 +470,13 @@ Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee 
 *** x
 *** =
 [STACK] Variable: x found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** 5
 *** ;
 *** x
 *** =
 [STACK] Variable: x found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** sum
 *** (
 *** 3
@@ -453,6 +484,8 @@ Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee 
 *** 5
 *** )
 *** ;
+Register function variable:i | NodeLiteral(TypeInt, 3)
+Register function variable:j | NodeLiteral(TypeInt, 5)
 *** println
 *** sum
 *** (
@@ -461,6 +494,8 @@ Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee 
 *** 5
 *** )
 *** ;
+Register function variable:i | NodeLiteral(TypeInt, 3)
+Register function variable:j | NodeLiteral(TypeInt, 5)
 *** println
 *** (
 *** pgcd
@@ -470,6 +505,8 @@ Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee 
 *** 90
 *** )
 *** )
+Register function variable:i | NodeLiteral(TypeInt, 78)
+Register function variable:j | NodeLiteral(TypeInt, 90)
 *** ;
 *** end
 

@@ -200,7 +200,12 @@ public class Parser extends beaver.Parser {
 				}
 			},
 			Action.RETURN,	// [23] range_type = enumerated_type
-			Action.RETURN,	// [24] range_type = subrange_type
+			new Action() {	// [24] range_type = subrange_type.t
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol t = _symbols[offset + 1];
+					 System.out.println(t.toString()); return t;
+				}
+			},
 			Action.RETURN,	// [25] range_type = named_type
 			new Action() {	// [26] pointer_type = TOKEN_CIRC type.t
 				public Symbol reduce(Symbol[] _symbols, int offset) {
@@ -454,8 +459,29 @@ public class Parser extends beaver.Parser {
 					final NodeList args = (NodeList) _symbol_args.value;
 					 
 																				try{
-																					NodeCallFct fct = procedureEnvironment.getNodeFct(func_name);
-																					return new NodeCallFct(func_name, fct.getTypeFunct(), args);
+																					stackEnvironment.getEnvironment().push(new HashMap<String, NodeLiteral>(stackEnvironment.getEnvironment().peek())); //push env
+																					HashMap<String, NodeLiteral> table = (HashMap) stackEnvironment.getEnvironment().peek();
+																					
+																					NodeCallFct fct_from_table = procedureEnvironment.getNodeFct(func_name);
+																					TypeFunct fct_type = fct_from_table.getTypeFunct().clone();
+																					
+																					
+																					int i = 0;
+																					Iterator<Type> it = fct_type.getParams().iterator();
+																					while(it.hasNext()) {
+																						TypeFeature current_type = (TypeFeature) it.next();
+																						String id = current_type.getName();
+																						Type t = current_type.getType();
+																						
+																						NodeLiteral node = (NodeLiteral) args.get(i);
+																						table.put(id, node);		
+																						System.out.println("Register function variable:" +id + " | "+ node.toString());
+																						
+																						
+																						i++;
+																					}
+																					
+																					return new NodeCallFct(func_name, fct_from_table.getTypeFunct(), args);
 																				}catch(NoSuchFieldException e){
 																					System.out.println("Procedure Expression: " + e);
 																					return new NodeCallFct(func_name, new TypeFunct(func_name, new TypeTuple(), new TypeVoid()), args);
@@ -615,8 +641,9 @@ public class Parser extends beaver.Parser {
 					final String name = (String) _symbol_name.value;
 						
 										try{
-											//System.out.println("[VARIABLE]" + name +" found.");
-											return stackEnvironment.get_node_reachable(name);  
+											NodeLiteral res = stackEnvironment.get_node_reachable(name);  
+											System.out.println("[VARIABLE]" + res.toString() +" found.");
+											return res;
 										} catch (NoSuchFieldException e) {
 											System.out.println("Variable [" + name + "]: "+ e);
 											return new NodeLiteral(new TypeVoid(), null);

@@ -1,5 +1,6 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
+import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypeComplex;
 import ubordeaux.deptinfo.compilation.project.type.TypePointer;
@@ -31,9 +32,10 @@ public final class NodePtrAccess extends NodeExp {
 	}
 
 	@Override
-	public void generateIntermediateCode() {
+	public ExpList generateIntermediateCode() {
 		// TODO Auto-generated method stub
 		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		return null;
 		
 	}
 }

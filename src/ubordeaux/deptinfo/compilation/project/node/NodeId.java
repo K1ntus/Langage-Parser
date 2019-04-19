@@ -1,5 +1,7 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
+
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 
 public final class NodeId extends NodeExp {
@@ -35,11 +37,11 @@ public final class NodeId extends NodeExp {
 	public String getName() {
 		return name;
 	}
-
-	@Override
-	public void generateIntermediateCode() {
-		// TODO Auto-generated method stub
-		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		
+	
+	
+	public Label generateIntermediateCodeLabel() {
+		System.err.println("Label: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		LabelLocation l = new LabelLocation(this.name);
+		return new Label(l);
 	}
 }

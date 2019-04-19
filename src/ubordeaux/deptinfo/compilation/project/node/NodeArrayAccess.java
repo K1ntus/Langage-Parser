@@ -2,6 +2,7 @@ package ubordeaux.deptinfo.compilation.project.node;
 
 import ubordeaux.deptinfo.compilation.project.type.TypeRange;
 import ubordeaux.deptinfo.compilation.project.type.TypeItemEnum;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypeArray;
 
@@ -44,10 +45,11 @@ public final class NodeArrayAccess extends NodeExp {
 		return new NodeArrayAccess((NodeExp) get(0).clone(), (Node) get(1).clone());
 	}
 
-	@Override
-	public void generateIntermediateCode() {
-		// TODO Auto-generated method stub
-		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+
+	public ExpList generateIntermediateCode() {
+		return null;
+		
+		//System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
 		
 	}
 

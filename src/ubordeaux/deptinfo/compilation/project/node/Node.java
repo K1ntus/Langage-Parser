@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
 import ubordeaux.deptinfo.compilation.project.main.ClonableSymbol;
 
 public abstract class Node extends ClonableSymbol implements NodeInterface {
@@ -59,6 +61,11 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 	public void add(Node elt) {
 		this.elts.add(elt);
 	}
+	
+	public void pop(Node elt) {
+		this.elts.remove(elt);
+		
+	}
 
 	public Node get(int i) {
 		return elts.get(i);
@@ -95,6 +102,9 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 		}
 	}
 
-	public abstract void generateIntermediateCode();
+	public IntermediateCode generateIntermediateCode() {
+		return null;
+		
+	}
 
 }

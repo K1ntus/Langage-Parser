@@ -1,5 +1,7 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
+
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 
 public final class NodeAssign extends Node {
@@ -38,10 +40,11 @@ public final class NodeAssign extends Node {
 	};
 	
 
-	@Override
-	public void generateIntermediateCode() {
-		// TODO Auto-generated method stub
-		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		
+
+	public Move generateIntermediateCode() {
+		System.err.println("Assing: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		ExpList l = new ExpList(new Exp(this.getLhs()), null);
+		ExpList r = new ExpList(new Exp(this.getRhs()), null);
+		return new Move(new Mem(l.getHead()),r.getHead() );	
 	}
 }

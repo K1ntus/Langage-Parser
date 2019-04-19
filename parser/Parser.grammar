@@ -24,7 +24,7 @@
 %embed {: 
 	public HashMap<String,Node> symtab = new HashMap<String,Node> ();	//ref du td6 a completer
 	
-	public Stm statement;	//pour utiliser les methodes... a completer
+	//public Stm statement;	//pour utiliser les methodes... a completer
 	
 	static class Events extends beaver.Parser.Events {
 		public void syntaxError(Symbol token) {
@@ -144,15 +144,9 @@ program=
 	TOKEN_BEGIN	push_stackenv.pu		//On empile stackenv
 	statement_list.l 				//Inserer variable dans env
 	TOKEN_END	pop_stackenv.pop 		//On depile stackenv
-	{: return _symbol_l; 
-		/*
-		tp.toString(statement);
-		vp.toString(statement);
-		pp.toString(statement);
-		pu.toString(statement);
-      System.out.format ("Programme :\n%s\n", statement.toString ());
-      return (l);
-      */
+	{: 
+	l.generateIntermediateCode();
+      return _symbol_l; 
     :}	
 	;
 	
@@ -326,19 +320,9 @@ procedure_declaration_head=
 	
 //Definition
 procedure_head=
-	TOKEN_PROCEDURE.p TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR 	
-	| TOKEN_FUNCTION TOKEN_IDENTIFIER.id TOKEN_LPAR argt_part.args TOKEN_RPAR TOKEN_COLON type.t {:																								int n =0;
-																									TypeTuple tuple = new TypeTuple();
-																									/*
-																									for(NodeId elt : args){
-																										Type tp = elt.getType();
-																										tuple.TypeTuple(elt, tp);
-																									}
-																									*/
-																									TypeFunct t1 = new TypeFunct(id, tuple, t);
+	TOKEN_PROCEDURE.p TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR 	{:	return new EmptySymbol(); :}
+	| TOKEN_FUNCTION TOKEN_IDENTIFIER.id TOKEN_LPAR argt_part.args TOKEN_RPAR TOKEN_COLON type.t {:	return new EmptySymbol(); :}
 																									
-																									return new NodeCallFct(id,t1,args);
-																									:}
 	;
 	
 argt_part=

@@ -77,7 +77,7 @@ public class Parser extends beaver.Parser {
  
 	public HashMap<String,Node> symtab = new HashMap<String,Node> ();	//ref du td6 a completer
 	
-	public Stm statement;	//pour utiliser les methodes... a completer
+	//public Stm statement;	//pour utiliser les methodes... a completer
 	
 	static class Events extends beaver.Parser.Events {
 		public void syntaxError(Symbol token) {
@@ -114,15 +114,9 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_l = _symbols[offset + 6];
 					final NodeList l = (NodeList) _symbol_l.value;
 					final Symbol pop = _symbols[offset + 8];
-					 return _symbol_l; 
-		/*
-		tp.toString(statement);
-		vp.toString(statement);
-		pp.toString(statement);
-		pu.toString(statement);
-      System.out.format ("Programme :\n%s\n", statement.toString ());
-      return (l);
-      */
+					 
+	l.generateIntermediateCode();
+      return _symbol_l;
 				}
 			},
 			Action.NONE,  	// [1] type_declaration_part = 
@@ -314,7 +308,12 @@ public class Parser extends beaver.Parser {
 			RETURN2,	// [43] procedure_definition = procedure_declaration_head TOKEN_SEMIC; returns 'TOKEN_SEMIC' although none is marked
 			Action.RETURN,	// [44] procedure_definition_head = procedure_head
 			Action.RETURN,	// [45] procedure_declaration_head = procedure_head
-			Action.RETURN,	// [46] procedure_head = TOKEN_PROCEDURE.p TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR
+			new Action() {	// [46] procedure_head = TOKEN_PROCEDURE.p TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol p = _symbols[offset + 1];
+						return new EmptySymbol();
+				}
+			},
 			new Action() {	// [47] procedure_head = TOKEN_FUNCTION TOKEN_IDENTIFIER.id TOKEN_LPAR argt_part.args TOKEN_RPAR TOKEN_COLON type.t
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_id = _symbols[offset + 2];
@@ -323,17 +322,7 @@ public class Parser extends beaver.Parser {
 					final NodeList args = (NodeList) _symbol_args.value;
 					final Symbol _symbol_t = _symbols[offset + 7];
 					final Type t = (Type) _symbol_t.value;
-																													int n =0;
-																									TypeTuple tuple = new TypeTuple();
-																									/*
-																									for(NodeId elt : args){
-																										Type tp = elt.getType();
-																										tuple.TypeTuple(elt, tp);
-																									}
-																									*/
-																									TypeFunct t1 = new TypeFunct(id, tuple, t);
-																									
-																									return new NodeCallFct(id,t1,args);
+						return new EmptySymbol();
 				}
 			},
 			Action.NONE,  	// [48] argt_part = 

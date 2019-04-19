@@ -1,5 +1,7 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
+import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
 import ubordeaux.deptinfo.compilation.project.type.TypeBoolean;
 import ubordeaux.deptinfo.compilation.project.type.TypeInt;
 
@@ -36,10 +38,10 @@ public class NodeRel extends NodeExp {
 		return new NodeRel(name, (Node) getOp1().clone(), (Node) getOp2().clone());
 	};
 
-	@Override
-	public void generateIntermediateCode() {
-		// TODO Auto-generated method stub
+
+	public ExpList generateIntermediateCode() {
 		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		return null;
 		
 	}
 }

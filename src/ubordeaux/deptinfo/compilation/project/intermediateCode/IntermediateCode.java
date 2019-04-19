@@ -1,11 +1,11 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
-public interface IntermediateCode {
+public abstract class IntermediateCode {
 
 	// Pour un affichage lisible
-	public String toString();
+	public abstract String toString();
 	
 	// Transforme l'arbre pour éliminer les ESEQ locaux
-	public void canonicalTransformation();
+	public abstract void canonicalTransformation();
 	
 }

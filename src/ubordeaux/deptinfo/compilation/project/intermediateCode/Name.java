@@ -4,7 +4,7 @@ public class Name extends Exp {
 	private LabelLocation label;
 
 	public Name(LabelLocation label) {
-		super();
+		super(null);
 		this.label = label;
 	}
 

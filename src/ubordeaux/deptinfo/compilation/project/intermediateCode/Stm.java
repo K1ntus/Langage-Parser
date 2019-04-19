@@ -1,6 +1,6 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
-public abstract class Stm implements IntermediateCode {
+public abstract class Stm extends IntermediateCode {
 	public Stm() {
 		super();
 	}

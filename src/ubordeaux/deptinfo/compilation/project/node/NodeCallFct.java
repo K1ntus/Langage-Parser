@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import ubordeaux.deptinfo.compilation.project.type.TypeFeature;
 import ubordeaux.deptinfo.compilation.project.type.TypeFunct;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 
 public final class NodeCallFct extends NodeExp {
@@ -83,9 +84,10 @@ public final class NodeCallFct extends NodeExp {
 	}
 
 	@Override
-	public void generateIntermediateCode() {
+	public ExpList generateIntermediateCode() {
 		// TODO Auto-generated method stub
 		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		return null;
 		
 	}
 

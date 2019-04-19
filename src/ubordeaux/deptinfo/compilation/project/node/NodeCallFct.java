@@ -47,8 +47,6 @@ public final class NodeCallFct extends NodeExp {
 		Iterator<Node> itArgs = this.getArgs().iterator();
 		Iterator<Type> itParams = ((TypeFunct) type).getParams().iterator();
 		
-		System.out.println("Number of args: " + this.getArgs().size());
-		System.out.println("Number of para: " + ((TypeFunct) type).getParams().size());
 		while (itArgs.hasNext() && itParams.hasNext()) {
 			NodeExp arg = (NodeExp) itArgs.next();
 			if (!arg.checksType()) {
@@ -57,9 +55,6 @@ public final class NodeCallFct extends NodeExp {
 			}
 			Type argType = arg.type;
 			Type paramType = ((TypeFeature) itParams.next()).getType();
-
-			System.out.println("Argum type: " + argType.toString());
-			System.out.println("Param type: " + paramType.toString());
 		
 			
 			if (!paramType.equals(argType)) {

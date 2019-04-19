@@ -347,17 +347,7 @@ public class Parser extends beaver.Parser {
 					NodeId n_id = (NodeId) n;
 					params_tuple.add(new TypeFeature(n_id.getName(), n_id.getType()));
 				}
-				/*
-				Iterator<Node> it = args.iterator();
-				while(it.hasNext()){
-					System.out.println("Node not of type id: " + it.next().getClass());
-					if(it.next() instanceof NodeId) {
-						NodeId current_elem = (NodeId) it.next();
-						params_tuple.add(new TypeFeature(current_elem.getName(), current_elem.getType()));
-						
-					} 
-				}
-				*/
+				
 				TypeFunct type_function = new TypeFunct(funct_name, params_tuple, t);
 			
 				return new NodeCallFct(funct_name, type_function, new NodeList());
@@ -465,14 +455,6 @@ public class Parser extends beaver.Parser {
 					 
 																				try{
 																					NodeCallFct fct = procedureEnvironment.getNodeFct(func_name);
-																					//System.out.println("funct:     " + func_name + " found.");
-																					System.out.println("funct: " + fct.getTypeFunct().toString());
-																					System.out.println("* expected: " + fct.getTypeFunct().getParams().toString());
-																					System.out.print("* got: ");
-																					for(Type t : args.getTypeList()) {
-																						System.out.print(t.toString()+", ");
-																					}
-																					System.out.println("params:" + args.toString());
 																					return new NodeCallFct(func_name, fct.getTypeFunct(), args);
 																				}catch(NoSuchFieldException e){
 																					System.out.println("Procedure Expression: " + e);
@@ -517,38 +499,20 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_args = _symbols[offset + 2];
 					final NodeExp args = (NodeExp) _symbol_args.value;
 					 
-			//TypeTuple args_type_raw = new TypeTuple();
-			//System.out.println("Typeraw: " + args.getType().toString());
-			//System.out.println("TYPEOF ARGS: " + args.toString());
-
-			TypeFeature t_feat = new TypeFeature("println");
-			
+			TypeTuple params_tuple = null;
+	
 			if(args instanceof NodeCallFct) {
-				NodeCallFct n = (NodeCallFct) args;
-				t_feat.add(n.getType());
+				NodeCallFct tmp = (NodeCallFct) args;
+				params_tuple= new TypeTuple(new TypeFeature(tmp.getName(), tmp.getTypeFunct()));
+			} else {
+				params_tuple= new TypeTuple(new TypeFeature("print nodelist", args.getType()));
 			}
-			System.out.println("Type feat: " + t_feat.toString());
-			System.out.println("Type args: " + args.toString());
+
 			
-
-			TypeTuple args_type = new TypeTuple(t_feat);
-
-			//System.out.println("expected:" + fct.getTypeFunct().getParams().toString());
-			//System.out.println("params:" + args.toString());
 			return new NodeCallFct(
 					"println",
-					new TypeFunct("println", args_type, new TypeVoid()),
+					new TypeFunct("println", params_tuple, new TypeVoid()),
 					new NodeList(args));
-		
-			
-			/*
-			return new NodeCallFct(
-				"println", 					//fonction name
-				new TypeFunct("println", 	//Un string jsp a quoi il sert
-					new TypeTuple(), 	//Type parametres
-					new TypeVoid()),	//Return type
-				new NodeList(e));		//Args
-			*/
 				}
 			},
 			new Action() {	// [77] readln_statement = TOKEN_READLN expression.e TOKEN_SEMIC

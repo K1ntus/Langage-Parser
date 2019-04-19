@@ -34,7 +34,6 @@
 *** begin
 * Enregistre k
 *** return
-[STACK] Pushed one more stack layer
 *** (
 *** i
 *** +
@@ -45,7 +44,6 @@ Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee 
 *** ;
 *** end
 *** function
-[STACK] Poped one more stack layer
 ** Enregistre fct:sum_NodeCallFct(NodeList)
 *** pgcd
 *** (
@@ -61,7 +59,6 @@ Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee 
 *** integer
 *** begin
 *** while
-[STACK] Pushed one more stack layer
 *** (
 *** i
 *** !=
@@ -89,7 +86,6 @@ Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee 
 *** ;
 Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** else
-[STATE] assignment: NodeAssign(NodeLiteral(TypeVoid, null), NodeOp(NodeLiteral(TypeVoid, null), NodeLiteral(TypeVoid, null)))
 *** j
 *** =
 Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
@@ -100,7 +96,6 @@ Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee 
 *** ;
 Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
 *** return
-[STATE] assignment: NodeAssign(NodeLiteral(TypeVoid, null), NodeOp(NodeLiteral(TypeVoid, null), NodeLiteral(TypeVoid, null)))
 *** (
 *** i
 *** )
@@ -108,17 +103,15 @@ Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee 
 *** ;
 *** end
 *** begin
-[STACK] Poped one more stack layer
 ** Enregistre fct:pgcd_NodeCallFct(NodeList)
 *** x
-[STACK] Pushed one more stack layer
 *** =
-[STACK] Variable: x found at Layer: 1
+[STACK] Variable: x found at Layer: 2
 *** 5
 *** ;
-//x = sum(3, 5);
-*** println
-[STATE] assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 5))
+*** x
+*** =
+[STACK] Variable: x found at Layer: 2
 *** sum
 *** (
 *** 3
@@ -126,6 +119,91 @@ Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee 
 *** 5
 *** )
 *** ;
-funct:     sum found.
-funct_type:() -> TypeInt Defined: true Name: sum
+funct: ([i:TypeInt], [j:TypeInt]) -> TypeInt Defined: true Name: sum
+* expected: ([i:TypeInt], [j:TypeInt])
+* got: TypeInt, TypeInt, params:NodeList(NodeLiteral(TypeInt, 3), NodeLiteral(TypeInt, 5))
 *** println
+*** sum
+*** (
+*** 3
+*** ,
+*** 5
+*** )
+*** ;
+funct: ([i:TypeInt], [j:TypeInt]) -> TypeInt Defined: true Name: sum
+* expected: ([i:TypeInt], [j:TypeInt])
+* got: TypeInt, TypeInt, params:NodeList(NodeLiteral(TypeInt, 3), NodeLiteral(TypeInt, 5))
+*** println
+Type feat: [println:TypeInt]
+Type args: sum_NodeCallFct(NodeList(NodeLiteral(TypeInt, 3), NodeLiteral(TypeInt, 5)))
+*** (
+*** pgcd
+*** (
+*** 78
+*** ,
+*** 90
+*** )
+*** )
+funct: ([i:TypeInt], [j:TypeInt]) -> TypeInt Defined: true Name: pgcd
+* expected: ([i:TypeInt], [j:TypeInt])
+* got: TypeInt, TypeInt, params:NodeList(NodeLiteral(TypeInt, 78), NodeLiteral(TypeInt, 90))
+*** ;
+*** end
+Type feat: [println:TypeInt]
+Type args: pgcd_NodeCallFct(NodeList(NodeLiteral(TypeInt, 78), NodeLiteral(TypeInt, 90)))
+
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeAssign
+--- CheckType NodeLiteral
+--- CheckType NodeCallFct
+Number of args: 2
+Number of para: 2
+--- CheckType NodeLiteral
+Argum type: TypeInt
+Param type: TypeInt
+--- CheckType NodeLiteral
+Argum type: TypeInt
+Param type: TypeInt
+--- CheckType NodeCallFct
+Number of args: 1
+Number of para: 1
+--- CheckType NodeCallFct
+Number of args: 2
+Number of para: 2
+--- CheckType NodeLiteral
+Argum type: TypeInt
+Param type: TypeInt
+--- CheckType NodeLiteral
+Argum type: TypeInt
+Param type: TypeInt
+Argum type: ([i:TypeInt], [j:TypeInt]) -> TypeInt Defined: true Name: sum
+Param type: TypeInt
+*** Erreur de typage :
+* Args Type: ([i:TypeInt], [j:TypeInt]) -> TypeInt Defined: true Name: sum
+* Params Type: TypeInt
+--- CheckType NodeCallFct
+Number of args: 1
+Number of para: 1
+--- CheckType NodeCallFct
+Number of args: 2
+Number of para: 2
+--- CheckType NodeLiteral
+Argum type: TypeInt
+Param type: TypeInt
+--- CheckType NodeLiteral
+Argum type: TypeInt
+Param type: TypeInt
+Argum type: ([i:TypeInt], [j:TypeInt]) -> TypeInt Defined: true Name: pgcd
+Param type: TypeInt
+*** Erreur de typage :
+* Args Type: ([i:TypeInt], [j:TypeInt]) -> TypeInt Defined: true Name: pgcd
+* Params Type: TypeInt
+*** Erreur de typage
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 5)), NodeAssign(NodeLiteral(TypeInt, 0), sum_NodeCallFct(NodeList(NodeLiteral(TypeInt, 3), NodeLiteral(TypeInt, 5)))), println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral(TypeInt, 3), NodeLiteral(TypeInt, 5))))), println_NodeCallFct(NodeList(pgcd_NodeCallFct(NodeList(NodeLiteral(TypeInt, 78), NodeLiteral(TypeInt, 90))))))

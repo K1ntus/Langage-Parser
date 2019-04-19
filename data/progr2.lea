@@ -19,5 +19,5 @@ begin
    println y;
    println b;
    println c;
-   println d[2];
+   //println d[2];
 end

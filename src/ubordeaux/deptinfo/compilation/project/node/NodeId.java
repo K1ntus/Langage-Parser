@@ -35,6 +35,10 @@ public final class NodeId extends NodeExp {
 	public String getName() {
 		return name;
 	}
+	
+	public Type getType() {
+		return type;
+	}
 
 	@Override
 	public void generateIntermediateCode() {

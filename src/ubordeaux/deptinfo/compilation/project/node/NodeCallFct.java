@@ -46,6 +46,9 @@ public final class NodeCallFct extends NodeExp {
 		boolean result = true;
 		Iterator<Node> itArgs = this.getArgs().iterator();
 		Iterator<Type> itParams = ((TypeFunct) type).getParams().iterator();
+		
+		System.out.println("Number of args: " + this.getArgs().size());
+		System.out.println("Number of para: " + ((TypeFunct) type).getParams().size());
 		while (itArgs.hasNext() && itParams.hasNext()) {
 			NodeExp arg = (NodeExp) itArgs.next();
 			if (!arg.checksType()) {
@@ -54,8 +57,13 @@ public final class NodeCallFct extends NodeExp {
 			}
 			Type argType = arg.type;
 			Type paramType = ((TypeFeature) itParams.next()).getType();
+
+			System.out.println("Argum type: " + argType.toString());
+			System.out.println("Param type: " + paramType.toString());
+		
+			
 			if (!paramType.equals(argType)) {
-				System.err.println("*** Erreur de typage " + argType + " != " + paramType);
+				System.err.println("*** Erreur de typage :\n* Args Type: " + argType + "\n* Params Type: " + paramType);
 				result = false;
 				break;
 			}
@@ -63,6 +71,8 @@ public final class NodeCallFct extends NodeExp {
 		// Plus ou moins d'arguments que de paramètres
 		if (result && (itArgs.hasNext() || itParams.hasNext())) {
 			System.err.println("*** Erreur de typage: pas le même nombre de paramètres ");
+			System.err.println("*** nb_params got: " + this.getArgs().getList().size() + " - Expected: " + ((TypeFunct) type).getParams().size());
+			
 			return false;
 		}
 		return result;

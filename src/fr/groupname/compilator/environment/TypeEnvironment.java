@@ -3,6 +3,8 @@ package fr.groupname.compilator.environment;
 import java.util.HashMap;
 import java.util.Map;
 
+import fr.groupname.compilator.error.DuplicateTypeDeclaration;
+import fr.groupname.compilator.error.UnknownType;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 
 public class TypeEnvironment {
@@ -22,17 +24,19 @@ public class TypeEnvironment {
 		this.name = name;
 	}
 	
-	
-	
 
-	
-
-	public void putVariable(String t, Type n) {
+	public void putVariable(String t, Type n) throws DuplicateTypeDeclaration {
+		if(table.get(t) != null) {
+			throw new DuplicateTypeDeclaration(t);
+		}
 		table.put(t, n);
 		System.out.println("** Enregistre " + name + ": " + n.toString());
 	}
 
-	public Type getVariableValue(String t) {
+	public Type getVariableValue(String t) throws UnknownType {
+		if(table.get(t) == null) {
+			throw new UnknownType(t);
+		}
 		System.out.println("** Retrouve " + name + ": " + t + " " + table.get(t));
 		return table.get(t);
 	}

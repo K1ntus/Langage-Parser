@@ -204,10 +204,10 @@ class ScannerExpr extends Scanner {
     "\1\55\1\56\6\2\1\57\5\2\1\27\1\60\5\2"+
     "\1\61\5\2\1\62\4\0\1\63\1\64\1\65\2\2"+
     "\1\66\6\2\1\67\3\2\1\70\5\2\4\0\3\2"+
-    "\1\71\1\72\6\2\1\73\1\2\1\74\2\2\2\0"+
-    "\1\75\1\0\1\76\1\77\1\2\1\100\1\101\1\102"+
-    "\6\2\1\103\1\104\1\0\2\2\1\105\1\106\1\107"+
-    "\1\110\1\111\1\112\1\113\1\2\1\114";
+    "\1\71\1\72\4\2\1\73\1\2\1\74\1\2\1\75"+
+    "\2\2\2\0\1\76\1\0\1\77\1\100\1\2\1\101"+
+    "\1\102\1\103\6\2\1\104\1\105\1\0\2\2\1\73"+
+    "\1\106\1\107\1\110\1\111\1\112\1\113\1\2\1\114";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[205];
@@ -1247,57 +1247,57 @@ private String annotation_type = "";
             // fall through
           case 134: break;
           case 59: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_BEGIN, yyline, yycolumn);
+            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_PRINTLN, yyline, yycolumn);
             } 
             // fall through
           case 135: break;
           case 60: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_WHILE, yyline, yycolumn);
+            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_BEGIN, yyline, yycolumn);
             } 
             // fall through
           case 136: break;
           case 61: 
-            { annotation_type = "param";
+            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_WHILE, yyline, yycolumn);
             } 
             // fall through
           case 137: break;
           case 62: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_RETURN, yyline, yycolumn);
+            { annotation_type = "param";
             } 
             // fall through
           case 138: break;
           case 63: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_READLN, yyline, yycolumn);
+            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_RETURN, yyline, yycolumn);
             } 
             // fall through
           case 139: break;
           case 64: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_STRUCT, yyline, yycolumn);
+            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_READLN, yyline, yycolumn);
             } 
             // fall through
           case 140: break;
           case 65: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_STRING, yyline, yycolumn);
+            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_STRUCT, yyline, yycolumn);
             } 
             // fall through
           case 141: break;
           case 66: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_SWITCH, yyline, yycolumn);
+            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_STRING, yyline, yycolumn);
             } 
             // fall through
           case 142: break;
           case 67: 
-            { annotation_type = "return";
+            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_SWITCH, yyline, yycolumn);
             } 
             // fall through
           case 143: break;
           case 68: 
-            { annotation_type = "author";
+            { annotation_type = "return";
             } 
             // fall through
           case 144: break;
           case 69: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_PRINTLN, yyline, yycolumn);
+            { annotation_type = "author";
             } 
             // fall through
           case 145: break;

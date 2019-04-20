@@ -76,6 +76,7 @@ HexaValue = 0x[a-fA-F0-9_]*
 	"while"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_WHILE, yyline, yycolumn); }
 	"return"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_RETURN, yyline, yycolumn); }
 	"readln"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_READLN, yyline, yycolumn); }
+	"print"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_PRINTLN, yyline, yycolumn); }
 	"println"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_PRINTLN, yyline, yycolumn); }
 	
 	

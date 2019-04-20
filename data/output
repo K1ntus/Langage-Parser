@@ -240,6 +240,324 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1234564789)), 
 
 
 *************************************************
+*** Fichier data/progr3.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+// gestion des variables statiques
+// gestion du tas et des pointeurs
+// 
+*** var
+*** x
+*** :
+*** integer
+*** ;
+*** y
+* Enregistre x
+*** :
+*** integer
+*** ;
+*** b
+* Enregistre y
+*** :
+*** boolean
+*** ;
+*** c
+* Enregistre b
+*** :
+*** string
+*** ;
+*** d
+* Enregistre c
+*** :
+*** array
+*** [
+*** 1
+*** ..
+*** 10
+*** ]
+TypeArrayRange[TypeInt..TypeInt]
+*** of
+*** string
+*** ;
+*** p
+* Enregistre d
+*** :
+*** ^
+*** integer
+*** ;
+*** q
+* Enregistre p
+*** :
+*** ^
+*** string
+*** ;
+*** r
+* Enregistre q
+*** :
+*** ^
+*** integer
+*** ;
+*** begin
+* Enregistre r
+*** x
+*** =
+[STACK] Variable: x found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** 1234564789
+*** ;
+// 0x4995F6B5
+*** y
+*** =
+[STACK] Variable: y found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** 0x7FFFFFFF
+*** ;
+*** b
+*** =
+[STACK] Variable: b found at Layer: 2
+[VARIABLE]NodeLiteral(TypeBoolean, 0) found.
+*** true
+*** ;
+*** c
+*** =
+[STACK] Variable: c found at Layer: 2
+[VARIABLE]NodeLiteral(TypeString, 0) found.
+*** ;
+*** d
+*** [
+[STACK] Variable: d found at Layer: 2
+[VARIABLE]NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0) found.
+*** 1
+*** ]
+*** =
+*** ;
+*** d
+*** [
+[STACK] Variable: d found at Layer: 2
+[VARIABLE]NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0) found.
+*** 2
+*** ]
+*** =
+*** ;
+*** d
+*** [
+[STACK] Variable: d found at Layer: 2
+[VARIABLE]NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0) found.
+*** 3
+*** ]
+*** =
+*** ;
+*** d
+*** [
+[STACK] Variable: d found at Layer: 2
+[VARIABLE]NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0) found.
+*** 10
+*** ]
+*** =
+*** ;
+*** println
+*** (
+*** x
+*** )
+[STACK] Variable: x found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** ;
+*** println
+*** (
+*** y
+*** )
+[STACK] Variable: y found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** ;
+*** println
+*** (
+*** b
+*** )
+[STACK] Variable: b found at Layer: 2
+[VARIABLE]NodeLiteral(TypeBoolean, 0) found.
+*** ;
+*** println
+*** (
+*** c
+*** )
+[STACK] Variable: c found at Layer: 2
+[VARIABLE]NodeLiteral(TypeString, 0) found.
+*** ;
+//println (d[2]);
+*** new
+*** q
+*** ;
+[STACK] Variable: q found at Layer: 2
+[VARIABLE]NodeLiteral(TypePointer(TypeString), 0) found.
+*** q
+*** ^
+[STACK] Variable: q found at Layer: 2
+[VARIABLE]NodeLiteral(TypePointer(TypeString), 0) found.
+*** =
+*** ;
+// 0x41
+*** println
+*** q
+*** ^
+[STACK] Variable: q found at Layer: 2
+[VARIABLE]NodeLiteral(TypePointer(TypeString), 0) found.
+*** ;
+*** println
+*** p
+*** ;
+[STACK] Variable: p found at Layer: 2
+[VARIABLE]NodeLiteral(TypePointer(TypeInt), 0) found.
+*** new
+*** p
+*** ;
+[STACK] Variable: p found at Layer: 2
+[VARIABLE]NodeLiteral(TypePointer(TypeInt), 0) found.
+*** println
+*** p
+*** ;
+[STACK] Variable: p found at Layer: 2
+[VARIABLE]NodeLiteral(TypePointer(TypeInt), 0) found.
+*** p
+*** ^
+[STACK] Variable: p found at Layer: 2
+[VARIABLE]NodeLiteral(TypePointer(TypeInt), 0) found.
+*** =
+*** x
+*** ;
+[STACK] Variable: x found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** println
+*** p
+*** ^
+[STACK] Variable: p found at Layer: 2
+[VARIABLE]NodeLiteral(TypePointer(TypeInt), 0) found.
+*** ;
+*** new
+*** r
+*** ;
+[STACK] Variable: r found at Layer: 2
+[VARIABLE]NodeLiteral(TypePointer(TypeInt), 0) found.
+// resize the heap
+*** r
+*** ^
+[STACK] Variable: r found at Layer: 2
+[VARIABLE]NodeLiteral(TypePointer(TypeInt), 0) found.
+*** =
+*** 65536
+*** ;
+*** println
+*** (
+*** r
+*** ^
+[STACK] Variable: r found at Layer: 2
+[VARIABLE]NodeLiteral(TypePointer(TypeInt), 0) found.
+*** )
+*** ;
+*** dispose
+*** p
+*** ;
+[STACK] Variable: p found at Layer: 2
+[VARIABLE]NodeLiteral(TypePointer(TypeInt), 0) found.
+*** println
+*** (
+*** p
+*** )
+[STACK] Variable: p found at Layer: 2
+[VARIABLE]NodeLiteral(TypePointer(TypeInt), 0) found.
+*** ;
+*** println
+*** (
+*** p
+*** ^
+[STACK] Variable: p found at Layer: 2
+[VARIABLE]NodeLiteral(TypePointer(TypeInt), 0) found.
+*** )
+*** ;
+// heap memory error
+*** end
+
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeAssign
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeAssign
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeAssign
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+--- CheckType NodeLiteral
+- Checktype invalid: 
+- elem:NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 1)), NodeLiteral(TypeString, A))
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+--- CheckType NodeLiteral
+- Checktype invalid: 
+- elem:NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 2)), NodeLiteral(TypeString, B))
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+--- CheckType NodeLiteral
+- Checktype invalid: 
+- elem:NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 3)), NodeLiteral(TypeString, C))
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+--- CheckType NodeLiteral
+- Checktype invalid: 
+- elem:NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 10)), NodeLiteral(TypeString, Z))
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeNew
+--- CheckType NodeAssign
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- Checktype invalid: 
+- elem:NodeAssign(NodeLiteral(TypeInt, 5), NodeLiteral(TypeString, A))
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeNew
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeAssign
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeNew
+--- CheckType NodeAssign
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeDispose
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+*** Erreur de typage
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1234564789)), NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 2147483647)), NodeAssign(NodeLiteral(TypeBoolean, 0), NodeLiteral(TypeBoolean, true)), NodeAssign(NodeLiteral(TypeString, 0), NodeLiteral(TypeString, a)), NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 1)), NodeLiteral(TypeString, A)), NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 2)), NodeLiteral(TypeString, B)), NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 3)), NodeLiteral(TypeString, C)), NodeAssign(NodeArrayAccess(NodeLiteral(TypeArray(TypeArrayRange[TypeInt..TypeInt], TypeString), 0), NodeLiteral(TypeInt, 10)), NodeLiteral(TypeString, Z)), println_NodeCallFct(NodeList(NodeLiteral(TypeInt, 0))), println_NodeCallFct(NodeList(NodeLiteral(TypeInt, 0))), println_NodeCallFct(NodeList(NodeLiteral(TypeBoolean, 0))), println_NodeCallFct(NodeList(NodeLiteral(TypeString, 0))), NodeNew(NodeLiteral(TypePointer(TypeString), 0)), NodeAssign(NodeLiteral(TypeInt, 5), NodeLiteral(TypeString, A)), println_NodeCallFct(NodeList(NodeLiteral(TypeInt, 5))), println_NodeCallFct(NodeList(NodeLiteral(TypePointer(TypeInt), 0))), NodeNew(NodeLiteral(TypePointer(TypeInt), 0)), println_NodeCallFct(NodeList(NodeLiteral(TypePointer(TypeInt), 0))), NodeAssign(NodeLiteral(TypeInt, 5), NodeLiteral(TypeInt, 0)), println_NodeCallFct(NodeList(NodeLiteral(TypeInt, 5))), NodeNew(NodeLiteral(TypePointer(TypeInt), 0)), NodeAssign(NodeLiteral(TypeInt, 5), NodeLiteral(TypeInt, 65536)), println_NodeCallFct(NodeList(NodeLiteral(TypeInt, 5))), NodeDispose(NodeLiteral(TypePointer(TypeInt), 0)), println_NodeCallFct(NodeList(NodeLiteral(TypePointer(TypeInt), 0))), println_NodeCallFct(NodeList(NodeLiteral(TypeInt, 5))))
+
+
+
+*************************************************
 *** Fichier data/progr4.lea
 [INFO] $$  : multiple line comment.
 [INFO] $$$ : documentation comment.
@@ -390,6 +708,8 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)), NodeWhile
 *** :
 *** integer
 *** var
+* Enregistre i
+* Enregistre j
 *** k
 *** :
 *** integer
@@ -400,14 +720,16 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)), NodeWhile
 *** (
 *** i
 *** +
-Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+[STACK] Variable: i found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** j
 *** )
-Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+[STACK] Variable: j found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** ;
 *** end
 *** function
-** Enregistre fct:sum_NodeCallFct(NodeList)
+** Enregistre fct:([i:TypeInt], [j:TypeInt]) -> TypeInt Defined: true Name: sum
 *** pgcd
 *** (
 *** i
@@ -421,52 +743,65 @@ Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee 
 *** :
 *** integer
 *** begin
+* Enregistre i
+* Enregistre j
 *** while
 *** (
 *** i
 *** !=
-Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+[STACK] Variable: i found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** j
 *** )
-Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+[STACK] Variable: j found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** do
 *** if
 *** (
 *** i
 *** >
-Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+[STACK] Variable: i found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** j
 *** )
-Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+[STACK] Variable: j found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** then
 *** i
 *** =
-Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+[STACK] Variable: i found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** i
 *** -
-Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+[STACK] Variable: i found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** j
 *** ;
-Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+[STACK] Variable: j found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** else
 *** j
 *** =
-Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+[STACK] Variable: j found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** j
 *** -
-Variable [j]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+[STACK] Variable: j found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** i
 *** ;
-Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+[STACK] Variable: i found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** return
 *** (
 *** i
 *** )
-Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee trouvee
+[STACK] Variable: i found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
 *** ;
 *** end
 *** begin
-** Enregistre fct:pgcd_NodeCallFct(NodeList)
+** Enregistre fct:([i:TypeInt], [j:TypeInt]) -> TypeInt Defined: true Name: pgcd
 *** x
 *** =
 [STACK] Variable: x found at Layer: 2
@@ -484,8 +819,8 @@ Variable [i]: java.lang.NoSuchFieldException: Aucune variable similaire stackee 
 *** 5
 *** )
 *** ;
-Register function variable:i | NodeLiteral(TypeInt, 3)
-Register function variable:j | NodeLiteral(TypeInt, 5)
+Register function NodeLiteral:i | NodeLiteral(TypeInt, 3)
+Register function NodeLiteral:j | NodeLiteral(TypeInt, 5)
 *** println
 *** sum
 *** (
@@ -494,8 +829,8 @@ Register function variable:j | NodeLiteral(TypeInt, 5)
 *** 5
 *** )
 *** ;
-Register function variable:i | NodeLiteral(TypeInt, 3)
-Register function variable:j | NodeLiteral(TypeInt, 5)
+Register function NodeLiteral:i | NodeLiteral(TypeInt, 3)
+Register function NodeLiteral:j | NodeLiteral(TypeInt, 5)
 *** println
 *** (
 *** pgcd
@@ -505,8 +840,8 @@ Register function variable:j | NodeLiteral(TypeInt, 5)
 *** 90
 *** )
 *** )
-Register function variable:i | NodeLiteral(TypeInt, 78)
-Register function variable:j | NodeLiteral(TypeInt, 90)
+Register function NodeLiteral:i | NodeLiteral(TypeInt, 78)
+Register function NodeLiteral:j | NodeLiteral(TypeInt, 90)
 *** ;
 *** end
 
@@ -533,3 +868,432 @@ Register function variable:j | NodeLiteral(TypeInt, 90)
 
 Arbre Principal: 
 NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 5)), NodeAssign(NodeLiteral(TypeInt, 0), sum_NodeCallFct(NodeList(NodeLiteral(TypeInt, 3), NodeLiteral(TypeInt, 5)))), println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral(TypeInt, 3), NodeLiteral(TypeInt, 5))))), println_NodeCallFct(NodeList(pgcd_NodeCallFct(NodeList(NodeLiteral(TypeInt, 78), NodeLiteral(TypeInt, 90))))))
+
+
+
+*************************************************
+*** Fichier data/progr6.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// gestion complexe de la pile
+// 
+*** var
+*** x
+*** :
+*** integer
+*** ;
+*** function
+* Enregistre x
+*** fact1
+*** (
+*** k
+*** :
+*** integer
+*** )
+*** :
+*** integer
+*** begin
+* Enregistre k
+*** if
+*** (
+*** k
+*** ==
+[STACK] Variable: k found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** 1
+*** )
+*** then
+*** return
+*** (
+*** 1
+*** )
+*** ;
+*** else
+*** return
+*** (
+*** k
+*** *
+[STACK] Variable: k found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** fact1
+*** (
+*** k
+*** -
+[STACK] Variable: k found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** 1
+*** )
+*** )
+Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: fact1 trouvee.
+*** ;
+*** end
+*** function
+** Enregistre fct:([k:TypeInt]) -> TypeInt Defined: true Name: fact1
+*** fact2
+*** (
+*** k
+*** :
+*** integer
+*** )
+*** :
+*** integer
+*** begin
+* Enregistre k
+*** if
+*** (
+*** k
+*** ==
+[STACK] Variable: k found at Layer: 3
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** 1
+*** )
+*** then
+*** return
+*** (
+*** 1
+*** )
+*** ;
+*** else
+*** return
+*** (
+*** fact2
+*** (
+*** k
+*** -
+[STACK] Variable: k found at Layer: 3
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** 1
+*** )
+*** *
+Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: fact2 trouvee.
+*** k
+*** )
+[STACK] Variable: k found at Layer: 4
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** ;
+*** end
+*** procedure
+** Enregistre fct:([k:TypeInt]) -> TypeInt Defined: true Name: fact2
+*** hanoi
+*** (
+*** a
+*** :
+*** string
+*** ,
+*** b
+*** :
+*** string
+*** ,
+*** c
+*** :
+*** string
+*** ,
+*** k
+*** :
+*** integer
+*** )
+*** begin
+* Enregistre a
+* Enregistre b
+* Enregistre c
+* Enregistre k
+*** if
+*** (
+*** k
+*** >
+[STACK] Variable: k found at Layer: 4
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** 1
+*** )
+*** then
+*** hanoi
+*** (
+*** a
+*** ,
+[STACK] Variable: a found at Layer: 2
+[VARIABLE]NodeLiteral(TypeString, 0) found.
+*** c
+*** ,
+[STACK] Variable: c found at Layer: 2
+[VARIABLE]NodeLiteral(TypeString, 0) found.
+*** b
+*** ,
+[STACK] Variable: b found at Layer: 2
+[VARIABLE]NodeLiteral(TypeString, 0) found.
+*** k
+*** -
+[STACK] Variable: k found at Layer: 4
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** 1
+*** )
+*** ;
+Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: hanoi trouvee.
+*** print
+*** (
+*** a
+*** )
+[STACK] Variable: a found at Layer: 3
+[VARIABLE]NodeLiteral(TypeString, 0) found.
+*** ;
+*** print
+*** (
+*** )
+*** ;
+*** println
+*** (
+*** c
+*** )
+[STACK] Variable: c found at Layer: 3
+[VARIABLE]NodeLiteral(TypeString, 0) found.
+*** ;
+*** if
+*** (
+*** k
+*** >
+[STACK] Variable: k found at Layer: 5
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** 1
+*** )
+*** then
+*** hanoi
+*** (
+*** b
+*** ,
+[STACK] Variable: b found at Layer: 3
+[VARIABLE]NodeLiteral(TypeString, 0) found.
+*** a
+*** ,
+[STACK] Variable: a found at Layer: 3
+[VARIABLE]NodeLiteral(TypeString, 0) found.
+*** c
+*** ,
+[STACK] Variable: c found at Layer: 3
+[VARIABLE]NodeLiteral(TypeString, 0) found.
+*** k
+*** -
+[STACK] Variable: k found at Layer: 5
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** 1
+*** )
+*** ;
+Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: hanoi trouvee.
+*** end
+*** function
+** Enregistre fct:([a:TypeString], [b:TypeString], [c:TypeString], [k:TypeInt]) -> TypeVoid Defined: true Name: hanoi
+*** impair
+*** (
+*** i
+*** :
+*** integer
+*** )
+*** :
+*** boolean
+*** ;
+* Enregistre i
+*** function
+** Enregistre fct:([i:TypeInt]) -> TypeBoolean Defined: false Name: impair
+*** pair
+*** (
+*** i
+*** :
+*** integer
+*** )
+*** :
+*** boolean
+*** var
+* Enregistre i
+*** b
+*** :
+*** boolean
+*** ;
+*** begin
+* Enregistre b
+*** if
+*** (
+*** i
+*** ==
+[STACK] Variable: i found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** 1
+*** )
+*** then
+*** b
+*** =
+[STACK] Variable: b found at Layer: 4
+[VARIABLE]NodeLiteral(TypeBoolean, 0) found.
+*** false
+*** ;
+*** else
+*** if
+*** (
+*** i
+*** ==
+[STACK] Variable: i found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** 0
+*** )
+*** then
+*** b
+*** =
+[STACK] Variable: b found at Layer: 4
+[VARIABLE]NodeLiteral(TypeBoolean, 0) found.
+*** true
+*** ;
+*** else
+*** b
+*** =
+[STACK] Variable: b found at Layer: 4
+[VARIABLE]NodeLiteral(TypeBoolean, 0) found.
+*** impair
+*** (
+*** i
+*** -
+[STACK] Variable: i found at Layer: 2
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** 1
+*** )
+*** ;
+Register function NodOp:i | NodeLiteral(TypeInt, NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)))
+*** return
+*** (
+*** b
+*** )
+[STACK] Variable: b found at Layer: 5
+[VARIABLE]NodeLiteral(TypeBoolean, 0) found.
+*** ;
+*** end
+*** function
+** Enregistre fct:([i:TypeInt]) -> TypeBoolean Defined: true Name: pair
+*** impair
+*** (
+*** i
+*** :
+*** integer
+*** )
+*** :
+*** boolean
+*** begin
+* Enregistre i
+*** if
+*** (
+*** i
+*** ==
+[STACK] Variable: i found at Layer: 3
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** 1
+*** )
+*** then
+*** return
+*** (
+*** true
+*** )
+*** ;
+*** else
+*** if
+*** (
+*** i
+*** ==
+[STACK] Variable: i found at Layer: 3
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** 0
+*** )
+*** then
+*** return
+*** (
+*** false
+*** )
+*** ;
+*** else
+*** return
+*** (
+*** pair
+*** (
+*** i
+*** -
+[STACK] Variable: i found at Layer: 3
+[VARIABLE]NodeLiteral(TypeInt, 0) found.
+*** 1
+*** )
+*** )
+Register function NodOp:i | NodeLiteral(TypeInt, NodeOp(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1)))
+*** ;
+*** end
+*** begin
+** Enregistre fct:([i:TypeInt]) -> TypeBoolean Defined: true Name: impair
+*** println
+*** (
+*** fact1
+*** (
+*** 6
+*** )
+*** )
+Register function NodeLiteral:k | NodeLiteral(TypeInt, 6)
+*** ;
+*** println
+*** (
+*** fact2
+*** (
+*** 6
+*** )
+*** )
+Register function NodeLiteral:k | NodeLiteral(TypeInt, 6)
+*** ;
+*** hanoi
+*** (
+*** ,
+*** ,
+*** ,
+*** 4
+*** )
+*** ;
+Register function NodeLiteral:a | NodeLiteral(TypeString, A)
+Register function NodeLiteral:b | NodeLiteral(TypeString, B)
+Register function NodeLiteral:c | NodeLiteral(TypeString, C)
+Register function NodeLiteral:k | NodeLiteral(TypeInt, 4)
+*** println
+*** (
+*** pair
+*** (
+*** 1001
+*** )
+*** )
+Register function NodeLiteral:i | NodeLiteral(TypeInt, 1001)
+*** ;
+*** println
+*** (
+*** pair
+*** (
+*** 1000
+*** )
+*** )
+Register function NodeLiteral:i | NodeLiteral(TypeInt, 1000)
+*** ;
+*** end
+
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(println_NodeCallFct(NodeList(fact1_NodeCallFct(NodeList(NodeLiteral(TypeInt, 6))))), println_NodeCallFct(NodeList(fact2_NodeCallFct(NodeList(NodeLiteral(TypeInt, 6))))), hanoi_NodeCallFct(NodeList(NodeLiteral(TypeString, A), NodeLiteral(TypeString, B), NodeLiteral(TypeString, C), NodeLiteral(TypeInt, 4))), println_NodeCallFct(NodeList(pair_NodeCallFct(NodeList(NodeLiteral(TypeInt, 1001))))), println_NodeCallFct(NodeList(pair_NodeCallFct(NodeList(NodeLiteral(TypeInt, 1000))))))

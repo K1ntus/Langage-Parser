@@ -6,6 +6,8 @@ import java.util.Map;
 import fr.groupname.compilator.error.DuplicateTypeDeclaration;
 import fr.groupname.compilator.error.UnknownType;
 import ubordeaux.deptinfo.compilation.project.type.Type;
+import ubordeaux.deptinfo.compilation.project.type.TypeItemEnum;
+import ubordeaux.deptinfo.compilation.project.type.TypeTuple;
 
 public class TypeEnvironment {
 	private String name;
@@ -41,7 +43,26 @@ public class TypeEnvironment {
 		return table.get(t);
 	}
 	
-	
+	public TypeItemEnum getEnumType(String id) throws NoSuchFieldException {
+		for(Type t : table.values()) {
+			if(t instanceof TypeTuple) {
+				TypeTuple t_tuple = (TypeTuple) t;
+				for(int i = 0; i < t_tuple.size(); i++) {
+					if(t_tuple.get(i) instanceof TypeItemEnum) {
+						TypeItemEnum t_enum = (TypeItemEnum) t_tuple.get(i);
+						
+						if(t_enum.getRefEnumRange().equals(id)){
+							return t_enum;
+						}
+					} else {
+						break;
+					}
+				}
+			}
+		}
+		
+		throw new NoSuchFieldException("No Enum type containing this value has been spotted");
+	}
 	
 	
 	

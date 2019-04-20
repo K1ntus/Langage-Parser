@@ -352,11 +352,6 @@ procedure_declaration_head=
 	
 //Definition
 procedure_head=
-<<<<<<< HEAD
-	TOKEN_PROCEDURE.p TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR 	{:	return new EmptySymbol(); :}
-	| TOKEN_FUNCTION TOKEN_IDENTIFIER.id TOKEN_LPAR argt_part.args TOKEN_RPAR TOKEN_COLON type.t {:	return new EmptySymbol(); :}
-																									
-=======
 	TOKEN_PROCEDURE TOKEN_IDENTIFIER.funct_name TOKEN_LPAR argt_part.args TOKEN_RPAR 	
 			{:				
 				TypeTuple params_tuple = new TypeTuple();
@@ -388,7 +383,6 @@ procedure_head=
 				return type_function;
 				//return new NodeCallFct(funct_name, type_function, new NodeList());
 			:}
->>>>>>> prod
 	;
 	
 	

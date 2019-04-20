@@ -62,10 +62,33 @@ public class StackEnvironment {
 	}
 
 	
-	
+
 	public void add_node_to_latest_portability(String id, NodeLiteral n) {
 		System.out.println("* Enregistre " + id.toString());
 		this.get_last_portability().put(id, n);
+	}
+
+	public void add_node_to_every_layer(String id, NodeLiteral n) {
+		Iterator<Map<String, NodeLiteral>> it = environment.iterator();
+		
+		int i = 0;
+		while(it.hasNext()) {
+			Map<String, NodeLiteral> map = it.next();
+			System.out.println("* Enregistre " + id.toString() + "at layer: " + i);
+			map.put(id, n);
+			i +=1;
+		}
+	}
+	public void remove_node_to_every_layer(String id) {
+		Iterator<Map<String, NodeLiteral>> it = environment.iterator();
+		
+		int i = 0;
+		while(it.hasNext()) {
+			Map<String, NodeLiteral> map = it.next();
+			System.out.println("* Removed " + id.toString() + "at layer: " + i);
+			map.remove(id);
+			i +=1;
+		}
 	}
 
 

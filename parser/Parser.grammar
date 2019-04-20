@@ -124,6 +124,7 @@
 %typeof statement_list, expression_list, argt_list, block = "NodeList";
 %typeof case_statement_list = "NodeCaseList";
 %typeof identifier_list = "IdentifierList";
+//%typeof case_identifier_list = "IdentifierList";
 
 %typeof readln_statement, println_statement, procedure_expression = "NodeCallFct";
 %typeof procedure_head, procedure_declaration_head, procedure_definition_head = "TypeFunct";
@@ -376,16 +377,6 @@ procedure_head=
 	;
 	
 	
-/*
-
-* c) pour implementer une liste, faites comme ceci:
-* xxx_list=
-*	xxx_list.list xxx.elt {: list.add(elt); return list; :}
-*	| xxx.elt {: MyList list = new MyList(); list.add(elt); return list; :}
-*	;
-*	
-
-*/
 argt_part=
 	/* empty */
 	| argt_list
@@ -529,14 +520,19 @@ expression_list=
 	| expression.expr									{: return new NodeList(expr); :}
 	;
 
-//OK	
+//PAS OK
 new_statement=
 	TOKEN_NEW variable_access.node TOKEN_SEMIC			{: return new NodeNew(node); :}
 	;
 	
-//OK
+//PAS OK
+//Supprimer pointeur de q dans toutes les piles d'environments
 dispose_statement=
-	TOKEN_DISPOSE variable_access.node TOKEN_SEMIC		{: return new NodeDispose(node); :}
+	TOKEN_DISPOSE variable_access.node TOKEN_SEMIC		
+							{: 
+								//stackEnvironment.remove_node_to_every_layer(node); 
+								return new NodeDispose(node); 
+							:}
 	;
 	
 //OK
@@ -610,15 +606,22 @@ case_statement_list=
 
 //OK	
 case_statement=
-	TOKEN_CASE TOKEN_IDENTIFIER.name TOKEN_COLON statement.state	{: return new NodeCase(name, state); :}
-	| TOKEN_DEFAULT TOKEN_COLON statement.state						{: return new NodeCase("default", state); :}
+	//TOKEN_CASE case_identifier_statement TOKEN_COLON statement.state	{: return new NodeCase(name, state); :}
+	TOKEN_CASE TOKEN_IDENTIFIER.name TOKEN_COLON statement.state		{: return new NodeCase(name, state); :}
+	| TOKEN_DEFAULT TOKEN_COLON statement.state							{: return new NodeCase("default", state); :}
 	;
-	
+
+/*
+case_identifier_list=
+	case_identifier_list.list TOKEN_IDENTIFIER.str	{: list.add(str); return list; :}
+	| TOKEN_IDENTIFIER.str	{: IdentifierList l = new IdentifierList(str); return l; :}
+	;
+*/
 	
 /*
 Expressions
 
-normalement OK
+normalement TODO
 */
 //Recup les valeurs stockees dans les environnements (ou pas, a check)
 variable_access=
@@ -634,8 +637,8 @@ variable_access=
 								:}
 	| variable_access.var TOKEN_LBRACKET expression.e TOKEN_RBRACKET		{: return new NodeArrayAccess(var, e); :}//Tableau
 	| expression.e TOKEN_CIRC	//Pointeur
-		{: return new NodeLiteral(new TypeInt(), 5); :}		
-		//{: return new NodePtrAccess(e);	:}			
+		//{: return new NodeLiteral(new TypeInt(), 5); :}		
+		{: return new NodePtrAccess(e);	:}			
 	;
 	
 expression=

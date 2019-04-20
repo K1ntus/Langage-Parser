@@ -568,7 +568,9 @@ public class Parser extends beaver.Parser {
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_node = _symbols[offset + 2];
 					final NodeExp node = (NodeExp) _symbol_node.value;
-					 return new NodeDispose(node);
+					 
+								//stackEnvironment.remove_node_to_every_layer(node); 
+								return new NodeDispose(node);
 				}
 			},
 			new Action() {	// [76] println_statement = TOKEN_PRINTLN expression.args TOKEN_SEMIC
@@ -714,7 +716,7 @@ public class Parser extends beaver.Parser {
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_e = _symbols[offset + 1];
 					final NodeExp e = (NodeExp) _symbol_e.value;
-					 return new NodeLiteral(new TypeInt(), 5);
+					 return new NodePtrAccess(e);
 				}
 			},
 			new Action() {	// [94] expression = expression.e1 TOKEN_PLUS expression.e2

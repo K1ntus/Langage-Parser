@@ -1,9 +1,7 @@
 package fr.groupname.compilator.environment;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
@@ -48,39 +46,52 @@ public class StackEnvironment {
 			
 		}
 		if(res != null) {
-			System.out.println("[STACK] Stack Layer: " +layer);
+			System.out.println("[STACK] Variable: "+ id +" found at Layer: " +layer);
 			return res;
 		}
 		throw new NoSuchFieldException("Aucune variable similaire stackee trouvee");
 			
 	}
 	
+
+	public NodeLiteral getLiteralFromId(String id, Map<String, NodeLiteral> map) throws NoSuchFieldException {
+		NodeLiteral res = map.get(id);
+		if(res == null)
+			throw new NoSuchFieldException("[ERROR]Aucune variable similaire stackee trouvee"+"\n[ERROR]Stack Size:"+environment.size());
+		return res;
+	}
+
 	
-	
+
 	public void add_node_to_latest_portability(String id, NodeLiteral n) {
 		System.out.println("* Enregistre " + id.toString());
 		this.get_last_portability().put(id, n);
 	}
 
-
-	public NodeLiteral getLiteralFromId(String id, Map<String, NodeLiteral> map) throws NoSuchFieldException {
-		NodeLiteral res = map.get(id);
-		if(res == null)
-			throw new NoSuchFieldException("[ERROR]Aucune variable similaire stackee trouvee"+"\n[ERROR]Stack Layer:"+environment.size());
-		return res;
-	}
-	
-	/*
-	public Type getTypeFromId(String id) throws NoSuchFieldException {
-		for(Entry<NodeId, NodeLiteral> entry : environment.peek().entrySet()) {
-			System.out.println("Key: " + entry.getKey().getName());
-			if(entry.getKey().getName() == id)
-				return entry.getValue().getType();
+	public void add_node_to_every_layer(String id, NodeLiteral n) {
+		Iterator<Map<String, NodeLiteral>> it = environment.iterator();
+		
+		int i = 0;
+		while(it.hasNext()) {
+			Map<String, NodeLiteral> map = it.next();
+			System.out.println("* Enregistre " + id.toString() + "at layer: " + i);
+			map.put(id, n);
+			i +=1;
 		}
-
-		throw new NoSuchFieldException("Count:"+environment.size()+ "[ERROR]Aucune variable similaire stackee trouvee");
 	}
-*/
+	public void remove_node_to_every_layer(String id) {
+		Iterator<Map<String, NodeLiteral>> it = environment.iterator();
+		
+		int i = 0;
+		while(it.hasNext()) {
+			Map<String, NodeLiteral> map = it.next();
+			System.out.println("* Removed " + id.toString() + "at layer: " + i);
+			map.remove(id);
+			i +=1;
+		}
+	}
+
+
 	
 	/**
 	 * @return the environment

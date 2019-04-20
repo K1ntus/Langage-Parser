@@ -10,6 +10,10 @@ public class TypeFeature extends TypeComplex {
 		super(t);
 		this.name = name;
 	}
+	public TypeFeature(String name) {
+		super();
+		this.name = name;
+	}
 
 	@Override
 	public boolean attestWellFormed() {

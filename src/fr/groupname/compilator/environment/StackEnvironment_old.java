@@ -12,6 +12,7 @@ import ubordeaux.deptinfo.compilation.project.type.Type;
 
 
 //Local variable stack
+@Deprecated
 public class StackEnvironment_old {
 	private Stack<Map<NodeId, NodeLiteral>> environment;
 

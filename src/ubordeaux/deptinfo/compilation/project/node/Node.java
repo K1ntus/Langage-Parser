@@ -29,6 +29,10 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 			elts.add(elt);
 		}
 	}
+	
+	public List<Node> getList(){
+		return elts;
+	}
 
 	public String toString() {
 		String ret = this.getClass().getSimpleName();

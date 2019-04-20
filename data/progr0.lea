@@ -1,6 +1,46 @@
+//Custom j'ai pas verif apres le merge
 var
 a: integer;
 
 begin
 a = 100;
+
+type
+
+chaine = string;
+entier = integer;
+booleen = boolean;
+
+named1 = chaine;
+//named2 = unknown; // error
+
+Months = (January, February, March, April, May, June, July, August, September, October, November, December);
+
+
+var
+
+
+m : Months;
+month : Months;
+
+
+
+begin
+	switch (month) 
+		begin
+		case March://, April, May:
+			println ("spring");
+		
+		case June://, July, August:
+			println("summer");
+		
+		case September://, October, November:
+			println("autumn");
+		
+		case February://, December, January:
+			println("winter");
+			
+		default:
+			println("none");
+		end
 end

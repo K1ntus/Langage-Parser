@@ -15,7 +15,7 @@ begin
    d[2] = "B";
    d[3] = "C";
    d[10] = "Z";
-   println x;
+   println (x + 5);
    println y;
    println b;
    println c;

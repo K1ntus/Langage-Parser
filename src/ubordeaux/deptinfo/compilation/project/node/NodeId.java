@@ -43,4 +43,10 @@ public final class NodeId extends NodeExp {
 		//System.err.println("Label: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
 		return new Mem((Exp)this.generateIntermediateCode());
 	}
+	
+	public Type getType() {
+		return type;
+	}
+
+
 }

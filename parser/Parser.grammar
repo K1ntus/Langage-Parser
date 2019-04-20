@@ -1,3 +1,4 @@
+
 //////////////////////////////////////////////////
 // version 20190401
 //////////////////////////////////////////////////
@@ -18,6 +19,7 @@
 
 %import "fr.groupname.compilator.environment.*";
 %import "fr.groupname.compilator.special.*";
+%import "fr.groupname.compilator.error.*";
 
 
 
@@ -41,8 +43,8 @@
 				Symbol.getColumn(token.getStart()));
 		}
 		
-	private Environment typeEnvironment = new Environment("types");
-	private Environment procedureEnvironment = new Environment("procedures");	//String et Type ?
+	private TypeEnvironment typeEnvironment = new TypeEnvironment("types");
+	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment("procedures");
 	private StackEnvironment stackEnvironment = new StackEnvironment("local variables stack");
 	private String type_declaration_name;
 	
@@ -74,12 +76,13 @@
 
 
 //PRIOTITIES
-%right TOKEN_CIRC, TOKEN_NOT, TOKEN_ELSE;
+%right TOKEN_CIRC, TOKEN_NOT;
+%right TOKEN_ELSE, TOKEN_IF, TOKEN_THEN;
 %left TOKEN_AND, TOKEN_AFF, TOKEN_OR;
 %left TOKEN_PLUS, TOKEN_MINUS, TOKEN_TIMES, TOKEN_DIV;
 %left TOKEN_LT, TOKEN_LE, TOKEN_GT, TOKEN_GE, TOKEN_EQ, TOKEN_NE;
 
-%left TOKEN_IF;
+%right TOKEN_IF;
 
 /***
 * A completer
@@ -123,11 +126,13 @@
 %typeof case_statement = "NodeCase";
 %typeof argt = "NodeId";
 
-%typeof statement_list, expression_list, argt_list = "NodeList";
+%typeof statement_list, expression_list, argt_list, block = "NodeList";
 %typeof case_statement_list = "NodeCaseList";
 %typeof identifier_list = "IdentifierList";
+//%typeof case_identifier_list = "IdentifierList";
 
-%typeof readln_statement, println_statement, procedure_expression, procedure_definition_part = "NodeCallFct";
+%typeof readln_statement, println_statement, procedure_expression = "NodeCallFct";
+%typeof procedure_head, procedure_declaration_head, procedure_definition_head = "TypeFunct";
 
 //%typeof pop_stackenv, push_stackenv = "Void";
 
@@ -167,8 +172,13 @@ type_declaration_list=
 
 type_declaration=
 	TOKEN_IDENTIFIER.name TOKEN_AFF type.t TOKEN_SEMIC 		{:
-																typeEnvironment.putVariable(name, t);
-																return new EmptySymbol();
+																try{
+																	typeEnvironment.putVariable(name, t);
+																} catch (DuplicateTypeDeclaration e) {
+																	System.err.println(e);
+																} finally {
+																	return new EmptySymbol();
+																}
 															:}
 	;
 	
@@ -201,15 +211,16 @@ index_type=
 	;
 
 enumerated_type=//{: return new TypeEnumRange(new TypeItemEnum(0, list.first()), new TypeItemEnum(0, list.last())); :} //OLD
-	init_enumerated_type TOKEN_LPAR identifier_list.id_l TOKEN_RPAR	{: 
-																			Vector<Type> array_tmp = new Vector<>();
-																			int const_id = 0;
-																			for(String identifier : id_l) {
-																				array_tmp.add(new TypeItemEnum(const_id, identifier));
-																				const_id +=1;
-																			}
-																			return new TypeTuple(array_tmp);
-																		:}
+	init_enumerated_type TOKEN_LPAR identifier_list.id_l TOKEN_RPAR	
+																	{: 
+																		Vector<Type> array_tmp = new Vector<>();
+																		int const_id = 0;
+																		for(String identifier : id_l) {
+																			array_tmp.add(new TypeItemEnum(const_id, identifier));
+																			const_id +=1;
+																		}
+																		return new TypeTuple(array_tmp);
+																	:}
 	;
 	
 init_enumerated_type= 
@@ -217,14 +228,18 @@ init_enumerated_type=
 
 subrange_type= 
 	TOKEN_LIT_INTEGER.min TOKEN_DOTDOT TOKEN_LIT_INTEGER.max		{: return new TypeArrayRange(new TypeInt(min), new TypeInt(max)); :}
-	| TOKEN_IDENTIFIER.id_min TOKEN_DOTDOT TOKEN_IDENTIFIER.id_max	/*{:	
-																		try { 
-																			return new TypeArrayRange(stackEnvironment.get_node_reachable(id_min), stackEnvironment.getTypeFromId(id_max));
+	| TOKEN_IDENTIFIER.id_min TOKEN_DOTDOT TOKEN_IDENTIFIER.id_max	{:	
+																		try {
+																			int val_min = typeEnvironment.getEnumType(id_min).getValue();
+																			int val_max = typeEnvironment.getEnumType(id_max).getValue();
+																			
+																			return new TypeArrayRange(new TypeInt(val_min), new TypeInt(val_max));
+																			
 																		} catch (NoSuchFieldException e) {
-																			return new TypeArrayRange(null, null);
-																		}
-																		
-																	:}*/
+																			System.err.println("subrange_type: " + e);
+																			return new TypeArrayRange(new TypeInt(0), new TypeInt(0));
+																		}														
+																	:}
 	;
 	
 array_type=
@@ -233,7 +248,7 @@ array_type=
 	
 range_type=
 	enumerated_type	//OK
-	| subrange_type	//OK
+	| subrange_type.t	{: System.out.println(t.toString()); return t; :}	//OK
 	| named_type	//OK
 	;
 	
@@ -252,7 +267,7 @@ feature_list_type=
 	;
 	
 feature_type=
-	TOKEN_IDENTIFIER.id TOKEN_COLON type.t TOKEN_SEMIC	{: return new TypeFeature(id, t); :}
+	TOKEN_IDENTIFIER.id TOKEN_COLON type.t TOKEN_SEMIC	{: System.out.println("FEATURES"); return new TypeFeature(id, t); :}
 	;
 	
 	
@@ -286,7 +301,8 @@ variable_declaration=
 	
 identifier_list=
 	identifier_list.list TOKEN_COMMA TOKEN_IDENTIFIER.id		{: 
-																	list.add(id); return list; :}
+																	list.add(id); return list; 
+																:}
 	| TOKEN_IDENTIFIER.name										{: 
 																	return new IdentifierList(name); 
 																:}
@@ -306,24 +322,75 @@ procedure_definition_list=
 	;
 	
 procedure_definition=
-	procedure_definition_head block
-	| procedure_declaration_head TOKEN_SEMIC
+	procedure_definition_head.type_fct block.fct_content	
+		{: 
+			procedureEnvironment.putVariable(type_fct, fct_content); 
+			return type_fct; 
+		:}
+	| procedure_declaration_head.type_fct TOKEN_SEMIC		
+		{: 
+			procedureEnvironment.putVariable(type_fct, new NodeList()); 
+			return type_fct; 
+		:}
 	;
 
 procedure_definition_head=
-	procedure_head
+	procedure_head.type_fct
+	{:
+		type_fct.setDefined(true); 
+		return type_fct;
+	:}	
 	;
 	
 procedure_declaration_head=
-	procedure_head
+	procedure_head.type_fct
+	{:
+		type_fct.setDefined(false); 
+		return type_fct;
+	:}	
 	;
 	
 //Definition
 procedure_head=
+<<<<<<< HEAD
 	TOKEN_PROCEDURE.p TOKEN_IDENTIFIER TOKEN_LPAR argt_part TOKEN_RPAR 	{:	return new EmptySymbol(); :}
 	| TOKEN_FUNCTION TOKEN_IDENTIFIER.id TOKEN_LPAR argt_part.args TOKEN_RPAR TOKEN_COLON type.t {:	return new EmptySymbol(); :}
 																									
+=======
+	TOKEN_PROCEDURE TOKEN_IDENTIFIER.funct_name TOKEN_LPAR argt_part.args TOKEN_RPAR 	
+			{:				
+				TypeTuple params_tuple = new TypeTuple();
+				
+				for(Node n : args.getList()) {
+					NodeId n_id = (NodeId) n;
+					params_tuple.add(new TypeFeature(n_id.getName(), n_id.getType()));
+					stackEnvironment.add_node_to_latest_portability(n_id.getName(), new NodeLiteral(n_id.getType(), 0));
+				}
+				
+				TypeFunct type_function = new TypeFunct(funct_name, params_tuple, new TypeVoid());
+				
+				return type_function;
+				//return new NodeCallFct(funct_name, type_function, new NodeList());
+			:}
+																		
+	| TOKEN_FUNCTION TOKEN_IDENTIFIER.funct_name TOKEN_LPAR argt_part.args TOKEN_RPAR TOKEN_COLON type.t 
+			{:
+				TypeTuple params_tuple = new TypeTuple();
+				
+				for(Node n : args.getList()) {
+					NodeId n_id = (NodeId) n;
+					params_tuple.add(new TypeFeature(n_id.getName(), n_id.getType()));
+					stackEnvironment.add_node_to_latest_portability(n_id.getName(), new NodeLiteral(n_id.getType(), 0));
+				}
+				
+				TypeFunct type_function = new TypeFunct(funct_name, params_tuple, t);
+			
+				return type_function;
+				//return new NodeCallFct(funct_name, type_function, new NodeList());
+			:}
+>>>>>>> prod
 	;
+	
 	
 argt_part=
 	/* empty */
@@ -331,8 +398,8 @@ argt_part=
 	;
 	
 argt_list=
-	argt_list.l TOKEN_COMMA argt.elem		//{: l.add(elem); return l; :}
-	| argt.elem								//{: NodeList l = new NodeList(elem); return l; :}
+	argt_list.nl TOKEN_COMMA argt.elem		{: nl.add(elem); return nl; :}
+	| argt.elem								{: NodeList nl = new NodeList(elem); return nl; :}
 	;
 	
 argt=
@@ -351,9 +418,19 @@ block=
 	TOKEN_END	pop_stackenv 		//On depile stackenv et return
 	{: return _symbol_list; :}
 	;
-pop_stackenv  =		{:	System.out.println("[STACK] Poped one more stack layer"); stackEnvironment.getEnvironment().pop(); return new EmptySymbol();	:}	;
+pop_stackenv  =		{:	
+						//System.out.println("[STACK] Poped one more stack layer"); 
+						stackEnvironment.getEnvironment().pop(); 
+						return new EmptySymbol();	
+					:}	
+				;
 
-push_stackenv =		{:	System.out.println("[STACK] Pushed one more stack layer"); stackEnvironment.getEnvironment().push(new HashMap<String, NodeLiteral>()); return new EmptySymbol(); :}	;
+push_stackenv =		{:	
+						//System.out.println("[STACK] Pushed one more stack layer"); 
+						stackEnvironment.getEnvironment().push(new HashMap<String, NodeLiteral>(stackEnvironment.getEnvironment().peek())); 
+						return new EmptySymbol(); 
+					:}	
+				;
 
 
 /*
@@ -371,8 +448,8 @@ statement=
 	;
 	
 simple_statement=
-	assignment_statement.e	{: System.out.println("[STATE] assignment: "+e); return e; :}
-	| procedure_statement
+	assignment_statement
+	| procedure_statement	//OK
 	| new_statement			//OK
 	| dispose_statement		//OK
 	| println_statement		//OK
@@ -388,14 +465,60 @@ assignment_statement=
 	;
 	
 procedure_statement=
-	procedure_expression TOKEN_SEMIC
+	procedure_expression.n TOKEN_SEMIC	{: return n; :}
 	;
 	
 	
 //NOT FINISHED
 //faudrait match si les params sont valides aussi
+//On cree un nouveau stack, et args = params
+//Semble bon a check
 procedure_expression=
-	TOKEN_IDENTIFIER.func_name TOKEN_LPAR expression_part.args TOKEN_RPAR	{: return new NodeCallFct(func_name, new TypeFunct(func_name, null, null), args); :}	//Remplacer type int par celle se trouvant dans environment avec func_name
+	TOKEN_IDENTIFIER.func_name TOKEN_LPAR expression_part.args TOKEN_RPAR	{: 
+																				try{
+																					stackEnvironment.getEnvironment().push(new HashMap<String, NodeLiteral>(stackEnvironment.getEnvironment().peek())); //push env
+																					HashMap<String, NodeLiteral> table = (HashMap) stackEnvironment.getEnvironment().peek();
+																					
+																					//NodeCallFct fct_from_table = procedureEnvironment.getNodeFct(func_name);
+																					//TypeFunct fct_type = fct_from_table.getTypeFunct().clone();
+																					TypeFunct fct_type = procedureEnvironment.getNodeFct(func_name);
+																					
+																					int i = 0;
+																					Iterator<Type> it = fct_type.getParams().iterator();
+																					while(it.hasNext()) {
+																						TypeFeature current_type = (TypeFeature) it.next();
+																						String id = current_type.getName();
+																						Type t = current_type.getType();
+																						if((args.get(i) instanceof NodeLiteral)) {
+																							NodeLiteral node = (NodeLiteral) args.get(i);
+																							table.put(id, node);		
+																							System.out.println("Register function NodeLiteral:" +id + " | "+ node.toString());
+																						}else if(args.get(i) instanceof NodeOp) {
+																							NodeLiteral node = new NodeLiteral(new TypeInt(), args.get(i));
+																							table.put(id,node);
+																							System.out.println("Register function NodOp:" +id + " | "+ node.toString());
+																					
+																						}else if(args.get(i) instanceof NodeRel) {
+																							NodeLiteral node = new NodeLiteral(new TypeBoolean(), args.get(i));
+																							table.put(id,node);
+																							System.out.println("Register function NodeRel:" +id + " | "+ node.toString());
+																							
+																						}else {
+																							System.out.println("Cannot register node: " + args.get(i).toString());
+																						}
+																								
+																						
+																						
+																						i++;
+																					}
+																					
+																					return new NodeCallFct(func_name, fct_type, args);
+																				}catch(NoSuchFieldException e){
+																					System.out.println("Procedure Expression: " + e);
+																					return new NodeCallFct(func_name, new TypeFunct(func_name, new TypeTuple(), new TypeVoid()), args);
+																				}
+																				
+																			:}
 	;
 	
 	
@@ -412,30 +535,44 @@ expression_list=
 	| expression.expr									{: return new NodeList(expr); :}
 	;
 
-//OK	
+//PAS OK
 new_statement=
-	TOKEN_NEW variable_access.node TOKEN_SEMIC		{: return new NodeNew(node); :}
+	TOKEN_NEW variable_access.node TOKEN_SEMIC			{: return new NodeNew(node); :}
 	;
 	
-//OK
+//PAS OK
+//Supprimer pointeur de q dans toutes les piles d'environments
 dispose_statement=
-	TOKEN_DISPOSE variable_access.node TOKEN_SEMIC	{: return new NodeDispose(node); :}
+	TOKEN_DISPOSE variable_access.node TOKEN_SEMIC		
+							{: 
+								//stackEnvironment.remove_node_to_every_layer(node); 
+								return new NodeDispose(node); 
+							:}
 	;
 	
 //OK
 println_statement=
-	TOKEN_PRINTLN expression.e TOKEN_SEMIC	
-		{: 
-			return new NodeCallFct(
-				"println", 					//fonction name
-				new TypeFunct("println", 	//Un string jsp a quoi il sert
-					new TypeTuple(), 	//Type parametres
-					new TypeVoid()),	//Return type
-				new NodeList(e));		//Args
-		:}
-	;	
+		TOKEN_PRINTLN expression.args TOKEN_SEMIC	
+			{: 
+				TypeTuple params_tuple = null;
+		
+				if(args instanceof NodeCallFct) {
+					NodeCallFct tmp = (NodeCallFct) args;
+					params_tuple= new TypeTuple(new TypeFeature(tmp.getName(), tmp.getTypeFunct()));
+				} else {
+					params_tuple= new TypeTuple(new TypeFeature("println nodelist", args.getType()));
+				}
 
-//OK	
+				
+				return new NodeCallFct(
+						"println",
+						new TypeFunct("println", params_tuple, new TypeVoid()),
+						new NodeList(args));
+			
+			:}
+		;	
+
+//TODO!!!!
 readln_statement=
 	TOKEN_READLN expression.e TOKEN_SEMIC	
 		{: 
@@ -484,29 +621,39 @@ case_statement_list=
 
 //OK	
 case_statement=
-	TOKEN_CASE TOKEN_IDENTIFIER.name TOKEN_COLON statement.state	{: return new NodeCase(name, state); :}
-	| TOKEN_DEFAULT TOKEN_COLON statement.state						{: return new NodeCase("default", state); :}
+	//TOKEN_CASE case_identifier_statement TOKEN_COLON statement.state	{: return new NodeCase(name, state); :}
+	TOKEN_CASE TOKEN_IDENTIFIER.name TOKEN_COLON statement.state		{: return new NodeCase(name, state); :}
+	| TOKEN_DEFAULT TOKEN_COLON statement.state							{: return new NodeCase("default", state); :}
 	;
-	
+
+/*
+case_identifier_list=
+	case_identifier_list.list TOKEN_IDENTIFIER.str	{: list.add(str); return list; :}
+	| TOKEN_IDENTIFIER.str	{: IdentifierList l = new IdentifierList(str); return l; :}
+	;
+*/
 	
 /*
 Expressions
 
-normalement OK
+normalement TODO
 */
 //Recup les valeurs stockees dans les environnements (ou pas, a check)
 variable_access=
 	TOKEN_IDENTIFIER.name		{:	
 										try{
-											System.out.println("[VARIABLE]" + name +" found.");
-											return stackEnvironment.get_node_reachable(name);  
+											NodeLiteral res = stackEnvironment.get_node_reachable(name);  
+											System.out.println("[VARIABLE]" + res.toString() +" found.");
+											return res;
 										} catch (NoSuchFieldException e) {
-											System.out.println(e);
-											return new NodeLiteral(null, -1);
+											System.out.println("Variable [" + name + "]: "+ e);
+											return new NodeLiteral(new TypeVoid(), null);
 										}
 								:}
 	| variable_access.var TOKEN_LBRACKET expression.e TOKEN_RBRACKET		{: return new NodeArrayAccess(var, e); :}//Tableau
-	| expression.e TOKEN_CIRC	{: return new NodePtrAccess(e);	:}			//Pointeur
+	| expression.e TOKEN_CIRC	//Pointeur
+		//{: return new NodeLiteral(new TypeInt(), 5); :}		
+		{: return new NodePtrAccess(e);	:}			
 	;
 	
 expression=

@@ -8,6 +8,10 @@ public class TypeFeatureList extends TypeComplex {
 		super(t);
 	}
 
+	public TypeFeatureList() {
+		super();
+	}
+
 	@Override
 	public boolean attestWellFormed() {
 		// TODO Auto-generated method stub

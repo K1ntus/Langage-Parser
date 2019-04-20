@@ -23,7 +23,7 @@ begin
    println (y);
    println (b);
    println (c);
-   println (d[2]);
+   //println (d[2]);
 
    new q;
    q^ = "A"; // 0x41

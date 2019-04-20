@@ -49,7 +49,7 @@ HexaValue = 0x[a-fA-F0-9_]*
 	"/*"			{System.out.println("$$"); yybegin(COMMENT);}
 	{LineComment}	{System.out.print(yytext()); }
 	
-	\"                             { string.setLength(0); yybegin(STRING); }
+	\"              { string.setLength(0); yybegin(STRING); }
 	//{String}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_STRING, yyline, yycolumn, new String(yytext()) ); }
 	
 	"struct"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_STRUCT, yyline, yycolumn); }
@@ -66,6 +66,7 @@ HexaValue = 0x[a-fA-F0-9_]*
 	"begin"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_BEGIN, yyline, yycolumn); }
 	"dispose"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_DISPOSE, yyline, yycolumn); }
 	"function"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_FUNCTION, yyline, yycolumn); }
+	"procedure"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_PROCEDURE, yyline, yycolumn); }
 	"var" 			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_VAR, yyline, yycolumn); }
 	
 	"if"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_IF, yyline, yycolumn); }
@@ -75,6 +76,7 @@ HexaValue = 0x[a-fA-F0-9_]*
 	"while"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_WHILE, yyline, yycolumn); }
 	"return"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_RETURN, yyline, yycolumn); }
 	"readln"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_READLN, yyline, yycolumn); }
+	"print"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_PRINTLN, yyline, yycolumn); }
 	"println"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_PRINTLN, yyline, yycolumn); }
 	
 	

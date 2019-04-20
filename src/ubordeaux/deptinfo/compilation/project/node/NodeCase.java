@@ -1,5 +1,7 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
+import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
+
 public final class NodeCase extends Node {
 
 	private String nameValue;
@@ -35,10 +37,9 @@ public final class NodeCase extends Node {
 		return defaultValue;
 	}
 
-	@Override
-	public void generateIntermediateCode() {
+	public IntermediateCode generateIntermediateCodeCase() {
 		// TODO Auto-generated method stub
 		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		
+		return null;
 	}
 }

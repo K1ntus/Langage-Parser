@@ -106,6 +106,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 		}
 	}
 
+	
 	public IntermediateCode generateIntermediateCode() {
 		for (Node elt : this.elts) {
 			switch(elt.getClass().toString()) {

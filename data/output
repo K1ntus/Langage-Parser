@@ -2,6 +2,46 @@
 
 
 *************************************************
+*** Fichier data/progr0.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+*** var
+*** a
+*** :
+*** integer
+*** ;
+*** begin
+* Enregistre a
+*** a
+[STACK] Pushed one more stack layer
+*** =
+[VARIABLE]a found.
+[STACK] Stack Layer: 1
+*** 100
+*** ;
+*** end
+[STATE] assignment: NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100))
+
+[STACK] Poped one more stack layer
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100)))
+
+
+
+*************************************************
 *** Fichier data/progr1.lea
 [INFO] $$  : multiple line comment.
 [INFO] $$$ : documentation comment.
@@ -56,8 +96,17 @@
 [STACK] Poped one more stack layer
 
 [STACK] Poped one more stack layer
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
-class ubordeaux.deptinfo.compilation.project.node.NodeWhile
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
+Code intermediaire while
+TODO: NodeLiteral.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeLiteral
+class ubordeaux.deptinfo.compilation.project.node.NodeLiteral
 *** Analyse syntaxique ok
 --- CheckType NodeList
 --- CheckType NodeAssign
@@ -209,14 +258,26 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 100)), NodeWhi
 *** end
 
 [STACK] Poped one more stack layer
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
@@ -526,29 +587,47 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1234564789)), 
 *** end
 
 [STACK] Poped one more stack layer
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeNew
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
+code intermediaire assign
+TODO: NodePtrAccess.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeNew
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
+code intermediaire assign
+TODO: NodePtrAccess.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeNew
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
+code intermediaire assign
+TODO: NodePtrAccess.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeDispose
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
@@ -747,8 +826,14 @@ NodeList(NodeAssign(NodeLiteral(TypeInt, 0), NodeLiteral(TypeInt, 1234564789)), 
 [STACK] Poped one more stack layer
 
 [STACK] Poped one more stack layer
-class ubordeaux.deptinfo.compilation.project.node.NodeAssign
-class ubordeaux.deptinfo.compilation.project.node.NodeWhile
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
+Code intermediaire while
+TODO: NodeLiteral.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeIf
 *** Analyse syntaxique ok
 --- CheckType NodeList
 --- CheckType NodeAssign

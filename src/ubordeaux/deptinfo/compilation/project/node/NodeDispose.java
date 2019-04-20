@@ -1,5 +1,7 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
+import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
+
 public final class NodeDispose extends Node {
 
 	public NodeDispose(Node e) {
@@ -18,9 +20,8 @@ public final class NodeDispose extends Node {
 	}
 
 	@Override
-	public void generateIntermediateCode() {
-		// TODO Auto-generated method stub
+	public IntermediateCode generateIntermediateCode() {
 		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		
+		return null;
 	}
 }

@@ -17,12 +17,14 @@ public abstract class NodeExp extends Node {
 	}
 
 	
-	public ExpList generateIntermediateCode() {
-		System.err.println("NodeExp code intermediaire: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+	public ExpList generateIntermediateCodeExp() {
+		//System.err.println("NodeExp code intermediaire: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
 		if(this.size()>0){
 			NodeExp tmp = (NodeExp) this.get(0);
 			this.pop(this.get(0));
-			return new ExpList(new Exp(tmp), this.generateIntermediateCode());
+			return new ExpList((Exp)tmp.generateIntermediateCode(), this.generateIntermediateCodeExp());	//appel gauche qui retourne une classe fille de exp à cast
+																											//appel droit avec le reste de la liste
+			//faire NodeOp, NodeCallFct, NodeLiteral pour pouvoir appeler le membre de gauche
 		}
 		return new ExpList(null,null);
 		

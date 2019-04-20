@@ -34,12 +34,16 @@ public class NodeOp extends NodeExp {
 		return true;
 	}
 
-	private NodeExp getOp1() {
+	public NodeExp getOp1() {
 		return (NodeExp) this.get(0);
-	};
+	}
 	
-	private NodeExp getOp2() {
+	public NodeExp getOp2() {
 		return (NodeExp) this.get(1);
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 
 	@Override
@@ -53,7 +57,7 @@ public class NodeOp extends NodeExp {
 	
 
 		
-        public ExpList generateIntermediateCode() {
+        public ExpList generateIntermediateCodeOp() {
         	System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
             int operation = -1;
             

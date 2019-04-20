@@ -39,9 +39,8 @@ public final class NodeId extends NodeExp {
 	}
 	
 	
-	public Label generateIntermediateCodeLabel() {
-		System.err.println("Label: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		LabelLocation l = new LabelLocation(this.name);
-		return new Label(l);
+	public Mem generateIntermediateCodeMem() {
+		//System.err.println("Label: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		return new Mem((Exp)this.generateIntermediateCode());
 	}
 }

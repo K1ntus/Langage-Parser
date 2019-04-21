@@ -8,6 +8,10 @@ public final class NodeCaseList extends NodeExp {
 		super();
 	}
 
+	public NodeCaseList(NodeCase node) {
+		super(node);
+	}
+
 	@Override
 	public boolean checksType() {
 		super.checksType();

@@ -3,11 +3,11 @@ package fr.groupname.compilator.environment;
 import java.util.HashMap;
 import java.util.Map;
 
-import ubordeaux.deptinfo.compilation.project.node.NodeList;
+import fr.groupname.compilator.error.AlreadyDefinedFunction;
 import ubordeaux.deptinfo.compilation.project.type.TypeFunct;
 
 public class ProcedureEnvironment {
-	private Map<TypeFunct, NodeList> table;
+	private Map<String, TypeFunct> table;
 	private String name;
 	
 
@@ -24,7 +24,11 @@ public class ProcedureEnvironment {
 		this.setName(name);
 	}
 	
-	public void putVariable(TypeFunct fct_node, NodeList fct_content) {
+	public void putVariable(String fct_node, TypeFunct fct_content) throws AlreadyDefinedFunction {
+		if(table.get(fct_node) != null) {
+			if(table.get(fct_node).getDefined())
+				throw new AlreadyDefinedFunction(fct_node);			
+		}
 		table.put(fct_node, fct_content);
 		System.out.println("** Enregistre fct:" + fct_node.toString());		
 	}
@@ -38,13 +42,8 @@ public class ProcedureEnvironment {
 	}
 	
 	public TypeFunct getNodeFct(String fct_name) throws NoSuchFieldException {
-		for(TypeFunct node_fct : table.keySet()) {
-			String funct_tested = node_fct.getName();
-			//System.out.println("Current function name tested: " + funct_tested);
-			if(funct_tested.equals(fct_name)) {
-				return node_fct;
-			}
-		}
+		if(table.get(fct_name) != null)
+			return table.get(fct_name);
 		throw new NoSuchFieldException("Aucune fonction: " + fct_name + " trouvee.");
 	}
 	
@@ -52,14 +51,14 @@ public class ProcedureEnvironment {
 	/**
 	 * @return the environment
 	 */
-	public Map<TypeFunct, NodeList> getEnvironment() {
+	public Map<String, TypeFunct> getEnvironment() {
 		return table;
 	}
 
 	/**
 	 * @param environment the environment to set
 	 */
-	public void setEnvironment(Map<TypeFunct, NodeList> environment) {
+	public void setEnvironment(Map<String, TypeFunct> environment) {
 		this.table = environment;
 	}
 

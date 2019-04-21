@@ -16,6 +16,9 @@ public class TypeEnvironment {
 	
 	public TypeEnvironment(){
 		table = new HashMap<String, Type>();
+		//table.put("integer",new TypeInt());
+		//table.put("string",new TypeString());
+		//table.put("boolean",new TypeBoolean());
 	}
 	
 	/**
@@ -26,11 +29,24 @@ public class TypeEnvironment {
 		this.name = name;
 	}
 	
+	private boolean isTypeRegistered(Type t_to_compare) {
+		for(Type t : table.values()) {
+			if(t.getClass().equals(t_to_compare.getClass())) {
+				return true;
+			}
+			
+		}
+		return false;
+	}
 
-	public void putVariable(String t, Type n) throws DuplicateTypeDeclaration {
+	public void putVariable(String t, Type n) throws DuplicateTypeDeclaration{//, UnknownType {
 		if(table.get(t) != null) {
 			throw new DuplicateTypeDeclaration(t);
 		}
+		//if(!isTypeRegistered(n)) {
+		//	throw new UnknownType(n.toString());
+		//}
+		
 		table.put(t, n);
 		System.out.println("** Enregistre " + name + ": " + n.toString());
 	}

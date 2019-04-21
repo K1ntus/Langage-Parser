@@ -24,45 +24,44 @@ import ubordeaux.deptinfo.compilation.project.node.*;
 public class Parser extends beaver.Parser {
 
 	static final ParsingTables PARSING_TABLES = new ParsingTables(
-		"U9pjM0bq5SKIlJDltA9Y8YW1ymaecX0K5HSqG6GFKK5050AHG23iHFqVN701mHr488A88A1" +
-		"YH4L1KK0H5D68kEA6E#wAAtxthRpJhzxBpBo51AFdU8xld3ktkggxghfdfhlc0Ku5UYCTfw" +
-		"0z1g4ULc1Fx8MzKGVx81Lfs1TriH$sHtrqm34u7WLeXHDn4av6DsGY0mSZ2xl1bgruNbl$G" +
-		"HCSX0laQWp3sUY9qz0N$J40O#9usFrFnnx2I5iHyiV6BjM8NSfnps4bpiKoIgln4CSvwkS2" +
-		"t1$ZmPjfIeqopKDtj4KRj6US1e5CTwt5E5qm1PtaSzmkMsLZ8CuUIUECh56SXZeRuNmo0d7" +
-		"oaiOPNQCuZS9na14dJiUaSSwgGPp66kK#p6US0oCnzJaOcpJE#1h4QQgURqHdnZaa4AT7qZ" +
-		"Zt9eoJYKMu6tTXAKvbprM#LSh40MY6vZWCX#D87EMpvM6cpvQ9riZMd4emEE1dQ48$bUWNy" +
-		"BCEZw8TSdppY$Wv8w6VJ0nCOXkLs2Ql9RJz3nVxR1TX17qTgfazYJKu9n3dp2Gvt9dGDXVd" +
-		"#MonztuH9cCQhiL4JCAbk0oNumgqq3pEbzLH#ooFFQAxFevkGHpT4t5qpyRHlUpHnMRwh#Q" +
-		"VfPc22UwEZyMKAemqsoTDZKgLAXsXpzriREARUWccOmwkn5MukjhI55nZVCsWLAvUMqQz7g" +
-		"tIiSh7AUSgNuVvSRsUeFQkohtHI$bqmuMgBr8kLXwkNARyN#K7UBQFmyMonPpjxYc$2lUW3" +
-		"sx51daM6$0gRi0yt8I5k1aLk12tu3RaumwymBLSWlLcVyZ3Slb4dfEFYO$mC1wKpLYBHpZw" +
-		"CJoEZNWAB#9fuXbinajmVw$m$kHoBst3BF8uftRCf0DFgqxepFCvdxChCFVEWisgnM6biYl" +
-		"hfzrvFjjwsXUYb7lySRwpFvqxKqFkvXdSSHfnBshCVIVMG$DQY9tEs6q3iLEh5JkLfrOndw" +
-		"uZAGrcNPREKoFi9vtxTz33pcUQ7HsRoZtKdsdVMempcjeoeqtbVVN7wLUBSI8ZmJWfWJZPV" +
-		"q6Sb3XnGhKM9pAkXBPKJypmSp2crkCSpOewDaxQJiQnpPxQdNLNckdfNILRwwvwMdbvRTdS" +
-		"XRmscrbLFQLz0txw9VJJ9n33PbKqYBM5VtuxpYUvxTWajjI4jbJkmrxR6JoBgfwgGrdzb0H" +
-		"yjKeIfoYXRGJljjSMU#yZzwW7w#LUh7jxisgEv975bOzd$pjqiPd#g$cdQRAC9eUIPQGKdt" +
-		"HuLEgZKjMRwRwfQVn#F8XVUWVp#wwwKiH$DhbPZDU8b8XRSbGyhpiQLrDsp$Rct072Pxjxo" +
-		"ZVW3f36gsNGdzyzHLozDCx0maZsjBYA3hzgSxXgEMP$oAQz6Nk7OR6lsxk1MSqiimfXNrdq" +
-		"raBuentOCf4NDZuZvGFsAUJ2YQROuXSpk5S0sm0hmzNj3FYxaZYAFjwiqjc$yb8N2Er2xac" +
-		"kGxwGN9$zs2NKc5oFt8pSXToIzeRarkI#v4xafUHkv7V9fxFVVkHYSW5vE7a5cNEmkfB7ax" +
-		"TvSlgTkidCmvEdrOVj2lA2SDlfppvJgHiRVrxs9FPT7fP3ioXlLlrqjc$Y#5ArqQTTH#Lbb" +
-		"9kgl9foIutze#QrcEXH5IEqddtQKNYDV03xxQtwJMntPxkzjbaVsqKKUF#S3fuS5n9ps6#S" +
-		"zdkV#4JbLSHRn1V9xfz$pg5rz9yUq7tBomVaxsZZ$Gozf$gFTHrvFvnMp65orHY7Qntwd5o" +
-		"cxOi8Yiu0RNlxzYCcUTf32TvVPwIsXz7t4dzEJh6kvsXjNwfy6L5EN4USIqnG$K1YZifZcT" +
-		"jsZwyRYRd4#SJb19ybfxx7Ff#8F3FZY0nYbZSVlbzhI4s9JCrhA7MLPCuDSnAjTtN1tpl#j" +
-		"bLNkOjoD#NnofSeRrBU7cOxJtbIc4DhbJzL$bBv6#NlbN#EpSb9YPFdUO4#TQetFsVVG7j$" +
-		"ZzpG8pVoo0VwnrZBUN7tcscKLsgVGpIlzSew7oT7noWxBRJTn7qFO$Ep8izjEksUPyCkhSx" +
-		"yTZn$gzpZKzzbUu97n$VBQU8VOr$bRpk7$OduCmE#T1#oAfACgGoCwUZ9hJosVsYUnpxVCw" +
-		"unaU#nLVZ7OGlViDzbgolAaz2VLChZia4Ua$Nog3mYwsIjF2pBv1wvMvRA3DDZZTpCwo9Y8" +
-		"R60uAujymY#yN83mPrJhYTc4zpXXRk6y6sNkMPykSnKJxV8TBdLI0#QwqgvLgR9DJ9LfiW3" +
-		"xFKGTJFaVcER8IiCtsUkzvhhyaZcib6Uqlpl8kvK#Oxeh9R8xIhTHhmZRslhJVb9VfGVv7l" +
-		"vJhwL$yitibs#fdwRV2LV8lgJJuaFLVv0tbVfNUKlY3VaTID$9k#fzYrpNImLyWJvLU9buY" +
-		"LvCUhr1NDznbmtoTFm$EHvUONNt#HNRVyilv36uKpMXAMKIda83pDmwno7DRyL5pqzw4RqK" +
-		"dJdc9FXddmXWrDPRmwdFeBUz7qQ#umWkry$HPJRidzRjaSQMAor7DPK8LDNyNGXB8oYRHHv" +
-		"0Db5CUN1n13k8KDOqGvalu5i3#AuGLgpvZ6skwEpGa4XnnHIVuAYNH9qOFoExD#QNCQnPTI" +
-		"DfZ$tNv9EvCv45oAVw4gqfzwB0euhOEmJoISnlp7qDORw4hPBs3#NSYxbNFDD6Gh0JY37Wn" +
-		"L5cpWuwm#YQV25");
+		"U9pjM0kOJLKK$i#vjzSKpQ1CcWn5CwY4eWQJDqFaFGOPXl6c52MbFA88UHL2H9gyASyIaXg" +
+		"lKbBfhTBBewBtS$MVC#lEd7lkkTUCfhxFztNd#y#$zbfxht$jUyxPUzy1$5beYrZSXBheXX" +
+		"9OWtDn7egWACv7D69G3CLn0Iv4ITJ3jRWUAQY1fcY66z4SyOX3UIJWB9Xo4AzhwnAKnMKOB" +
+		"kFH2uFG2ktG0PtG1GCyCfpzZxLxKEaWVC7QE2CVsfaSjnVhSITMqTg8vpdEhtc6Osr81cUb" +
+		"KGMgD1ajK1krK9Sw5xagFRCGTHfX8Xh8KJmj1sMdI#USY3fz2wHJIcSZd4#SIoSveax$0kc" +
+		"Kpj51d8TE$OWwjnP0fuogF8jvrBaqeAdFmU28ElSKGAUSPfwBXjIvtANJCgBECs5ruh4GAx" +
+		"0Coz66FJS4VKlnk1WLK0bNeZAge5fGB1dJWsBng8b4hIa3tLrvUeRDausEhZnRy2Bge6BG$" +
+		"09vRWwR9nvT8yJwXO$9ks5ZjsD4KEm#z66kAxIo7TY4ErmwjqIeOMdOs1na1SL2x$r2ZC5a" +
+		"JC4et8#nU00FOXokqZg6oiRS#0n7FE2RvU5xmiFtYeVlDG$VMmvVQAN$UqulpqJSRQtuk8l" +
+		"MCDkQIIlBmyfMwsfzxcPYDz$KIPYAnp0U3s52lgs969chELgpLitDUerQrPMlKqvIVXZJFB" +
+		"FUeF4coctHMhczpMdgxwoShjnRUQ3oRShhkBSFmGWvOE$jrYw$0IkHYgUmNLx3Tho3H$0ev" +
+		"c4s7iTyt8i5U1AD#IQ$mNajmZPxVKZ64lbAzcAnx9KlvGkinWjuJlPXCyTlnKju6Jkn2szY" +
+		"3rxbTH$UndxUdoIkfRLOHJBdL8ULrEDkrG0DkJytvknIx7jdmEIfnS#JofayFvtD$TdKtJu" +
+		"DcLpZhmlQ#sEvCfNYQXx75QSqrw8oN7T2CrGg1ErOQjTsQKVdIpkQkrOwdwugjBhpN1RBNI" +
+		"CdJopNRtU6KwyqCNTiDDVGu4ex5A9EVte7sjvemANJiH1r0YD1dIYNJkA$e1FbeUChD9t0k" +
+		"0p6eXsQES$1W4BNkOOdwb2Tc5FKCUqrjGNFNJ5sJ#UtPEgvguIUl9onHAv2pfZ9glAUqWwk" +
+		"F1t3vabrQPWy5NNZsI9uVYUl9tAiUeHOTDXODDTXP#ncxaLvJzKLFFrak7BLYA3JEMoi3##" +
+		"sCnPwxmFtg2NFowrvxctBKtEWZlRyvhtY$uKljDB$FQUR9y7sLAHbs5PK62jLhRmtqtfJA$" +
+		"FtusNyfLUUl#$oQparOqAo1gnmR73jySfwid45PMjlhyItAsTljtRvYxW2nF1gsEZ4LQegk" +
+		"HhVx0JqjMTYpQWNh#q9Qtr8vDmgi7TbeWB$4kmPMpsj7AbsEyTEi3F6S7y73epWHKIEa1e3" +
+		"vataDCl7po2Y674OCE8itwc0dmU9QipnGPxF$8ENue3l378hSb7oFUIIxCSklZBa4kGAv4R" +
+		"ageoN8jSaTo0t82ydDoT$GcxFVXUGqyafvDxaDMJEmMX27aO#xAZfB$f6imv7dKOgsrdaUJ" +
+		"bjVoVscK3VOEzvcQFOTtMExNk4zZxrJsRxSOxFr1XpcaNLNaMxdDeRQLTLxL#qhaL4opmDt" +
+		"pRsgKFZNVB5x5T4$RlPRi5sNMtlPxip3Tu$Vpr7ZVCPsq1yfZf3jFzNn36rJn0VSbmHhtbw" +
+		"pzstb$sh1$lyradk4BaDqOnzFjM#NshyHc8uQnZj6DEHyQFasxGzaXX3T77qoI36EzezYRv" +
+		"4FsqFPCx5hbhIzVlih#snoWyGl5V#HuaxYL7gxqhCKliErdJSaMikCOUuY#2pxB#RAEc8po" +
+		"CMg3sKY2EcE#lX#xM9L8w8rxfwqfTDvlmnCx$VUpZmyt5msoYkt4YvkV8mvP7AkvMFvx2Ph" +
+		"ApVYs#pyjVAtoYVKFv9#RVGclnH7dKETVKfch$v#OkvsXSwx58EkxJ3lZHuZB6Q5skzcKHx" +
+		"lVQvNElQfgppyLVKCSh#gxHTrdeFytAQVLmQNRH$B6EEPyJCpCyyJ$uz6DCSEVLTDkzp#6f" +
+		"Gkrpm67DSSDjVxHHqfxfow3faP4KOa#qQqz1HqxJG$huvZlXSnxWoH8eZbXKy3WVuXlqb1o" +
+		"rJTa0$aYqlotPvIRR9Yx9LjiXcUK5MoKfP8SjbYjrZaopWzGbYFi6tMBXg2zzqcKtC8cOIC" +
+		"mYk5i9LGwOJN0taCNlyD9cgcHRAP7dIjfwph#lbOPaa4sM2F2JhsEjv#gR8MZisHTRO$Anz" +
+		"VSQ#hWvKBZjbbzQ$Z5YgzfBSMIsMfzLwdtYA#5W#Kiy7ygly8Z$BJ$AZ$23VomavBj$HVrY" +
+		"#bM#G#v6lYS$LFYIVgVM9yZ5vp#OZygbwFhIlYoHBNY6$Gxn5x9StSpE#OLzVjQ#xPGyS7t" +
+		"bTtkRrJ$b3sx$9xwGXk8LdmanQcTo4UzcmJYL#dlaDJxHoe3dHMj62OxYpSEVpsMZ3ysPl#" +
+		"WDeozpjsASFsVhrqvbsRVQlpNPV6mRFMdwUeto40UukX85#ZFKZTo5RIAVTdUZ1DQG7JxHT" +
+		"sQyhszquhfkUMPEfRQteFA4WZMFIwBz1KIS2wb6$FllN97Ct8mpqPpxhloGDo0s9HaHZeWb" +
+		"HbtudKZWkXTfDoSrOtm3c6a1$1jiPx9z4EubsalsRqkU26SRsWf6BMXwuzM$npEur");
 
 	static final Action RETURN2 = new Action() {
 		public Symbol reduce(Symbol[] _symbols, int offset) {
@@ -105,7 +104,9 @@ public class Parser extends beaver.Parser {
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol tp = _symbols[offset + 1];
 					final Symbol vp = _symbols[offset + 2];
-					final Symbol pp = _symbols[offset + 3];
+					final Symbol _symbol_pp = _symbols[offset + 3];
+					final ArrayList _list_pp = (ArrayList) _symbol_pp.value;
+					final TypeFunct[] pp = _list_pp == null ? new TypeFunct[0] : (TypeFunct[]) _list_pp.toArray(new TypeFunct[_list_pp.size()]);
 					final Symbol pu = _symbols[offset + 5];
 					final Symbol _symbol_l = _symbols[offset + 6];
 					final NodeList l = (NodeList) _symbol_l.value;
@@ -134,13 +135,14 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_t = _symbols[offset + 3];
 					final Type t = (Type) _symbol_t.value;
 					
-																try{
-																	typeEnvironment.putVariable(name, t);
-																} catch (DuplicateTypeDeclaration e) {
-																	System.err.println(e);
-																} finally {
-																	return new EmptySymbol();
-																}
+			try{
+				//System.out.println("Registering type:" + t.toString());
+				typeEnvironment.putVariable(name, t);
+			} catch (DuplicateTypeDeclaration e) {//|UnknownType e) {
+				System.err.println(e);
+			} finally {
+				return new EmptySymbol();
+			}
 				}
 			},
 			Action.RETURN,	// [6] type = simple_type
@@ -168,7 +170,14 @@ public class Parser extends beaver.Parser {
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_r = _symbols[offset + 1];
 					final String r = (String) _symbol_r.value;
-					 return new TypeNamed(r);
+					 
+		System.out.println("Named: " + r); 
+		try {
+			return typeEnvironment.getVariableValue(r);
+		} catch(UnknownType e) {	//Si pas deja present
+			System.err.println(e);
+			return new TypeNamed(r);
+		}
 				}
 			},
 			Action.RETURN,	// [16] index_type = enumerated_type
@@ -219,7 +228,7 @@ public class Parser extends beaver.Parser {
 			new Action() {	// [22] array_type = TOKEN_ARRAY TOKEN_LBRACKET range_type.range TOKEN_RBRACKET TOKEN_OF type.t
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_range = _symbols[offset + 3];
-					final TypeRange range = (TypeRange) _symbol_range.value;
+					final Type range = (Type) _symbol_range.value;
 					final Symbol _symbol_t = _symbols[offset + 6];
 					final Type t = (Type) _symbol_t.value;
 					 return new TypeArray(range, t);
@@ -315,12 +324,12 @@ public class Parser extends beaver.Parser {
 			Action.RETURN,	// [39] procedure_definition_part = procedure_definition_list
 			new Action() {	// [40] procedure_definition_list = procedure_definition_list procedure_definition
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 2]); return _symbols[offset + 1];
+					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 2].value); return _symbols[offset + 1];
 				}
 			},
 			new Action() {	// [41] procedure_definition_list = procedure_definition
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1]); return new Symbol(lst);
+					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1].value); return new Symbol(lst);
 				}
 			},
 			new Action() {	// [42] procedure_definition = procedure_definition_head.type_fct block.fct_content
@@ -330,7 +339,15 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_fct_content = _symbols[offset + 2];
 					final NodeList fct_content = (NodeList) _symbol_fct_content.value;
 					 
-			procedureEnvironment.putVariable(type_fct, fct_content); 
+			type_fct.setDefined(true);
+			try {
+				procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
+			} catch (AlreadyDefinedFunction e) {
+				System.err.println(e);
+				if(critical_mode)
+					System.exit(0);
+			}
+		
 			return type_fct;
 				}
 			},
@@ -339,28 +356,20 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_type_fct = _symbols[offset + 1];
 					final TypeFunct type_fct = (TypeFunct) _symbol_type_fct.value;
 					 
-			procedureEnvironment.putVariable(type_fct, new NodeList()); 
+			type_fct.setDefined(false); 
+			try {
+				procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
+			} catch (AlreadyDefinedFunction e) {
+				System.err.println(e);
+				if(critical_mode)
+					System.exit(0);
+			}
+
 			return type_fct;
 				}
 			},
-			new Action() {	// [44] procedure_definition_head = procedure_head.type_fct
-				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_type_fct = _symbols[offset + 1];
-					final TypeFunct type_fct = (TypeFunct) _symbol_type_fct.value;
-					
-		type_fct.setDefined(true); 
-		return type_fct;
-				}
-			},
-			new Action() {	// [45] procedure_declaration_head = procedure_head.type_fct
-				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_type_fct = _symbols[offset + 1];
-					final TypeFunct type_fct = (TypeFunct) _symbol_type_fct.value;
-					
-		type_fct.setDefined(false); 
-		return type_fct;
-				}
-			},
+			Action.RETURN,	// [44] procedure_definition_head = procedure_head.type_fct
+			Action.RETURN,	// [45] procedure_declaration_head = procedure_head.type_fct
 			new Action() {	// [46] procedure_head = TOKEN_PROCEDURE TOKEN_IDENTIFIER.funct_name TOKEN_LPAR argt_part.args TOKEN_RPAR
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_funct_name = _symbols[offset + 2];
@@ -694,31 +703,37 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_list = _symbols[offset + 1];
 					final NodeCaseList list = (NodeCaseList) _symbol_list.value;
 					final Symbol _symbol_item = _symbols[offset + 2];
-					final NodeCase item = (NodeCase) _symbol_item.value;
-					 list.add(item); return list;
+					final NodeCaseList item = (NodeCaseList) _symbol_item.value;
+					 
+				List<Node> lst_entry = item.getList();
+				for(Node n : lst_entry) {
+					NodeCase n_case = (NodeCase) n;
+					list.add(n_case); 
+				}
+				return list;
 				}
 			},
-			new Action() {	// [88] case_statement_list = case_statement.item
+			Action.RETURN,	// [88] case_statement_list = case_statement.list
+			new Action() {	// [89] case_statement = TOKEN_CASE identifier_list.idl TOKEN_COLON statement.st
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_item = _symbols[offset + 1];
-					final NodeCase item = (NodeCase) _symbol_item.value;
-					 NodeCaseList list = new NodeCaseList(); list.add(item); return list;
+					final Symbol _symbol_idl = _symbols[offset + 2];
+					final IdentifierList idl = (IdentifierList) _symbol_idl.value;
+					final Symbol _symbol_st = _symbols[offset + 4];
+					final Node st = (Node) _symbol_st.value;
+					 
+				NodeCaseList res = new NodeCaseList();
+				for(String id : idl) {
+					res.add(new NodeCase(id, st));
 				}
-			},
-			new Action() {	// [89] case_statement = TOKEN_CASE TOKEN_IDENTIFIER.name TOKEN_COLON statement.state
-				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_name = _symbols[offset + 2];
-					final String name = (String) _symbol_name.value;
-					final Symbol _symbol_state = _symbols[offset + 4];
-					final Node state = (Node) _symbol_state.value;
-					 return new NodeCase(name, state);
+				
+				return res;
 				}
 			},
 			new Action() {	// [90] case_statement = TOKEN_DEFAULT TOKEN_COLON statement.state
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_state = _symbols[offset + 3];
 					final Node state = (Node) _symbol_state.value;
-					 return new NodeCase("default", state);
+					 return new NodeCaseList(new NodeCase(state));
 				}
 			},
 			new Action() {	// [91] variable_access = TOKEN_IDENTIFIER.name
@@ -730,7 +745,7 @@ public class Parser extends beaver.Parser {
 				Type t = stackEnvironment.get_node_reachable(name);  
 				return new NodeId(name, t);
 			} catch (UnknownVariable e) {	//Not a normal variable
-				try {	//Check enum
+				try {						//Check enum
 					Type tmp = typeEnvironment.getEnumType(name);
 					if(tmp instanceof TypeItemEnum) {
 						TypeItemEnum t = (TypeItemEnum) tmp;

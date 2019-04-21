@@ -938,22 +938,22 @@ class ScannerExpr extends Scanner {
             // fall through
           case 77: break;
           case 2: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_IDENTIFIER, yyline, yycolumn, new String(yytext()) );
+            { return new Symbol(Terminals.TOKEN_IDENTIFIER, yyline, yycolumn, new String(yytext()) );
             } 
             // fall through
           case 78: break;
           case 3: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn, new Integer(Integer.valueOf(yytext())) );
+            { return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn, new Integer(Integer.valueOf(yytext())) );
             } 
             // fall through
           case 79: break;
           case 4: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_DIV, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_DIV, yyline, yycolumn);
             } 
             // fall through
           case 80: break;
           case 5: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_TIMES, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_TIMES, yyline, yycolumn);
             } 
             // fall through
           case 81: break;
@@ -963,82 +963,82 @@ class ScannerExpr extends Scanner {
             // fall through
           case 82: break;
           case 7: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_PLUS, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_PLUS, yyline, yycolumn);
             } 
             // fall through
           case 83: break;
           case 8: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_MINUS, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_MINUS, yyline, yycolumn);
             } 
             // fall through
           case 84: break;
           case 9: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LPAR, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_LPAR, yyline, yycolumn);
             } 
             // fall through
           case 85: break;
           case 10: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_RPAR, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_RPAR, yyline, yycolumn);
             } 
             // fall through
           case 86: break;
           case 11: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LBRACKET, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_LBRACKET, yyline, yycolumn);
             } 
             // fall through
           case 87: break;
           case 12: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_RBRACKET, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_RBRACKET, yyline, yycolumn);
             } 
             // fall through
           case 88: break;
           case 13: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LBRACE, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_LBRACE, yyline, yycolumn);
             } 
             // fall through
           case 89: break;
           case 14: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_RBRACE, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_RBRACE, yyline, yycolumn);
             } 
             // fall through
           case 90: break;
           case 15: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_COMMA, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_COMMA, yyline, yycolumn);
             } 
             // fall through
           case 91: break;
           case 16: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_SEMIC, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_SEMIC, yyline, yycolumn);
             } 
             // fall through
           case 92: break;
           case 17: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_COLON, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_COLON, yyline, yycolumn);
             } 
             // fall through
           case 93: break;
           case 18: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LT, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_LT, yyline, yycolumn);
             } 
             // fall through
           case 94: break;
           case 19: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_AFF, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_AFF, yyline, yycolumn);
             } 
             // fall through
           case 95: break;
           case 20: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_GT, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_GT, yyline, yycolumn);
             } 
             // fall through
           case 96: break;
           case 21: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_NOT, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_NOT, yyline, yycolumn);
             } 
             // fall through
           case 97: break;
           case 22: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_CIRC, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_CIRC, yyline, yycolumn);
             } 
             // fall through
           case 98: break;
@@ -1079,57 +1079,57 @@ class ScannerExpr extends Scanner {
             // fall through
           case 105: break;
           case 30: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn, new Integer(Integer.decode (yytext())) );
+            { return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn, new Integer(Integer.decode (yytext())) );
             } 
             // fall through
           case 106: break;
           case 31: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_OF, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_OF, yyline, yycolumn);
             } 
             // fall through
           case 107: break;
           case 32: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_IF, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_IF, yyline, yycolumn);
             } 
             // fall through
           case 108: break;
           case 33: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_DO, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_DO, yyline, yycolumn);
             } 
             // fall through
           case 109: break;
           case 34: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_DOTDOT, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_DOTDOT, yyline, yycolumn);
             } 
             // fall through
           case 110: break;
           case 35: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LE, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_LE, yyline, yycolumn);
             } 
             // fall through
           case 111: break;
           case 36: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_EQ, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_EQ, yyline, yycolumn);
             } 
             // fall through
           case 112: break;
           case 37: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_GE, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_GE, yyline, yycolumn);
             } 
             // fall through
           case 113: break;
           case 38: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_NE, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_NE, yyline, yycolumn);
             } 
             // fall through
           case 114: break;
           case 39: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_OR, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_OR, yyline, yycolumn);
             } 
             // fall through
           case 115: break;
           case 40: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_AND, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_AND, yyline, yycolumn);
             } 
             // fall through
           case 116: break;
@@ -1169,72 +1169,72 @@ class ScannerExpr extends Scanner {
             // fall through
           case 123: break;
           case 48: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_END, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_END, yyline, yycolumn);
             } 
             // fall through
           case 124: break;
           case 49: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_NEW, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_NEW, yyline, yycolumn);
             } 
             // fall through
           case 125: break;
           case 50: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_VAR, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_VAR, yyline, yycolumn);
             } 
             // fall through
           case 126: break;
           case 51: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_TRUE, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_TRUE, yyline, yycolumn);
             } 
             // fall through
           case 127: break;
           case 52: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_TYPE, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_TYPE, yyline, yycolumn);
             } 
             // fall through
           case 128: break;
           case 53: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_THEN, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_THEN, yyline, yycolumn);
             } 
             // fall through
           case 129: break;
           case 54: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_CASE, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_CASE, yyline, yycolumn);
             } 
             // fall through
           case 130: break;
           case 55: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_ELSE, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_ELSE, yyline, yycolumn);
             } 
             // fall through
           case 131: break;
           case 56: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_NULL, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_NULL, yyline, yycolumn);
             } 
             // fall through
           case 132: break;
           case 57: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_ARRAY, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_ARRAY, yyline, yycolumn);
             } 
             // fall through
           case 133: break;
           case 58: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_PRINTLN, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_PRINTLN, yyline, yycolumn);
             } 
             // fall through
           case 134: break;
           case 59: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_FALSE, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_FALSE, yyline, yycolumn);
             } 
             // fall through
           case 135: break;
           case 60: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_BEGIN, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_BEGIN, yyline, yycolumn);
             } 
             // fall through
           case 136: break;
           case 61: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_WHILE, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_WHILE, yyline, yycolumn);
             } 
             // fall through
           case 137: break;
@@ -1244,27 +1244,27 @@ class ScannerExpr extends Scanner {
             // fall through
           case 138: break;
           case 63: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_STRUCT, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_STRUCT, yyline, yycolumn);
             } 
             // fall through
           case 139: break;
           case 64: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_STRING, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_STRING, yyline, yycolumn);
             } 
             // fall through
           case 140: break;
           case 65: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_SWITCH, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_SWITCH, yyline, yycolumn);
             } 
             // fall through
           case 141: break;
           case 66: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_RETURN, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_RETURN, yyline, yycolumn);
             } 
             // fall through
           case 142: break;
           case 67: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_READLN, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_READLN, yyline, yycolumn);
             } 
             // fall through
           case 143: break;
@@ -1279,22 +1279,22 @@ class ScannerExpr extends Scanner {
             // fall through
           case 145: break;
           case 70: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_INTEGER, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_INTEGER, yyline, yycolumn);
             } 
             // fall through
           case 146: break;
           case 71: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_BOOLEAN, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_BOOLEAN, yyline, yycolumn);
             } 
             // fall through
           case 147: break;
           case 72: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_DEFAULT, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_DEFAULT, yyline, yycolumn);
             } 
             // fall through
           case 148: break;
           case 73: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_DISPOSE, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_DISPOSE, yyline, yycolumn);
             } 
             // fall through
           case 149: break;
@@ -1304,12 +1304,12 @@ class ScannerExpr extends Scanner {
             // fall through
           case 150: break;
           case 75: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_FUNCTION, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_FUNCTION, yyline, yycolumn);
             } 
             // fall through
           case 151: break;
           case 76: 
-            { System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_PROCEDURE, yyline, yycolumn);
+            { return new Symbol(Terminals.TOKEN_PROCEDURE, yyline, yycolumn);
             } 
             // fall through
           case 152: break;

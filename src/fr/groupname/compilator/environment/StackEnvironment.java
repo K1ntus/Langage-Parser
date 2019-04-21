@@ -49,7 +49,7 @@ public class StackEnvironment {
 			
 		}
 		if(res != null) {
-			System.out.println("[STACK] Variable: "+ id +" found at Layer: " +layer);
+			//System.out.println("[STACK] Variable: "+ id +" found at Layer: " +layer);
 			return res;
 		}
 		throw new UnknownVariable("Aucune variable ["+id+"] enregistree");
@@ -89,7 +89,7 @@ public class StackEnvironment {
 		int i = 0;
 		while(it.hasNext()) {
 			Map<String, Type> map = it.next();
-			System.out.println("* Removed " + id.toString() + "at layer: " + i);
+			//System.out.println("* Removed " + id.toString() + " at layer: " + i);
 			if((map.get(id) instanceof TypePointer)) {
 				throw new MemoryLeak("Variable: " + id + " double malloc tentative.");
 			}
@@ -107,9 +107,9 @@ public class StackEnvironment {
 		int i = 0;
 		while(it.hasNext()) {
 			Map<String, Type> map = it.next();
-			System.out.println("* Removed " + id.toString() + "at layer: " + i);
+			//System.out.println("* Removed " + id.toString() + " at layer: " + i);
 			if(!(map.get(id) instanceof TypePointer)) {
-				throw new MemoryLeak("Variable: " + id + " already free or not a pointer.");
+				throw new MemoryLeak("Variable: " + id + " already free'd or not a pointer.");
 			}
 			TypePointer n_type = (TypePointer) map.get(id);
 			map.put(id, n_type.get(n_type.size()-1));

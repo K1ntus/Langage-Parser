@@ -119,22 +119,22 @@
 
 %typeof type = "Type";
 %typeof feature_type = "TypeFeature";
-%typeof range_type = "TypeRange";
+%typeof range_type = "Type";
 %typeof feature_list_type = "TypeFeatureList";
 
 %typeof statement = "Node";
 %typeof literal  = "NodeLiteral";
 %typeof variable_access, expression = "NodeExp";
-%typeof case_statement = "NodeCase";
+//%typeof case_statement = "NodeList";
 %typeof argt = "NodeId";
 
 %typeof statement_list, expression_list, argt_list, block = "NodeList";
-%typeof case_statement_list = "NodeCaseList";
+%typeof case_statement_list, case_statement = "NodeCaseList";
 %typeof identifier_list = "IdentifierList";
 //%typeof case_identifier_list = "IdentifierList";
 
 %typeof readln_statement, println_statement, procedure_expression = "NodeCallFct";
-%typeof procedure_head, procedure_declaration_head, procedure_definition_head = "TypeFunct";
+%typeof procedure_head, procedure_definition = "TypeFunct";
 
 //%typeof pop_stackenv, push_stackenv = "Void";
 
@@ -173,15 +173,17 @@ type_declaration_list=
 	;
 
 type_declaration=
-	TOKEN_IDENTIFIER.name TOKEN_AFF type.t TOKEN_SEMIC 		{:
-																try{
-																	typeEnvironment.putVariable(name, t);
-																} catch (DuplicateTypeDeclaration e) {
-																	System.err.println(e);
-																} finally {
-																	return new EmptySymbol();
-																}
-															:}
+	TOKEN_IDENTIFIER.name TOKEN_AFF type.t TOKEN_SEMIC 		
+		{:
+			try{
+				//System.out.println("Registering type:" + t.toString());
+				typeEnvironment.putVariable(name, t);
+			} catch (DuplicateTypeDeclaration e) {//|UnknownType e) {
+				System.err.println(e);
+			} finally {
+				return new EmptySymbol();
+			}
+		:}
 	;
 	
 /* 
@@ -204,7 +206,15 @@ simple_type=
 	;
 	
 named_type=
-	TOKEN_IDENTIFIER.r /*empty*/	{: return new TypeNamed(r);	:}
+	TOKEN_IDENTIFIER.r /*empty*/	{: 
+		System.out.println("Named: " + r); 
+		try {
+			return typeEnvironment.getVariableValue(r);
+		} catch(UnknownType e) {	//Si pas deja present
+			System.err.println(e);
+			return new TypeNamed(r);
+		}
+	:}
 	;
 	
 index_type=
@@ -320,36 +330,45 @@ procedure_definition_part=
 	
 procedure_definition_list=
 	procedure_definition_list procedure_definition
-	| procedure_definition
+	| procedure_definition	
+		
 	;
 	
 procedure_definition=
 	procedure_definition_head.type_fct block.fct_content	
 		{: 
-			procedureEnvironment.putVariable(type_fct, fct_content); 
+			type_fct.setDefined(true);
+			try {
+				procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
+			} catch (AlreadyDefinedFunction e) {
+				System.err.println(e);
+				if(critical_mode)
+					System.exit(0);
+			}
+		
 			return type_fct; 
 		:}
 	| procedure_declaration_head.type_fct TOKEN_SEMIC		
 		{: 
-			procedureEnvironment.putVariable(type_fct, new NodeList()); 
+			type_fct.setDefined(false); 
+			try {
+				procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
+			} catch (AlreadyDefinedFunction e) {
+				System.err.println(e);
+				if(critical_mode)
+					System.exit(0);
+			}
+
 			return type_fct; 
 		:}
 	;
 
 procedure_definition_head=
 	procedure_head.type_fct
-	{:
-		type_fct.setDefined(true); 
-		return type_fct;
-	:}	
 	;
 	
 procedure_declaration_head=
 	procedure_head.type_fct
-	{:
-		type_fct.setDefined(false); 
-		return type_fct;
-	:}	
 	;
 	
 //Definition
@@ -471,6 +490,7 @@ procedure_statement=
 //faudrait match si les params sont valides aussi
 //On cree un nouveau stack, et args = params
 //Semble bon a check
+	//A refaire, il faut juste instancier les parametres lors du parcours de la fonction
 procedure_expression=
 	TOKEN_IDENTIFIER.func_name TOKEN_LPAR expression_part.args TOKEN_RPAR	{: 
 																				try{
@@ -635,11 +655,7 @@ switch_statement=
 	TOKEN_SWITCH expression.root TOKEN_BEGIN case_statement_list.case_list TOKEN_END	{: return new NodeSwitch(root, case_list);	:}
 	;
 
-//OK	
-case_statement_list=
-	case_statement_list.list case_statement.item	{: list.add(item); return list; :}
-	| case_statement.item							{: NodeCaseList list = new NodeCaseList(); list.add(item); return list; :}
-	;
+/*
 
 //OK	
 case_statement=
@@ -647,14 +663,36 @@ case_statement=
 	TOKEN_CASE TOKEN_IDENTIFIER.name TOKEN_COLON statement.state		{: return new NodeCase(name, state); :}
 	| TOKEN_DEFAULT TOKEN_COLON statement.state							{: return new NodeCase("default", state); :}
 	;
+	*/
 
-/*
-case_identifier_list=
-	case_identifier_list.list TOKEN_IDENTIFIER.str	{: list.add(str); return list; :}
-	| TOKEN_IDENTIFIER.str	{: IdentifierList l = new IdentifierList(str); return l; :}
-	;
-*/
-	
+	//OK	
+	case_statement_list=
+		case_statement_list.list case_statement.item	
+			{: 
+				List<Node> lst_entry = item.getList();
+				for(Node n : lst_entry) {
+					NodeCase n_case = (NodeCase) n;
+					list.add(n_case); 
+				}
+				return list; 
+			:}
+		| case_statement.list		
+		;
+		
+	case_statement=
+		TOKEN_CASE identifier_list.idl TOKEN_COLON statement.st 
+			{: 
+				NodeCaseList res = new NodeCaseList();
+				for(String id : idl) {
+					res.add(new NodeCase(id, st));
+				}
+				
+				return res;
+			:}
+		| TOKEN_DEFAULT TOKEN_COLON statement.state {: return new NodeCaseList(new NodeCase(state)); :}
+		;
+		
+
 /*
 Expressions
 
@@ -668,7 +706,7 @@ variable_access=
 				Type t = stackEnvironment.get_node_reachable(name);  
 				return new NodeId(name, t);
 			} catch (UnknownVariable e) {	//Not a normal variable
-				try {	//Check enum
+				try {						//Check enum
 					Type tmp = typeEnvironment.getEnumType(name);
 					if(tmp instanceof TypeItemEnum) {
 						TypeItemEnum t = (TypeItemEnum) tmp;

@@ -1,11 +1,10 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
+import ubordeaux.deptinfo.compilation.project.type.TypeRange;
+import ubordeaux.deptinfo.compilation.project.type.TypeItemEnum;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypeArray;
 import ubordeaux.deptinfo.compilation.project.type.TypeComplex;
-import ubordeaux.deptinfo.compilation.project.type.TypeItemEnum;
-import ubordeaux.deptinfo.compilation.project.type.TypeRange;
 
 public final class NodeArrayAccess extends NodeExp {
 
@@ -40,21 +39,12 @@ public final class NodeArrayAccess extends NodeExp {
 			System.err.println("index constant hors tableau");
 			return false;
 		}			
-		System.out.println("- ArrayAccess well typed");
 		return true;
 	}
 
 	@Override
 	public NodeArrayAccess clone() {
 		return new NodeArrayAccess((NodeExp) get(0).clone(), (Node) get(1).clone());
-	}
-
-
-	public ExpList generateIntermediateCode() {
-		return null;
-		
-		//System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		
 	}
 
 }

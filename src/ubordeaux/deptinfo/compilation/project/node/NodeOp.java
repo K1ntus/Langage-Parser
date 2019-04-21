@@ -106,7 +106,9 @@ public class NodeOp extends NodeExp {
                     break;
             }
             
-            return new ExpList(new Binop(operation,  this.getOp1().generateIntermediateCode().getHead(), this.getOp2().generateIntermediateCode().getHead()),null);
+            return null;
+            
+            //return new ExpList(new Binop(operation,  this.getOp1().generateIntermediateCode().getHead(), this.getOp2().generateIntermediateCode().getHead()),null);
 
             
         }

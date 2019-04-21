@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 import ubordeaux.deptinfo.compilation.project.type.TypeFeature;
 import ubordeaux.deptinfo.compilation.project.type.TypeFunct;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 
 public final class NodeCallFct extends NodeExp {
@@ -25,10 +24,6 @@ public final class NodeCallFct extends NodeExp {
 		super();
 		this.name = name;
 		this.type = type;
-	}
-	
-	public TypeFunct getTypeFunct() {
-		return (TypeFunct) this.type;
 	}
 
 	public Type getType() {
@@ -54,20 +49,17 @@ public final class NodeCallFct extends NodeExp {
 				break;
 			}
 			Type argType = arg.getType();
-			// chaque parametre est une feature nom : type
+			// chaque paramètre est une feature nom : type
 			Type paramType = ((TypeFeature) itParams.next()).getType();
-			
 			if (!paramType.equals(argType)) {
-				System.err.println("*** Erreur de typage :\n* Args Type: " + argType + "\n* Params Type: " + paramType);
+				System.err.println("*** Erreur de typage " + argType + " != " + paramType);
 				result = false;
 				break;
 			}
 		}
-		// Plus ou moins d'arguments que de parametres
+		// Plus ou moins d'arguments que de paramètres
 		if (result && (itArgs.hasNext() || itParams.hasNext())) {
 			System.err.println("*** Erreur de typage: pas le même nombre de paramètres ");
-			System.err.println("*** nb_params got: " + this.getArgs().getList().size() + " - Expected: " + ((TypeFunct) type).getParams().size());
-			
 			return false;
 		}
 		return result;
@@ -91,16 +83,6 @@ public final class NodeCallFct extends NodeExp {
 		return "NodeCallFct " + name + "()";
 	}
 
-	@Override
-	public ExpList generateIntermediateCode() {
-		// TODO Auto-generated method stub
-		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		return null;
-		
-	}
 
-	public String getName() {
-		return name;
-	}
 
 }

@@ -1,0 +1,1588 @@
+
+
+
+*************************************************
+*** Fichier data/progr1.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+*** var
+*** a
+*** :
+*** integer
+*** ;
+*** begin
+* Enregistre a
+*** a
+*** =
+[STACK] Variable: a found at Layer: 2
+*** 100
+*** ;
+*** while
+*** (
+*** a
+*** >=
+[STACK] Variable: a found at Layer: 2
+*** 0
+*** )
+*** do
+*** begin
+*** println
+*** (
+*** a
+*** )
+[STACK] Variable: a found at Layer: 3
+*** ;
+*** a
+*** =
+[STACK] Variable: a found at Layer: 3
+*** a
+*** -
+[STACK] Variable: a found at Layer: 3
+*** 1
+*** ;
+*** end
+*** end
+
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+Code intermediaire while
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+code intermediaire assign
+code intermediaire ID
+class ubordeaux.deptinfo.compilation.project.node.NodeLiteral
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeWhile
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeWhile(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeId#a:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))))
+
+
+
+*************************************************
+*** Fichier data/progr2.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// gestion des variables statiques
+//
+*** var
+*** x
+*** ,
+*** y
+*** :
+*** integer
+*** ;
+*** b
+* Enregistre x
+* Enregistre y
+*** :
+*** boolean
+*** ;
+*** c
+* Enregistre b
+*** :
+*** string
+*** ;
+*** d
+* Enregistre c
+*** :
+*** array
+*** [
+*** 1
+*** ..
+*** 10
+*** ]
+*** of
+*** string
+*** ;
+*** begin
+* Enregistre d
+*** x
+*** =
+[STACK] Variable: x found at Layer: 2
+*** 1234564789
+*** ;
+// 0x4995F6B5
+*** y
+*** =
+[STACK] Variable: y found at Layer: 2
+*** 0x7FFFFFFF
+*** ;
+*** b
+*** =
+[STACK] Variable: b found at Layer: 2
+*** true
+*** ;
+*** c
+*** =
+[STACK] Variable: c found at Layer: 2
+*** ;
+*** d
+*** [
+[STACK] Variable: d found at Layer: 2
+*** 1
+*** ]
+*** =
+*** ;
+*** d
+*** [
+[STACK] Variable: d found at Layer: 2
+*** 2
+*** ]
+*** =
+*** ;
+*** d
+*** [
+[STACK] Variable: d found at Layer: 2
+*** 3
+*** ]
+*** =
+*** ;
+*** d
+*** [
+[STACK] Variable: d found at Layer: 2
+*** 10
+*** ]
+*** =
+*** ;
+*** println
+*** (
+*** x
+*** +
+[STACK] Variable: x found at Layer: 2
+*** 5
+*** )
+*** ;
+*** println
+*** y
+*** ;
+[STACK] Variable: y found at Layer: 2
+*** println
+*** b
+*** ;
+[STACK] Variable: b found at Layer: 2
+*** println
+*** c
+*** ;
+[STACK] Variable: c found at Layer: 2
+*** println
+*** d
+*** [
+[STACK] Variable: d found at Layer: 2
+*** 2
+*** ]
+*** ;
+*** end
+
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeOp
+--- CheckType NodeCallFct
+--- CheckType NodeId
+--- CheckType NodeCallFct
+--- CheckType NodeId
+--- CheckType NodeCallFct
+--- CheckType NodeId
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeOp(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#))), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#))))
+
+
+
+*************************************************
+*** Fichier data/progr3.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+// gestion des variables statiques
+// gestion du tas et des pointeurs
+// 
+*** var
+*** x
+*** :
+*** integer
+*** ;
+*** y
+* Enregistre x
+*** :
+*** integer
+*** ;
+*** b
+* Enregistre y
+*** :
+*** boolean
+*** ;
+*** c
+* Enregistre b
+*** :
+*** string
+*** ;
+*** d
+* Enregistre c
+*** :
+*** array
+*** [
+*** 1
+*** ..
+*** 10
+*** ]
+*** of
+*** string
+*** ;
+*** p
+* Enregistre d
+*** :
+*** ^
+*** integer
+*** ;
+*** q
+* Enregistre p
+*** :
+*** ^
+*** string
+*** ;
+*** r
+* Enregistre q
+*** :
+*** ^
+*** integer
+*** ;
+*** begin
+* Enregistre r
+*** x
+*** =
+[STACK] Variable: x found at Layer: 2
+*** 1234564789
+*** ;
+// 0x4995F6B5
+*** y
+*** =
+[STACK] Variable: y found at Layer: 2
+*** 0x7FFFFFFF
+*** ;
+*** b
+*** =
+[STACK] Variable: b found at Layer: 2
+*** true
+*** ;
+*** c
+*** =
+[STACK] Variable: c found at Layer: 2
+*** ;
+*** d
+*** [
+[STACK] Variable: d found at Layer: 2
+*** 1
+*** ]
+*** =
+*** ;
+*** d
+*** [
+[STACK] Variable: d found at Layer: 2
+*** 2
+*** ]
+*** =
+*** ;
+*** d
+*** [
+[STACK] Variable: d found at Layer: 2
+*** 3
+*** ]
+*** =
+*** ;
+*** d
+*** [
+[STACK] Variable: d found at Layer: 2
+*** 10
+*** ]
+*** =
+*** ;
+*** println
+*** (
+*** x
+*** )
+[STACK] Variable: x found at Layer: 2
+*** ;
+*** println
+*** (
+*** y
+*** )
+[STACK] Variable: y found at Layer: 2
+*** ;
+*** println
+*** (
+*** b
+*** )
+[STACK] Variable: b found at Layer: 2
+*** ;
+*** println
+*** (
+*** c
+*** )
+[STACK] Variable: c found at Layer: 2
+*** ;
+//println (d[2]);
+*** new
+*** q
+*** ;
+[STACK] Variable: q found at Layer: 2
+*** q
+*** ^
+[STACK] Variable: q found at Layer: 2
+*** =
+*** ;
+// 0x41
+*** println
+*** q
+*** ^
+[STACK] Variable: q found at Layer: 2
+*** ;
+*** println
+*** p
+*** ;
+[STACK] Variable: p found at Layer: 2
+*** new
+*** p
+*** ;
+[STACK] Variable: p found at Layer: 2
+*** println
+*** p
+*** ;
+[STACK] Variable: p found at Layer: 2
+*** p
+*** ^
+[STACK] Variable: p found at Layer: 2
+*** =
+*** x
+*** ;
+[STACK] Variable: x found at Layer: 2
+*** println
+*** p
+*** ^
+[STACK] Variable: p found at Layer: 2
+*** ;
+*** new
+*** r
+*** ;
+[STACK] Variable: r found at Layer: 2
+// resize the heap
+*** r
+*** ^
+[STACK] Variable: r found at Layer: 2
+*** =
+*** 65536
+*** ;
+*** println
+*** (
+*** r
+*** ^
+[STACK] Variable: r found at Layer: 2
+*** )
+*** ;
+*** dispose
+*** p
+*** ;
+[STACK] Variable: p found at Layer: 2
+*** println
+*** (
+*** p
+*** )
+[STACK] Variable: p found at Layer: 2
+*** ;
+*** println
+*** (
+*** p
+*** ^
+[STACK] Variable: p found at Layer: 2
+*** )
+*** ;
+// heap memory error
+*** end
+
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeNew
+code intermediaire assign
+TODO: NodePtrAccess.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeNew
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+code intermediaire assign
+TODO: NodePtrAccess.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeNew
+code intermediaire assign
+TODO: NodePtrAccess.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeDispose
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+--- CheckType NodeCallFct
+--- CheckType NodeId
+--- CheckType NodeCallFct
+--- CheckType NodeId
+--- CheckType NodeCallFct
+--- CheckType NodeId
+--- CheckType NodeNew
+--- CheckType NodeAssign
+--- CheckType NodePtrAccess
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodePtrAccess
+--- CheckType NodeCallFct
+--- CheckType NodeId
+--- CheckType NodeNew
+--- CheckType NodeCallFct
+--- CheckType NodeId
+--- CheckType NodeAssign
+--- CheckType NodePtrAccess
+--- CheckType NodeId
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodePtrAccess
+--- CheckType NodeNew
+--- CheckType NodeAssign
+--- CheckType NodePtrAccess
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodePtrAccess
+--- CheckType NodeDispose
+--- CheckType NodeCallFct
+--- CheckType NodeId
+--- CheckType NodeCallFct
+--- CheckType NodePtrAccess
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), NodeNew(NodeId#q:TypePointer(TypeString)#), NodeAssign(NodePtrAccess(NodeId#q:TypePointer(TypeString)#), NodeLiteral#"A":TypeString#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#q:TypePointer(TypeString)#))), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeNew(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeAssign(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#), NodeId#x:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#))), NodeNew(NodeId#r:TypePointer(TypeInt_null)#), NodeAssign(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#), NodeLiteral#65536:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#))), NodeDispose(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#))))
+
+
+
+*************************************************
+*** Fichier data/progr4.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// Structure de contrôle
+//
+//
+*** var
+*** x
+*** ,
+*** y
+*** :
+*** integer
+*** ;
+*** begin
+* Enregistre x
+* Enregistre y
+*** x
+*** =
+[STACK] Variable: x found at Layer: 2
+*** 1
+*** ;
+*** while
+*** (
+*** x
+*** <=
+[STACK] Variable: x found at Layer: 2
+*** 10
+*** )
+*** do
+*** begin
+*** println
+*** (
+*** x
+*** )
+[STACK] Variable: x found at Layer: 3
+*** ;
+*** if
+*** (
+*** x
+*** ==
+[STACK] Variable: x found at Layer: 3
+*** 10
+*** )
+*** then
+*** begin
+*** y
+*** =
+[STACK] Variable: y found at Layer: 4
+*** 1
+*** ;
+*** while
+*** (
+*** y
+*** <=
+[STACK] Variable: y found at Layer: 4
+*** 5
+*** )
+*** do
+*** begin
+*** println
+*** (
+*** -
+*** 1000
+*** -
+*** y
+*** )
+[STACK] Variable: y found at Layer: 5
+*** ;
+*** y
+*** =
+[STACK] Variable: y found at Layer: 5
+*** y
+*** +
+[STACK] Variable: y found at Layer: 5
+*** 1
+*** ;
+*** end
+*** else
+*** Erreur de syntaxe en ligne 0, colonne 18. Token inattendu: TOKEN_ELSE
+*** println
+*** (
+0,18-0,6: Recovered: removed unexpected token #54
+*** )
+*** ;
+*** x
+*** =
+[STACK] Variable: x found at Layer: 4
+*** x
+*** +
+[STACK] Variable: x found at Layer: 4
+*** 1
+*** ;
+*** end
+*** end
+*** end
+
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+Code intermediaire while
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeIf
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeWhile
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), NodeIf(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#y:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeOp(NodeOp(NodeLiteral#1000:TypeInt_null#), NodeId#y:TypeInt_null#))), NodeAssign(NodeId#y:TypeInt_null#, NodeOp(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))), println_NodeCallFct(NodeList(NodeLiteral#"X":TypeString#)), NodeAssign(NodeId#x:TypeInt_null#, NodeOp(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))))))
+
+
+
+*************************************************
+*** Fichier data/progr5.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+*** var
+*** x
+*** :
+*** integer
+*** ;
+*** function
+* Enregistre x
+*** sum
+*** (
+*** i
+*** :
+*** integer
+*** ,
+*** j
+*** :
+*** integer
+*** )
+*** :
+*** integer
+*** var
+* Enregistre i
+* Enregistre j
+*** k
+*** :
+*** integer
+*** ;
+*** begin
+* Enregistre k
+*** return
+*** (
+*** i
+*** +
+[STACK] Variable: i found at Layer: 2
+*** j
+*** )
+[STACK] Variable: j found at Layer: 2
+*** ;
+*** end
+*** function
+** Enregistre fct:([i:TypeInt_null], [j:TypeInt_null]) -> TypeInt_null Defined: true Name: sum
+*** pgcd
+*** (
+*** i
+*** :
+*** integer
+*** ,
+*** j
+*** :
+*** integer
+*** )
+*** :
+*** integer
+*** begin
+* Enregistre i
+* Enregistre j
+*** while
+*** (
+*** i
+*** !=
+[STACK] Variable: i found at Layer: 2
+*** j
+*** )
+[STACK] Variable: j found at Layer: 2
+*** do
+*** if
+*** (
+*** i
+*** >
+[STACK] Variable: i found at Layer: 2
+*** j
+*** )
+[STACK] Variable: j found at Layer: 2
+*** then
+*** i
+*** =
+[STACK] Variable: i found at Layer: 2
+*** i
+*** -
+[STACK] Variable: i found at Layer: 2
+*** j
+*** ;
+[STACK] Variable: j found at Layer: 2
+*** else
+*** j
+*** =
+[STACK] Variable: j found at Layer: 2
+*** j
+*** -
+[STACK] Variable: j found at Layer: 2
+*** i
+*** ;
+[STACK] Variable: i found at Layer: 2
+*** return
+*** (
+*** i
+*** )
+[STACK] Variable: i found at Layer: 2
+*** ;
+*** end
+*** begin
+** Enregistre fct:([i:TypeInt_null], [j:TypeInt_null]) -> TypeInt_null Defined: true Name: pgcd
+*** x
+*** =
+[STACK] Variable: x found at Layer: 2
+*** 5
+*** ;
+*** x
+*** =
+[STACK] Variable: x found at Layer: 2
+*** sum
+*** (
+*** 3
+*** ,
+*** 5
+*** )
+*** ;
+Register function NodeLiteral:i | NodeLiteral#3:TypeInt_null#
+Register function NodeLiteral:j | NodeLiteral#5:TypeInt_null#
+*** println
+*** sum
+*** (
+*** 3
+*** ,
+*** 5
+*** )
+*** ;
+Register function NodeLiteral:i | NodeLiteral#3:TypeInt_null#
+Register function NodeLiteral:j | NodeLiteral#5:TypeInt_null#
+*** println
+*** (
+*** pgcd
+*** (
+*** 78
+*** ,
+*** 90
+*** )
+*** )
+Register function NodeLiteral:i | NodeLiteral#78:TypeInt_null#
+Register function NodeLiteral:j | NodeLiteral#90:TypeInt_null#
+*** ;
+*** end
+
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeCallFct.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+*** Erreur de typage :
+* Args Type: TypeInt_null
+* Params Type: ([i:TypeInt_null], [j:TypeInt_null]) -> TypeInt_null Defined: true Name: sum
+- Checktype invalid: 
+- elem:println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#))))
+*** Erreur de typage
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeAssign(NodeId#x:TypeInt_null#, sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#))), println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#)))), println_NodeCallFct(NodeList(pgcd_NodeCallFct(NodeList(NodeLiteral#78:TypeInt_null#, NodeLiteral#90:TypeInt_null#)))))
+
+
+
+*************************************************
+*** Fichier data/progr6.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// gestion complexe de la pile
+// 
+*** var
+*** x
+*** :
+*** integer
+*** ;
+*** function
+* Enregistre x
+*** fact1
+*** (
+*** k
+*** :
+*** integer
+*** )
+*** :
+*** integer
+*** begin
+* Enregistre k
+*** if
+*** (
+*** k
+*** ==
+[STACK] Variable: k found at Layer: 2
+*** 1
+*** )
+*** then
+*** return
+*** (
+*** 1
+*** )
+*** ;
+*** else
+*** return
+*** (
+*** k
+*** *
+[STACK] Variable: k found at Layer: 2
+*** fact1
+*** (
+*** k
+*** -
+[STACK] Variable: k found at Layer: 2
+*** 1
+*** )
+*** )
+Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: fact1 trouvee.
+*** ;
+*** end
+*** function
+** Enregistre fct:([k:TypeInt_null]) -> TypeInt_null Defined: true Name: fact1
+*** fact2
+*** (
+*** k
+*** :
+*** integer
+*** )
+*** :
+*** integer
+*** begin
+* Enregistre k
+*** if
+*** (
+*** k
+*** ==
+[STACK] Variable: k found at Layer: 3
+*** 1
+*** )
+*** then
+*** return
+*** (
+*** 1
+*** )
+*** ;
+*** else
+*** return
+*** (
+*** fact2
+*** (
+*** k
+*** -
+[STACK] Variable: k found at Layer: 3
+*** 1
+*** )
+*** *
+Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: fact2 trouvee.
+*** k
+*** )
+[STACK] Variable: k found at Layer: 4
+*** ;
+*** end
+*** procedure
+** Enregistre fct:([k:TypeInt_null]) -> TypeInt_null Defined: true Name: fact2
+*** hanoi
+*** (
+*** a
+*** :
+*** string
+*** ,
+*** b
+*** :
+*** string
+*** ,
+*** c
+*** :
+*** string
+*** ,
+*** k
+*** :
+*** integer
+*** )
+*** begin
+* Enregistre a
+* Enregistre b
+* Enregistre c
+* Enregistre k
+*** if
+*** (
+*** k
+*** >
+[STACK] Variable: k found at Layer: 4
+*** 1
+*** )
+*** then
+*** hanoi
+*** (
+*** a
+*** ,
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:4
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:4
+[STACK] Variable: a found at Layer: 2
+*** c
+*** ,
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:4
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:4
+[STACK] Variable: c found at Layer: 2
+*** b
+*** ,
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:4
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:4
+[STACK] Variable: b found at Layer: 2
+*** k
+*** -
+[STACK] Variable: k found at Layer: 4
+*** 1
+*** )
+*** ;
+Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: hanoi trouvee.
+*** print
+*** (
+*** a
+*** )
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:5
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:5
+[STACK] Variable: a found at Layer: 3
+*** ;
+*** print
+*** (
+*** )
+*** ;
+*** println
+*** (
+*** c
+*** )
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:5
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:5
+[STACK] Variable: c found at Layer: 3
+*** ;
+*** if
+*** (
+*** k
+*** >
+[STACK] Variable: k found at Layer: 5
+*** 1
+*** )
+*** then
+*** hanoi
+*** (
+*** b
+*** ,
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:5
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:5
+[STACK] Variable: b found at Layer: 3
+*** a
+*** ,
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:5
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:5
+[STACK] Variable: a found at Layer: 3
+*** c
+*** ,
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:5
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:5
+[STACK] Variable: c found at Layer: 3
+*** k
+*** -
+[STACK] Variable: k found at Layer: 5
+*** 1
+*** )
+*** ;
+Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: hanoi trouvee.
+*** end
+*** function
+** Enregistre fct:([a:TypeString], [b:TypeString], [c:TypeString], [k:TypeInt_null]) -> TypeVoid Defined: true Name: hanoi
+*** impair
+*** (
+*** i
+*** :
+*** integer
+*** )
+*** :
+*** boolean
+*** ;
+* Enregistre i
+*** function
+** Enregistre fct:([i:TypeInt_null]) -> TypeBoolean Defined: false Name: impair
+*** pair
+*** (
+*** i
+*** :
+*** integer
+*** )
+*** :
+*** boolean
+*** var
+* Enregistre i
+*** b
+*** :
+*** boolean
+*** ;
+*** begin
+* Enregistre b
+*** if
+*** (
+*** i
+*** ==
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[STACK] Variable: i found at Layer: 2
+*** 1
+*** )
+*** then
+*** b
+*** =
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[STACK] Variable: b found at Layer: 4
+*** false
+*** ;
+*** else
+*** if
+*** (
+*** i
+*** ==
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[STACK] Variable: i found at Layer: 2
+*** 0
+*** )
+*** then
+*** b
+*** =
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[STACK] Variable: b found at Layer: 4
+*** true
+*** ;
+*** else
+*** b
+*** =
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[STACK] Variable: b found at Layer: 4
+*** impair
+*** (
+*** i
+*** -
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:6
+[STACK] Variable: i found at Layer: 2
+*** 1
+*** )
+*** ;
+Register function NodOp:i | NodeLiteral#NodeOp(NodeId#i:TypeInt_null#, NodeLiteral#1:TypeInt_null#):TypeInt_null#
+*** return
+*** (
+*** b
+*** )
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:7
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:7
+[STACK] Variable: b found at Layer: 5
+*** ;
+*** end
+*** function
+** Enregistre fct:([i:TypeInt_null]) -> TypeBoolean Defined: true Name: pair
+*** impair
+*** (
+*** i
+*** :
+*** integer
+*** )
+*** :
+*** boolean
+*** begin
+* Enregistre i
+*** if
+*** (
+*** i
+*** ==
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:7
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:7
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:7
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:7
+[STACK] Variable: i found at Layer: 3
+*** 1
+*** )
+*** then
+*** return
+*** (
+*** true
+*** )
+*** ;
+*** else
+*** if
+*** (
+*** i
+*** ==
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:7
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:7
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:7
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:7
+[STACK] Variable: i found at Layer: 3
+*** 0
+*** )
+*** then
+*** return
+*** (
+*** false
+*** )
+*** ;
+*** else
+*** return
+*** (
+*** pair
+*** (
+*** i
+*** -
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:7
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:7
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:7
+[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
+[ERROR]Stack Size:7
+[STACK] Variable: i found at Layer: 3
+*** 1
+*** )
+*** )
+Register function NodOp:i | NodeLiteral#NodeOp(NodeId#i:TypeInt_null#, NodeLiteral#1:TypeInt_null#):TypeInt_null#
+*** ;
+*** end
+*** begin
+** Enregistre fct:([i:TypeInt_null]) -> TypeBoolean Defined: true Name: impair
+*** println
+*** (
+*** fact1
+*** (
+*** 6
+*** )
+*** )
+Register function NodeLiteral:k | NodeLiteral#6:TypeInt_null#
+*** ;
+*** println
+*** (
+*** fact2
+*** (
+*** 6
+*** )
+*** )
+Register function NodeLiteral:k | NodeLiteral#6:TypeInt_null#
+*** ;
+*** hanoi
+*** (
+*** ,
+*** ,
+*** ,
+*** 4
+*** )
+*** ;
+Register function NodeLiteral:a | NodeLiteral#"A":TypeString#
+Register function NodeLiteral:b | NodeLiteral#"B":TypeString#
+Register function NodeLiteral:c | NodeLiteral#"C":TypeString#
+Register function NodeLiteral:k | NodeLiteral#4:TypeInt_null#
+*** println
+*** (
+*** pair
+*** (
+*** 1001
+*** )
+*** )
+Register function NodeLiteral:i | NodeLiteral#1001:TypeInt_null#
+*** ;
+*** println
+*** (
+*** pair
+*** (
+*** 1000
+*** )
+*** )
+Register function NodeLiteral:i | NodeLiteral#1000:TypeInt_null#
+*** ;
+*** end
+
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+*** Erreur de typage :
+* Args Type: TypeInt_null
+* Params Type: ([k:TypeInt_null]) -> TypeInt_null Defined: true Name: fact1
+- Checktype invalid: 
+- elem:println_NodeCallFct(NodeList(fact1_NodeCallFct(NodeList(NodeLiteral#6:TypeInt_null#))))
+*** Erreur de typage
+
+
+Arbre Principal: 
+NodeList(println_NodeCallFct(NodeList(fact1_NodeCallFct(NodeList(NodeLiteral#6:TypeInt_null#)))), println_NodeCallFct(NodeList(fact2_NodeCallFct(NodeList(NodeLiteral#6:TypeInt_null#)))), hanoi_NodeCallFct(NodeList(NodeLiteral#"A":TypeString#, NodeLiteral#"B":TypeString#, NodeLiteral#"C":TypeString#, NodeLiteral#4:TypeInt_null#)), println_NodeCallFct(NodeList(pair_NodeCallFct(NodeList(NodeLiteral#1001:TypeInt_null#)))), println_NodeCallFct(NodeList(pair_NodeCallFct(NodeList(NodeLiteral#1000:TypeInt_null#)))))
+
+
+
+*************************************************
+*** Fichier data/progr7.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// tableaux
+// 
+*** var
+*** week
+*** :
+*** array
+*** [
+*** 0
+*** ..
+*** 6
+*** ]
+*** of
+*** string
+*** ;
+*** year
+* Enregistre week
+*** :
+*** array
+*** [
+*** 1
+*** ..
+*** 7
+*** ]
+*** of
+*** array
+*** [
+*** 1
+*** ..
+*** 31
+*** ]
+*** of
+*** array
+*** [
+*** 1
+*** ..
+*** 12
+*** ]
+*** of
+*** string
+*** ;
+*** begin
+* Enregistre year
+*** week
+*** [
+[STACK] Variable: week found at Layer: 2
+*** 0
+*** ]
+*** =
+*** ;
+*** week
+*** [
+[STACK] Variable: week found at Layer: 2
+*** 1
+*** ]
+*** =
+*** ;
+*** week
+*** [
+[STACK] Variable: week found at Layer: 2
+*** 2
+*** ]
+*** =
+*** ;
+*** year
+*** [
+[STACK] Variable: year found at Layer: 2
+*** 2
+*** ]
+*** [
+*** 17
+*** ]
+*** [
+*** 3
+*** ]
+*** =
+*** ;
+*** year
+*** [
+[STACK] Variable: year found at Layer: 2
+*** 4
+*** ]
+*** [
+*** 22
+*** ]
+*** [
+*** 7
+*** ]
+*** =
+*** ;
+*** println
+*** (
+*** year
+*** [
+[STACK] Variable: year found at Layer: 2
+*** 2
+*** ]
+*** [
+*** 17
+*** ]
+*** [
+*** 3
+*** ]
+*** )
+*** ;
+*** println
+*** (
+*** year
+*** [
+[STACK] Variable: year found at Layer: 2
+*** 2
+*** ]
+*** [
+*** 17
+*** ]
+*** [
+*** 4
+*** ]
+*** )
+*** ;
+*** println
+*** (
+*** week
+*** [
+[STACK] Variable: week found at Layer: 2
+*** 1
+*** ]
+*** )
+*** ;
+*** end
+
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#0:TypeInt_null#), NodeLiteral#"M":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"T":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"W":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#), NodeLiteral#"X":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#4:TypeInt_null#), NodeLiteral#22:TypeInt_null#), NodeLiteral#7:TypeInt_null#), NodeLiteral#"V":TypeString#), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#4:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#))))

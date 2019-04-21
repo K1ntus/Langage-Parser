@@ -101,13 +101,12 @@ public abstract class Type extends ClonableSymbol implements Comparable<Type>, T
 			// nothing
 		}
 		else {
-			System.err.println("Erreur d'unification: " + this + " different de  " + obj);
+			System.err.println("Erreur d'unification: " + this + " différent de  " + obj);
 			return null;
 		}
 		return result;
 
 	}
-
 
 	@Override
 	public int compareTo(Type o) {

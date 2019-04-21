@@ -224,12 +224,7 @@ public class Parser extends beaver.Parser {
 				}
 			},
 			Action.RETURN,	// [23] range_type = enumerated_type
-			new Action() {	// [24] range_type = subrange_type.t
-				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol t = _symbols[offset + 1];
-					 System.out.println(t.toString()); return t;
-				}
-			},
+			Action.RETURN,	// [24] range_type = subrange_type
 			Action.RETURN,	// [25] range_type = named_type
 			new Action() {	// [26] pointer_type = TOKEN_CIRC type.t
 				public Symbol reduce(Symbol[] _symbols, int offset) {
@@ -290,7 +285,7 @@ public class Parser extends beaver.Parser {
 					final Type t = (Type) _symbol_t.value;
 					
 																for(String str : id_list){
-																	stackEnvironment.add_node_to_latest_portability(str, new NodeLiteral(t, 0));
+																	stackEnvironment.add_node_to_latest_portability(str, t);
 																}
 																
 																return _symbol_id_list;
@@ -376,7 +371,7 @@ public class Parser extends beaver.Parser {
 				for(Node n : args.getList()) {
 					NodeId n_id = (NodeId) n;
 					params_tuple.add(new TypeFeature(n_id.getName(), n_id.getType()));
-					stackEnvironment.add_node_to_latest_portability(n_id.getName(), new NodeLiteral(n_id.getType(), 0));
+					stackEnvironment.add_node_to_latest_portability(n_id.getName(), n_id.getType());
 				}
 				
 				TypeFunct type_function = new TypeFunct(funct_name, params_tuple, new TypeVoid());
@@ -399,7 +394,7 @@ public class Parser extends beaver.Parser {
 				for(Node n : args.getList()) {
 					NodeId n_id = (NodeId) n;
 					params_tuple.add(new TypeFeature(n_id.getName(), n_id.getType()));
-					stackEnvironment.add_node_to_latest_portability(n_id.getName(), new NodeLiteral(n_id.getType(), 0));
+					stackEnvironment.add_node_to_latest_portability(n_id.getName(), n_id.getType());
 				}
 				
 				TypeFunct type_function = new TypeFunct(funct_name, params_tuple, t);
@@ -454,7 +449,7 @@ public class Parser extends beaver.Parser {
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 						
 						//System.out.println("[STACK] Pushed one more stack layer"); 
-						stackEnvironment.getEnvironment().push(new HashMap<String, NodeLiteral>(stackEnvironment.getEnvironment().peek())); 
+						stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); 
 						return new EmptySymbol();
 				}
 			},
@@ -490,6 +485,8 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_e2 = _symbols[offset + 3];
 					final NodeExp e2 = (NodeExp) _symbol_e2.value;
 					  
+		//System.out.println("Left: " + e1.toString());
+		//System.out.println("Right: " + e2.toString());
 																return new NodeAssign(e1, e2);
 				}
 			},
@@ -508,8 +505,8 @@ public class Parser extends beaver.Parser {
 					final NodeList args = (NodeList) _symbol_args.value;
 					 
 																				try{
-																					stackEnvironment.getEnvironment().push(new HashMap<String, NodeLiteral>(stackEnvironment.getEnvironment().peek())); //push env
-																					HashMap<String, NodeLiteral> table = (HashMap) stackEnvironment.getEnvironment().peek();
+																					stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); //push env
+																					HashMap<String, Type> table = (HashMap) stackEnvironment.getEnvironment().peek();
 																					
 																					//NodeCallFct fct_from_table = procedureEnvironment.getNodeFct(func_name);
 																					//TypeFunct fct_type = fct_from_table.getTypeFunct().clone();
@@ -523,16 +520,16 @@ public class Parser extends beaver.Parser {
 																						Type t = current_type.getType();
 																						if((args.get(i) instanceof NodeLiteral)) {
 																							NodeLiteral node = (NodeLiteral) args.get(i);
-																							table.put(id, node);		
+																							table.put(id, node.getType());		
 																							System.out.println("Register function NodeLiteral:" +id + " | "+ node.toString());
 																						}else if(args.get(i) instanceof NodeOp) {
 																							NodeLiteral node = new NodeLiteral(new TypeInt(), args.get(i));
-																							table.put(id,node);
+																							table.put(id, node.getType());
 																							System.out.println("Register function NodOp:" +id + " | "+ node.toString());
 																					
 																						}else if(args.get(i) instanceof NodeRel) {
 																							NodeLiteral node = new NodeLiteral(new TypeBoolean(), args.get(i));
-																							table.put(id,node);
+																							table.put(id, node.getType());
 																							System.out.println("Register function NodeRel:" +id + " | "+ node.toString());
 																							
 																						}else {
@@ -705,14 +702,14 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_name = _symbols[offset + 1];
 					final String name = (String) _symbol_name.value;
 						
-										try{
-											NodeLiteral res = stackEnvironment.get_node_reachable(name);  
-											System.out.println("[VARIABLE]" + res.toString() +" found.");
-											return res;
-										} catch (NoSuchFieldException e) {
-											System.out.println("Variable [" + name + "]: "+ e);
-											return new NodeLiteral(new TypeVoid(), null);
-										}
+			try{
+				Type t = stackEnvironment.get_node_reachable(name);  
+				//System.out.println("[VARIABLE]" + res.toString() +" found.");
+				return new NodeId(name, t);
+			} catch (UnknownVariable e) {
+				System.err.println("Variable [" + name + "]: "+ e);
+				return new NodeId(null, null);
+			}
 				}
 			},
 			new Action() {	// [92] variable_access = variable_access.var TOKEN_LBRACKET expression.e TOKEN_RBRACKET
@@ -863,18 +860,18 @@ public class Parser extends beaver.Parser {
 			Action.RETURN,	// [109] expression = procedure_expression
 			Action.RETURN,	// [110] expression = variable_access
 			Action.RETURN,	// [111] expression = literal
-			new Action() {	// [112] literal = TOKEN_LIT_INTEGER.e
+			new Action() {	// [112] literal = TOKEN_LIT_INTEGER.value
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_e = _symbols[offset + 1];
-					final Integer e = (Integer) _symbol_e.value;
-					 return new NodeLiteral(new TypeInt(), e);
+					final Symbol _symbol_value = _symbols[offset + 1];
+					final Integer value = (Integer) _symbol_value.value;
+					 return new NodeLiteral(new TypeInt(), value);
 				}
 			},
-			new Action() {	// [113] literal = TOKEN_LIT_STRING.e
+			new Action() {	// [113] literal = TOKEN_LIT_STRING.value
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_e = _symbols[offset + 1];
-					final String e = (String) _symbol_e.value;
-					 return new NodeLiteral(new TypeString(), e);
+					final Symbol _symbol_value = _symbols[offset + 1];
+					final String value = (String) _symbol_value.value;
+					 return new NodeLiteral(new TypeString(), value);
 				}
 			},
 			new Action() {	// [114] literal = TOKEN_TRUE

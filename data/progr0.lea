@@ -5,6 +5,7 @@ named2 = unknown; // UnknownType
 
 var
 x : integer;
+x : integer; //Erreur redefinition
 
 function sum(i : integer, j : integer) : integer
 var k:integer;

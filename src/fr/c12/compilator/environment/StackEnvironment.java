@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Stack;
 
 import fr.c12.compilator.error.MemoryLeak;
+import fr.c12.compilator.error.RedefinitionVariable;
 import fr.c12.compilator.error.UnknownVariable;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypePointer;
@@ -68,9 +69,11 @@ public class StackEnvironment {
 
 	
 
-	public void add_node_to_latest_portability(String id, Type n) {
+	public void add_node_to_latest_portability(String id, Type n) throws RedefinitionVariable {
 		if(verbose)
 			System.out.println("* Enregistre " + id.toString());
+		if(this.get_last_portability().get(id) != null)
+			throw new RedefinitionVariable(id);
 		this.get_last_portability().put(id, n);
 	}
 

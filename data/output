@@ -14,13 +14,36 @@ fr.c12.compilator.error.UnknownType
 // UnknownType
 named2 -> TypeNamed_unknown
 [UnknownType] TypeNamed_unknown
+//Erreur redefinition
+[RedefinitionVariable] x
+fr.c12.compilator.error.RedefinitionVariable at Line : 0
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
 ** Enregistre fct:sum
 //AlreadyDefinedFunction Error
-[AlreadyDefinedFunction] sum
-fr.c12.compilator.error.AlreadyDefinedFunction
+[RedefinitionVariable] k
+fr.c12.compilator.error.RedefinitionVariable at Line : 0
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+[RedefinitionFunction] sum
+fr.c12.compilator.error.RedefinitionFunction at Line : 0
 //AlreadyDefinedFunction Error
-[AlreadyDefinedFunction] sum
-fr.c12.compilator.error.AlreadyDefinedFunction
+[RedefinitionVariable] k
+fr.c12.compilator.error.RedefinitionVariable at Line : 0
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+[RedefinitionFunction] sum
+fr.c12.compilator.error.RedefinitionFunction at Line : 0
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
 ** Enregistre fct:pgcd
 
 code intermediaire assign
@@ -186,13 +209,13 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#
 // 0x4995F6B5
 //println (d[2]);
 [MEMLEAK] Variable: q double malloc tentative.
-fr.c12.compilator.error.MemoryLeak
+fr.c12.compilator.error.MemoryLeak at Line : 0
 // 0x41
 [MEMLEAK] Variable: p double malloc tentative.
-fr.c12.compilator.error.MemoryLeak
+fr.c12.compilator.error.MemoryLeak at Line : 0
 // resize the heap
 [MEMLEAK] Variable: r double malloc tentative.
-fr.c12.compilator.error.MemoryLeak
+fr.c12.compilator.error.MemoryLeak at Line : 0
 [MEMLEAK] Trying to access free or undeclared pointer
 // heap memory error
 
@@ -372,7 +395,20 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWh
 [INFO] $$$ : documentation comment.
 
 
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
 ** Enregistre fct:sum
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
 ** Enregistre fct:pgcd
 
 code intermediaire assign
@@ -428,15 +464,39 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#), printl
 //
 // gestion complexe de la pile
 // 
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
 Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: fact1 trouvee.
 ** Enregistre fct:fact1
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
 Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: fact2 trouvee.
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
 ** Enregistre fct:fact2
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
 Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: hanoi trouvee.
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
 Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: hanoi trouvee.
 ** Enregistre fct:hanoi
 ** Enregistre fct:impair
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
 ** Enregistre fct:pair
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
+java.lang.NoSuchFieldException: No Enum type containing this value has been spotted
 ** Enregistre fct:impair
 
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct

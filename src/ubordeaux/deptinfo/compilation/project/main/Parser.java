@@ -83,7 +83,14 @@ public class Parser extends beaver.Parser {
 	}
 	
 	public void semanticError(String msg, Symbol token) {
-			System.err.format("*** " + msg + " ligne %d, colonne %d\n",
+		System.err.format("*** " + msg + " ligne %d, colonne %d\n",
+			Symbol.getLine(token.getStart()),
+			Symbol.getColumn(token.getStart()));
+		
+	}
+	
+	public void semanticErrorReformated(Symbol token) {
+			System.err.format(" ligne %d, colonne %d\n",
 				Symbol.getLine(token.getStart()),
 				Symbol.getColumn(token.getStart()));
 		}
@@ -138,7 +145,7 @@ public class Parser extends beaver.Parser {
 			try{
 				//System.out.println("Registering type:" + t.toString());
 				typeEnvironment.putVariable(name, t);
-			} catch (DuplicateTypeDeclaration e) {//|UnknownType e) {
+			} catch (RedefinitionType e) {
 				System.err.println(e);
 			} finally {
 				return new EmptySymbol();
@@ -220,7 +227,7 @@ public class Parser extends beaver.Parser {
 																			return new TypeArrayRange(new TypeInt(val_min), new TypeInt(val_max));
 																			
 																		} catch (NoSuchFieldException e) {
-																			System.err.println("subrange_type: " + e);
+																			System.err.println("subrange_type: " + e );
 																			return new TypeArrayRange(new TypeInt(0), new TypeInt(0));
 																		}
 				}
@@ -296,7 +303,13 @@ public class Parser extends beaver.Parser {
 					final Type t = (Type) _symbol_t.value;
 					
 																for(String str : id_list){
-																	stackEnvironment.add_node_to_latest_portability(str, t);
+																	try {
+																		stackEnvironment.add_node_to_latest_portability(str, t);
+																	}catch ( RedefinitionVariable e) {
+																		System.err.println(e + " at Line : " + Symbol.getLine(t.getStart()));
+																		if(critical_mode)
+																			System.exit(0);
+																	}
 																}
 																
 																return _symbol_id_list;
@@ -342,8 +355,8 @@ public class Parser extends beaver.Parser {
 			type_fct.setDefined(true);
 			try {
 				procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
-			} catch (AlreadyDefinedFunction e) {
-				System.err.println(e);
+			} catch (RedefinitionFunction e) {
+				System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
 				if(critical_mode)
 					System.exit(0);
 			}
@@ -359,8 +372,8 @@ public class Parser extends beaver.Parser {
 			type_fct.setDefined(false); 
 			try {
 				procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
-			} catch (AlreadyDefinedFunction e) {
-				System.err.println(e);
+			} catch (RedefinitionFunction e) {
+				System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
 				if(critical_mode)
 					System.exit(0);
 			}
@@ -378,15 +391,24 @@ public class Parser extends beaver.Parser {
 					final NodeList args = (NodeList) _symbol_args.value;
 									
 				TypeTuple params_tuple = new TypeTuple();
+				stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); 
 				
+
 				for(Node n : args.getList()) {
-					NodeId n_id = (NodeId) n;
-					params_tuple.add(new TypeFeature(n_id.getName(), n_id.getType()));
-					stackEnvironment.add_node_to_latest_portability(n_id.getName(), n_id.getType());
+					try {
+						NodeId n_id = (NodeId) n;
+						params_tuple.add(new TypeFeature(n_id.getName(), n_id.getType()));
+						stackEnvironment.add_node_to_latest_portability(n_id.getName(), n_id.getType());
+					}catch ( RedefinitionVariable e) {
+						System.err.println(e + " at Line : " + Symbol.getLine(args.getStart()));
+						if(critical_mode)
+							System.exit(0);
+					}
 				}
 				
 				TypeFunct type_function = new TypeFunct(funct_name, params_tuple, new TypeVoid());
-				
+
+				stackEnvironment.getEnvironment().pop(); 
 				return type_function;
 				//return new NodeCallFct(funct_name, type_function, new NodeList());
 				}
@@ -401,15 +423,23 @@ public class Parser extends beaver.Parser {
 					final Type t = (Type) _symbol_t.value;
 					
 				TypeTuple params_tuple = new TypeTuple();
+				stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); 
 				
 				for(Node n : args.getList()) {
-					NodeId n_id = (NodeId) n;
-					params_tuple.add(new TypeFeature(n_id.getName(), n_id.getType()));
-					stackEnvironment.add_node_to_latest_portability(n_id.getName(), n_id.getType());
+					try {
+						NodeId n_id = (NodeId) n;
+						params_tuple.add(new TypeFeature(n_id.getName(), n_id.getType()));
+						stackEnvironment.add_node_to_latest_portability(n_id.getName(), n_id.getType());
+					}catch ( RedefinitionVariable e) {
+						System.err.println(e + " at Line : " + Symbol.getLine(args.getStart()));
+						if(critical_mode)
+							System.exit(0);
+					}
 				}
 				
 				TypeFunct type_function = new TypeFunct(funct_name, params_tuple, t);
-			
+
+				stackEnvironment.getEnvironment().pop(); 
 				return type_function;
 				//return new NodeCallFct(funct_name, type_function, new NodeList());
 				}
@@ -587,7 +617,7 @@ public class Parser extends beaver.Parser {
 			try {
 				stackEnvironment.alloc_variable(n_id.getName()); 
 			}catch(MemoryLeak e) {
-				System.err.println(e);
+				System.err.println(e + " at Line : " + Symbol.getLine(node.getStart()));
 				if(critical_mode)
 					System.exit(0);
 				return node;
@@ -606,7 +636,7 @@ public class Parser extends beaver.Parser {
 									try {
 										stackEnvironment.dispose_variable(n_id.getName()); 
 									}catch(MemoryLeak e) {
-										System.err.println(e);
+										System.err.println(e + " at Line : " + Symbol.getLine(node.getStart()));
 										if(critical_mode)
 											System.exit(0);
 										return node;
@@ -757,7 +787,7 @@ public class Parser extends beaver.Parser {
 				} catch (NoSuchFieldException e2) {
 
 					//System.err.println("Variable [" + name + "]");
-					System.err.println(e2);
+					System.err.println(e2);// + " at Line : " + Symbol.getLine(args.getStart()));
 					return new NodeId(null, null);
 				}
 			}

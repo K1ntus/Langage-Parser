@@ -79,15 +79,15 @@
 			<arg value="data/progr7.lea" />
 			<!-- -->
 			
-			<!-- ->
+			<!-- -->
 			<arg value="-checkType" />
 			<arg value="data/progr8.lea" />
-			<!- -->
+			<!-- -->
 			
-			<!-- ->
+			<!-- -->
 			<arg value="-checkType" />
 			<arg value="data/progr9.lea" />
-			<!- -->
+			<!-- -->
 		</java>
 	</target>
 
@@ -95,7 +95,7 @@
 		<delete>
 			<fileset dir="src" includes="**/Parser.java,**/Scanner.java,**/Terminals.java" />
 			<fileset dir="bin" includes="**" excludes="" />
-			<fileset dir="data" includes="output" excludes="" />
+			<!--<fileset dir="data" includes="output" excludes="" />-->
 		</delete>
 	</target>
 

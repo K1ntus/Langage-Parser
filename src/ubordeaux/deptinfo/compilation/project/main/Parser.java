@@ -591,7 +591,7 @@ public class Parser extends beaver.Parser {
 		
 				if(args instanceof NodeCallFct) {
 					NodeCallFct tmp = (NodeCallFct) args;
-					params_tuple= new TypeTuple(new TypeFeature(tmp.getName(), tmp.getTypeFunct()));
+					params_tuple= new TypeTuple(new TypeFeature(tmp.getName(), tmp.getType()));
 				} else {
 					params_tuple= new TypeTuple(new TypeFeature("println nodelist", args.getType()));
 				}
@@ -704,11 +704,18 @@ public class Parser extends beaver.Parser {
 						
 			try{
 				Type t = stackEnvironment.get_node_reachable(name);  
-				//System.out.println("[VARIABLE]" + res.toString() +" found.");
 				return new NodeId(name, t);
-			} catch (UnknownVariable e) {
-				System.err.println("Variable [" + name + "]: "+ e);
-				return new NodeId(null, null);
+			} catch (UnknownVariable e) {	//Not a normal variable
+				try {	//Check enum
+					Type t = typeEnvironment.getEnumType(name);
+					//System.out.println("FINDDD");
+					return new NodeId(name, t);
+				} catch (NoSuchFieldException e2) {
+
+					//System.err.println("Variable [" + name + "]");
+					System.err.println(e2);
+					return new NodeId(null, null);
+				}
 			}
 				}
 			},

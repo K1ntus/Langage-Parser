@@ -4,7 +4,7 @@ public class UnknownType extends Exception {
 	private static final long serialVersionUID = 1L;
 
 	public UnknownType(String e) {
-		System.out.println("[TypeEnvironment] Trying to acces an unknwon type: " + e);
+		System.out.println("[UnknownType] " + e);
 		
 	}
 }

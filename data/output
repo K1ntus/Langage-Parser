@@ -60,6 +60,7 @@ class ubordeaux.deptinfo.compilation.project.node.NodeLiteral
 --- CheckType NodeLiteral
 - Assign well typed
 --- CheckType NodeWhile
+- NodeList well typed
 *** Typage correct
 
 
@@ -247,15 +248,22 @@ class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 - Assign well typed
 --- CheckType NodeCallFct
 --- CheckType NodeOp
+- NodeOp well typed
+- NodeCallFct well typed
 --- CheckType NodeCallFct
 --- CheckType NodeId
+- NodeCallFct well typed
 --- CheckType NodeCallFct
 --- CheckType NodeId
+- NodeCallFct well typed
 --- CheckType NodeCallFct
 --- CheckType NodeId
+- NodeCallFct well typed
 --- CheckType NodeCallFct
 --- CheckType NodeArrayAccess
 - ArrayAccess well typed
+- NodeCallFct well typed
+- NodeList well typed
 *** Typage correct
 
 
@@ -554,12 +562,16 @@ class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 - Assign well typed
 --- CheckType NodeCallFct
 --- CheckType NodeId
+- NodeCallFct well typed
 --- CheckType NodeCallFct
 --- CheckType NodeId
+- NodeCallFct well typed
 --- CheckType NodeCallFct
 --- CheckType NodeId
+- NodeCallFct well typed
 --- CheckType NodeCallFct
 --- CheckType NodeId
+- NodeCallFct well typed
 --- CheckType NodeNew
 --- CheckType NodeAssign
 --- CheckType NodePtrAccess
@@ -567,17 +579,21 @@ class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 - Assign well typed
 --- CheckType NodeCallFct
 --- CheckType NodePtrAccess
+- NodeCallFct well typed
 --- CheckType NodeCallFct
 --- CheckType NodeId
+- NodeCallFct well typed
 --- CheckType NodeNew
 --- CheckType NodeCallFct
 --- CheckType NodeId
+- NodeCallFct well typed
 --- CheckType NodeAssign
 --- CheckType NodePtrAccess
 --- CheckType NodeId
 - Assign well typed
 --- CheckType NodeCallFct
 --- CheckType NodePtrAccess
+- NodeCallFct well typed
 --- CheckType NodeNew
 --- CheckType NodeAssign
 --- CheckType NodePtrAccess
@@ -585,11 +601,15 @@ class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 - Assign well typed
 --- CheckType NodeCallFct
 --- CheckType NodePtrAccess
+- NodeCallFct well typed
 --- CheckType NodeDispose
 --- CheckType NodeCallFct
 --- CheckType NodeId
+- NodeCallFct well typed
 --- CheckType NodeCallFct
 --- CheckType NodePtrAccess
+- NodeCallFct well typed
+- NodeList well typed
 *** Typage correct
 
 
@@ -711,6 +731,7 @@ class ubordeaux.deptinfo.compilation.project.node.NodeIf
 --- CheckType NodeLiteral
 - Assign well typed
 --- CheckType NodeWhile
+- NodeList well typed
 *** Typage correct
 
 
@@ -831,6 +852,10 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWh
 [STACK] Variable: x found at Layer: 2
 *** 5
 *** ;
+*** println
+*** x
+*** ;
+[STACK] Variable: x found at Layer: 2
 *** x
 *** =
 [STACK] Variable: x found at Layer: 2
@@ -869,6 +894,7 @@ Register function NodeLiteral:j | NodeLiteral#90:TypeInt_null#
 
 code intermediaire assign
 TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 code intermediaire assign
 TODO: NodeCallFct.generateIntermediateCode()
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
@@ -879,26 +905,34 @@ class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 --- CheckType NodeId
 --- CheckType NodeLiteral
 - Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
 --- CheckType NodeAssign
 --- CheckType NodeId
 --- CheckType NodeCallFct
 --- CheckType NodeLiteral
 --- CheckType NodeLiteral
+- NodeCallFct well typed
 - Assign well typed
 --- CheckType NodeCallFct
 --- CheckType NodeCallFct
 --- CheckType NodeLiteral
 --- CheckType NodeLiteral
-*** Erreur de typage :
-* Args Type: TypeInt_null
-* Params Type: ([i:TypeInt_null], [j:TypeInt_null]) -> TypeInt_null Defined: true Name: sum
-- Checktype invalid: 
-- elem:println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#))))
-*** Erreur de typage
+- NodeCallFct well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeAssign(NodeId#x:TypeInt_null#, sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#))), println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#)))), println_NodeCallFct(NodeList(pgcd_NodeCallFct(NodeList(NodeLiteral#78:TypeInt_null#, NodeLiteral#90:TypeInt_null#)))))
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), NodeAssign(NodeId#x:TypeInt_null#, sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#))), println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#)))), println_NodeCallFct(NodeList(pgcd_NodeCallFct(NodeList(NodeLiteral#78:TypeInt_null#, NodeLiteral#90:TypeInt_null#)))))
 
 
 
@@ -1037,24 +1071,18 @@ Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: fact2 tro
 *** (
 *** a
 *** ,
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:4
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:4
+[UnknownVariable]Aucune variable [a] enregistree a la couche :4
+[UnknownVariable]Aucune variable [a] enregistree a la couche :4
 [STACK] Variable: a found at Layer: 2
 *** c
 *** ,
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:4
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:4
+[UnknownVariable]Aucune variable [c] enregistree a la couche :4
+[UnknownVariable]Aucune variable [c] enregistree a la couche :4
 [STACK] Variable: c found at Layer: 2
 *** b
 *** ,
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:4
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:4
+[UnknownVariable]Aucune variable [b] enregistree a la couche :4
+[UnknownVariable]Aucune variable [b] enregistree a la couche :4
 [STACK] Variable: b found at Layer: 2
 *** k
 *** -
@@ -1067,10 +1095,8 @@ Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: hanoi tro
 *** (
 *** a
 *** )
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:5
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:5
+[UnknownVariable]Aucune variable [a] enregistree a la couche :5
+[UnknownVariable]Aucune variable [a] enregistree a la couche :5
 [STACK] Variable: a found at Layer: 3
 *** ;
 *** print
@@ -1081,10 +1107,8 @@ Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: hanoi tro
 *** (
 *** c
 *** )
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:5
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:5
+[UnknownVariable]Aucune variable [c] enregistree a la couche :5
+[UnknownVariable]Aucune variable [c] enregistree a la couche :5
 [STACK] Variable: c found at Layer: 3
 *** ;
 *** if
@@ -1099,24 +1123,18 @@ Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: hanoi tro
 *** (
 *** b
 *** ,
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:5
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:5
+[UnknownVariable]Aucune variable [b] enregistree a la couche :5
+[UnknownVariable]Aucune variable [b] enregistree a la couche :5
 [STACK] Variable: b found at Layer: 3
 *** a
 *** ,
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:5
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:5
+[UnknownVariable]Aucune variable [a] enregistree a la couche :5
+[UnknownVariable]Aucune variable [a] enregistree a la couche :5
 [STACK] Variable: a found at Layer: 3
 *** c
 *** ,
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:5
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:5
+[UnknownVariable]Aucune variable [c] enregistree a la couche :5
+[UnknownVariable]Aucune variable [c] enregistree a la couche :5
 [STACK] Variable: c found at Layer: 3
 *** k
 *** -
@@ -1160,24 +1178,18 @@ Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: hanoi tro
 *** (
 *** i
 *** ==
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
+[UnknownVariable]Aucune variable [i] enregistree a la couche :6
+[UnknownVariable]Aucune variable [i] enregistree a la couche :6
+[UnknownVariable]Aucune variable [i] enregistree a la couche :6
+[UnknownVariable]Aucune variable [i] enregistree a la couche :6
 [STACK] Variable: i found at Layer: 2
 *** 1
 *** )
 *** then
 *** b
 *** =
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
+[UnknownVariable]Aucune variable [b] enregistree a la couche :6
+[UnknownVariable]Aucune variable [b] enregistree a la couche :6
 [STACK] Variable: b found at Layer: 4
 *** false
 *** ;
@@ -1186,47 +1198,35 @@ Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: hanoi tro
 *** (
 *** i
 *** ==
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
+[UnknownVariable]Aucune variable [i] enregistree a la couche :6
+[UnknownVariable]Aucune variable [i] enregistree a la couche :6
+[UnknownVariable]Aucune variable [i] enregistree a la couche :6
+[UnknownVariable]Aucune variable [i] enregistree a la couche :6
 [STACK] Variable: i found at Layer: 2
 *** 0
 *** )
 *** then
 *** b
 *** =
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
+[UnknownVariable]Aucune variable [b] enregistree a la couche :6
+[UnknownVariable]Aucune variable [b] enregistree a la couche :6
 [STACK] Variable: b found at Layer: 4
 *** true
 *** ;
 *** else
 *** b
 *** =
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
+[UnknownVariable]Aucune variable [b] enregistree a la couche :6
+[UnknownVariable]Aucune variable [b] enregistree a la couche :6
 [STACK] Variable: b found at Layer: 4
 *** impair
 *** (
 *** i
 *** -
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:6
+[UnknownVariable]Aucune variable [i] enregistree a la couche :6
+[UnknownVariable]Aucune variable [i] enregistree a la couche :6
+[UnknownVariable]Aucune variable [i] enregistree a la couche :6
+[UnknownVariable]Aucune variable [i] enregistree a la couche :6
 [STACK] Variable: i found at Layer: 2
 *** 1
 *** )
@@ -1236,10 +1236,8 @@ Register function NodOp:i | NodeLiteral#NodeOp(NodeId#i:TypeInt_null#, NodeLiter
 *** (
 *** b
 *** )
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:7
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:7
+[UnknownVariable]Aucune variable [b] enregistree a la couche :7
+[UnknownVariable]Aucune variable [b] enregistree a la couche :7
 [STACK] Variable: b found at Layer: 5
 *** ;
 *** end
@@ -1259,14 +1257,10 @@ Register function NodOp:i | NodeLiteral#NodeOp(NodeId#i:TypeInt_null#, NodeLiter
 *** (
 *** i
 *** ==
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:7
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:7
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:7
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:7
+[UnknownVariable]Aucune variable [i] enregistree a la couche :7
+[UnknownVariable]Aucune variable [i] enregistree a la couche :7
+[UnknownVariable]Aucune variable [i] enregistree a la couche :7
+[UnknownVariable]Aucune variable [i] enregistree a la couche :7
 [STACK] Variable: i found at Layer: 3
 *** 1
 *** )
@@ -1281,14 +1275,10 @@ Register function NodOp:i | NodeLiteral#NodeOp(NodeId#i:TypeInt_null#, NodeLiter
 *** (
 *** i
 *** ==
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:7
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:7
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:7
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:7
+[UnknownVariable]Aucune variable [i] enregistree a la couche :7
+[UnknownVariable]Aucune variable [i] enregistree a la couche :7
+[UnknownVariable]Aucune variable [i] enregistree a la couche :7
+[UnknownVariable]Aucune variable [i] enregistree a la couche :7
 [STACK] Variable: i found at Layer: 3
 *** 0
 *** )
@@ -1305,14 +1295,10 @@ Register function NodOp:i | NodeLiteral#NodeOp(NodeId#i:TypeInt_null#, NodeLiter
 *** (
 *** i
 *** -
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:7
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:7
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:7
-[TypeEnvironment] Trying to acces an unknwon type: [ERROR]Aucune variable similaire stackee trouvee
-[ERROR]Stack Size:7
+[UnknownVariable]Aucune variable [i] enregistree a la couche :7
+[UnknownVariable]Aucune variable [i] enregistree a la couche :7
+[UnknownVariable]Aucune variable [i] enregistree a la couche :7
+[UnknownVariable]Aucune variable [i] enregistree a la couche :7
 [STACK] Variable: i found at Layer: 3
 *** 1
 *** )
@@ -1382,12 +1368,31 @@ class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 --- CheckType NodeCallFct
 --- CheckType NodeCallFct
 --- CheckType NodeLiteral
-*** Erreur de typage :
-* Args Type: TypeInt_null
-* Params Type: ([k:TypeInt_null]) -> TypeInt_null Defined: true Name: fact1
-- Checktype invalid: 
-- elem:println_NodeCallFct(NodeList(fact1_NodeCallFct(NodeList(NodeLiteral#6:TypeInt_null#))))
-*** Erreur de typage
+- NodeCallFct well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
 
 
 Arbre Principal: 
@@ -1575,14 +1580,400 @@ class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 --- CheckType NodeCallFct
 --- CheckType NodeArrayAccess
 - ArrayAccess well typed
+- NodeCallFct well typed
 --- CheckType NodeCallFct
 --- CheckType NodeArrayAccess
 - ArrayAccess well typed
+- NodeCallFct well typed
 --- CheckType NodeCallFct
 --- CheckType NodeArrayAccess
 - ArrayAccess well typed
+- NodeCallFct well typed
+- NodeList well typed
 *** Typage correct
 
 
 Arbre Principal: 
 NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#0:TypeInt_null#), NodeLiteral#"M":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"T":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"W":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#), NodeLiteral#"X":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#4:TypeInt_null#), NodeLiteral#22:TypeInt_null#), NodeLiteral#7:TypeInt_null#), NodeLiteral#"V":TypeString#), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#4:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#))))
+
+
+
+*************************************************
+*** Fichier data/progr8.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// tableaux et enumérés
+// 
+*** type
+*** days
+*** =
+*** (
+*** SUNDAY
+*** ,
+*** MONDAY
+*** ,
+*** TUESDAY
+*** ,
+*** WEDNESDAY
+*** ,
+*** THURSDAY
+*** ,
+*** FRIDAY
+*** ,
+*** SATURDAY
+*** )
+*** ;
+*** months
+** Enregistre types: (TypeItemEnum@SUNDAY=0, TypeItemEnum@MONDAY=1, TypeItemEnum@TUESDAY=2, TypeItemEnum@WEDNESDAY=3, TypeItemEnum@THURSDAY=4, TypeItemEnum@FRIDAY=5, TypeItemEnum@SATURDAY=6)
+*** =
+*** (
+*** JANUARY
+*** ,
+*** FEBRUARY
+*** ,
+*** MARCH
+*** ,
+*** APRIL
+*** ,
+*** MAY
+*** ,
+*** JUNE
+*** ,
+*** JULY
+*** ,
+*** AUGUST
+*** ,
+*** SEPTEMBER
+*** ,
+*** OCTOBER
+*** ,
+*** NOVEMBER
+*** ,
+*** DECEMBER
+*** )
+*** ;
+*** var
+** Enregistre types: (TypeItemEnum@JANUARY=0, TypeItemEnum@FEBRUARY=1, TypeItemEnum@MARCH=2, TypeItemEnum@APRIL=3, TypeItemEnum@MAY=4, TypeItemEnum@JUNE=5, TypeItemEnum@JULY=6, TypeItemEnum@AUGUST=7, TypeItemEnum@SEPTEMBER=8, TypeItemEnum@OCTOBER=9, TypeItemEnum@NOVEMBER=10, TypeItemEnum@DECEMBER=11)
+*** d
+*** :
+*** SUNDAY
+*** ..
+*** SATURDAY
+*** ;
+*** week
+* Enregistre d
+*** :
+*** array
+*** [
+*** MONDAY
+*** ..
+*** FRIDAY
+*** ]
+*** of
+*** string
+*** ;
+*** year
+* Enregistre week
+*** :
+*** array
+*** [
+*** SUNDAY
+*** ..
+*** SATURDAY
+*** ]
+*** of
+*** array
+*** [
+*** 1
+*** ..
+*** 31
+*** ]
+*** of
+*** array
+*** [
+*** JANUARY
+*** ..
+*** DECEMBER
+*** ]
+*** of
+*** string
+*** ;
+*** begin
+* Enregistre year
+*** week
+*** [
+[STACK] Variable: week found at Layer: 2
+*** MONDAY
+*** ]
+[UnknownVariable]Aucune variable [MONDAY] enregistree a la couche :2
+[UnknownVariable]Aucune variable [MONDAY] enregistree a la couche :2
+[UnknownVariable]Aucune variable [MONDAY] enregistree
+*** =
+*** ;
+*** week
+*** [
+[STACK] Variable: week found at Layer: 2
+*** TUESDAY
+*** ]
+[UnknownVariable]Aucune variable [TUESDAY] enregistree a la couche :2
+[UnknownVariable]Aucune variable [TUESDAY] enregistree a la couche :2
+[UnknownVariable]Aucune variable [TUESDAY] enregistree
+*** =
+*** ;
+*** week
+*** [
+[STACK] Variable: week found at Layer: 2
+*** WEDNESDAY
+*** ]
+[UnknownVariable]Aucune variable [WEDNESDAY] enregistree a la couche :2
+[UnknownVariable]Aucune variable [WEDNESDAY] enregistree a la couche :2
+[UnknownVariable]Aucune variable [WEDNESDAY] enregistree
+*** =
+*** ;
+*** year
+*** [
+[STACK] Variable: year found at Layer: 2
+*** SATURDAY
+*** ]
+[UnknownVariable]Aucune variable [SATURDAY] enregistree a la couche :2
+[UnknownVariable]Aucune variable [SATURDAY] enregistree a la couche :2
+[UnknownVariable]Aucune variable [SATURDAY] enregistree
+*** [
+*** 17
+*** ]
+*** [
+*** MARCH
+*** ]
+[UnknownVariable]Aucune variable [MARCH] enregistree a la couche :2
+[UnknownVariable]Aucune variable [MARCH] enregistree a la couche :2
+[UnknownVariable]Aucune variable [MARCH] enregistree
+*** =
+*** ;
+*** year
+*** [
+[STACK] Variable: year found at Layer: 2
+*** SATURDAY
+*** ]
+[UnknownVariable]Aucune variable [SATURDAY] enregistree a la couche :2
+[UnknownVariable]Aucune variable [SATURDAY] enregistree a la couche :2
+[UnknownVariable]Aucune variable [SATURDAY] enregistree
+*** [
+*** 1
+*** ]
+*** [
+*** MARCH
+*** ]
+[UnknownVariable]Aucune variable [MARCH] enregistree a la couche :2
+[UnknownVariable]Aucune variable [MARCH] enregistree a la couche :2
+[UnknownVariable]Aucune variable [MARCH] enregistree
+*** =
+*** ;
+*** println
+*** (
+*** year
+*** [
+[STACK] Variable: year found at Layer: 2
+*** SATURDAY
+*** ]
+[UnknownVariable]Aucune variable [SATURDAY] enregistree a la couche :2
+[UnknownVariable]Aucune variable [SATURDAY] enregistree a la couche :2
+[UnknownVariable]Aucune variable [SATURDAY] enregistree
+*** [
+*** 1
+*** ]
+*** [
+*** MARCH
+*** ]
+[UnknownVariable]Aucune variable [MARCH] enregistree a la couche :2
+[UnknownVariable]Aucune variable [MARCH] enregistree a la couche :2
+[UnknownVariable]Aucune variable [MARCH] enregistree
+*** )
+*** ;
+*** println
+*** (
+*** year
+*** [
+[STACK] Variable: year found at Layer: 2
+*** SATURDAY
+*** ]
+[UnknownVariable]Aucune variable [SATURDAY] enregistree a la couche :2
+[UnknownVariable]Aucune variable [SATURDAY] enregistree a la couche :2
+[UnknownVariable]Aucune variable [SATURDAY] enregistree
+*** [
+*** 17
+*** ]
+*** [
+*** MARCH
+*** ]
+[UnknownVariable]Aucune variable [MARCH] enregistree a la couche :2
+[UnknownVariable]Aucune variable [MARCH] enregistree a la couche :2
+[UnknownVariable]Aucune variable [MARCH] enregistree
+*** )
+*** ;
+*** println
+*** (
+*** week
+*** [
+[STACK] Variable: week found at Layer: 2
+*** TUESDAY
+*** ]
+[UnknownVariable]Aucune variable [TUESDAY] enregistree a la couche :2
+[UnknownVariable]Aucune variable [TUESDAY] enregistree a la couche :2
+[UnknownVariable]Aucune variable [TUESDAY] enregistree
+*** )
+*** ;
+*** end
+
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+type de l'index incorrect
+- Checktype invalid: 
+- elem:NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#MONDAY:TypeItemEnum@MONDAY=1#), NodeLiteral#"M":TypeString#)
+- NodeList well typed
+*** Erreur de typage
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#MONDAY:TypeItemEnum@MONDAY=1#), NodeLiteral#"M":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#TUESDAY:TypeItemEnum@TUESDAY=2#), NodeLiteral#"T":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#WEDNESDAY:TypeItemEnum@WEDNESDAY=3#), NodeLiteral#"W":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeItemEnum@SATURDAY=6#), NodeLiteral#17:TypeInt_null#), NodeId#MARCH:TypeItemEnum@MARCH=2#), NodeLiteral#"X":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeItemEnum@SATURDAY=6#), NodeLiteral#1:TypeInt_null#), NodeId#MARCH:TypeItemEnum@MARCH=2#), NodeLiteral#"V":TypeString#), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeItemEnum@SATURDAY=6#), NodeLiteral#1:TypeInt_null#), NodeId#MARCH:TypeItemEnum@MARCH=2#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeItemEnum@SATURDAY=6#), NodeLiteral#17:TypeInt_null#), NodeId#MARCH:TypeItemEnum@MARCH=2#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#TUESDAY:TypeItemEnum@TUESDAY=2#))))
+
+
+
+*************************************************
+*** Fichier data/progr9.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+$$
+ **************************************************
+ ************************************************** $$
+*** type
+*** chaine
+*** =
+*** string
+*** ;
+*** entier
+** Enregistre types: TypeString
+*** =
+*** integer
+*** ;
+*** booleen
+** Enregistre types: TypeInt_null
+*** =
+*** boolean
+*** ;
+*** named1
+** Enregistre types: TypeBoolean
+*** =
+*** chaine
+*** ;
+//named2 = unknown; // error
+*** Months
+** Enregistre types: TypeNamed_chaine
+*** =
+*** (
+*** January
+*** ,
+*** February
+*** ,
+*** March
+*** ,
+*** April
+*** ,
+*** May
+*** ,
+*** June
+*** ,
+*** July
+*** ,
+*** August
+*** ,
+*** September
+*** ,
+*** October
+*** ,
+*** November
+*** ,
+*** December
+*** )
+*** ;
+*** DaysOfWeek
+** Enregistre types: (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
+*** =
+*** (
+*** Sunday
+*** ,
+*** Monday
+*** ,
+*** Tuesday
+*** ,
+*** Wednesday
+*** ,
+*** Thursday
+*** ,
+*** Friday
+*** ,
+*** Saturday
+*** )
+*** ;
+//// xxx = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, aa, ab, ac, ad, ae, af, ag, ah); // error
+*** range1
+** Enregistre types: (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
+*** =
+*** 64
+*** ..
+*** 81
+*** ;
+*** range2
+** Enregistre types: TypeArrayRange[TypeInt_64..TypeInt_81]
+*** =
+*** Monday
+*** ..
+*** Friday
+*** ;
+//range3 = 81 .. 64; //error
+//range4 = Friday .. Unknown; // error
+//range5 = Friday .. Monday; // error
+//range6 = Monday .. December; //error
+//range7 = Friday .. Tuesday; // error "range not valid"
+//range8 = Monday .. April; // error "incoherent range"
+*** table1
+** Enregistre types: TypeArrayRange[TypeInt_1..TypeInt_5]
+*** =
+*** array
+*** [
+*** 1
+*** ..
+*** 32
+*** ]
+*** of
+*** integer
+*** ;
+*** table2
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)
+*** =
+*** array
+*** [
+*** range1
+*** ]
+*** of
+*** integer
+*** ;

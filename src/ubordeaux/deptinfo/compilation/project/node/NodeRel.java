@@ -20,8 +20,11 @@ public class NodeRel extends NodeExp {
 	@Override
 	public boolean checksType() {
 		super.checksType();
-		if ((!(this.getOp1().getType() instanceof TypeInt)) || (!(this.getOp2().getType() instanceof TypeInt)))
+		if ((!(this.getOp1().getType() instanceof TypeInt)) || (!(this.getOp2().getType() instanceof TypeInt))) {
+			System.out.println("- NodeRel well typed");
 			return false;
+		}
+		System.out.println("- NodeRel well typed");
 		return true;
 	}
 

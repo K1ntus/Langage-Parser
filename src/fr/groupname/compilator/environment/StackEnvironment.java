@@ -50,7 +50,7 @@ public class StackEnvironment {
 			System.out.println("[STACK] Variable: "+ id +" found at Layer: " +layer);
 			return res;
 		}
-		throw new UnknownVariable("Aucune variable similaire stackee trouvee");
+		throw new UnknownVariable("Aucune variable ["+id+"] enregistree");
 			
 	}
 	
@@ -58,7 +58,7 @@ public class StackEnvironment {
 	public Type getLiteralFromId(String id, Map<String, Type> map) throws UnknownVariable {
 		Type res = map.get(id);
 		if(res == null)
-			throw new UnknownVariable("[ERROR]Aucune variable similaire stackee trouvee"+"\n[ERROR]Stack Size:"+environment.size());
+			throw new UnknownVariable("Aucune variable ["+id+"] enregistree a la couche :" + environment.size());
 		return res;
 	}
 

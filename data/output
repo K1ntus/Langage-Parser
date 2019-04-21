@@ -46,9 +46,7 @@
 *** end
 
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 Code intermediaire while
-TODO: NodeLiteral.generateIntermediateCode()
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 code intermediaire assign
 code intermediaire ID
@@ -187,21 +185,13 @@ NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), Node
 *** end
 
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
@@ -476,21 +466,13 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#
 *** end
 
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
@@ -498,7 +480,6 @@ class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeNew
 code intermediaire assign
 TODO: NodePtrAccess.generateIntermediateCode()
-TODO: NodeLiteral.generateIntermediateCode()
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeNew
@@ -509,7 +490,6 @@ class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeNew
 code intermediaire assign
 TODO: NodePtrAccess.generateIntermediateCode()
-TODO: NodeLiteral.generateIntermediateCode()
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeDispose
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
@@ -699,9 +679,7 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#
 *** end
 
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 Code intermediaire while
-TODO: NodeLiteral.generateIntermediateCode()
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeIf
 *** Analyse syntaxique ok
@@ -868,7 +846,6 @@ Register function NodeLiteral:j | NodeLiteral#90:TypeInt_null#
 *** end
 
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
 TODO: NodeCallFct.generateIntermediateCode()
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
@@ -1533,15 +1510,10 @@ NodeList(println_NodeCallFct(NodeList(fact1_NodeCallFct(NodeList(NodeLiteral#6:T
 *** end
 
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 code intermediaire assign
-TODO: NodeLiteral.generateIntermediateCode()
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct

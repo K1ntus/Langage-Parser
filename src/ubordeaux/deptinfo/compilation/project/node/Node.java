@@ -97,7 +97,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 			BufferedWriter out = new BufferedWriter(new FileWriter(file));
 			out.write("digraph Stree {\n");
 			StringBuffer str = new StringBuffer();
-			toDot(str);
+			toDot(str);	
 			out.write(str.toString());
 			out.write("}\n");
 			out.close();

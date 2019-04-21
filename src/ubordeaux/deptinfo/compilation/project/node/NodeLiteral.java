@@ -1,6 +1,6 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 
 public final class NodeLiteral extends NodeExp {
@@ -41,11 +41,13 @@ public final class NodeLiteral extends NodeExp {
 		return type;
 	}
 
-	@Override
-	public ExpList generateIntermediateCode() {
-		// TODO Auto-generated method stub
-		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		return null;
-		
+	public Move generateIntermediateCodeLiteral() {
+		//NodeExp n = new NodeExp((NodeLiteral)this.getValue()); Trouver autre chose jsp
+		//ExpList l = n.generateIntermediateCodeExp();
+		ExpList l = new ExpList(null, null);
+		Exp exp = l.getHead();
+		TempValue tmp = new TempValue();
+		return new Move(new Temp(tmp),exp);
 	}
+	
 }

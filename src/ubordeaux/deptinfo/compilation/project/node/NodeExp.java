@@ -21,7 +21,18 @@ public abstract class NodeExp extends Node {
 	public Type getType() {
 		return this.type;
 	}
-
+	
+	public List<Type> getTypeList() {
+		ArrayList<Type> res = new ArrayList<>();
+		ArrayList<Node> arr = new ArrayList<>(this.getList());
+		for(Node n : arr) {
+			System.out.println("Expr->Tuple: " + n.toDotNodeName());
+			NodeExp current = (NodeExp) n;
+			res.add(current.getType());
+		}
+		
+		return res;		
+	}
 	
 	public ExpList generateIntermediateCodeExp() {
 		//System.err.println("NodeExp code intermediaire: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
@@ -35,18 +46,6 @@ public abstract class NodeExp extends Node {
 		return new ExpList(null,null);
 		
 		
-	}
-	
-	public List<Type> getTypeList() {
-		ArrayList<Type> res = new ArrayList<>();
-		ArrayList<Node> arr = new ArrayList<>(this.getList());
-		for(Node n : arr) {
-			System.out.println("Expr->Tuple: " + n.toDotNodeName());
-			NodeExp current = (NodeExp) n;
-			res.add(current.getType());
-		}
-		
-		return res;		
 	}
 	
 }

@@ -4,10 +4,6 @@ public class ExpList extends IntermediateCode {
 	private Exp head;
 	private ExpList tail;
 	
-	public Exp getHead() {
-		return head;
-	}
-
 	public ExpList getTail() {
 		return tail;
 	}
@@ -18,6 +14,9 @@ public class ExpList extends IntermediateCode {
 		this.tail = tail;
 	}
 	
+	public Exp getHead() {
+		return this.head;
+	}
 	
 
 	@Override

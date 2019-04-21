@@ -5,8 +5,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Stack;
 
+import fr.groupname.compilator.error.MemoryLeak;
 import fr.groupname.compilator.error.UnknownVariable;
 import ubordeaux.deptinfo.compilation.project.type.Type;
+import ubordeaux.deptinfo.compilation.project.type.TypePointer;
 
 
 //Local variable stack
@@ -80,14 +82,38 @@ public class StackEnvironment {
 			i +=1;
 		}
 	}
-	public void remove_node_to_every_layer(String id) {
+	
+	public void alloc_variable(String id) throws MemoryLeak {
 		Iterator<Map<String, Type>> it = environment.iterator();
 		
 		int i = 0;
 		while(it.hasNext()) {
 			Map<String, Type> map = it.next();
 			System.out.println("* Removed " + id.toString() + "at layer: " + i);
-			map.remove(id);
+			if((map.get(id) instanceof TypePointer)) {
+				throw new MemoryLeak("Variable: " + id + " double malloc tentative.");
+			}
+			TypePointer n_type = new TypePointer(map.get(id));
+			map.put(id, n_type);
+			
+			i +=1;
+		}
+	}
+
+
+	public void dispose_variable(String id) throws MemoryLeak {
+		Iterator<Map<String, Type>> it = environment.iterator();
+		
+		int i = 0;
+		while(it.hasNext()) {
+			Map<String, Type> map = it.next();
+			System.out.println("* Removed " + id.toString() + "at layer: " + i);
+			if(!(map.get(id) instanceof TypePointer)) {
+				throw new MemoryLeak("Variable: " + id + " already free or not a pointer.");
+			}
+			TypePointer n_type = (TypePointer) map.get(id);
+			map.put(id, n_type.get(n_type.size()-1));
+			
 			i +=1;
 		}
 	}

@@ -54,10 +54,10 @@
 			<arg value="data/progr2.lea" />
 			<!- -->
 			
-			<!-- ->
+			<!-- -->
 			<arg value="-checkType" />
 			<arg value="data/progr3.lea" />
-			<!- -->
+			<!-- -->
 			
 			<!-- ->
 			<arg value="-checkType" />
@@ -79,10 +79,10 @@
 			<arg value="data/progr7.lea" />
 			<!- -->
 			
-			<!-- -->
+			<!-- ->
 			<arg value="-checkType" />
 			<arg value="data/progr8.lea" />
-			<!-- -->
+			<!- -->
 			
 			<!-- ->
 			<arg value="-checkType" />

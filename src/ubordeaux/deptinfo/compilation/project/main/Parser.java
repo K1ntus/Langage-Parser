@@ -93,6 +93,8 @@ public class Parser extends beaver.Parser {
 	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment("procedures");
 	private StackEnvironment stackEnvironment = new StackEnvironment("local variables stack");
 	private String type_declaration_name;
+	
+	private boolean critical_mode = false;
 
 	private final Action[] actions;
 
@@ -570,7 +572,19 @@ public class Parser extends beaver.Parser {
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_node = _symbols[offset + 2];
 					final NodeExp node = (NodeExp) _symbol_node.value;
-					 return new NodeNew(node);
+					 
+		if(node instanceof NodeId) {
+			NodeId n_id = (NodeId) node;
+			try {
+				stackEnvironment.alloc_variable(n_id.getName()); 
+			}catch(MemoryLeak e) {
+				System.err.println(e);
+				if(critical_mode)
+					System.exit(0);
+				return node;
+			}
+		}
+		return new NodeNew(node);
 				}
 			},
 			new Action() {	// [75] dispose_statement = TOKEN_DISPOSE variable_access.node TOKEN_SEMIC
@@ -578,7 +592,17 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_node = _symbols[offset + 2];
 					final NodeExp node = (NodeExp) _symbol_node.value;
 					 
-								//stackEnvironment.remove_node_to_every_layer(node); 
+								if(node instanceof NodeId) {
+									NodeId n_id = (NodeId) node;
+									try {
+										stackEnvironment.dispose_variable(n_id.getName()); 
+									}catch(MemoryLeak e) {
+										System.err.println(e);
+										if(critical_mode)
+											System.exit(0);
+										return node;
+									}
+								}
 								return new NodeDispose(node);
 				}
 			},
@@ -588,7 +612,7 @@ public class Parser extends beaver.Parser {
 					final NodeExp args = (NodeExp) _symbol_args.value;
 					 
 				TypeTuple params_tuple = null;
-		
+
 				if(args instanceof NodeCallFct) {
 					NodeCallFct tmp = (NodeCallFct) args;
 					params_tuple= new TypeTuple(new TypeFeature(tmp.getName(), tmp.getType()));
@@ -737,7 +761,15 @@ public class Parser extends beaver.Parser {
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_e = _symbols[offset + 1];
 					final NodeExp e = (NodeExp) _symbol_e.value;
-					 return new NodePtrAccess(e);
+					 
+		if(!(e.getType() instanceof TypePointer)){
+			System.err.println("[MEMLEAK] Trying to access free or undeclared pointer");
+			
+			if(critical_mode)
+				System.exit(0);
+			return e;
+		}
+		return new NodePtrAccess(e);
 				}
 			},
 			new Action() {	// [94] expression = expression.e1 TOKEN_PLUS expression.e2

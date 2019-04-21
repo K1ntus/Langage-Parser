@@ -48,6 +48,8 @@
 	private StackEnvironment stackEnvironment = new StackEnvironment("local variables stack");
 	private String type_declaration_name;
 	
+	private boolean critical_mode = false;
+	
 :};
 
 %init {: 
@@ -533,7 +535,21 @@ expression_list=
 
 //PAS OK
 new_statement=
-	TOKEN_NEW variable_access.node TOKEN_SEMIC			{: return new NodeNew(node); :}
+	TOKEN_NEW variable_access.node TOKEN_SEMIC			
+	{: 
+		if(node instanceof NodeId) {
+			NodeId n_id = (NodeId) node;
+			try {
+				stackEnvironment.alloc_variable(n_id.getName()); 
+			}catch(MemoryLeak e) {
+				System.err.println(e);
+				if(critical_mode)
+					System.exit(0);
+				return node;
+			}
+		}
+		return new NodeNew(node); 
+	:}
 	;
 	
 //PAS OK
@@ -541,7 +557,17 @@ new_statement=
 dispose_statement=
 	TOKEN_DISPOSE variable_access.node TOKEN_SEMIC		
 							{: 
-								//stackEnvironment.remove_node_to_every_layer(node); 
+								if(node instanceof NodeId) {
+									NodeId n_id = (NodeId) node;
+									try {
+										stackEnvironment.dispose_variable(n_id.getName()); 
+									}catch(MemoryLeak e) {
+										System.err.println(e);
+										if(critical_mode)
+											System.exit(0);
+										return node;
+									}
+								}
 								return new NodeDispose(node); 
 							:}
 	;
@@ -551,7 +577,7 @@ println_statement=
 		TOKEN_PRINTLN expression.args TOKEN_SEMIC	
 			{: 
 				TypeTuple params_tuple = null;
-		
+
 				if(args instanceof NodeCallFct) {
 					NodeCallFct tmp = (NodeCallFct) args;
 					params_tuple= new TypeTuple(new TypeFeature(tmp.getName(), tmp.getType()));
@@ -664,7 +690,15 @@ variable_access=
 		{: return new NodeArrayAccess(var, e); :}
 	
 	| expression.e TOKEN_CIRC	//Pointeur
-		{: return new NodePtrAccess(e);	:}			
+		{: 
+		if(!(e.getType() instanceof TypePointer)){
+			System.err.println("[MEMLEAK] Trying to access free or undeclared pointer");
+			
+			if(critical_mode)
+				System.exit(0);
+			return e;
+		}
+		return new NodePtrAccess(e);	:}			
 	;
 	
 expression=

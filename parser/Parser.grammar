@@ -457,7 +457,7 @@ assignment_statement=
 																return new NodeAssign(e1, e2); 
 															:}
 	;
-	
+
 procedure_statement=
 	procedure_expression.n TOKEN_SEMIC	{: return n; :}
 	;

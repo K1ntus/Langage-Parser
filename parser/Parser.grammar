@@ -248,7 +248,7 @@ array_type=
 	
 range_type=
 	enumerated_type	//OK
-	| subrange_type.t	{: System.out.println(t.toString()); return t; :}	//OK
+	| subrange_type//.t	{: System.out.println(t.toString()); return t; :}	//OK
 	| named_type	//OK
 	;
 	
@@ -292,7 +292,7 @@ variable_declaration=
 	identifier_list.id_list TOKEN_COLON type.t TOKEN_SEMIC 	
 															{:
 																for(String str : id_list){
-																	stackEnvironment.add_node_to_latest_portability(str, new NodeLiteral(t, 0));
+																	stackEnvironment.add_node_to_latest_portability(str, t);
 																}
 																
 																return _symbol_id_list;
@@ -359,7 +359,7 @@ procedure_head=
 				for(Node n : args.getList()) {
 					NodeId n_id = (NodeId) n;
 					params_tuple.add(new TypeFeature(n_id.getName(), n_id.getType()));
-					stackEnvironment.add_node_to_latest_portability(n_id.getName(), new NodeLiteral(n_id.getType(), 0));
+					stackEnvironment.add_node_to_latest_portability(n_id.getName(), n_id.getType());
 				}
 				
 				TypeFunct type_function = new TypeFunct(funct_name, params_tuple, new TypeVoid());
@@ -375,7 +375,7 @@ procedure_head=
 				for(Node n : args.getList()) {
 					NodeId n_id = (NodeId) n;
 					params_tuple.add(new TypeFeature(n_id.getName(), n_id.getType()));
-					stackEnvironment.add_node_to_latest_portability(n_id.getName(), new NodeLiteral(n_id.getType(), 0));
+					stackEnvironment.add_node_to_latest_portability(n_id.getName(), n_id.getType());
 				}
 				
 				TypeFunct type_function = new TypeFunct(funct_name, params_tuple, t);
@@ -421,7 +421,7 @@ pop_stackenv  =		{:
 
 push_stackenv =		{:	
 						//System.out.println("[STACK] Pushed one more stack layer"); 
-						stackEnvironment.getEnvironment().push(new HashMap<String, NodeLiteral>(stackEnvironment.getEnvironment().peek())); 
+						stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); 
 						return new EmptySymbol(); 
 					:}	
 				;
@@ -454,6 +454,8 @@ simple_statement=
 //OK
 assignment_statement=
 	variable_access.e1 TOKEN_AFF expression.e2 TOKEN_SEMIC	{:  
+		//System.out.println("Left: " + e1.toString());
+		//System.out.println("Right: " + e2.toString());
 																return new NodeAssign(e1, e2); 
 															:}
 	;
@@ -470,8 +472,8 @@ procedure_statement=
 procedure_expression=
 	TOKEN_IDENTIFIER.func_name TOKEN_LPAR expression_part.args TOKEN_RPAR	{: 
 																				try{
-																					stackEnvironment.getEnvironment().push(new HashMap<String, NodeLiteral>(stackEnvironment.getEnvironment().peek())); //push env
-																					HashMap<String, NodeLiteral> table = (HashMap) stackEnvironment.getEnvironment().peek();
+																					stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); //push env
+																					HashMap<String, Type> table = (HashMap) stackEnvironment.getEnvironment().peek();
 																					
 																					//NodeCallFct fct_from_table = procedureEnvironment.getNodeFct(func_name);
 																					//TypeFunct fct_type = fct_from_table.getTypeFunct().clone();
@@ -485,16 +487,16 @@ procedure_expression=
 																						Type t = current_type.getType();
 																						if((args.get(i) instanceof NodeLiteral)) {
 																							NodeLiteral node = (NodeLiteral) args.get(i);
-																							table.put(id, node);		
+																							table.put(id, node.getType());		
 																							System.out.println("Register function NodeLiteral:" +id + " | "+ node.toString());
 																						}else if(args.get(i) instanceof NodeOp) {
 																							NodeLiteral node = new NodeLiteral(new TypeInt(), args.get(i));
-																							table.put(id,node);
+																							table.put(id, node.getType());
 																							System.out.println("Register function NodOp:" +id + " | "+ node.toString());
 																					
 																						}else if(args.get(i) instanceof NodeRel) {
 																							NodeLiteral node = new NodeLiteral(new TypeBoolean(), args.get(i));
-																							table.put(id,node);
+																							table.put(id, node.getType());
 																							System.out.println("Register function NodeRel:" +id + " | "+ node.toString());
 																							
 																						}else {
@@ -634,19 +636,22 @@ normalement TODO
 */
 //Recup les valeurs stockees dans les environnements (ou pas, a check)
 variable_access=
-	TOKEN_IDENTIFIER.name		{:	
-										try{
-											NodeLiteral res = stackEnvironment.get_node_reachable(name);  
-											System.out.println("[VARIABLE]" + res.toString() +" found.");
-											return res;
-										} catch (NoSuchFieldException e) {
-											System.out.println("Variable [" + name + "]: "+ e);
-											return new NodeLiteral(new TypeVoid(), null);
-										}
-								:}
-	| variable_access.var TOKEN_LBRACKET expression.e TOKEN_RBRACKET		{: return new NodeArrayAccess(var, e); :}//Tableau
+	TOKEN_IDENTIFIER.name		
+		{:	
+			try{
+				Type t = stackEnvironment.get_node_reachable(name);  
+				//System.out.println("[VARIABLE]" + res.toString() +" found.");
+				return new NodeId(name, t);
+			} catch (UnknownVariable e) {
+				System.err.println("Variable [" + name + "]: "+ e);
+				return new NodeId(null, null);
+			}
+		:}
+
+	| variable_access.var TOKEN_LBRACKET expression.e TOKEN_RBRACKET	//Tableau
+		{: return new NodeArrayAccess(var, e); :}
+	
 	| expression.e TOKEN_CIRC	//Pointeur
-		//{: return new NodeLiteral(new TypeInt(), 5); :}		
 		{: return new NodePtrAccess(e);	:}			
 	;
 	
@@ -677,9 +682,9 @@ Literal Expression
 normalement OK
 */
 literal=
-	TOKEN_LIT_INTEGER.e		{: return new NodeLiteral(new TypeInt(), e);			:}
-	| TOKEN_LIT_STRING.e	{: return new NodeLiteral(new TypeString(), e);			:}
-	| TOKEN_TRUE			{: return new NodeLiteral(new TypeBoolean(), true);		:}
-	| TOKEN_FALSE			{: return new NodeLiteral(new TypeBoolean(), false);	:}
-	| TOKEN_NULL			{: return new NodeLiteral(new TypeVoid(), null);		:}
+	TOKEN_LIT_INTEGER.value		{: return new NodeLiteral(new TypeInt(), value);		:}
+	| TOKEN_LIT_STRING.value	{: return new NodeLiteral(new TypeString(), value);		:}
+	| TOKEN_TRUE				{: return new NodeLiteral(new TypeBoolean(), true);		:}
+	| TOKEN_FALSE				{: return new NodeLiteral(new TypeBoolean(), false);	:}
+	| TOKEN_NULL				{: return new NodeLiteral(new TypeVoid(), null);		:}
 	;

@@ -18,21 +18,16 @@ import beaver.Scanner;
 %column
 
 %{
-      StringBuffer string = new StringBuffer();
+	StringBuffer string = new StringBuffer();
       
-private String annotation_buffer = "";
-private String annotation_type = "";
+	private String annotation_buffer = "";
+	private String annotation_type = "";
 %}
 
 
 Identifier = [:jletter:] [:jletterdigit:]*
 
 Integer = [0-9]+
-String = \"[^\"]*\";
-
-
-Boolean = true|false
-
 
 LineTerminator = \r|\n|\r\n
 LineComment = "//" [^\r\n]* {LineTerminator}?
@@ -47,10 +42,10 @@ HexaValue = 0x[a-fA-F0-9_]*
 
 	"/**"			{System.out.println("$$$"); yybegin(COMMENT_DOC);}
 	"/*"			{System.out.println("$$"); yybegin(COMMENT);}
+	
+	\"              { string.setLength(0); string.append('\"'); yybegin(STRING); }
 	{LineComment}	{System.out.print(yytext()); }
 	
-	\"              { string.setLength(0); yybegin(STRING); }
-	//{String}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_STRING, yyline, yycolumn, new String(yytext()) ); }
 	
 	"struct"		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_STRUCT, yyline, yycolumn); }
 	"array"			{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_ARRAY, yyline, yycolumn); }
@@ -120,8 +115,8 @@ HexaValue = 0x[a-fA-F0-9_]*
 	"^"				{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_CIRC, yyline, yycolumn); }
 	
 	{Identifier}	{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_IDENTIFIER, yyline, yycolumn, new String(yytext()) ); }
-	{Integer}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn, new Integer(yytext()) ); }
-	{HexaValue}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn, new Integer(Integer.decode(yytext())) ); }
+	{Integer}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn, new Integer(Integer.valueOf(yytext())) ); }
+	{HexaValue}		{ System.out.println("*** " + yytext()); return new Symbol(Terminals.TOKEN_LIT_INTEGER, yyline, yycolumn, new Integer(Integer.decode (yytext())) ); }
 	
 	
 	
@@ -132,7 +127,7 @@ HexaValue = 0x[a-fA-F0-9_]*
 
 <STRING> {
       \"                             { yybegin(YYINITIAL); 
-                                       return new Symbol(Terminals.TOKEN_LIT_STRING, yyline, yycolumn, new String(string)); }
+                                       string.append('\"'); return new Symbol(Terminals.TOKEN_LIT_STRING, yyline, yycolumn, new String(string)); }
       [^\n\r\"\\]+                   { string.append( yytext() ); }
       \\t                            { string.append('\t'); }
       \\n                            { string.append('\n'); }

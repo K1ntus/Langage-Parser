@@ -1,6 +1,5 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 
 public final class NodeLiteral extends NodeExp {
@@ -14,7 +13,6 @@ public final class NodeLiteral extends NodeExp {
 	}
 
 	public String toString() {
-		//return "NodeLiteral("+type+", "+value+")";
 		return this.getClass().getSimpleName() + '#' + value + ':' + type + '#';
 	}
 
@@ -32,20 +30,5 @@ public final class NodeLiteral extends NodeExp {
 	public NodeLiteral clone() {
 		return new NodeLiteral(type, value);
 	}
-	
-	public Object getValue() {
-		return value;
-	}
-	
-	public Type getType() {
-		return type;
-	}
 
-	@Override
-	public ExpList generateIntermediateCode() {
-		// TODO Auto-generated method stub
-		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		return null;
-		
-	}
 }

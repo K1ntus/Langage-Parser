@@ -28,7 +28,8 @@ public final class NodeList extends Node {
 				System.out.println("- Checktype invalid: ");
 				System.out.println("- elem:" + elt.toString());
 				//System.out.println("* Checktype invalid.");
-				result = false;	
+				result = false;
+				break;
 			}
 		}
 		return result;

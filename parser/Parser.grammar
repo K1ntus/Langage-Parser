@@ -17,9 +17,9 @@
 %import "ubordeaux.deptinfo.compilation.project.type.*";
 %import "ubordeaux.deptinfo.compilation.project.intermediateCode.*";
 
-%import "fr.groupname.compilator.environment.*";
-%import "fr.groupname.compilator.special.*";
-%import "fr.groupname.compilator.error.*";
+%import "fr.c12.compilator.environment.*";
+%import "fr.c12.compilator.special.*";
+%import "fr.c12.compilator.error.*";
 
 
 
@@ -49,6 +49,7 @@
 	private String type_declaration_name;
 	
 	private boolean critical_mode = false;
+	
 	
 :};
 
@@ -510,16 +511,16 @@ procedure_expression=
 																						if((args.get(i) instanceof NodeLiteral)) {
 																							NodeLiteral node = (NodeLiteral) args.get(i);
 																							table.put(id, node.getType());		
-																							System.out.println("Register function NodeLiteral:" +id + " | "+ node.toString());
+																							//System.out.println("Register function NodeLiteral:" +id + " | "+ node.toString());
 																						}else if(args.get(i) instanceof NodeOp) {
 																							NodeLiteral node = new NodeLiteral(new TypeInt(), args.get(i));
 																							table.put(id, node.getType());
-																							System.out.println("Register function NodOp:" +id + " | "+ node.toString());
+																							//System.out.println("Register function NodOp:" +id + " | "+ node.toString());
 																					
 																						}else if(args.get(i) instanceof NodeRel) {
 																							NodeLiteral node = new NodeLiteral(new TypeBoolean(), args.get(i));
 																							table.put(id, node.getType());
-																							System.out.println("Register function NodeRel:" +id + " | "+ node.toString());
+																							//System.out.println("Register function NodeRel:" +id + " | "+ node.toString());
 																							
 																						}else {
 																							System.out.println("Cannot register node: " + args.get(i).toString());

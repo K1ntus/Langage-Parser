@@ -1,4 +1,4 @@
-package fr.groupname.compilator.special;
+package fr.c12.compilator.special;
 
 import beaver.Symbol;
 

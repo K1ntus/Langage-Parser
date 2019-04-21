@@ -1,4 +1,4 @@
-package fr.groupname.compilator.error;
+package fr.c12.compilator.error;
 
 public class UnknownVariable extends Exception {
 	private static final long serialVersionUID = 5L;

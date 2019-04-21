@@ -1,4 +1,4 @@
-package fr.groupname.compilator.error;
+package fr.c12.compilator.error;
 
 public class MemoryLeak extends Exception {
 	private static final long serialVersionUID = 3L;

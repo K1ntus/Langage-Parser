@@ -2,12 +2,57 @@
 
 
 *************************************************
+*** Fichier data/progr0.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//Custom j'ai pas verif apres le merge
+Named: unknown
+[UnknownType] unknown
+fr.c12.compilator.error.UnknownType
+// UnknownType
+named2 -> TypeNamed_unknown
+[UnknownType] TypeNamed_unknown
+** Enregistre fct:sum
+//AlreadyDefinedFunction Error
+[AlreadyDefinedFunction] sum
+fr.c12.compilator.error.AlreadyDefinedFunction
+//AlreadyDefinedFunction Error
+[AlreadyDefinedFunction] sum
+fr.c12.compilator.error.AlreadyDefinedFunction
+** Enregistre fct:pgcd
+
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#100:TypeInt_null#), println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral#5:TypeInt_null#, NodeLiteral#5:TypeInt_null#)))))
+
+
+
+*************************************************
 *** Fichier data/progr1.lea
 [INFO] $$  : multiple line comment.
 [INFO] $$$ : documentation comment.
 
 
-* Enregistre a
 
 code intermediaire assign
 TODO: NodeLiteral.generateIntermediateCode()
@@ -42,11 +87,6 @@ NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), Node
 //
 // gestion des variables statiques
 //
-* Enregistre x
-* Enregistre y
-* Enregistre b
-* Enregistre c
-* Enregistre d
 // 0x4995F6B5
 
 code intermediaire assign
@@ -143,24 +183,16 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#
 // gestion des variables statiques
 // gestion du tas et des pointeurs
 // 
-* Enregistre x
-* Enregistre y
-* Enregistre b
-* Enregistre c
-* Enregistre d
-* Enregistre p
-* Enregistre q
-* Enregistre r
 // 0x4995F6B5
 //println (d[2]);
 [MEMLEAK] Variable: q double malloc tentative.
-fr.groupname.compilator.error.MemoryLeak
+fr.c12.compilator.error.MemoryLeak
 // 0x41
 [MEMLEAK] Variable: p double malloc tentative.
-fr.groupname.compilator.error.MemoryLeak
+fr.c12.compilator.error.MemoryLeak
 // resize the heap
 [MEMLEAK] Variable: r double malloc tentative.
-fr.groupname.compilator.error.MemoryLeak
+fr.c12.compilator.error.MemoryLeak
 [MEMLEAK] Trying to access free or undeclared pointer
 // heap memory error
 
@@ -309,8 +341,6 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#
 // Structure de contrôle
 //
 //
-* Enregistre x
-* Enregistre y
 *** Erreur de syntaxe en ligne 0, colonne 18. Token inattendu: TOKEN_ELSE
 0,18-0,6: Recovered: removed unexpected token #54
 
@@ -342,20 +372,8 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWh
 [INFO] $$$ : documentation comment.
 
 
-* Enregistre x
-* Enregistre i
-* Enregistre j
-* Enregistre k
 ** Enregistre fct:sum
-* Enregistre i
-* Enregistre j
 ** Enregistre fct:pgcd
-Register function NodeLiteral:i | NodeLiteral#3:TypeInt_null#
-Register function NodeLiteral:j | NodeLiteral#5:TypeInt_null#
-Register function NodeLiteral:i | NodeLiteral#3:TypeInt_null#
-Register function NodeLiteral:j | NodeLiteral#5:TypeInt_null#
-Register function NodeLiteral:i | NodeLiteral#78:TypeInt_null#
-Register function NodeLiteral:j | NodeLiteral#90:TypeInt_null#
 
 code intermediaire assign
 TODO: NodeLiteral.generateIntermediateCode()
@@ -410,37 +428,16 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#), printl
 //
 // gestion complexe de la pile
 // 
-* Enregistre x
-* Enregistre k
 Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: fact1 trouvee.
 ** Enregistre fct:fact1
-* Enregistre k
 Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: fact2 trouvee.
 ** Enregistre fct:fact2
-* Enregistre a
-* Enregistre b
-* Enregistre c
-* Enregistre k
 Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: hanoi trouvee.
 Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: hanoi trouvee.
 ** Enregistre fct:hanoi
-* Enregistre i
 ** Enregistre fct:impair
-* Enregistre i
-* Enregistre b
-Register function NodOp:i | NodeLiteral#NodeOp(NodeId#i:TypeInt_null#, NodeLiteral#1:TypeInt_null#):TypeInt_null#
 ** Enregistre fct:pair
-* Enregistre i
-Register function NodOp:i | NodeLiteral#NodeOp(NodeId#i:TypeInt_null#, NodeLiteral#1:TypeInt_null#):TypeInt_null#
 ** Enregistre fct:impair
-Register function NodeLiteral:k | NodeLiteral#6:TypeInt_null#
-Register function NodeLiteral:k | NodeLiteral#6:TypeInt_null#
-Register function NodeLiteral:a | NodeLiteral#"A":TypeString#
-Register function NodeLiteral:b | NodeLiteral#"B":TypeString#
-Register function NodeLiteral:c | NodeLiteral#"C":TypeString#
-Register function NodeLiteral:k | NodeLiteral#4:TypeInt_null#
-Register function NodeLiteral:i | NodeLiteral#1001:TypeInt_null#
-Register function NodeLiteral:i | NodeLiteral#1000:TypeInt_null#
 
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
 class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
@@ -493,8 +490,6 @@ NodeList(println_NodeCallFct(NodeList(fact1_NodeCallFct(NodeList(NodeLiteral#6:T
 //
 // tableaux
 // 
-* Enregistre week
-* Enregistre year
 
 code intermediaire assign
 TODO: NodeLiteral.generateIntermediateCode()
@@ -568,9 +563,6 @@ NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt
 // 
 ** Enregistre types: (TypeItemEnum@SUNDAY=0, TypeItemEnum@MONDAY=1, TypeItemEnum@TUESDAY=2, TypeItemEnum@WEDNESDAY=3, TypeItemEnum@THURSDAY=4, TypeItemEnum@FRIDAY=5, TypeItemEnum@SATURDAY=6)
 ** Enregistre types: (TypeItemEnum@JANUARY=0, TypeItemEnum@FEBRUARY=1, TypeItemEnum@MARCH=2, TypeItemEnum@APRIL=3, TypeItemEnum@MAY=4, TypeItemEnum@JUNE=5, TypeItemEnum@JULY=6, TypeItemEnum@AUGUST=7, TypeItemEnum@SEPTEMBER=8, TypeItemEnum@OCTOBER=9, TypeItemEnum@NOVEMBER=10, TypeItemEnum@DECEMBER=11)
-* Enregistre d
-* Enregistre week
-* Enregistre year
 
 code intermediaire assign
 TODO: NodeLiteral.generateIntermediateCode()

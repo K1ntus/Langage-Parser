@@ -1,9 +1,9 @@
-package fr.groupname.compilator.environment;
+package fr.c12.compilator.environment;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import fr.groupname.compilator.error.AlreadyDefinedFunction;
+import fr.c12.compilator.error.AlreadyDefinedFunction;
 import ubordeaux.deptinfo.compilation.project.type.TypeFunct;
 
 public class ProcedureEnvironment {

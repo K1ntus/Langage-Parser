@@ -1,12 +1,12 @@
-package fr.groupname.compilator.environment;
+package fr.c12.compilator.environment;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Stack;
 
-import fr.groupname.compilator.error.MemoryLeak;
-import fr.groupname.compilator.error.UnknownVariable;
+import fr.c12.compilator.error.MemoryLeak;
+import fr.c12.compilator.error.UnknownVariable;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypePointer;
 
@@ -15,6 +15,8 @@ import ubordeaux.deptinfo.compilation.project.type.TypePointer;
 public class StackEnvironment {
 	private Stack<Map<String, Type>> environment;
 
+	private static boolean verbose = false;
+	
 	public StackEnvironment() {		
 		environment = new Stack<>();
 		
@@ -67,7 +69,8 @@ public class StackEnvironment {
 	
 
 	public void add_node_to_latest_portability(String id, Type n) {
-		System.out.println("* Enregistre " + id.toString());
+		if(verbose)
+			System.out.println("* Enregistre " + id.toString());
 		this.get_last_portability().put(id, n);
 	}
 
@@ -77,7 +80,8 @@ public class StackEnvironment {
 		int i = 0;
 		while(it.hasNext()) {
 			Map<String, Type> map = it.next();
-			System.out.println("* Enregistre " + id.toString() + "at layer: " + i);
+			if(verbose)
+				System.out.println("* Enregistre " + id.toString() + "at layer: " + i);
 			map.put(id, n);
 			i +=1;
 		}

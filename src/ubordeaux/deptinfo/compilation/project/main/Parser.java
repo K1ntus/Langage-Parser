@@ -1,19 +1,19 @@
 package ubordeaux.deptinfo.compilation.project.main;
 
 import java.util.Iterator;
+import fr.c12.compilator.error.*;
 import ubordeaux.deptinfo.compilation.project.type.*;
-import fr.groupname.compilator.environment.*;
+import fr.c12.compilator.special.*;
 import java.util.Scanner;
 import java.util.HashMap;
+import fr.c12.compilator.environment.*;
 import java.util.Stack;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 import java.util.Map;
-import fr.groupname.compilator.error.*;
 import beaver.*;
-import fr.groupname.compilator.special.*;
 import ubordeaux.deptinfo.compilation.project.node.*;
 
 /**
@@ -532,16 +532,16 @@ public class Parser extends beaver.Parser {
 																						if((args.get(i) instanceof NodeLiteral)) {
 																							NodeLiteral node = (NodeLiteral) args.get(i);
 																							table.put(id, node.getType());		
-																							System.out.println("Register function NodeLiteral:" +id + " | "+ node.toString());
+																							//System.out.println("Register function NodeLiteral:" +id + " | "+ node.toString());
 																						}else if(args.get(i) instanceof NodeOp) {
 																							NodeLiteral node = new NodeLiteral(new TypeInt(), args.get(i));
 																							table.put(id, node.getType());
-																							System.out.println("Register function NodOp:" +id + " | "+ node.toString());
+																							//System.out.println("Register function NodOp:" +id + " | "+ node.toString());
 																					
 																						}else if(args.get(i) instanceof NodeRel) {
 																							NodeLiteral node = new NodeLiteral(new TypeBoolean(), args.get(i));
 																							table.put(id, node.getType());
-																							System.out.println("Register function NodeRel:" +id + " | "+ node.toString());
+																							//System.out.println("Register function NodeRel:" +id + " | "+ node.toString());
 																							
 																						}else {
 																							System.out.println("Cannot register node: " + args.get(i).toString());

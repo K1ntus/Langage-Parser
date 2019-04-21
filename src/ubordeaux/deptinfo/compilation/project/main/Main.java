@@ -2,7 +2,7 @@ package ubordeaux.deptinfo.compilation.project.main;
 
 import java.io.FileReader;
 
-import fr.groupname.compilator.environment.StackEnvironment;
+import fr.c12.compilator.environment.StackEnvironment;
 import ubordeaux.deptinfo.compilation.project.node.Node;
 
 

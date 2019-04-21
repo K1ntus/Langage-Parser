@@ -643,9 +643,14 @@ variable_access=
 				return new NodeId(name, t);
 			} catch (UnknownVariable e) {	//Not a normal variable
 				try {	//Check enum
-					Type t = typeEnvironment.getEnumType(name);
+					Type tmp = typeEnvironment.getEnumType(name);
+					if(tmp instanceof TypeItemEnum) {
+						TypeItemEnum t = (TypeItemEnum) tmp;
+						return new NodeId(t.getRefEnumRange(), new TypeInt(t.getValue()));
+					}
+					return new NodeId(null, null);					
+					
 					//System.out.println("FINDDD");
-					return new NodeId(name, t);
 				} catch (NoSuchFieldException e2) {
 
 					//System.err.println("Variable [" + name + "]");

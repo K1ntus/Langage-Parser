@@ -32,6 +32,7 @@ public final class NodeList extends Node {
 				break;
 			}
 		}
+		System.out.println("- NodeList well typed");
 		return result;
 	}
 

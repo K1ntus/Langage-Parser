@@ -29,8 +29,11 @@ public class NodeOp extends NodeExp {
 	@Override
 	public boolean checksType() {
 		super.checksType();
-		if ((super.size() > 1) && getOp2()!=null && !this.getOp1().getType().equals(this.getOp2().getType()))
+		if ((super.size() > 1) && getOp2()!=null && !this.getOp1().getType().equals(this.getOp2().getType())) {
+			System.out.println("- NodeOp not well typed");
 			return false;
+		}
+		System.out.println("- NodeOp well typed");
 		return true;
 	}
 

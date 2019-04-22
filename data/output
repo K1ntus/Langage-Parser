@@ -46,11 +46,23 @@
 *** end
 
 code intermediaire assign
+
+
 Code intermediaire while
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+intermediate code call
+
+
 code intermediaire assign
 code intermediaire ID
+
+
 class ubordeaux.deptinfo.compilation.project.node.NodeLiteral
+
+
+
+
+
+
 *** Analyse syntaxique ok
 --- CheckType NodeList
 --- CheckType NodeAssign
@@ -185,18 +197,44 @@ NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), Node
 *** end
 
 code intermediaire assign
+
+
 code intermediaire assign
+
+
 code intermediaire assign
+
+
 code intermediaire assign
+
+
 code intermediaire assign
+
+
 code intermediaire assign
+
+
 code intermediaire assign
+
+
 code intermediaire assign
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+
+
+intermediate code call
+
+
+intermediate code call
+
+
+intermediate code call
+
+
+intermediate code call
+
+
+intermediate code call
+
+
 *** Analyse syntaxique ok
 --- CheckType NodeList
 --- CheckType NodeAssign
@@ -466,34 +504,86 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#
 *** end
 
 code intermediaire assign
+
+
 code intermediaire assign
+
+
 code intermediaire assign
+
+
 code intermediaire assign
+
+
 code intermediaire assign
+
+
 code intermediaire assign
+
+
 code intermediaire assign
+
+
 code intermediaire assign
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+
+
+intermediate code call
+
+
+intermediate code call
+
+
+intermediate code call
+
+
+intermediate code call
+
+
 class ubordeaux.deptinfo.compilation.project.node.NodeNew
+
+
 code intermediaire assign
 TODO: NodePtrAccess.generateIntermediateCode()
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+
+
+intermediate code call
+
+
+intermediate code call
+
+
 class ubordeaux.deptinfo.compilation.project.node.NodeNew
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+
+
+intermediate code call
+
+
 code intermediaire assign
 TODO: NodePtrAccess.generateIntermediateCode()
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+
+
+intermediate code call
+
+
 class ubordeaux.deptinfo.compilation.project.node.NodeNew
+
+
 code intermediaire assign
 TODO: NodePtrAccess.generateIntermediateCode()
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+
+
+intermediate code call
+
+
 class ubordeaux.deptinfo.compilation.project.node.NodeDispose
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+
+
+intermediate code call
+
+
+intermediate code call
+
+
 *** Analyse syntaxique ok
 --- CheckType NodeList
 --- CheckType NodeAssign
@@ -679,9 +769,17 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#
 *** end
 
 code intermediaire assign
+
+
 Code intermediaire while
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+intermediate code call
+
+
 class ubordeaux.deptinfo.compilation.project.node.NodeIf
+
+
+
+
 *** Analyse syntaxique ok
 --- CheckType NodeList
 --- CheckType NodeAssign
@@ -846,10 +944,20 @@ Register function NodeLiteral:j | NodeLiteral#90:TypeInt_null#
 *** end
 
 code intermediaire assign
+
+
 code intermediaire assign
-TODO: NodeCallFct.generateIntermediateCode()
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+code intermediaire list
+
+
+
+
+intermediate code call
+
+
+intermediate code call
+
+
 *** Analyse syntaxique ok
 --- CheckType NodeList
 --- CheckType NodeAssign
@@ -1349,11 +1457,21 @@ Register function NodeLiteral:i | NodeLiteral#1000:TypeInt_null#
 *** ;
 *** end
 
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+intermediate code call
+
+
+intermediate code call
+
+
+intermediate code call
+
+
+intermediate code call
+
+
+intermediate code call
+
+
 *** Analyse syntaxique ok
 --- CheckType NodeList
 --- CheckType NodeCallFct
@@ -1510,13 +1628,29 @@ NodeList(println_NodeCallFct(NodeList(fact1_NodeCallFct(NodeList(NodeLiteral#6:T
 *** end
 
 code intermediaire assign
+
+
 code intermediaire assign
+
+
 code intermediaire assign
+
+
 code intermediaire assign
+
+
 code intermediaire assign
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
-class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+
+
+intermediate code call
+
+
+intermediate code call
+
+
+intermediate code call
+
+
 *** Analyse syntaxique ok
 --- CheckType NodeList
 --- CheckType NodeAssign

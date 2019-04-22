@@ -118,7 +118,8 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 					((NodeAssign)elt).generateIntermediateCodeAssign();
 					break;
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeCallFct":
-					System.out.println(elt.getClass().toString());
+					System.out.println("intermediate code call");
+					//((NodeCallFct)elt).generateIntermediateCodeCallFct(); //null pointer exception
 					break;
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeCase":
 					System.out.println(elt.getClass().toString());
@@ -177,7 +178,6 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 				default:
 					System.out.println("-_-_-_-DEFAULT-_-_-_-");		
 			}
-			
 		}
 		return null;
 	}

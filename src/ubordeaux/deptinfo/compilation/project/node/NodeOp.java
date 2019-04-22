@@ -6,7 +6,7 @@ import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
 
 public class NodeOp extends NodeExp {
 
-	protected String name;
+	private String name;
 
 	// Opération binaire
 	// f : E X F -> F

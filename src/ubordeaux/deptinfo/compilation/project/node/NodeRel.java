@@ -1,5 +1,6 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Binop;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
 import ubordeaux.deptinfo.compilation.project.type.TypeBoolean;
@@ -7,7 +8,7 @@ import ubordeaux.deptinfo.compilation.project.type.TypeInt;
 
 public class NodeRel extends NodeExp {
 
-	protected String name;
+	private String name;
 
 	// Relation binaire
 	// f : E X F -> {0,1}
@@ -32,6 +33,10 @@ public class NodeRel extends NodeExp {
 	public NodeExp getOp2() {
 		return (NodeExp) this.get(1);
 	}
+	
+	public String getName(){
+		return this.name;
+	}
 
 	@Override
 	public NodeRel clone() {
@@ -39,9 +44,9 @@ public class NodeRel extends NodeExp {
 	};
 
 
-	public ExpList generateIntermediateCode() {
-		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		return null;
-		
+	public ExpList generateIntermediateCodeRel() {
+		//System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		//new Binop(operation,  ((ExpList)this.getOp1().generateIntermediateCode()).getHead(), ((ExpList)this.getOp2().generateIntermediateCode()).getHead())
+        return new ExpList(null,null);
 	}
 }

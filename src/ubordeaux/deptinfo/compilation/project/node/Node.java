@@ -111,6 +111,16 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 
 	
 	
+	/**
+	 * Presque aussi rapide qu un switch case, si ce n est autant ;)
+	 * 
+	 * A ce qu il parait, a partir de java8 on peut aussi utiliser 
+	 * lambda ou method reference pour eviter de creer des sous-classes Handler
+	 * et rendre le code plus court pour un resultat similaire
+	 * (en plus, ca fait lgtps que je veux try les lambda ref, askip cest de la prog fonct.)
+	 *
+	 */
+	
 	//Une interface pour la classe Polymorphe Handler. 
 	//Forcer l'implementation de cette interface ainsi, pour éviter de niquer la table
 	//Avec plusieurs définitions de "Handler"
@@ -121,7 +131,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 	//On cree une map qui assigne un Handler a un objet "Class"
 	private static final Map<Class, Handler> intermediate_code_table = new HashMap<Class, Handler>();
 	
-	// Remplis la map avec un bloc static (static initializer) Execute quand la classe Handler est initialisee
+	// Remplit la map avec un bloc static (static initializer) Execute quand la classe Handler est initialisee
 	static {
 		intermediate_code_table.put(NodeOp.class, new Handler() {
 	        public void handle(Node o) {

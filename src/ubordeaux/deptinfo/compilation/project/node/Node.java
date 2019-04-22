@@ -267,7 +267,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 				//	break;
 			
 				default:
-					System.out.println("-_-_-_-DEFAULT-_-_-_-");		
+					System.out.println("-_-_-_-DEFAULT-_-_-_-");		//Ca doit etre beau comme message
 			}
 					*/
 		}

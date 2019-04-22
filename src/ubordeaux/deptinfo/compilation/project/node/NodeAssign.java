@@ -1,7 +1,10 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Mem;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Move;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 
 public final class NodeAssign extends Node {
@@ -28,10 +31,21 @@ public final class NodeAssign extends Node {
 				System.err.println("Problem with LeftType. mb null.");
 			}
 			try {
-				System.err.println("- RightType: " + rhsType.toString());			
+				System.err.println("- RightType: " + rhsType.toString());	
 			} catch (Exception e) {
 				System.err.println("Problem with RightType. mb null.");
 			}
+			
+			/*
+			if(!(rhsType == null)) {
+				if(rhsType instanceof TypeFunct) {
+					if(!((TypeFunct) rhsType).getRet().equals(lhsType)) {
+						//throw new InvalidReturnType(((TypeFunct) rhsType).getRet().toString() + " -> " + lhsType.toString());
+					}
+				}
+			}
+			*/
+			
 			return false;
 		}
 		System.out.println("- Assign well typed");

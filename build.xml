@@ -44,10 +44,10 @@
 		</path>
 		<java classname="ubordeaux.deptinfo.compilation.project.main.Main" classpath="bin" classpathref="beaverclasspath" output="data/output">
 
-			<!-- ->
+			<!-- -->
 			<arg value="-checkType" />
 			<arg value="data/progr0.lea" />
-			<!- -->
+			<!-- -->
 
 			<!-- -->
 			<arg value="-checkType" />
@@ -89,10 +89,10 @@
 			<arg value="data/progr8.lea" />
 			<!-- -->
 			
-			<!-- -->
+			<!-- ->
 			<arg value="-checkType" />
 			<arg value="data/progr9.lea" />
-			<!-- -->
+			<!- -->
 		</java>
 	</target>
 

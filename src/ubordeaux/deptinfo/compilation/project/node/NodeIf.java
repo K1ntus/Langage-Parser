@@ -32,6 +32,7 @@ public final class NodeIf extends Node {
 	private Node getExpNode() {
 		return this.get(0);
 	}
+	
 
 	private Node getElseNode() {
 		if (this.size() == 3)

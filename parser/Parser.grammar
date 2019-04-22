@@ -86,14 +86,17 @@
 
 
 //PRIOTITIES
-//%right TOKEN_IF_ELSE;
 %right TOKEN_CIRC, TOKEN_NOT;
-%right TOKEN_IF, TOKEN_THEN, TOKEN_ELSE;
+%right TOKEN_ELSE;
+%right TOKEN_IF_ELSE;
 //%left TOKEN_UNARY_IF;
 %left TOKEN_AND, TOKEN_AFF, TOKEN_OR;
 %left TOKEN_PLUS, TOKEN_MINUS, TOKEN_TIMES, TOKEN_DIV;
 %left TOKEN_LT, TOKEN_LE, TOKEN_GT, TOKEN_GE, TOKEN_EQ, TOKEN_NE;
 
+%left TOKEN_ONLY_IF;
+%left TOKEN_IF;
+%left TOKEN_THEN;
 
 /***
 * A completer
@@ -131,7 +134,7 @@
 %typeof range_type = "Type";
 %typeof feature_list_type = "TypeFeatureList";
 
-%typeof statement = "Node";
+%typeof statement, else_statement = "Node";
 %typeof literal  = "NodeLiteral";
 %typeof variable_access, expression = "NodeExp";
 //%typeof case_statement = "NodeList";
@@ -505,7 +508,7 @@ push_stackenv =		{:
 						return new EmptySymbol(); 
 					:}	
 				;
-DEBUG_print_stack = {: System.out.println("Size: " + stackEnvironment.getEnvironment().size() + "\nCurrent Stack State: " + stackEnvironment.getEnvironment().toString()); return new EmptySymbol(); :};
+//DEBUG_print_stack = {: System.out.println("Size: " + stackEnvironment.getEnvironment().size() + "\nCurrent Stack State: " + stackEnvironment.getEnvironment().toString()); return new EmptySymbol(); :};
 
 DEBUG_clear_useless_stack = 
 	{: 
@@ -542,8 +545,6 @@ simple_statement=
 //OK
 assignment_statement=
 	variable_access.e1 TOKEN_AFF expression.e2 TOKEN_SEMIC	{:  
-		//System.out.println("Left: " + e1.toString());
-		//System.out.println("Right: " + e2.toString());
 																return new NodeAssign(e1, e2); 
 															:}
 	;
@@ -562,25 +563,20 @@ procedure_expression=
 	TOKEN_IDENTIFIER.func_name TOKEN_LPAR expression_part.args TOKEN_RPAR	{: 
 																				try{
 																					stackEnvironment.getEnvironment().push(new HashMap<String, Type>()); //push env
-																					HashMap<String, Type> table = (HashMap) stackEnvironment.getEnvironment().peek();
-
-
+																					HashMap<String, Type> table = (HashMap<String, Type>) stackEnvironment.getEnvironment().peek();
+																					
 																					TypeFunct fct_type = procedureEnvironment.getTypeFct(func_name);
-																					
-																					
 																					Iterator<Type> it = fct_type.getParams().iterator();
 																					while(it.hasNext()) {
 																						try {
 																							TypeFeature type_feature= (TypeFeature) it.next();
 																							stackEnvironment.add_node_to_latest_portability(type_feature.getName(), type_feature.getType());	
-																							//System.out.println("Table: " + stackEnvironment.get_last_portability().toString());
-																							//System.out.println("Table-1: " + stackEnvironment.get_last2_portability().toString());
 																						} catch (RedefinitionVariable e) {
 																							System.err.println(e);
 																						}
 																					}
-																					
 																					return new NodeCallFct(func_name, fct_type, args);
+																				
 																				}catch(NoSuchFieldException e){
 																					System.out.println("Procedure Expression: " + e + " at Line : " + Symbol.getLine(args.getStart()));
 																					return new NodeCallFct(func_name, new TypeFunct(func_name, new TypeTuple(), new TypeVoid()), args);
@@ -691,8 +687,18 @@ structured_statement=
 
 //OK	
 if_statement=
-	TOKEN_IF expression.e TOKEN_THEN statement.stm_then TOKEN_ELSE statement.stm_else	 {:	return new NodeIf(e, stm_then, stm_else);	:}
-	| TOKEN_IF expression.e TOKEN_THEN statement.stm 					{:	return new NodeIf(e, stm);	:}
+	TOKEN_IF expression.e TOKEN_THEN statement.stm_if else_statement.stm_else				
+		{:	
+			if(stm_else instanceof EmptyNode) {
+				return new NodeIf(e, stm_if);
+			} else {
+				return new NodeIf(e, stm_if, stm_else);	
+			}
+		:}
+;
+else_statement=
+	TOKEN_ELSE statement.stm_else  	 @TOKEN_IF_ELSE	{: System.out.println("IF...ELSE !!!!!!"); return stm_else; :}
+	|	@TOKEN_ONLY_IF			{: System.out.println("Solo If Statement (no else)"); return new EmptyNode(); :}
 	;
 
 //OK	
@@ -715,32 +721,32 @@ case_statement=
 	;
 	*/
 
-	//OK	
-	case_statement_list=
-		case_statement_list.list case_statement.item	
-			{: 
-				List<Node> lst_entry = item.getList();
-				for(Node n : lst_entry) {
-					NodeCase n_case = (NodeCase) n;
-					list.add(n_case); 
-				}
-				return list; 
-			:}
-		| case_statement.list		
-		;
-		
-	case_statement=
-		TOKEN_CASE identifier_list.idl TOKEN_COLON statement.st 
-			{: 
-				NodeCaseList res = new NodeCaseList();
-				for(String id : idl) {
-					res.add(new NodeCase(id, st));
-				}
-				
-				return res;
-			:}
-		| TOKEN_DEFAULT TOKEN_COLON statement.state {: return new NodeCaseList(new NodeCase(state)); :}
-		;
+//OK	
+case_statement_list=
+	case_statement_list.list case_statement.item	
+		{: 
+			List<Node> lst_entry = item.getList();
+			for(Node n : lst_entry) {
+				NodeCase n_case = (NodeCase) n;
+				list.add(n_case); 
+			}
+			return list; 
+		:}
+	| case_statement.list		
+	;
+	
+case_statement=
+	TOKEN_CASE identifier_list.idl TOKEN_COLON statement.st 
+		{: 
+			NodeCaseList res = new NodeCaseList();
+			for(String id : idl) {
+				res.add(new NodeCase(id, st));
+			}
+			
+			return res;
+		:}
+	| TOKEN_DEFAULT TOKEN_COLON statement.state {: return new NodeCaseList(new NodeCase(state)); :}
+	;
 		
 
 /*

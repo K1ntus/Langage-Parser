@@ -111,60 +111,71 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 
 	
 	
-	//https://stackoverflow.com/a/29570906	
-	// Declare an interface for your polymorphic handlers to implement.
-	// There will be only anonymous implementations of this interface.
+	//Une interface pour la classe Polymorphe Handler. 
+	//Forcer l'implementation de cette interface ainsi, pour éviter de niquer la table
+	//Avec plusieurs définitions de "Handler"
 	private interface Handler {
 	    void handle(Node o);
 	}
-	// Make a map that translates a Class object to a Handler
-	private static final Map<Class,Handler> intermediate_code_table = new HashMap<Class,Handler>();
-	// Populate the map in a static initializer
+	
+	//On cree une map qui assigne un Handler a un objet "Class"
+	private static final Map<Class, Handler> intermediate_code_table = new HashMap<Class, Handler>();
+	
+	// Remplis la map avec un bloc static (static initializer) Execute quand la classe Handler est initialisee
 	static {
 		intermediate_code_table.put(NodeOp.class, new Handler() {
 	        public void handle(Node o) {
 	            ((NodeOp)o).generateIntermediateCodeOp();
 	        }
 	    });
-		intermediate_code_table.put(NodeList.class, new Handler() {
+		
+		intermediate_code_table.put(NodeList.class, new Handler() {	//On insert dans la table le Node.Class, et en key la fonction qui handle la generation de code intermediaire du noeud
 	        public void handle(Node o) {
 	            ((NodeList)o).generateIntermediateCodeList();
 	        }
 	    });
+		
 		intermediate_code_table.put(NodeAssign.class, new Handler() {
 	        public void handle(Node o) {
 	            ((NodeAssign)o).generateIntermediateCodeAssign();
 	        }
 	    });
+		
 		intermediate_code_table.put(NodeId.class, new Handler() {
 	        public void handle(Node o) {
 	            ((NodeId)o).generateIntermediateCodeMem();
 	        }
 	    });
+		
 		intermediate_code_table.put(NodeExp.class, new Handler() {
 	        public void handle(Node o) {
 	            ((NodeExp)o).generateIntermediateCodeExp();
 	        }
 	    });
+		
 		intermediate_code_table.put(NodeCallFct.class, new Handler() {
 	        public void handle(Node o) {
 	            //((NodeCallFct)o).generateIntermediateCodeCallFct();	//null pointer exception
 	        }
 	    });
+		
 		intermediate_code_table.put(NodeWhile.class, new Handler() {
 	        public void handle(Node o) {
 	            ((NodeWhile)o).generateIntermediateCodeWhile();
 	        }
 	    });
 	}
-	// This object performs the dispatch by looking up a handler,
-	// and calling it if it's available
+	
+	//Cherche un handler dans al table
+	//S'il n'y en a pas, alors type de node inconnu. On throw une erreur.
+	//(a ajouter dans la generation de code intermediaire)?
+	//Sinon on l'appel avec la valeur du noeud
 	private static void handle(Node o) throws UnknownNodeType{
 	    Handler h = intermediate_code_table.get(o.getClass());
 	    if (h == null) {
 	    	throw new UnknownNodeType(o.toString());
 	    }
-	    h.handle(o); // <<== Here is the magic
+	    h.handle(o);
 	}
 	
 	

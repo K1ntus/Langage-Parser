@@ -66,7 +66,7 @@ begin
 	return (i+j);
 end
 
-function goo(i : integer, j : integer) : boolean { return false; } // error "function already defined"
+function goo(i : integer, j : integer) : boolean begin return false; end // error "function already defined"
 
 begin
 	b = false;
@@ -84,11 +84,11 @@ begin
 	z2 [ 1 ] = 36;
 	x = z2 [ 1 ];
 	b = goo(z2 [ 1 ], 1);
-	//y = z [ false ]; // error "Type error in array access"
-	//y = z [ 4 ]; // error "Type error in affectation"
-	//b = z [ 4 ]; // error "Type error in affectation"
-	//z = k [ 4 ]; // error "Type error in affectation"
-	//b = z2 [ Thursday ]; // error "Type error in affectation"
+	y = z [ false ]; // error "Type error in array access"
+	y = z [ 4 ]; // error "Type error in affectation"
+	b = z [ 4 ]; // error "Type error in affectation"
+	z = k [ 4 ]; // error "Type error in affectation"
+	b = z2 [ Thursday ]; // error "Type error in affectation"
 	z2 = 36; // Accessible variable expected
 	
 

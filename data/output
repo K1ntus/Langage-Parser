@@ -2,6 +2,290 @@
 
 
 *************************************************
+*** Fichier data/progr1.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+Code intermediaire while
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+code intermediaire assign
+code intermediaire ID
+class ubordeaux.deptinfo.compilation.project.node.NodeLiteral
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeWhile
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeWhile(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeId#a:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))))
+
+
+
+*************************************************
+*** Fichier data/progr2.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// gestion des variables statiques
+//
+// 0x4995F6B5
+
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeOp
+- NodeOp well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeOp(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#))), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#))))
+
+
+
+*************************************************
+*** Fichier data/progr3.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+// gestion des variables statiques
+// gestion du tas et des pointeurs
+// 
+// 0x4995F6B5
+//println (d[2]);
+[MEMLEAK] Variable: q double malloc tentative.
+fr.c12.compilator.error.MemoryLeak at Line : 0
+// 0x41
+[MEMLEAK] Variable: p double malloc tentative.
+fr.c12.compilator.error.MemoryLeak at Line : 0
+// resize the heap
+[MEMLEAK] Variable: r double malloc tentative.
+fr.c12.compilator.error.MemoryLeak at Line : 0
+[MEMLEAK] Trying to access free or undeclared pointer
+// heap memory error
+
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+code intermediaire ID
+code intermediaire assign
+TODO: NodePtrAccess.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+code intermediaire ID
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+code intermediaire assign
+TODO: NodePtrAccess.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+code intermediaire ID
+code intermediaire assign
+TODO: NodePtrAccess.generateIntermediateCode()
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeDispose
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeId
+--- CheckType NodeAssign
+--- CheckType NodePtrAccess
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodePtrAccess
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeId
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeAssign
+--- CheckType NodePtrAccess
+--- CheckType NodeId
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodePtrAccess
+- NodeCallFct well typed
+--- CheckType NodeId
+--- CheckType NodeAssign
+--- CheckType NodePtrAccess
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodePtrAccess
+- NodeCallFct well typed
+--- CheckType NodeDispose
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), NodeId#q:TypePointer(TypeString)#, NodeAssign(NodePtrAccess(NodeId#q:TypePointer(TypeString)#), NodeLiteral#"A":TypeString#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#q:TypePointer(TypeString)#))), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeId#p:TypePointer(TypeInt_null)#, println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeAssign(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#), NodeId#x:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#))), NodeId#r:TypePointer(TypeInt_null)#, NodeAssign(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#), NodeLiteral#65536:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#))), NodeDispose(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#p:TypeInt_null#)))
+
+
+
+*************************************************
 *** Fichier data/progr4.lea
 [INFO] $$  : multiple line comment.
 [INFO] $$$ : documentation comment.
@@ -33,3 +317,323 @@ class ubordeaux.deptinfo.compilation.project.node.NodeIf
 
 Arbre Principal: 
 NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), NodeIf(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#y:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeOp(NodeOp(NodeLiteral#1000:TypeInt_null#), NodeId#y:TypeInt_null#))), NodeAssign(NodeId#y:TypeInt_null#, NodeOp(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))), println_NodeCallFct(NodeList(NodeLiteral#"X":TypeString#)), NodeAssign(NodeId#x:TypeInt_null#, NodeOp(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))))))
+
+
+
+*************************************************
+*** Fichier data/progr5.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+** Enregistre fct:sum
+** Enregistre fct:pgcd
+
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+code intermediaire assign
+TODO: NodeCallFct.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), NodeAssign(NodeId#x:TypeInt_null#, sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#))), println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#)))), println_NodeCallFct(NodeList(pgcd_NodeCallFct(NodeList(NodeLiteral#78:TypeInt_null#, NodeLiteral#90:TypeInt_null#)))))
+
+
+
+*************************************************
+*** Fichier data/progr6.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// gestion complexe de la pile
+// 
+** Enregistre fct:fact1
+** Enregistre fct:fact2
+** Enregistre fct:hanoi
+** Enregistre fct:impair
+** Enregistre fct:pair
+** Enregistre fct:impair
+
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(println_NodeCallFct(NodeList(fact1_NodeCallFct(NodeList(NodeLiteral#6:TypeInt_null#)))), println_NodeCallFct(NodeList(fact2_NodeCallFct(NodeList(NodeLiteral#6:TypeInt_null#)))), hanoi_NodeCallFct(NodeList(NodeLiteral#"A":TypeString#, NodeLiteral#"B":TypeString#, NodeLiteral#"C":TypeString#, NodeLiteral#4:TypeInt_null#)), println_NodeCallFct(NodeList(pair_NodeCallFct(NodeList(NodeLiteral#1001:TypeInt_null#)))), println_NodeCallFct(NodeList(pair_NodeCallFct(NodeList(NodeLiteral#1000:TypeInt_null#)))))
+
+
+
+*************************************************
+*** Fichier data/progr7.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// tableaux
+// 
+
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#0:TypeInt_null#), NodeLiteral#"M":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"T":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"W":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#), NodeLiteral#"X":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#4:TypeInt_null#), NodeLiteral#22:TypeInt_null#), NodeLiteral#7:TypeInt_null#), NodeLiteral#"V":TypeString#), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#4:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#))))
+
+
+
+*************************************************
+*** Fichier data/progr8.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// tableaux et enumérés
+// 
+** Enregistre types: (TypeItemEnum@SUNDAY=0, TypeItemEnum@MONDAY=1, TypeItemEnum@TUESDAY=2, TypeItemEnum@WEDNESDAY=3, TypeItemEnum@THURSDAY=4, TypeItemEnum@FRIDAY=5, TypeItemEnum@SATURDAY=6)
+** Enregistre types: (TypeItemEnum@JANUARY=0, TypeItemEnum@FEBRUARY=1, TypeItemEnum@MARCH=2, TypeItemEnum@APRIL=3, TypeItemEnum@MAY=4, TypeItemEnum@JUNE=5, TypeItemEnum@JULY=6, TypeItemEnum@AUGUST=7, TypeItemEnum@SEPTEMBER=8, TypeItemEnum@OCTOBER=9, TypeItemEnum@NOVEMBER=10, TypeItemEnum@DECEMBER=11)
+
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+code intermediaire assign
+TODO: NodeLiteral.generateIntermediateCode()
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+class ubordeaux.deptinfo.compilation.project.node.NodeCallFct
+*** Analyse syntaxique ok
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#MONDAY:TypeInt_1#), NodeLiteral#"M":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#TUESDAY:TypeInt_2#), NodeLiteral#"T":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#WEDNESDAY:TypeInt_3#), NodeLiteral#"W":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#17:TypeInt_null#), NodeId#MARCH:TypeInt_2#), NodeLiteral#"X":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#1:TypeInt_null#), NodeId#MARCH:TypeInt_2#), NodeLiteral#"V":TypeString#), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#1:TypeInt_null#), NodeId#MARCH:TypeInt_2#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#17:TypeInt_null#), NodeId#MARCH:TypeInt_2#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#TUESDAY:TypeInt_2#))))
+
+
+
+*************************************************
+*** Fichier data/progr9.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+$$
+ **************************************************
+ ************************************************** $$
+** Enregistre types: TypeString
+** Enregistre types: TypeInt_null
+** Enregistre types: TypeBoolean
+** Retrouve types: chaine TypeString
+//named2 = unknown; // error
+** Enregistre types: TypeString
+** Enregistre types: (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
+//// xxx = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, aa, ab, ac, ad, ae, af, ag, ah); // error
+** Enregistre types: (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
+** Enregistre types: TypeArrayRange[TypeInt_64..TypeInt_81]
+//range3 = 81 .. 64; //error
+//range4 = Friday .. Unknown; // error
+//range5 = Friday .. Monday; // error
+//range6 = Monday .. December; //error
+//range7 = Friday .. Tuesday; // error "range not valid"
+//range8 = Monday .. April; // error "incoherent range"
+** Enregistre types: TypeArrayRange[TypeInt_1..TypeInt_5]
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)
+** Retrouve types: range1 TypeArrayRange[TypeInt_64..TypeInt_81]
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_64..TypeInt_81], TypeInt_null)
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeInt_null)
+** Retrouve types: DaysOfWeek (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
+//table5 = array [ 1 .. 32 ] of array [ range3 ] of integer; // error "Range type expected"
+//table6 = array [ 1 .. 32 ] of array [ Wednesday..Saturday ] of integer;
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray((TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6), TypeInt_null))
+** Enregistre types: TypePointer(TypeInt_null)
+** Retrouve types: DaysOfWeek (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
+** Enregistre types: TypePointer(TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray((TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6), TypeInt_null)))
+//x : boolean; // error "Variable x yet declared"
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Retrouve types: ptr1 TypePointer(TypeInt_null)
+** Retrouve types: Months (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
+** Retrouve types: range1 TypeArrayRange[TypeInt_64..TypeInt_81]
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Retrouve types: Months (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
+** Enregistre fct:goo
+//function goo(i : integer, j : integer) : boolean; //error "procedure or function declared twice"
+** Enregistre fct:foo
+//result^ = hoo(i, j); // error "function not declared"
+[MEMLEAK] Variable: result double malloc tentative.
+fr.c12.compilator.error.MemoryLeak at Line : 0
+** Enregistre fct:goo
+[RedefinitionFunction] goo
+fr.c12.compilator.error.RedefinitionFunction at Line : 0
+// error "function already defined"
+// error "Type error in affectation"
+// error "Type error in affectation"
+//b = foo(3); // error "Type error in calling expression"
+//b = foo(3, false); // error "Type error in calling expression"
+//x = foo(3, 7); // error "Type error in calling expression"
+// error "Type error in array access "

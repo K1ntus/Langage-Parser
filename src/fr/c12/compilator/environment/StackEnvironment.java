@@ -27,11 +27,21 @@ public class StackEnvironment {
 	public StackEnvironment(String str) {
 		this();
 	}
-	
+
 	public Map<String, Type> get_last_portability(){
 		if(environment.isEmpty())
 			return environment.push(new HashMap<String, Type>());
 		return environment.peek();
+	}
+
+	public Map<String, Type> get_last2_portability(){
+		if(environment.isEmpty())
+			return environment.push(new HashMap<String, Type>());
+		Map<String,Type> top, top_0;
+		top = environment.pop();
+		top_0 = environment.peek();
+		environment.push(top);
+		return top_0;
 	}
 	
 	//haut vers bas, faut get le last equals sinon modifier et utiliser listIterator+hasPrevious

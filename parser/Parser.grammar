@@ -86,11 +86,10 @@
 
 
 //PRIOTITIES
-%right TOKEN_IF_ELSE;
+//%right TOKEN_IF_ELSE;
 %right TOKEN_CIRC, TOKEN_NOT;
-//%left TOKEN_ELSE;
+%right TOKEN_IF, TOKEN_THEN, TOKEN_ELSE;
 //%left TOKEN_UNARY_IF;
-%right TOKEN_ELSE, TOKEN_IF;
 %left TOKEN_AND, TOKEN_AFF, TOKEN_OR;
 %left TOKEN_PLUS, TOKEN_MINUS, TOKEN_TIMES, TOKEN_DIV;
 %left TOKEN_LT, TOKEN_LE, TOKEN_GT, TOKEN_GE, TOKEN_EQ, TOKEN_NE;
@@ -158,6 +157,8 @@ program=
 	type_declaration_part.tp			//Type env
 	variable_declaration_part.vp 		//Type var
 	procedure_definition_part.pp		//Type procedure
+	DEBUG_clear_useless_stack
+	//DEBUG_print_stack
 	TOKEN_BEGIN	push_stackenv.pu		//On empile stackenv
 	statement_list.l 				//Inserer variable dans env
 	TOKEN_END	pop_stackenv.pop 		//On depile stackenv
@@ -217,7 +218,7 @@ simple_type=
 	
 named_type=
 	TOKEN_IDENTIFIER.r /*empty*/	{: 
-		System.out.println("Named: " + r); 
+		//System.out.println("Named: " + r); 
 		try {
 			return typeEnvironment.getVariableValue(r);
 		} catch(UnknownType e) {	//Si pas deja present
@@ -351,11 +352,12 @@ procedure_definition_list=
 	;
 	
 procedure_definition=
-	procedure_definition_head.type_fct block.fct_content	
-		{: 
+	procedure_definition_head.type_fct block.stm {: return type_fct; :}
+		/*{: 
 			type_fct.setDefined(true);
+			stackEnvironment.getEnvironment().pop(); 
 			try {
-				procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
+				//procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
 			} catch (RedefinitionFunction e) {
 				System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
 				if(critical_mode)
@@ -363,9 +365,9 @@ procedure_definition=
 			}
 		
 			return type_fct; 
-		:}
-	| procedure_declaration_head.type_fct TOKEN_SEMIC		
-		{: 
+		:}*/
+	| procedure_declaration_head TOKEN_SEMIC		
+		/*{: 
 			type_fct.setDefined(false); 
 			try {
 				procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
@@ -376,30 +378,55 @@ procedure_definition=
 			}
 
 			return type_fct; 
-		:}
+		:}*/
 	;
 
 procedure_definition_head=
 	procedure_head.type_fct
+	{:
+		try {
+			type_fct.setDefined(true); 
+			procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
+		} catch (RedefinitionFunction e) {
+			System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
+			if(critical_mode)
+				System.exit(0);
+		}
+		return type_fct;
+	:}
 	;
 	
 procedure_declaration_head=
 	procedure_head.type_fct
+		{:
+			try {
+				type_fct.setDefined(false); 
+				procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
+			} catch (RedefinitionFunction e) {
+				System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
+				if(critical_mode)
+					System.exit(0);
+			}
+			return type_fct;
+		:}
 	;
+	
+	
+	
 	
 //Definition
 procedure_head=
 	TOKEN_PROCEDURE TOKEN_IDENTIFIER.funct_name TOKEN_LPAR argt_part.args TOKEN_RPAR 
 			{:				
-				TypeTuple params_tuple = new TypeTuple();
-				//stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); 
-				
+				TypeTuple params_tuple = new TypeTuple();	
+				stackEnvironment.getEnvironment().push(new HashMap<String, Type>()); 			
 
 				for(Node n : args.getList()) {
 					try {
 						NodeId n_id = (NodeId) n;
 						params_tuple.add(new TypeFeature(n_id.getName(), n_id.getType()));
 						stackEnvironment.add_node_to_latest_portability(n_id.getName(), n_id.getType());
+				
 					}catch ( RedefinitionVariable e) {
 						System.err.println(e + " at Line : " + Symbol.getLine(args.getStart()));
 						if(critical_mode)
@@ -407,23 +434,22 @@ procedure_head=
 					}
 				}
 				
+				
 				TypeFunct type_function = new TypeFunct(funct_name, params_tuple, new TypeVoid());
-
-				//stackEnvironment.getEnvironment().pop(); 
 				return type_function;
-				//return new NodeCallFct(funct_name, type_function, new NodeList());
 			:}
 																		
 	| TOKEN_FUNCTION TOKEN_IDENTIFIER.funct_name TOKEN_LPAR argt_part.args TOKEN_RPAR TOKEN_COLON type.t 
 			{:
 				TypeTuple params_tuple = new TypeTuple();
-				//stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); 
+				stackEnvironment.getEnvironment().push(new HashMap<String, Type>()); 
 				
 				for(Node n : args.getList()) {
 					try {
 						NodeId n_id = (NodeId) n;
 						params_tuple.add(new TypeFeature(n_id.getName(), n_id.getType()));
 						stackEnvironment.add_node_to_latest_portability(n_id.getName(), n_id.getType());
+
 					}catch ( RedefinitionVariable e) {
 						System.err.println(e + " at Line : " + Symbol.getLine(args.getStart()));
 						if(critical_mode)
@@ -479,8 +505,16 @@ push_stackenv =		{:
 						return new EmptySymbol(); 
 					:}	
 				;
+DEBUG_print_stack = {: System.out.println("Size: " + stackEnvironment.getEnvironment().size() + "\nCurrent Stack State: " + stackEnvironment.getEnvironment().toString()); return new EmptySymbol(); :};
 
-
+DEBUG_clear_useless_stack = 
+	{: 
+		while(stackEnvironment.getEnvironment().size() > 1) { 
+			stackEnvironment.getEnvironment().pop(); 
+		} 
+		return new EmptySymbol(); 
+	:}
+	;
 /*
 Instructions
 */
@@ -527,40 +561,23 @@ procedure_statement=
 procedure_expression=
 	TOKEN_IDENTIFIER.func_name TOKEN_LPAR expression_part.args TOKEN_RPAR	{: 
 																				try{
-																					stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); //push env
+																					stackEnvironment.getEnvironment().push(new HashMap<String, Type>()); //push env
 																					HashMap<String, Type> table = (HashMap) stackEnvironment.getEnvironment().peek();
 
 
 																					TypeFunct fct_type = procedureEnvironment.getTypeFct(func_name);
 																					
 																					
-																					int i = 0;
 																					Iterator<Type> it = fct_type.getParams().iterator();
 																					while(it.hasNext()) {
-																						TypeFeature current_type = (TypeFeature) it.next();
-																						String id = current_type.getName();
-																						Type t = current_type.getType();
-																						if((args.get(i) instanceof NodeLiteral)) {
-																							NodeLiteral node = (NodeLiteral) args.get(i);
-																							table.put(id, node.getType());		
-																							//System.out.println("Register function NodeLiteral:" +id + " | "+ node.toString());
-																						}else if(args.get(i) instanceof NodeOp) {
-																							NodeLiteral node = new NodeLiteral(new TypeInt(), args.get(i));
-																							table.put(id, node.getType());
-																							//System.out.println("Register function NodOp:" +id + " | "+ node.toString());
-																					
-																						}else if(args.get(i) instanceof NodeRel) {
-																							NodeLiteral node = new NodeLiteral(new TypeBoolean(), args.get(i));
-																							table.put(id, node.getType());
-																							//System.out.println("Register function NodeRel:" +id + " | "+ node.toString());
-																							
-																						}else {
-																							System.out.println("Cannot register node: " + args.get(i).toString());
+																						try {
+																							TypeFeature type_feature= (TypeFeature) it.next();
+																							stackEnvironment.add_node_to_latest_portability(type_feature.getName(), type_feature.getType());	
+																							//System.out.println("Table: " + stackEnvironment.get_last_portability().toString());
+																							//System.out.println("Table-1: " + stackEnvironment.get_last2_portability().toString());
+																						} catch (RedefinitionVariable e) {
+																							System.err.println(e);
 																						}
-																								
-																						
-																						
-																						i++;
 																					}
 																					
 																					return new NodeCallFct(func_name, fct_type, args);
@@ -674,8 +691,8 @@ structured_statement=
 
 //OK	
 if_statement=
-	TOKEN_IF expression.e TOKEN_THEN statement.stm_then TOKEN_ELSE statement.stm_else	{:	return new NodeIf(e, stm_then, stm_else);	:}
-	| TOKEN_IF expression.e TOKEN_THEN statement.stm @TOKEN_UNARY_IF					{:	return new NodeIf(e, stm);	:}
+	TOKEN_IF expression.e TOKEN_THEN statement.stm_then TOKEN_ELSE statement.stm_else	 {:	return new NodeIf(e, stm_then, stm_else);	:}
+	| TOKEN_IF expression.e TOKEN_THEN statement.stm 					{:	return new NodeIf(e, stm);	:}
 	;
 
 //OK	

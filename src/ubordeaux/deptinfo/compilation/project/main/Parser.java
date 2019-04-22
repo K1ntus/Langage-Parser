@@ -56,12 +56,12 @@ public class Parser extends beaver.Parser {
 		"Gkrpm67DSSDjVxHHqfxfow3faP4KOa#qQqz1HqxJG$huvZlXSnxWoH8eZbXKy3WVuXlqb1o" +
 		"rJTa0$aYqlotPvIRR9Yx9LjiXcUK5MoKfP8SjbYjrZaopWzGbYFi6tMBXg2zzqcKtC8cOIC" +
 		"mYk5i9LGwOJN0taCNlyD9cgcHRAP7dIjfwph#lbOPaa4sM2F2JhsEjv#gR8MZisHTRO$Anz" +
-		"VSQ#hWvKBZjbbzQ$Z5YgzfBSMIsMfzLwdtYA#5W#Kiy7ygly8Z$BJ$AZ$23VomavBj$HVrY" +
+		"VSQ#hWvKBZjbbzQ$b5YczfBSMIsMfzLwdtYA#5W#Kiy7ygly8Z$BJ$AZ$23VomavBj$HVrY" +
 		"#bM#G#v6lYS$LFYIVgVM9yZ5vp#OZygbwFhIlYoHBNY6$Gxn5x9StSpE#OLzVjQ#xPGyS7t" +
 		"bTtkRrJ$b3sx$9xwGXk8LdmanQcTo4UzcmJYL#dlaDJxHoe3dHMj62OxYpSEVpsMZ3ysPl#" +
 		"WDeozpjsASFsVhrqvbsRVQlpNPV6mRFMdwUeto40UukX85#ZFKZTo5RIAVTdUZ1DQG7JxHT" +
 		"sQyhszquhfkUMPEfRQteFA4WZMFIwBz1KIS2wb6$FllN97Ct8mpqPpxhloGDo0s9HaHZeWb" +
-		"HbtudKZWkXTfDoSrOtm3c6a1$1jiPx9z4EubsalsRqkU26SRsWf6BMXwuzM$npEur");
+		"HbtudKgYRmh5DYMQiRm1p3Q0$W#qCza#YdKGxoVvDwNF136DxmSX5BG$S#ZVnqEur");
 
 	static final Action RETURN2 = new Action() {
 		public Symbol reduce(Symbol[] _symbols, int offset) {
@@ -391,7 +391,7 @@ public class Parser extends beaver.Parser {
 					final NodeList args = (NodeList) _symbol_args.value;
 									
 				TypeTuple params_tuple = new TypeTuple();
-				stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); 
+				//stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); 
 				
 
 				for(Node n : args.getList()) {
@@ -408,7 +408,7 @@ public class Parser extends beaver.Parser {
 				
 				TypeFunct type_function = new TypeFunct(funct_name, params_tuple, new TypeVoid());
 
-				stackEnvironment.getEnvironment().pop(); 
+				//stackEnvironment.getEnvironment().pop(); 
 				return type_function;
 				//return new NodeCallFct(funct_name, type_function, new NodeList());
 				}
@@ -423,7 +423,7 @@ public class Parser extends beaver.Parser {
 					final Type t = (Type) _symbol_t.value;
 					
 				TypeTuple params_tuple = new TypeTuple();
-				stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); 
+				//stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); 
 				
 				for(Node n : args.getList()) {
 					try {
@@ -439,7 +439,7 @@ public class Parser extends beaver.Parser {
 				
 				TypeFunct type_function = new TypeFunct(funct_name, params_tuple, t);
 
-				stackEnvironment.getEnvironment().pop(); 
+				//stackEnvironment.getEnvironment().pop(); 
 				return type_function;
 				//return new NodeCallFct(funct_name, type_function, new NodeList());
 				}
@@ -548,10 +548,10 @@ public class Parser extends beaver.Parser {
 																				try{
 																					stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); //push env
 																					HashMap<String, Type> table = (HashMap) stackEnvironment.getEnvironment().peek();
+
+
+																					TypeFunct fct_type = procedureEnvironment.getTypeFct(func_name);
 																					
-																					//NodeCallFct fct_from_table = procedureEnvironment.getNodeFct(func_name);
-																					//TypeFunct fct_type = fct_from_table.getTypeFunct().clone();
-																					TypeFunct fct_type = procedureEnvironment.getNodeFct(func_name);
 																					
 																					int i = 0;
 																					Iterator<Type> it = fct_type.getParams().iterator();
@@ -584,7 +584,7 @@ public class Parser extends beaver.Parser {
 																					
 																					return new NodeCallFct(func_name, fct_type, args);
 																				}catch(NoSuchFieldException e){
-																					System.out.println("Procedure Expression: " + e);
+																					System.out.println("Procedure Expression: " + e + " at Line : " + Symbol.getLine(args.getStart()));
 																					return new NodeCallFct(func_name, new TypeFunct(func_name, new TypeTuple(), new TypeVoid()), args);
 																				}
 				}
@@ -690,16 +690,7 @@ public class Parser extends beaver.Parser {
 			Action.RETURN,	// [80] structured_statement = if_statement
 			Action.RETURN,	// [81] structured_statement = while_statement
 			Action.RETURN,	// [82] structured_statement = switch_statement
-			new Action() {	// [83] if_statement = TOKEN_IF expression.e TOKEN_THEN statement.stm
-				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_e = _symbols[offset + 2];
-					final NodeExp e = (NodeExp) _symbol_e.value;
-					final Symbol _symbol_stm = _symbols[offset + 4];
-					final Node stm = (Node) _symbol_stm.value;
-						return new NodeIf(e, stm);
-				}
-			},
-			new Action() {	// [84] if_statement = TOKEN_IF expression.e TOKEN_THEN statement.stm_then TOKEN_ELSE statement.stm_else
+			new Action() {	// [83] if_statement = TOKEN_IF expression.e TOKEN_THEN statement.stm_then TOKEN_ELSE statement.stm_else
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_e = _symbols[offset + 2];
 					final NodeExp e = (NodeExp) _symbol_e.value;
@@ -708,6 +699,15 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_stm_else = _symbols[offset + 6];
 					final Node stm_else = (Node) _symbol_stm_else.value;
 						return new NodeIf(e, stm_then, stm_else);
+				}
+			},
+			new Action() {	// [84] if_statement = TOKEN_IF expression.e TOKEN_THEN statement.stm
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					final Symbol _symbol_e = _symbols[offset + 2];
+					final NodeExp e = (NodeExp) _symbol_e.value;
+					final Symbol _symbol_stm = _symbols[offset + 4];
+					final Node stm = (Node) _symbol_stm.value;
+						return new NodeIf(e, stm);
 				}
 			},
 			new Action() {	// [85] while_statement = TOKEN_WHILE expression.e1 TOKEN_DO statement.stm
@@ -787,7 +787,9 @@ public class Parser extends beaver.Parser {
 				} catch (NoSuchFieldException e2) {
 
 					//System.err.println("Variable [" + name + "]");
-					System.err.println(e2);// + " at Line : " + Symbol.getLine(args.getStart()));
+					System.err.println(e2 + " at Line : ");
+					if(critical_mode)
+						System.exit(0);
 					return new NodeId(null, null);
 				}
 			}

@@ -1,15 +1,11 @@
 package fr.c12.compilator.environment;
-
 import java.util.HashMap;
 import java.util.Map;
 
 import fr.c12.compilator.error.RedefinitionType;
 import fr.c12.compilator.error.UnknownType;
 import ubordeaux.deptinfo.compilation.project.type.Type;
-import ubordeaux.deptinfo.compilation.project.type.TypeBoolean;
-import ubordeaux.deptinfo.compilation.project.type.TypeInt;
 import ubordeaux.deptinfo.compilation.project.type.TypeItemEnum;
-import ubordeaux.deptinfo.compilation.project.type.TypeString;
 import ubordeaux.deptinfo.compilation.project.type.TypeTuple;
 
 public class TypeEnvironment {
@@ -19,9 +15,9 @@ public class TypeEnvironment {
 	
 	public TypeEnvironment(){
 		table = new HashMap<String, Type>();
-		table.put("integer",new TypeInt());
-		table.put("string",new TypeString());
-		table.put("boolean",new TypeBoolean());
+		//table.put("integer",new TypeInt());
+		//table.put("string",new TypeString());
+		//table.put("boolean",new TypeBoolean());
 	}
 	
 	/**
@@ -42,14 +38,13 @@ public class TypeEnvironment {
 		return false;
 	}
 
-	public void putVariable(String t, Type n) throws RedefinitionType, UnknownType {
+	public void putVariable(String t, Type n) throws RedefinitionType{//, UnknownType {
 		if(table.get(t) != null) {
 			throw new RedefinitionType(t);
 		}
-		if(!isTypeRegistered(n) && !(n instanceof TypeTuple)) {
-			System.out.println(t + " -> " + n.toString());
-			throw new UnknownType(n.toString());
-		}
+		//if(!isTypeRegistered(n)) {
+		//	throw new UnknownType(n.toString());
+		//}
 		
 		table.put(t, n);
 		System.out.println("** Enregistre " + name + ": " + n.toString());
@@ -80,8 +75,8 @@ public class TypeEnvironment {
 				}
 			}
 		}
-		
-		throw new NoSuchFieldException("No Enum type containing this value has been spotted");
+
+		throw new NoSuchFieldException("No Enum type containing [" + id + "] has been find");
 	}
 	
 	

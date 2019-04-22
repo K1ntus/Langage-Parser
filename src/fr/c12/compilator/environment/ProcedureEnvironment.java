@@ -26,8 +26,9 @@ public class ProcedureEnvironment {
 	
 	public void putVariable(String fct_node, TypeFunct fct_content) throws RedefinitionFunction {
 		if(table.get(fct_node) != null) {
-			if(table.get(fct_node).getDefined())
-				throw new RedefinitionFunction(fct_node);			
+			if(table.get(fct_node).getDefined()) {
+				throw new RedefinitionFunction(fct_node);
+			}
 		}
 		table.put(fct_node, fct_content);
 		System.out.println("** Enregistre fct:" + fct_node.toString());		
@@ -35,13 +36,12 @@ public class ProcedureEnvironment {
 	
 
 
-	public TypeFunct getVariableValue(TypeFunct t) throws NoSuchFieldException {
-		System.out.println("** Retrouve fct:" + t.toString());
-		String name = t.getName();
-		return getNodeFct(name);
+	public TypeFunct getVariableValue(String name) throws NoSuchFieldException {
+		System.out.println("** Retrouve fct: " +name);
+		return getTypeFct(name);
 	}
 	
-	public TypeFunct getNodeFct(String fct_name) throws NoSuchFieldException {
+	public TypeFunct getTypeFct(String fct_name) throws NoSuchFieldException {
 		if(table.get(fct_name) != null)
 			return table.get(fct_name);
 		throw new NoSuchFieldException("Aucune fonction: " + fct_name + " trouvee.");

@@ -86,13 +86,15 @@
 
 
 //PRIOTITIES
+%right TOKEN_IF_ELSE;
 %right TOKEN_CIRC, TOKEN_NOT;
-%right TOKEN_ELSE, TOKEN_IF, TOKEN_THEN;
+//%left TOKEN_ELSE;
+//%left TOKEN_UNARY_IF;
+%right TOKEN_ELSE, TOKEN_IF;
 %left TOKEN_AND, TOKEN_AFF, TOKEN_OR;
 %left TOKEN_PLUS, TOKEN_MINUS, TOKEN_TIMES, TOKEN_DIV;
 %left TOKEN_LT, TOKEN_LE, TOKEN_GT, TOKEN_GE, TOKEN_EQ, TOKEN_NE;
 
-%right TOKEN_IF;
 
 /***
 * A completer
@@ -390,7 +392,7 @@ procedure_head=
 	TOKEN_PROCEDURE TOKEN_IDENTIFIER.funct_name TOKEN_LPAR argt_part.args TOKEN_RPAR 
 			{:				
 				TypeTuple params_tuple = new TypeTuple();
-				stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); 
+				//stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); 
 				
 
 				for(Node n : args.getList()) {
@@ -407,7 +409,7 @@ procedure_head=
 				
 				TypeFunct type_function = new TypeFunct(funct_name, params_tuple, new TypeVoid());
 
-				stackEnvironment.getEnvironment().pop(); 
+				//stackEnvironment.getEnvironment().pop(); 
 				return type_function;
 				//return new NodeCallFct(funct_name, type_function, new NodeList());
 			:}
@@ -415,7 +417,7 @@ procedure_head=
 	| TOKEN_FUNCTION TOKEN_IDENTIFIER.funct_name TOKEN_LPAR argt_part.args TOKEN_RPAR TOKEN_COLON type.t 
 			{:
 				TypeTuple params_tuple = new TypeTuple();
-				stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); 
+				//stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); 
 				
 				for(Node n : args.getList()) {
 					try {
@@ -431,7 +433,7 @@ procedure_head=
 				
 				TypeFunct type_function = new TypeFunct(funct_name, params_tuple, t);
 
-				stackEnvironment.getEnvironment().pop(); 
+				//stackEnvironment.getEnvironment().pop(); 
 				return type_function;
 				//return new NodeCallFct(funct_name, type_function, new NodeList());
 			:}
@@ -527,10 +529,10 @@ procedure_expression=
 																				try{
 																					stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); //push env
 																					HashMap<String, Type> table = (HashMap) stackEnvironment.getEnvironment().peek();
+
+
+																					TypeFunct fct_type = procedureEnvironment.getTypeFct(func_name);
 																					
-																					//NodeCallFct fct_from_table = procedureEnvironment.getNodeFct(func_name);
-																					//TypeFunct fct_type = fct_from_table.getTypeFunct().clone();
-																					TypeFunct fct_type = procedureEnvironment.getNodeFct(func_name);
 																					
 																					int i = 0;
 																					Iterator<Type> it = fct_type.getParams().iterator();
@@ -563,7 +565,7 @@ procedure_expression=
 																					
 																					return new NodeCallFct(func_name, fct_type, args);
 																				}catch(NoSuchFieldException e){
-																					System.out.println("Procedure Expression: " + e);
+																					System.out.println("Procedure Expression: " + e + " at Line : " + Symbol.getLine(args.getStart()));
 																					return new NodeCallFct(func_name, new TypeFunct(func_name, new TypeTuple(), new TypeVoid()), args);
 																				}
 																				
@@ -672,8 +674,8 @@ structured_statement=
 
 //OK	
 if_statement=
-	TOKEN_IF expression.e TOKEN_THEN statement.stm	{:	return new NodeIf(e, stm);	:}
-	| TOKEN_IF expression.e TOKEN_THEN statement.stm_then TOKEN_ELSE statement.stm_else	{:	return new NodeIf(e, stm_then, stm_else);	:}
+	TOKEN_IF expression.e TOKEN_THEN statement.stm_then TOKEN_ELSE statement.stm_else	{:	return new NodeIf(e, stm_then, stm_else);	:}
+	| TOKEN_IF expression.e TOKEN_THEN statement.stm @TOKEN_UNARY_IF					{:	return new NodeIf(e, stm);	:}
 	;
 
 //OK	
@@ -749,7 +751,9 @@ variable_access=
 				} catch (NoSuchFieldException e2) {
 
 					//System.err.println("Variable [" + name + "]");
-					System.err.println(e2);// + " at Line : " + Symbol.getLine(args.getStart()));
+					System.err.println(e2 + " at Line : ");
+					if(critical_mode)
+						System.exit(0);
 					return new NodeId(null, null);
 				}
 			}

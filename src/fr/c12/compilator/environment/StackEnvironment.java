@@ -43,6 +43,8 @@ public class StackEnvironment {
 		while(it.hasNext()) {
 			Map<String, Type> map = it.next();
 			
+			//System.out.println("map:" + map.toString());
+			
 			try {
 				res = getLiteralFromId(id, map);
 			} catch (UnknownVariable e) {
@@ -72,8 +74,12 @@ public class StackEnvironment {
 	public void add_node_to_latest_portability(String id, Type n) throws RedefinitionVariable {
 		if(verbose)
 			System.out.println("* Enregistre " + id.toString());
+		
+		
 		if(this.get_last_portability().get(id) != null)
 			throw new RedefinitionVariable(id);
+		
+		
 		this.get_last_portability().put(id, n);
 	}
 

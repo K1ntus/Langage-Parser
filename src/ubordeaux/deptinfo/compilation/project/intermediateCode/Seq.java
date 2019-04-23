@@ -8,5 +8,11 @@ public class Seq extends Stm {
 		this.left = left;
 		this.right = right;
 	}
+	
+	@Override
+	public String toString(){
+		return "SEQ("+ left.toString() + "," + right.toString() + ")";
+	}
+	
 
 }

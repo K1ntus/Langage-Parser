@@ -7,5 +7,11 @@ public class Name extends Exp {
 		super();
 		this.label = label;
 	}
+	
+	@Override
+	public String toString(){
+		return "NAME("+ label.toString() + ")";
+	}
+	
 
 }

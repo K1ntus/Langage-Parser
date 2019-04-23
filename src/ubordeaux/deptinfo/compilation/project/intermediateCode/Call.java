@@ -10,8 +10,9 @@ public class Call extends Exp {
 		this.args = args;
 	}
 	
+	@Override
 	public String toString() {
-		return "Call(" + this.getClass().toString() + "," + this.args.toString() + ")";
+		return "CALL(" + func.toString() + "," + args.toString() + ")";
 	}
 
 }

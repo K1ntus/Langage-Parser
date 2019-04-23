@@ -7,5 +7,10 @@ public class Temp extends Exp {
 		super();
 		this.temp = temp;
 	}
-
+	
+	@Override
+	public String toString(){
+		return "EXP("+ temp.toString() + ")";
+	}
+	
 }

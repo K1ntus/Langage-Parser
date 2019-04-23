@@ -11,9 +11,8 @@ public abstract class Stm extends IntermediateCode {
 		System.err.println("TODO: " + this.getClass().getSimpleName() + ".canonicalTransformation()()");
 	}
 	
-	public String toString() {
-		return "stm";
-	}
+	
+	public abstract String toString();
 
 
 }

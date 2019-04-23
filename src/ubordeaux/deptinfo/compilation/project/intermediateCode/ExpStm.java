@@ -12,4 +12,11 @@ public class ExpStm extends Stm {
 	public Exp getE(){
 		return this.e;
 	}
+	
+	@Override
+	public String toString(){
+		return "EXP("+ e.toString() + ")";
+	}
+	
+	
 }

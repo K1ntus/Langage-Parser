@@ -9,5 +9,11 @@ public class LabelLocationList {
 		this.head = head;
 		this.tail = tail;
 	}
+	
+	@Override
+	public String toString(){
+		return head.toString() + "," + tail.toString();
+	}
+	
 
 }

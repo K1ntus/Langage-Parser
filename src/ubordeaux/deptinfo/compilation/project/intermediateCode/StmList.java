@@ -11,6 +11,6 @@ public class StmList {
 	}
 	
 	public String toString() {
-		return ("StmList(" + head.toString() + ",fin de liste )");
+		return ("StmList(" + head.toString() + ","+ tail.toString() + ")");
 	}
 }

@@ -7,5 +7,10 @@ public class Mem extends Exp {
 		super();
 		this.exp = exp;
 	}
-
+	
+	@Override
+	public String toString(){
+		return "MEM("+ exp.toString() + ")";
+	}
+	
 }

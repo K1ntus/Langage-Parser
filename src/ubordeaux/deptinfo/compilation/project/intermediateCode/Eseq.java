@@ -18,6 +18,9 @@ public class Eseq extends Exp {
 		this.exp = exp;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "ESEQ(" + stm.toString() + "," + exp.toString() + ")";
+	}
 
 }

@@ -23,7 +23,6 @@ fr.c12.compilator.error.RedefinitionFunction at Line : 0
 [RedefinitionFunction] sum
 fr.c12.compilator.error.RedefinitionFunction at Line : 0
 ** Enregistre fct:pgcd
-IF...ELSE !!!!!!
 
 *** Analyse syntaxique ok
 --- CheckType NodeList
@@ -120,8 +119,7 @@ NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), Node
 --- CheckType NodeLiteral
 - Assign well typed
 --- CheckType NodeCallFct
---- CheckType NodeOp
-- NodeOp well typed
+--- CheckType NodeId
 - NodeCallFct well typed
 --- CheckType NodeCallFct
 --- CheckType NodeId
@@ -141,7 +139,7 @@ NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), Node
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeOp(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#))), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#))))
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#))))
 
 
 
@@ -155,20 +153,15 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#
 // gestion du tas et des pointeurs
 // 
 // 0x4995F6B5
-//println (d[2]);
-[MEMLEAK] Variable: q double malloc tentative.
-fr.c12.compilator.error.MemoryLeak at Line : 0
 // 0x41
-[MEMLEAK] Variable: p double malloc tentative.
-fr.c12.compilator.error.MemoryLeak at Line : 0
 // resize the heap
-[MEMLEAK] Variable: r double malloc tentative.
-fr.c12.compilator.error.MemoryLeak at Line : 0
-[MEMLEAK] Trying to access free or undeclared pointer
 // heap memory error
 
+Recover From Intermediate Code Generation Error:fr.c12.compilator.error.UnknownNodeType
 TODO: NodePtrAccess.generateIntermediateCode()
+Recover From Intermediate Code Generation Error:fr.c12.compilator.error.UnknownNodeType
 TODO: NodePtrAccess.generateIntermediateCode()
+Recover From Intermediate Code Generation Error:fr.c12.compilator.error.UnknownNodeType
 TODO: NodePtrAccess.generateIntermediateCode()
 Recover From Intermediate Code Generation Error:fr.c12.compilator.error.UnknownNodeType
 *** Analyse syntaxique ok
@@ -221,7 +214,11 @@ Recover From Intermediate Code Generation Error:fr.c12.compilator.error.UnknownN
 --- CheckType NodeCallFct
 --- CheckType NodeId
 - NodeCallFct well typed
---- CheckType NodeId
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+--- CheckType NodeNew
 --- CheckType NodeAssign
 --- CheckType NodePtrAccess
 --- CheckType NodeLiteral
@@ -232,7 +229,7 @@ Recover From Intermediate Code Generation Error:fr.c12.compilator.error.UnknownN
 --- CheckType NodeCallFct
 --- CheckType NodeId
 - NodeCallFct well typed
---- CheckType NodeId
+--- CheckType NodeNew
 --- CheckType NodeCallFct
 --- CheckType NodeId
 - NodeCallFct well typed
@@ -243,7 +240,7 @@ Recover From Intermediate Code Generation Error:fr.c12.compilator.error.UnknownN
 --- CheckType NodeCallFct
 --- CheckType NodePtrAccess
 - NodeCallFct well typed
---- CheckType NodeId
+--- CheckType NodeNew
 --- CheckType NodeAssign
 --- CheckType NodePtrAccess
 --- CheckType NodeLiteral
@@ -256,14 +253,14 @@ Recover From Intermediate Code Generation Error:fr.c12.compilator.error.UnknownN
 --- CheckType NodeId
 - NodeCallFct well typed
 --- CheckType NodeCallFct
---- CheckType NodeId
+--- CheckType NodePtrAccess
 - NodeCallFct well typed
 - NodeList well typed
 *** Typage correct
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), NodeId#q:TypePointer(TypeString)#, NodeAssign(NodePtrAccess(NodeId#q:TypePointer(TypeString)#), NodeLiteral#"A":TypeString#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#q:TypePointer(TypeString)#))), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeId#p:TypePointer(TypeInt_null)#, println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeAssign(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#), NodeId#x:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#))), NodeId#r:TypePointer(TypeInt_null)#, NodeAssign(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#), NodeLiteral#65536:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#))), NodeDispose(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#p:TypeInt_null#)))
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#))), NodeNew(NodeId#q:TypePointer(TypeString)#), NodeAssign(NodePtrAccess(NodeId#q:TypePointer(TypeString)#), NodeLiteral#"A":TypeString#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#q:TypePointer(TypeString)#))), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeNew(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeAssign(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#), NodeId#x:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#))), NodeNew(NodeId#r:TypePointer(TypeInt_null)#), NodeAssign(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#), NodeLiteral#65536:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#))), NodeDispose(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#))))
 
 
 
@@ -277,10 +274,8 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#
 // Structure de contrôle
 //
 //
-*** Erreur de syntaxe en ligne 0, colonne 18. Token inattendu: TOKEN_ELSE
-0,18-0,6: Recovered: removed unexpected token #56
-Solo If Statement (no else)
 
+Recover From Intermediate Code Generation Error:fr.c12.compilator.error.UnknownNodeType
 Recover From Intermediate Code Generation Error:fr.c12.compilator.error.UnknownNodeType
 *** Analyse syntaxique ok
 --- CheckType NodeList
@@ -294,7 +289,7 @@ Recover From Intermediate Code Generation Error:fr.c12.compilator.error.UnknownN
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), NodeIf(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#y:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeOp(NodeOp(NodeLiteral#1000:TypeInt_null#), NodeId#y:TypeInt_null#))), NodeAssign(NodeId#y:TypeInt_null#, NodeOp(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))), println_NodeCallFct(NodeList(NodeLiteral#"X":TypeString#)), NodeAssign(NodeId#x:TypeInt_null#, NodeOp(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))))))
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), NodeIf(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#y:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeOp(NodeOp(NodeLiteral#1000:TypeInt_null#), NodeId#y:TypeInt_null#))), NodeAssign(NodeId#y:TypeInt_null#, NodeOp(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#))))), println_NodeCallFct(NodeList(NodeLiteral#"X":TypeString#))), NodeAssign(NodeId#x:TypeInt_null#, NodeOp(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))))
 
 
 
@@ -306,7 +301,6 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWh
 
 ** Enregistre fct:sum
 ** Enregistre fct:pgcd
-IF...ELSE !!!!!!
 
 *** Analyse syntaxique ok
 --- CheckType NodeList
@@ -314,9 +308,6 @@ IF...ELSE !!!!!!
 --- CheckType NodeId
 --- CheckType NodeLiteral
 - Assign well typed
---- CheckType NodeCallFct
---- CheckType NodeId
-- NodeCallFct well typed
 --- CheckType NodeAssign
 --- CheckType NodeId
 --- CheckType NodeCallFct
@@ -341,7 +332,7 @@ IF...ELSE !!!!!!
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), NodeAssign(NodeId#x:TypeInt_null#, sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#))), println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#)))), println_NodeCallFct(NodeList(pgcd_NodeCallFct(NodeList(NodeLiteral#78:TypeInt_null#, NodeLiteral#90:TypeInt_null#)))))
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeAssign(NodeId#x:TypeInt_null#, sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#))), println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#)))), println_NodeCallFct(NodeList(pgcd_NodeCallFct(NodeList(NodeLiteral#78:TypeInt_null#, NodeLiteral#90:TypeInt_null#)))))
 
 
 
@@ -355,19 +346,11 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#), printl
 // gestion complexe de la pile
 // 
 ** Enregistre fct:fact1
-IF...ELSE !!!!!!
 ** Enregistre fct:fact2
-IF...ELSE !!!!!!
 ** Enregistre fct:hanoi
-Solo If Statement (no else)
-Solo If Statement (no else)
 ** Enregistre fct:impair
 ** Enregistre fct:pair
-IF...ELSE !!!!!!
-IF...ELSE !!!!!!
 ** Enregistre fct:impair
-IF...ELSE !!!!!!
-IF...ELSE !!!!!!
 
 *** Analyse syntaxique ok
 --- CheckType NodeList

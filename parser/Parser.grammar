@@ -88,13 +88,11 @@
 //PRIOTITIES
 %right TOKEN_CIRC, TOKEN_NOT;
 %right TOKEN_ELSE;
-%right TOKEN_IF_ELSE;
-//%left TOKEN_UNARY_IF;
+
 %left TOKEN_AND, TOKEN_AFF, TOKEN_OR;
 %left TOKEN_PLUS, TOKEN_MINUS, TOKEN_TIMES, TOKEN_DIV;
 %left TOKEN_LT, TOKEN_LE, TOKEN_GT, TOKEN_GE, TOKEN_EQ, TOKEN_NE;
 
-%left TOKEN_ONLY_IF;
 %left TOKEN_IF;
 %left TOKEN_THEN;
 
@@ -134,7 +132,7 @@
 %typeof range_type = "Type";
 %typeof feature_list_type = "TypeFeatureList";
 
-%typeof statement, else_statement = "Node";
+%typeof statement = "Node";
 %typeof literal  = "NodeLiteral";
 %typeof variable_access, expression = "NodeExp";
 //%typeof case_statement = "NodeList";
@@ -603,6 +601,7 @@ expression_list=
 new_statement=
 	TOKEN_NEW variable_access.node TOKEN_SEMIC			
 	{: 
+		/*
 		if(node instanceof NodeId) {
 			NodeId n_id = (NodeId) node;
 			try {
@@ -614,6 +613,8 @@ new_statement=
 				return node;
 			}
 		}
+		*/
+		
 		return new NodeNew(node); 
 	:}
 	;
@@ -623,7 +624,8 @@ new_statement=
 dispose_statement=
 	TOKEN_DISPOSE variable_access.node TOKEN_SEMIC		
 							{: 
-								if(node instanceof NodeId) {
+								/*
+								 * if(node instanceof NodeId) {
 									NodeId n_id = (NodeId) node;
 									try {
 										stackEnvironment.dispose_variable(n_id.getName()); 
@@ -634,6 +636,7 @@ dispose_statement=
 										return node;
 									}
 								}
+								*/
 								return new NodeDispose(node); 
 							:}
 	;
@@ -687,20 +690,20 @@ structured_statement=
 
 //OK	
 if_statement=
-	TOKEN_IF expression.e TOKEN_THEN statement.stm_if else_statement.stm_else				
+	TOKEN_IF expression.e TOKEN_THEN statement.stm_if				
 		{:	
-			if(stm_else instanceof EmptyNode) {
-				return new NodeIf(e, stm_if);
-			} else {
-				return new NodeIf(e, stm_if, stm_else);	
-			}
+			return new NodeIf(e, stm_if);
 		:}
-;
+	| TOKEN_IF expression.e TOKEN_THEN statement.stm_if TOKEN_ELSE statement.stm_else 
+		{: 
+			return new NodeIf(e, stm_if, stm_else); 
+		:}
+;/*
 else_statement=
 	TOKEN_ELSE statement.stm_else  	 @TOKEN_IF_ELSE	{: System.out.println("IF...ELSE !!!!!!"); return stm_else; :}
 	|	@TOKEN_ONLY_IF			{: System.out.println("Solo If Statement (no else)"); return new EmptyNode(); :}
 	;
-
+*/
 //OK	
 while_statement=
 	TOKEN_WHILE expression.e1 TOKEN_DO statement.stm	{:	return new NodeWhile(e1, stm);	:}
@@ -787,6 +790,7 @@ variable_access=
 	
 	| expression.e TOKEN_CIRC	//Pointeur
 		{: 
+			/*/
 		if(!(e.getType() instanceof TypePointer)){
 			System.err.println("[MEMLEAK] Trying to access free or undeclared pointer");
 			
@@ -794,6 +798,7 @@ variable_access=
 				System.exit(0);
 			return e;
 		}
+		*/
 		return new NodePtrAccess(e);	:}			
 	;
 	

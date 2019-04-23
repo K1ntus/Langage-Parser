@@ -12,7 +12,7 @@ public abstract class Stm extends IntermediateCode {
 	}
 	
 	public String toString() {
-		return "stm jsp";
+		return "stm";
 	}
 
 

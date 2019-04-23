@@ -45,8 +45,8 @@ public final class NodeIf extends Node {
 		return this.get(1);
 	}
 
-	@Override
-	public IntermediateCode generateIntermediateCode() {
+	
+	public IntermediateCode generateIntermediateCodeIf() {
 		// TODO Auto-generated method stub
 		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
 		return null;

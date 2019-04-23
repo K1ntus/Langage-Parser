@@ -35,16 +35,20 @@ public abstract class NodeExp extends Node {
 	}
 	
 	public ExpList generateIntermediateCodeExp() {
+		System.out.println("size = "+ this.size());
+		System.out.println("elt = "+ super.toString() );
 		//System.err.println("NodeExp code intermediaire: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		if(this.size()>0){
+		if(this.size()>1){
 			NodeExp tmp = (NodeExp) this.get(0);
 			this.pop(this.get(0));
 			return new ExpList((Exp)tmp.generateIntermediateCode(), this.generateIntermediateCodeExp());	//appel gauche qui retourne une classe fille de exp à cast
 																											//appel droit avec le reste de la liste
 			//faire NodeOp, NodeCallFct, NodeLiteral pour pouvoir appeler le membre de gauche
+		}else if(super.size() <= 1) {
+			NodeExp tmp = (NodeExp) this;
+			return new ExpList((Exp)tmp.generateIntermediateCode(), null);
 		}
-		return new ExpList(null,null);
-		
+		return null;
 		
 	}
 	

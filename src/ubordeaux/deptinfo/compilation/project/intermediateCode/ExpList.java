@@ -27,8 +27,11 @@ public class ExpList extends IntermediateCode {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		if(this.tail != null && this.head != null)
+			return this.head.toString() + this.tail.toString();
+		else if(this.head != null)
+			return this.head.toString();
+		return "NULL POINTER in ExpList";
 	}
 
 }

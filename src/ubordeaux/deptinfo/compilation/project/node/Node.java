@@ -174,6 +174,12 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 	            ((NodeWhile)o).generateIntermediateCodeWhile();
 	        }
 	    });
+		
+		intermediate_code_table.put(NodeLiteral.class, new Handler() {
+	        public void handle(Node o) {
+	            ((NodeLiteral)o).generateIntermediateCodeLiteral();
+	        }
+	    });
 	}
 	
 	//Cherche un handler dans al table
@@ -183,7 +189,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 	private static void handle(Node o) throws UnknownNodeType{
 	    Handler h = intermediate_code_table.get(o.getClass());
 	    if (h == null) {
-	    	throw new UnknownNodeType(o.toString());
+	    	throw new UnknownNodeType(o.toString() + " : " + o.toString());
 	    }
 	    h.handle(o);
 	}

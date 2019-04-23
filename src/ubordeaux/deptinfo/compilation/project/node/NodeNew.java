@@ -21,8 +21,6 @@ public final class NodeNew extends Node {
 
 	@Override
 	public IntermediateCode generateIntermediateCode() {
-		// TODO Auto-generated method stub
-		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
 		return null;
 		
 	}

@@ -9,5 +9,9 @@ public class Call extends Exp {
 		this.func = func;
 		this.args = args;
 	}
+	
+	public String toString() {
+		return "Call(" + this.getClass().toString() + "," + this.args.toString() + ")";
+	}
 
 }

@@ -42,8 +42,7 @@ public final class NodeLiteral extends NodeExp {
 	}
 
 	public Move generateIntermediateCodeLiteral() {
-		//NodeExp n = new NodeExp((NodeLiteral)this.getValue()); Trouver autre chose jsp
-		//ExpList l = n.generateIntermediateCodeExp();
+		//System.out.println(this.getValue().getClass().toString());
 		ExpList l = new ExpList(null, null);
 		Exp exp = l.getHead();
 		TempValue tmp = new TempValue();

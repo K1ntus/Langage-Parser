@@ -7,5 +7,7 @@ public class Label extends Stm {
 		super();
 		this.label = label;
 	}
-
+	public String toString() {
+		return "Label" + this.label.toString();
+	}
 }

@@ -8,5 +8,8 @@ public class Move extends Stm {
 		this.dst = dst;
 		this.src = src;
 	}
-
+	
+	public String toString() {
+		return "Move(" + dst.toString() + src.toString();
+	}
 }

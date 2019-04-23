@@ -38,15 +38,12 @@ public final class NodeId extends NodeExp {
 		return name;
 	}
 	
-	
-	public Mem generateIntermediateCodeMem() {
-		//System.err.println("Label: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		return new Mem((Exp)this.generateIntermediateCode());
-	}
-	
 	public Type getType() {
 		return type;
 	}
-
-
+	
+	public Name generateIntermediateCodeMem() {
+		LabelLocation l = new LabelLocation(this.getName());
+		return new Name(l);
+	}
 }

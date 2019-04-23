@@ -10,9 +10,8 @@ public abstract class Exp extends IntermediateCode {
 		System.err.println("TODO: " + this.getClass().getSimpleName() + ".canonicalTransformation()()");
 	}
 
-	@Override
+
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Exp";	//pour le moment...
 	}
 }

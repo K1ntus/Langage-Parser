@@ -1,6 +1,6 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 
 public final class NodeIf extends Node {
 
@@ -46,10 +46,19 @@ public final class NodeIf extends Node {
 	}
 
 	
-	public IntermediateCode generateIntermediateCodeIf() {
-		// TODO Auto-generated method stub
-		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		return null;
-		
+	public Cjump generateIntermediateCodeIf() {
+		LabelLocation iftrue = new LabelLocation();
+		LabelLocation ifFalse= new LabelLocation();
+		int i;
+		Exp e1, e2;
+		if(this.getExpNode() instanceof NodeRel) {	// cas de comparaison entre 2 objects 
+			i = ((NodeRel)this.getExpNode()).getCodeOp(); //valeur du symbol de la relation
+			e1 = (Exp)((NodeRel)this.getExpNode()).generateIntermediateCodeRel();	//genere une erreure null pointer, verifier getExpNode()
+			e2 = (Exp)((NodeRel)this.getExpNode()).generateIntermediateCodeRel();
+			return new Cjump(i, e1, e2,iftrue,ifFalse);
+		}else{
+			i = -1;	//cas d'erreur...
+		}
+	return new Cjump(i, null, null, iftrue,ifFalse);	//cas erreur, surement buge
 	}
 }

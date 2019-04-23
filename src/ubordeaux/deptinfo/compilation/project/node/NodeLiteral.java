@@ -46,6 +46,8 @@ public final class NodeLiteral extends NodeExp {
 		ExpList l = new ExpList(null, null);
 		Exp exp = l.getHead();
 		TempValue tmp = new TempValue();
+		//if()
+		
 		return new Move(new Temp(tmp),exp);
 	}
 	

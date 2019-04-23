@@ -19,6 +19,7 @@ public final class NodeArrayAccess extends NodeExp {
 	@Override
 	public boolean checksType() {
 		super.checksType();
+		
 		TypeArray typeArray = (TypeArray)((NodeExp)this.get(0)).getType();
 		TypeRange typeRangeOREnum = typeArray.getRangeOREnum();
 		Type typeArg = ((NodeExp)get(1)).getType();

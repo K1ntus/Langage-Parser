@@ -45,11 +45,41 @@ public class NodeRel extends NodeExp {
 	public NodeRel clone() {
 		return new NodeRel(name, (Node) getOp1().clone(), (Node) getOp2().clone());
 	};
+	
+	public int getCodeOp() {
+		int operation = -1;
+        
+        switch(this.name) {
+            case "an":
+                operation = 4;
+                break;
+            case"or":
+                operation = 5;
+                break;
+            case"lt":
+                operation = 10;
+                break;
+            case"le":
+                operation = 11;
+                break;
+            case"gt":
+                operation = 12;
+                break;
+            case"ge":
+                operation = 13;
+                break;
+            case"eq":
+                operation = 14;
+                break;
+            case"ne":
+                operation = 15;
+                break;
+        }
+       return operation;
+	}
 
+	public Binop generateIntermediateCodeRel() {
 
-	public ExpList generateIntermediateCodeRel() {
-		//System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		//new Binop(operation,  ((ExpList)this.getOp1().generateIntermediateCode()).getHead(), ((ExpList)this.getOp2().generateIntermediateCode()).getHead())
-        return new ExpList(null,null);
+		return new Binop(this.getCodeOp(), ((ExpList)this.getOp1().generateIntermediateCode()).getHead(), ((ExpList)this.getOp2().generateIntermediateCode()).getHead());
 	}
 }

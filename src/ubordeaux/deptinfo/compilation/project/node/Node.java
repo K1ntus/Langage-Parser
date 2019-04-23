@@ -180,6 +180,12 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 	            ((NodeLiteral)o).generateIntermediateCodeLiteral();
 	        }
 	    });
+		
+		intermediate_code_table.put(NodeIf.class, new Handler() {
+	        public void handle(Node o) {
+	            //((NodeIf)o).generateIntermediateCodeIf();	//genere une erreure null pointer
+	        }
+	    });
 	}
 	
 	//Cherche un handler dans al table

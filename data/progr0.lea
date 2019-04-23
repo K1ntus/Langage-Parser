@@ -9,6 +9,12 @@ x : integer;
 x : integer; //Erreur redefinition
 month : Months;
 
+
+/*
+FUNCTION
+AND ERROR
+HANDLER
+*/
 function sum(i : integer, j : integer) : integer
 var k:integer;
 begin

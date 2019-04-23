@@ -40,8 +40,8 @@ HexaValue = 0x[a-fA-F0-9_]*
 
 <YYINITIAL> {
 
-	"/**"			{System.out.println("$$$"); yybegin(COMMENT_DOC);}
-	"/*"			{System.out.println("$$"); yybegin(COMMENT);}
+	"/**"			{System.out.print("$$$"); yybegin(COMMENT_DOC);}
+	"/*"			{System.out.print("$$"); yybegin(COMMENT);}
 	
 	\"              { string.setLength(0); string.append('\"'); yybegin(STRING); }
 	{LineComment}	{System.out.print(yytext()); }

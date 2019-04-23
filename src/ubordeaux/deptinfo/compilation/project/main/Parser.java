@@ -195,13 +195,13 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_id_l = _symbols[offset + 3];
 					final IdentifierList id_l = (IdentifierList) _symbol_id_l.value;
 					 
-																		Vector<Type> array_tmp = new Vector<>();
-																		int const_id = 0;
-																		for(String identifier : id_l) {
-																			array_tmp.add(new TypeItemEnum(const_id, identifier));
-																			const_id +=1;
-																		}
-																		return new TypeTuple(array_tmp);
+			Vector<Type> array_tmp = new Vector<>();
+			int const_id = 0;
+			for(String identifier : id_l) {
+				array_tmp.add(new TypeItemEnum(const_id, identifier));
+				const_id +=1;
+			}
+			return new TypeTuple(array_tmp);
 				}
 			},
 			Action.NONE,  	// [19] init_enumerated_type = 
@@ -211,7 +211,13 @@ public class Parser extends beaver.Parser {
 					final Integer min = (Integer) _symbol_min.value;
 					final Symbol _symbol_max = _symbols[offset + 3];
 					final Integer max = (Integer) _symbol_max.value;
-					 return new TypeArrayRange(new TypeInt(min), new TypeInt(max));
+					 	
+			if(min > max) {
+				System.err.println("[InvalidType@subrange_type] min@" + min + " is greater than max@" +max);
+				if(critical_mode)
+					System.exit(0);
+			}
+			return new TypeArrayRange(new TypeInt(min), new TypeInt(max));
 				}
 			},
 			new Action() {	// [21] subrange_type = TOKEN_IDENTIFIER.id_min TOKEN_DOTDOT TOKEN_IDENTIFIER.id_max
@@ -221,16 +227,22 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_id_max = _symbols[offset + 3];
 					final String id_max = (String) _symbol_id_max.value;
 						
-																		try {
-																			int val_min = typeEnvironment.getEnumType(id_min).getValue();
-																			int val_max = typeEnvironment.getEnumType(id_max).getValue();
-																			
-																			return new TypeArrayRange(new TypeInt(val_min), new TypeInt(val_max));
-																			
-																		} catch (NoSuchFieldException e) {
-																			System.err.println("subrange_type: " + e );
-																			return new TypeArrayRange(new TypeInt(0), new TypeInt(0));
-																		}
+			try {
+				int val_min = typeEnvironment.getEnumType(id_min).getValue();
+				int val_max = typeEnvironment.getEnumType(id_max).getValue();
+
+				if(val_min > val_max) {
+					System.err.println("[InvalidType@subrange_type] min@[" + id_min + ":" + val_min + "] is greater than max@[" + id_max + ":" +val_max +"]");
+					if(critical_mode)
+						System.exit(0);
+				}
+				
+				return new TypeArrayRange(new TypeInt(val_min), new TypeInt(val_max));
+				
+			} catch (NoSuchFieldException e) {
+				System.err.println("subrange_type: " + e );
+				return new TypeArrayRange(new TypeInt(0), new TypeInt(0));
+			}
 				}
 			},
 			new Action() {	// [22] array_type = TOKEN_ARRAY TOKEN_LBRACKET range_type.range TOKEN_RBRACKET TOKEN_OF type.t
@@ -363,7 +375,7 @@ public class Parser extends beaver.Parser {
 		try {
 			type_fct.setDefined(true); 
 			procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
-		} catch (RedefinitionFunction e) {
+		} catch (RedefinitionFunction|RedefinitionFunctionPrototype e) {
 			System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
 			if(critical_mode)
 				System.exit(0);
@@ -379,7 +391,7 @@ public class Parser extends beaver.Parser {
 			try {
 				type_fct.setDefined(false); 
 				procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
-			} catch (RedefinitionFunction e) {
+			} catch (RedefinitionFunction|RedefinitionFunctionPrototype e) {
 				System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
 				if(critical_mode)
 					System.exit(0);
@@ -538,7 +550,17 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_e2 = _symbols[offset + 3];
 					final NodeExp e2 = (NodeExp) _symbol_e2.value;
 					  
-																return new NodeAssign(e1, e2);
+		//System.out.println("ASSIGN;::::" + e1.getType() + " -> " + e2.getType());
+			
+			//Type(e1) = Type(e2), ou Pointer(Type(e1)) = Type(e2) 
+			if(!e1.getType().equals(e2.getType()) && !(new TypePointer(e1.getType()).equals(e2.getType()) )) {
+				System.err.println("[InvalidAffectation] Impossible to assign a " + e1.getType() + " to " + e2.getType());
+				if(critical_mode)
+					System.exit(0);
+				System.err.println("[InvalidAffectation] Automatically recover from error.");
+				return new NodeAssign(e1,e1);
+			}
+			return new NodeAssign(e1, e2);
 				}
 			},
 			new Action() {	// [69] procedure_statement = procedure_expression.n TOKEN_SEMIC
@@ -600,6 +622,12 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_node = _symbols[offset + 2];
 					final NodeExp node = (NodeExp) _symbol_node.value;
 					 
+		if(!(node.getType() instanceof TypePointer)) {
+			System.err.println("[InvalidPointerAccess] Trying to new a variable that is not a pointer.");
+			if(critical_mode)
+				System.exit(0);
+			return node;
+		}
 		/*
 		if(node instanceof NodeId) {
 			NodeId n_id = (NodeId) node;
@@ -622,6 +650,12 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_node = _symbols[offset + 2];
 					final NodeExp node = (NodeExp) _symbol_node.value;
 					 
+								if(!(node.getType() instanceof TypePointer)) {
+									System.err.println("[InvalidPointerAccess] Trying to dispose a variable that is not a pointer.");
+									if(critical_mode)
+										System.exit(0);
+									return node;
+								}
 								/*
 								 * if(node instanceof NodeId) {
 									NodeId n_id = (NodeId) node;
@@ -815,7 +849,24 @@ public class Parser extends beaver.Parser {
 					final NodeExp var = (NodeExp) _symbol_var.value;
 					final Symbol _symbol_e = _symbols[offset + 3];
 					final NodeExp e = (NodeExp) _symbol_e.value;
-					 return new NodeArrayAccess(var, e);
+					
+			if(!(var.getType() instanceof TypeArray) ) {
+				System.err.println("[InvalidArrayAccess] Trying to access a variable as array@" + var.getType() + "with " +e);
+				if(critical_mode)
+					System.exit(0);
+				System.err.println("[InvalidArrayAccess] Automatically recover from syntax error.");
+				return var;
+				
+			}
+			if(e.getType() instanceof TypeBoolean || e.getType() instanceof TypeString) {
+				System.err.println("[InvalidArrayAccess] Invalid Type@" + e.getType() + " to access array.");
+				if(critical_mode)
+					System.exit(0);
+				System.err.println("[InvalidArrayAccess] Automatically recover from syntax error.");
+				return var;
+				//return new NodeArrayAccess(var, new NodeLiteral(new TypeInt(0), 0));
+			}
+			return new NodeArrayAccess(var, e);
 				}
 			},
 			new Action() {	// [95] variable_access = expression.e TOKEN_CIRC
@@ -841,7 +892,14 @@ public class Parser extends beaver.Parser {
 					final NodeExp e1 = (NodeExp) _symbol_e1.value;
 					final Symbol _symbol_e2 = _symbols[offset + 3];
 					final NodeExp e2 = (NodeExp) _symbol_e2.value;
-					 return new NodeOp("plus", e1, e2);
+					 
+
+			//Gerer cas pointeur aussi
+			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
+				System.out.println("[InvalidBinaryOperation->Arithmetic] Plus: left@"+e1.getType() + ", right@"+e2.getType());
+				return new NodeOp("invalid expr", e1, e2);
+			}
+			return new NodeOp("plus", e1, e2);
 				}
 			},
 			new Action() {	// [97] expression = expression.e1 TOKEN_MINUS expression.e2
@@ -850,7 +908,13 @@ public class Parser extends beaver.Parser {
 					final NodeExp e1 = (NodeExp) _symbol_e1.value;
 					final Symbol _symbol_e2 = _symbols[offset + 3];
 					final NodeExp e2 = (NodeExp) _symbol_e2.value;
-					 return new NodeOp("minus", e1, e2);
+					 
+			//Gerer cas pointeur aussi
+			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
+				System.out.println("[InvalidBinaryOperation->Arithmetic] Minus: left@"+e1.getType() + ", right@"+e2.getType());
+				return new NodeOp("invalid expr", e1, e2);
+			}
+			return new NodeOp("minus", e1, e2);
 				}
 			},
 			new Action() {	// [98] expression = expression.e1 TOKEN_TIMES expression.e2
@@ -859,7 +923,13 @@ public class Parser extends beaver.Parser {
 					final NodeExp e1 = (NodeExp) _symbol_e1.value;
 					final Symbol _symbol_e2 = _symbols[offset + 3];
 					final NodeExp e2 = (NodeExp) _symbol_e2.value;
-					 return new NodeOp("times", e1, e2);
+					 
+			//Gerer cas pointeur aussi
+			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
+				System.out.println("[InvalidBinaryOperation->Arithmetic] Times: left@"+e1.getType() + ", right@"+e2.getType());
+				return new NodeOp("invalid expr", e1, e2);
+			}
+			return new NodeOp("times", e1, e2);
 				}
 			},
 			new Action() {	// [99] expression = expression.e1 TOKEN_DIV expression.e2
@@ -868,14 +938,21 @@ public class Parser extends beaver.Parser {
 					final NodeExp e1 = (NodeExp) _symbol_e1.value;
 					final Symbol _symbol_e2 = _symbols[offset + 3];
 					final NodeExp e2 = (NodeExp) _symbol_e2.value;
-					 return new NodeOp("divide", e1, e2);
+					 
+			//Gerer cas pointeur aussi
+			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
+				System.out.println("[InvalidBinaryOperation->Arithmetic] Divide: left@"+e1.getType() + ", right@"+e2.getType());
+				return new NodeOp("invalid expr", e1, e2);
+			}
+			return new NodeOp("divide", e1, e2);
 				}
 			},
 			new Action() {	// [100] expression = TOKEN_MINUS expression.e
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_e = _symbols[offset + 2];
 					final NodeExp e = (NodeExp) _symbol_e.value;
-					 return new NodeOp("u_minus", e);
+					 
+			return new NodeOp("u_minus", e);
 				}
 			},
 			new Action() {	// [101] expression = expression.e1 TOKEN_OR expression.e2

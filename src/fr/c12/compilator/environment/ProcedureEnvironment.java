@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import fr.c12.compilator.error.RedefinitionFunction;
+import fr.c12.compilator.error.RedefinitionFunctionPrototype;
 import ubordeaux.deptinfo.compilation.project.type.TypeFunct;
 
 public class ProcedureEnvironment {
@@ -24,8 +25,10 @@ public class ProcedureEnvironment {
 		this.setName(name);
 	}
 	
-	public void putVariable(String fct_node, TypeFunct fct_content) throws RedefinitionFunction {
+	public void putVariable(String fct_node, TypeFunct fct_content) throws RedefinitionFunction, RedefinitionFunctionPrototype {
 		if(table.get(fct_node) != null) {
+			if(!table.get(fct_node).getDefined() && !fct_content.getDefined())
+				throw new RedefinitionFunctionPrototype(fct_node);
 			if(table.get(fct_node).getDefined()) {
 				throw new RedefinitionFunction(fct_node);
 			}

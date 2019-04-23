@@ -193,11 +193,13 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 	
 	public IntermediateCode generateIntermediateCode() {
 		for (Node elt : this.elts) {
+			/* 
 			try {
 				handle(elt);
 			} catch (UnknownNodeType e) {
 				System.err.println("Recover From Intermediate Code Generation Error:" + e);
 			}
+			*/
 			
 			/*
 			switch(elt.getClass().toString()) {

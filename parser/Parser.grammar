@@ -137,9 +137,11 @@
 %typeof variable_access, expression = "NodeExp";
 //%typeof case_statement = "NodeList";
 %typeof argt = "NodeId";
+%typeof case_default = "NodeCase";
+%typeof case_statement = "NodeList";
 
 %typeof statement_list, expression_list, argt_list, block = "NodeList";
-%typeof case_statement_list, case_statement = "NodeCaseList";
+%typeof case_statement_list = "NodeCaseList";
 %typeof identifier_list = "IdentifierList";
 //%typeof case_identifier_list = "IdentifierList";
 
@@ -698,12 +700,9 @@ if_statement=
 		{: 
 			return new NodeIf(e, stm_if, stm_else); 
 		:}
-;/*
-else_statement=
-	TOKEN_ELSE statement.stm_else  	 @TOKEN_IF_ELSE	{: System.out.println("IF...ELSE !!!!!!"); return stm_else; :}
-	|	@TOKEN_ONLY_IF			{: System.out.println("Solo If Statement (no else)"); return new EmptyNode(); :}
-	;
-*/
+;
+
+
 //OK	
 while_statement=
 	TOKEN_WHILE expression.e1 TOKEN_DO statement.stm	{:	return new NodeWhile(e1, stm);	:}
@@ -715,14 +714,6 @@ switch_statement=
 	;
 
 /*
-
-//OK	
-case_statement=
-	//TOKEN_CASE case_identifier_statement TOKEN_COLON statement.state	{: return new NodeCase(name, state); :}
-	TOKEN_CASE TOKEN_IDENTIFIER.name TOKEN_COLON statement.state		{: return new NodeCase(name, state); :}
-	| TOKEN_DEFAULT TOKEN_COLON statement.state							{: return new NodeCase("default", state); :}
-	;
-	*/
 
 //OK	
 case_statement_list=
@@ -750,7 +741,52 @@ case_statement=
 		:}
 	| TOKEN_DEFAULT TOKEN_COLON statement.state {: return new NodeCaseList(new NodeCase(state)); :}
 	;
+*/
+case_statement_list=
+		case_statement_list.list case_statement.case_arr case_default.case_default
+			{:
+				Iterator<Node> it = case_arr.iterator();
+				while(it.hasNext()) {
+					NodeCase nc = (NodeCase) it.next();
+					list.add(nc);
+				}
+
+				if(case_default instanceof NodeCase) {
+					list.add(case_default);
+				}
+				
+				return list;
+				
+			:}
+		| case_statement.stm	
+			{: 
+				NodeCaseList list = new NodeCaseList();
+				
+				Iterator<Node> it = stm.iterator();
+				while(it.hasNext()) {
+					NodeCase nc = (NodeCase) it.next();
+					list.add(nc);
+				}
+				return list;
+			:}				
+		;
 		
+	case_statement=
+		TOKEN_CASE identifier_list.id_list TOKEN_COLON statement.stm 
+			{: 
+				NodeList res = new NodeList();
+				for(String case_name : id_list) {
+					res.add(new NodeCase(case_name, stm));
+				}
+				return res;
+			
+			:}
+		;
+		
+	case_default=
+		/* empty */
+		| TOKEN_DEFAULT TOKEN_COLON statement.stm	{: return new NodeCase(null, stm); :}
+		;
 
 /*
 Expressions

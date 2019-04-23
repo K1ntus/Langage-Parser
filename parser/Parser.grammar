@@ -754,9 +754,8 @@ case_statement=
 
 /*
 Expressions
-
-normalement TODO
 */
+
 //Recup les valeurs stockees dans les environnements (ou pas, a check)
 variable_access=
 	TOKEN_IDENTIFIER.name		
@@ -773,10 +772,8 @@ variable_access=
 					}
 					return new NodeId(null, null);					
 					
-					//System.out.println("FINDDD");
 				} catch (NoSuchFieldException e2) {
 
-					//System.err.println("Variable [" + name + "]");
 					System.err.println(e2 + " at Line : ");
 					if(critical_mode)
 						System.exit(0);
@@ -790,7 +787,7 @@ variable_access=
 	
 	| expression.e TOKEN_CIRC	//Pointeur
 		{: 
-			/*/
+		/*
 		if(!(e.getType() instanceof TypePointer)){
 			System.err.println("[MEMLEAK] Trying to access free or undeclared pointer");
 			

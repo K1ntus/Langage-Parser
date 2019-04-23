@@ -690,7 +690,7 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_stm_if = _symbols[offset + 4];
 					final Node stm_if = (Node) _symbol_stm_if.value;
 						
-				return new NodeIf(e, stm_if);
+			return new NodeIf(e, stm_if);
 				}
 			},
 			new Action() {	// [85] if_statement = TOKEN_IF expression.e TOKEN_THEN statement.stm_if TOKEN_ELSE statement.stm_else
@@ -778,10 +778,8 @@ public class Parser extends beaver.Parser {
 					}
 					return new NodeId(null, null);					
 					
-					//System.out.println("FINDDD");
 				} catch (NoSuchFieldException e2) {
 
-					//System.err.println("Variable [" + name + "]");
 					System.err.println(e2 + " at Line : ");
 					if(critical_mode)
 						System.exit(0);
@@ -804,7 +802,7 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_e = _symbols[offset + 1];
 					final NodeExp e = (NodeExp) _symbol_e.value;
 					 
-			/*/
+		/*
 		if(!(e.getType() instanceof TypePointer)){
 			System.err.println("[MEMLEAK] Trying to access free or undeclared pointer");
 			

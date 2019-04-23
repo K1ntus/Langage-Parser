@@ -51,9 +51,8 @@ public final class NodeArrayAccess extends NodeExp {
 
 
 	public ExpList generateIntermediateCode() {
+		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
 		return null;
-		
-		//System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
 		
 	}
 

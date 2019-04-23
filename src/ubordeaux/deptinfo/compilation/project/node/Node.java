@@ -192,7 +192,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 	
 	
 	public IntermediateCode generateIntermediateCode() {
-		for (Node elt : this.elts) {
+		//for (Node elt : this.elts) {
 			/* 
 			try {
 				handle(elt);
@@ -272,7 +272,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 					System.out.println("-_-_-_-DEFAULT-_-_-_-");		//Ca doit etre beau comme message
 			}
 					*/
-		}
+		//}
 		return null;
 	}
 

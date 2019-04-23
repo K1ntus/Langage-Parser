@@ -36,6 +36,8 @@ public abstract class NodeExp extends Node {
 	
 	
 	public ExpList generateIntermediateCodeExp() {
+		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		return null;
 		//System.err.println("NodeExp code intermediaire: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
 		/*
 		if(this.size()>0){
@@ -47,7 +49,7 @@ public abstract class NodeExp extends Node {
 		}
 		return new ExpList(null,null);
 		*/
-		return null;
+		//return null;
 		
 	}
 	

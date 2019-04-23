@@ -42,8 +42,12 @@ public final class NodeCase extends Node {
 	}
 
 	public ExpList generateIntermediateCodeCase() {
-		IntermediateCode i =  this.getStm().generateIntermediateCode();
+		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		return null;
+		
+		
+		//IntermediateCode i =  this.getStm().generateIntermediateCode();
 		//ExpList l = new ExpList(this.getStm(),this.pop(this.getStm()).generateIntermediateCodeCase(this.getNameValue,this.getStm()));
-		return (ExpList) i; //a modifier... T.T	
+		//return (ExpList) i; //a modifier... T.T	
 	}
 }

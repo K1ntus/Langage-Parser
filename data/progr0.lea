@@ -2,10 +2,12 @@
 
 type
 named2 = unknown; // UnknownType
+Months = (January, February, March, April, May, June, July, August, September, October, November, December);
 
 var
 x : integer;
 x : integer; //Erreur redefinition
+month : Months;
 
 function sum(i : integer, j : integer) : integer
 var k:integer;
@@ -39,5 +41,28 @@ begin
 x = 100;
 
 println sum(5,5);
+
+
+/*
+TEST
+CASE:
+*/
+	switch (month) 
+		begin
+		case March, April, May:
+			println ("spring");
+		
+		case June, July, August:
+			println("summer");
+		
+		case September, October, November:
+			println("autumn");
+		
+		case February, December, January:
+			println("winter");
+			
+		default:
+			println("none");
+		end
 
 end

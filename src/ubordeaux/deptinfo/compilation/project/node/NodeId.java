@@ -40,8 +40,10 @@ public final class NodeId extends NodeExp {
 	
 	
 	public Mem generateIntermediateCodeMem() {
+		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		return null;
 		//System.err.println("Label: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		return new Mem((Exp)this.generateIntermediateCode());
+		//return new Mem((Exp)this.generateIntermediateCode());
 	}
 	
 	public Type getType() {

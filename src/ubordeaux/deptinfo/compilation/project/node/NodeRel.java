@@ -50,6 +50,10 @@ public class NodeRel extends NodeExp {
 	public ExpList generateIntermediateCodeRel() {
 		//System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
 		//new Binop(operation,  ((ExpList)this.getOp1().generateIntermediateCode()).getHead(), ((ExpList)this.getOp2().generateIntermediateCode()).getHead())
-        return new ExpList(null,null);
+		//return new ExpList(null,null);
+		
+
+		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		return null;
 	}
 }

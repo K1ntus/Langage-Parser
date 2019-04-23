@@ -68,10 +68,15 @@ public final class NodeAssign extends Node {
 
 
 	public Move generateIntermediateCodeAssign() {
+		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		return null;
+		
+		/*
 		ExpList l = new ExpList((Exp)this.getLhs().generateIntermediateCode(), null);
 		ExpList r = new ExpList((Exp)this.getRhs().generateIntermediateCode(), null);
 		//ExpList l = new ExpList(null, null);
 		//ExpList r = new ExpList(null, null);
 		return new Move(new Mem(l.getHead()),r.getHead() );	
+		*/
 	}
 }

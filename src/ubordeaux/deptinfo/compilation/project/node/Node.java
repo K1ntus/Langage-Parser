@@ -121,7 +121,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 	 *
 	 */
 	
-	//Une interface pour la classe Polymorphe Handler. 
+	//Une interface pour un objet Polymorphe 'Handler'. 
 	//Forcer l'implementation de cette interface ainsi, pour éviter de niquer la table
 	//Avec plusieurs définitions de "Handler"
 	private interface Handler {
@@ -131,7 +131,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 	//On cree une map qui assigne un Handler a un objet "Class"
 	private static final Map<Class, Handler> intermediate_code_table = new HashMap<Class, Handler>();
 	
-	// Remplit la map avec un bloc static (static initializer) Execute quand la classe Handler est initialisee
+	// Remplit la map avec un bloc static (static initializer). Execute quand l objet Handler est initialisee
 	static {
 		intermediate_code_table.put(NodeOp.class, new Handler() {
 	        public void handle(Node o) {

@@ -1,6 +1,7 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Binop;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
 import ubordeaux.deptinfo.compilation.project.type.TypeBoolean;
@@ -77,8 +78,20 @@ public class NodeRel extends NodeExp {
         }
        return operation;
 	}
+	
+	@Override
+	public Binop generateIntermediateCodeExp() {
 
-	public Binop generateIntermediateCodeRel() {
-		return new Binop(this.getCodeOp(), ((ExpList)this.getOp1().generateIntermediateCode()).getHead(), ((ExpList)this.getOp2().generateIntermediateCode()).getHead());
+		 //Exp left = new Const (((NodeLiteral)n.get(i)).getValue());
+		 //res = new Binop(n.getCodeOp(), n.getExp(0).generateIntermediateCodeExp(), n.getExp(1).generateIntermediateCodeExp());
+		 return new Binop(this.getCodeOp(), 
+				 new Const(
+						 (int) ((NodeLiteral) this.getExp(0)).getValue()
+						 ), 
+				 new Const(
+						 (int) ((NodeLiteral) this.getExp(1)).getValue()
+						 )
+				 );
+		//return new Binop(this.getCodeOp(), ((ExpList)this.getOp1().generateIntermediateCode()).getHead(), ((ExpList)this.getOp2().generateIntermediateCode()).getHead());
 	}
 }

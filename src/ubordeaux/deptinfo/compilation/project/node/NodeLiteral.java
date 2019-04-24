@@ -42,13 +42,15 @@ public final class NodeLiteral extends NodeExp {
 	}
 
 	public Move generateIntermediateCodeLiteral() {
-		//System.out.println(this.getValue().getClass().toString());
+		/*//System.out.println(this.getValue().getClass().toString());
 		ExpList l = new ExpList(null, null);
 		Exp exp = l.getHead();
 		TempValue tmp = new TempValue();
 		//if()
 		
-		return new Move(new Temp(tmp),exp);
+		return new Move(new Temp(tmp),exp);*/
+		System.err.println("Errr");
+		return null;
 	}
 
 	

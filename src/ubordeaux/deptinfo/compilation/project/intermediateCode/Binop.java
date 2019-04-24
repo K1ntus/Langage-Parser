@@ -19,4 +19,4 @@ public class Binop extends Exp {
 		return "BINOP(" + binop + "," + left.toString() + "," + right.toString() + ")";
 	}
 
-}
+} 

@@ -59,7 +59,7 @@ public final class NodeAssign extends Node {
 	};
 	
 	private NodeExp getRhs() {
-		return (NodeLiteral) this.get(1);
+		return (NodeExp) this.get(1);
 	}
 
 	@Override

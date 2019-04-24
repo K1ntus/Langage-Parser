@@ -1,6 +1,7 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Binop;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
 
@@ -30,14 +31,14 @@ public class NodeOp extends NodeExp {
 	public boolean checksType() {
 		super.checksType();
 		if ((super.size() > 1) && getOp2()!=null && !this.getOp1().getType().equals(this.getOp2().getType())) {
-			System.out.println("- NodeOp not well typed");
+			System.out.println("- NodeOp not  well typed");
 			return false;
 		}
 		System.out.println("- NodeOp well typed");
-		return true;
+		return true; 
 	}
 
-	public NodeExp getOp1() {
+	public NodeExp getOp1() { 
 		return (NodeExp) this.get(0);
 	}
 	
@@ -46,7 +47,7 @@ public class NodeOp extends NodeExp {
 	}
 	
 	public String getName() {
-		return this.name;
+		return this.name; 
 	}
 
 	@Override
@@ -77,8 +78,19 @@ public class NodeOp extends NodeExp {
         }
        return operation;
 	}
-		
-        public ExpList generateIntermediateCodeOp() { 
-            return new ExpList(new Binop(this.getCodeOp(),  ((ExpList)this.getOp1().generateIntermediateCode()).getHead(), ((ExpList)this.getOp2().generateIntermediateCode()).getHead()),null);
+		@Override
+        public Binop generateIntermediateCodeExp() { 
+        	//Binop res = null;
+			 //Exp left = new Const (((NodeLiteral)n.get(i)).getValue());
+			 //res = new Binop(this.getCodeOp(), this.getExp(0).generateIntermediateCodeExp(), this.getExp(1).generateIntermediateCodeExp());
+			 return new Binop(this.getCodeOp(), 
+					 new Const(
+							 (int) ((NodeLiteral) this.getExp(0)).getValue()
+							 ), 
+					 new Const(
+							 (int) ((NodeLiteral) this.getExp(1)).getValue()
+							 )
+					 );
+        	//return new ExpList(new Binop(this.getCodeOp(),  ((ExpList)this.getOp1().generateIntermediateCode()).getHead(), ((ExpList)this.getOp2().generateIntermediateCode()).getHead()),null);
         }
 }

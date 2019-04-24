@@ -2,29 +2,15 @@
 
 
 *************************************************
-*** Fichier data/progr1.lea
+*** Fichier data/progr0.lea
 [INFO] $$  : multiple line comment.
 [INFO] $$$ : documentation comment.
 
 
-//while (a >= 0) do
-//NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeWhile(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeLiteral#1:TypeInt_null#)))))
 
-* Move(NAME(a),constante:100)
-*** Analyse syntaxique ok
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeIf
-- NodeList well typed
-*** Typage correct
+* Move(NAME(a),CONST:100)
+* Move(NAME(b),BINOP(0,CONST:2,CONST:9))
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeIf(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeId#a:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))))
-
-
-Code intermediaire: 
-* Move(NAME(a),constante:100)
+NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeAssign(NodeId#b:TypeInt_null#, NodeOp(NodeLiteral#2:TypeInt_null#, NodeLiteral#9:TypeInt_null#)))

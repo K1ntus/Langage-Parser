@@ -88,7 +88,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 			elt.toDot(stringBuffer);
 			stringBuffer.append("node_" + this.uniqId + " -> node_" + elt.uniqId + ";\n");
 		}
-
+ 
 	}
 
 	protected String toDotNodeName() {

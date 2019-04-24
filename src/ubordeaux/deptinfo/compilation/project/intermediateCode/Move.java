@@ -10,12 +10,6 @@ public class Move extends Stm {
 	}
 	
 	public String toString() {
-		if(dst == null) {
-			return "Move: dest is null";
-		}
-		if(src == null) {
-			return "Move: src is null";
-		}
 		return "Move(" + dst.toString() + "," + src.toString() + ")";
 	}
 }

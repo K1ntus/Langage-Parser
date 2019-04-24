@@ -38,7 +38,8 @@ public class Main {
 					System.out.println(result.toString());
 					result.toDot("data/output_tree");
 					result.toDot("\n");
-					//System.out.println(result.generateIntermediateCode().toString()); //null pointer à finir 
+					result.toDot("Generation de code intermediaire");
+					System.out.println(result.generateIntermediateCode()); //null pointer à finir 
 					
 					
 				} catch (beaver.Parser.Exception e) {

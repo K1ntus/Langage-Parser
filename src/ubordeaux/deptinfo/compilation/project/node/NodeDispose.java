@@ -19,9 +19,9 @@ public final class NodeDispose extends Node {
 		return new NodeDispose((Node) this.get(0).clone());
 	}
 
-	@Override
-	public IntermediateCode generateIntermediateCode() {
-		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+
+	public IntermediateCode generateIntermediateCodeNodeDispose() {
+		System.err.println("Node dispose en code intermediaire ?????");
 		return null;
 	}
 }

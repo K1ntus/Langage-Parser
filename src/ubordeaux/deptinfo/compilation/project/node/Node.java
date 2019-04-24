@@ -165,7 +165,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 		
 		intermediate_code_table.put(NodeCallFct.class, new Handler() {
 	        public void handle(Node o) {
-	            //((NodeCallFct)o).generateIntermediateCodeCallFct();	//null pointer exception
+	            ((NodeCallFct)o).generateIntermediateCodeCallFct();	//null pointer exception
 	        }
 	    });
 		
@@ -183,9 +183,57 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 		
 		intermediate_code_table.put(NodeIf.class, new Handler() {
 	        public void handle(Node o) {
-	            //((NodeIf)o).generateIntermediateCodeIf();	//genere une erreure null pointer
+	          //((NodeIf)o).generateIntermediateCodeIf();	//genere une erreur null pointer
 	        }
 	    });
+		
+		intermediate_code_table.put(NodeArrayAccess.class, new Handler() {
+	        public void handle(Node o) {
+	          //((NodeArrayAccess)o).generateIntermediateCodeArrayAccess();	//genere une erreur null pointer
+	        }
+	    });
+		
+		intermediate_code_table.put(NodeCase.class, new Handler() {
+	        public void handle(Node o) {
+	          //((NodeCase)o).generateIntermediateCodeIf();	//genere une erreur null pointer
+	        }
+	    });
+		
+		intermediate_code_table.put(NodeCaseList.class, new Handler() {
+	        public void handle(Node o) {
+	          //((NodeCaseList)o).generateIntermediateCodeCaseList();	//genere une erreur null pointer
+	        }
+	    });
+		
+		intermediate_code_table.put(NodeNew.class, new Handler() {
+	        public void handle(Node o) {
+	          //((NodeNew)o).generateIntermediateCodeNew();	//genere une erreur null pointer
+	        }
+	    });
+		
+		intermediate_code_table.put(NodePtrAccess.class, new Handler() {
+	        public void handle(Node o) {
+	          //((NodePtrAccess)o).generateIntermediateCodeNodePtrAccess();	//genere une erreur null pointer
+	        }
+	    });
+		
+		intermediate_code_table.put(NodeReturn.class, new Handler() {
+	        public void handle(Node o) {
+	          //((NodeReturn)o).generateIntermediateCodeIf();	//genere une erreur null pointer
+	        }
+	    });
+		
+		intermediate_code_table.put(NodeSwitch.class, new Handler() {
+	        public void handle(Node o) {
+	          //((NodeSwitch)o).generateIntermediateCodeIf();	//genere une erreur null pointer
+	        }
+	    });		
+		
+		intermediate_code_table.put(NodeDispose.class, new Handler() {
+	        public void handle(Node o) {
+	          ((NodeDispose)o).generateIntermediateCodeNodeDispose();	//genere une erreur null pointer
+	        }
+	    });	
 	}
 	
 	//Cherche un handler dans al table

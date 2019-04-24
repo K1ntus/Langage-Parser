@@ -31,7 +31,7 @@ public class ExpList extends IntermediateCode {
 			return this.head.toString() + this.tail.toString();
 		else if(this.head != null)
 			return this.head.toString();
-		return "NULL POINTER in ExpList";
+		return "Explist(null,null)";
 	}
 
 }

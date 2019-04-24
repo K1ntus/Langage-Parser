@@ -1,14 +1,16 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
 import ubordeaux.deptinfo.compilation.project.type.Type;
-import ubordeaux.deptinfo.compilation.project.type.TypeTuple;
+import ubordeaux.deptinfo.compilation.project.type.TypeBoolean;
+import ubordeaux.deptinfo.compilation.project.type.TypeInt;
+import ubordeaux.deptinfo.compilation.project.type.TypeString;
 
 public abstract class NodeExp extends Node {
 
@@ -35,23 +37,41 @@ public abstract class NodeExp extends Node {
 	}
 	
 	
-	public ExpList generateIntermediateCodeExp() {
-		System.out.println("size = "+ this.size());
-		System.out.println("elt = "+ super.toString() );
-		//System.err.println("NodeExp code intermediaire: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		if(this.size()>1){
-			NodeExp tmp = (NodeExp) this.get(0);
-			this.pop(this.get(0));
-			return new ExpList((Exp)tmp.generateIntermediateCode(), this.generateIntermediateCodeExp());	//appel gauche qui retourne une classe fille de exp à cast
-																											//appel droit avec le reste de la liste
-			//faire NodeOp, NodeCallFct, NodeLiteral pour pouvoir appeler le membre de gauche
-		}else if(super.size() <= 1) {
-			NodeExp tmp = (NodeExp) this;
-			return new ExpList((Exp)tmp.generateIntermediateCode(), null);
-		}
-		
-		return new ExpList(null,null);
-		
-	}
-	
+	 public Exp generateIntermediateCodeExp() {
+		 //System.out.println("Size node exp assign: " + size());
+		 Exp res = null;
+		 if(size() == 0) {
+			 if(this instanceof NodeLiteral) {
+				 NodeLiteral n = (NodeLiteral) this;
+				 if(n.getType() instanceof TypeInt) {
+					 res = new Const((int) n.getValue());
+			 	} else if(n.getType() instanceof TypeBoolean) {
+					 res = new Const((int) n.getValue());
+				 } else if(n.getType() instanceof TypeString)
+					 res = new Const(-1);
+			 }
+			 //System.out.println(((Const)res).toString());
+		 }else {
+			 //GERER NodeOP et NodeRel
+			 res = null;
+			 //System.out.println("Left: " + this.get(0)) ;
+		 }
+		 
+		 /*
+	        if(this.size()>1){
+	            NodeExp tmp = (NodeExp) this.get(0);
+	            this.pop(this.get(0));
+	            ExpList e = new ExpList((Exp)tmp.generateIntermediateCode(), this.generateIntermediateCodeExp());
+	            System.err.println(e.toString());
+	            return  e; 
+	        }else if(super.size() <= 1) {
+	            NodeExp tmp = (NodeExp) this;
+	            ExpList e = new ExpList((Exp)tmp.generateIntermediateCode(), null);
+	            System.err.println(e.toString());
+	            return  e; 
+	        }
+	        */
+	        return res;
+  
+	 }
 }

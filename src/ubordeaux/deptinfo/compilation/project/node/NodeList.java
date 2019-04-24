@@ -71,14 +71,9 @@ public final class NodeList extends Node {
 
 
 	public IntermediateCode generateIntermediateCodeList() {
-		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		return null;
-		/*
 		for (Node elt : this.elts) {
 			return elt.generateIntermediateCode();
 		}
 		return null;
-		*/
 	}
-	
 }

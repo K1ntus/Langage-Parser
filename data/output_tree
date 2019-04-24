@@ -1,0 +1,35 @@
+digraph Stree {
+node_3 [shape="ellipse", label="NodeList"];
+node_2 [shape="ellipse", label="NodeAssign"];
+node_0 [shape="ellipse", label="NodeId a"];
+node_2 -> node_0;
+node_1 [shape="ellipse", label="NodeLiteral 100"];
+node_2 -> node_1;
+node_3 -> node_2;
+node_16 [shape="ellipse", label="NodeIf"];
+node_6 [shape="ellipse", label="NodeRel"];
+node_4 [shape="ellipse", label="NodeId a"];
+node_6 -> node_4;
+node_5 [shape="ellipse", label="NodeLiteral 0"];
+node_6 -> node_5;
+node_16 -> node_6;
+node_10 [shape="ellipse", label="NodeList"];
+node_9 [shape="ellipse", label="NodeCallFct println()"];
+node_8 [shape="ellipse", label="NodeList"];
+node_7 [shape="ellipse", label="NodeId a"];
+node_8 -> node_7;
+node_9 -> node_8;
+node_10 -> node_9;
+node_15 [shape="ellipse", label="NodeAssign"];
+node_11 [shape="ellipse", label="NodeId a"];
+node_15 -> node_11;
+node_14 [shape="ellipse", label="NodeOp"];
+node_12 [shape="ellipse", label="NodeId a"];
+node_14 -> node_12;
+node_13 [shape="ellipse", label="NodeLiteral 1"];
+node_14 -> node_13;
+node_15 -> node_14;
+node_10 -> node_15;
+node_16 -> node_10;
+node_3 -> node_16;
+}

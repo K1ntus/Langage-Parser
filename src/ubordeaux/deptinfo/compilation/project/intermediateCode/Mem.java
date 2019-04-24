@@ -10,6 +10,9 @@ public class Mem extends Exp {
 	
 	@Override
 	public String toString(){
+		if(exp == null) {
+			System.out.println("Mem: exp is null");
+		}
 		return "MEM("+ exp.toString() + ")";
 	}
 	

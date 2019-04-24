@@ -10,8 +10,7 @@ public class Const extends Exp {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "constante:" + value;
 	}
 
 }

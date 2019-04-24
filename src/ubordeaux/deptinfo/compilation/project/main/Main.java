@@ -37,9 +37,10 @@ public class Main {
 					System.out.println("\n\nArbre Principal: ");
 					System.out.println(result.toString());
 					result.toDot("data/output_tree");
-					//result.toDot("\n");	//NE //FAIS //PLUS //JAMAIS //CA
-					//System.out.println(result.generateIntermediateCode()); //null pointer à finir 
 					
+					System.out.println("\n\nCode intermediaire: ");
+					System.out.println(result.generateIntermediateCode().toString()); //null pointer à finir 
+					//result.toDot("data/intermediate_code");
 					
 				} catch (beaver.Parser.Exception e) {
 					System.err.println("*** Erreur de syntaxe: " + arg + ":" + e.getMessage());

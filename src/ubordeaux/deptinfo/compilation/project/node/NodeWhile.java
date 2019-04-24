@@ -28,12 +28,8 @@ public final class NodeWhile extends Node {
 		return this.get(0);
 	}
 
-	public IntermediateCode generateIntermediateCodeWhile() {
-		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		return null;
-		/*
-		//i =  null;
-		
+	public Seq generateIntermediateCodeWhile() {
+
 		LabelLocation debut = new LabelLocation();
 		LabelLocation suite = new LabelLocation();
 		LabelLocation sortie = new LabelLocation();
@@ -70,7 +66,7 @@ public final class NodeWhile extends Node {
 						new Seq(new Label(suite),
 								new Seq((Stm) this.getStm().generateIntermediateCode(), new Seq(new Jump(debut), new Label(sortie))))));
 								//ce noeud Seq du code interm doit etre modifie sur le stm de gauche
-*/
+
 	}
 	
 }

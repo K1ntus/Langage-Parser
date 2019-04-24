@@ -42,4 +42,10 @@ public class Cjump extends Stm {
 			throw new Error("bad relop in CJUMP.notRel");
 		}
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

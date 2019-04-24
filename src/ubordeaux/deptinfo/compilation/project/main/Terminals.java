@@ -31,13 +31,13 @@ public class Terminals {
 	static public final short TOKEN_NE = 23;
 	static public final short TOKEN_VAR = 24;
 	static public final short TOKEN_RPAR = 25;
-	static public final short TOKEN_SWITCH = 26;
-	static public final short TOKEN_NEW = 27;
-	static public final short TOKEN_DISPOSE = 28;
-	static public final short TOKEN_PRINTLN = 29;
-	static public final short TOKEN_READLN = 30;
-	static public final short TOKEN_RETURN = 31;
-	static public final short TOKEN_IF = 32;
+	static public final short TOKEN_IF = 26;
+	static public final short TOKEN_SWITCH = 27;
+	static public final short TOKEN_NEW = 28;
+	static public final short TOKEN_DISPOSE = 29;
+	static public final short TOKEN_PRINTLN = 30;
+	static public final short TOKEN_READLN = 31;
+	static public final short TOKEN_RETURN = 32;
 	static public final short TOKEN_WHILE = 33;
 	static public final short TOKEN_ARRAY = 34;
 	static public final short TOKEN_STRUCT = 35;
@@ -54,14 +54,14 @@ public class Terminals {
 	static public final short TOKEN_AFF = 46;
 	static public final short TOKEN_DOTDOT = 47;
 	static public final short TOKEN_CASE = 48;
-	static public final short TOKEN_DEFAULT = 49;
-	static public final short TOKEN_OF = 50;
-	static public final short TOKEN_LBRACE = 51;
-	static public final short TOKEN_RBRACE = 52;
-	static public final short TOKEN_THEN = 53;
+	static public final short TOKEN_OF = 49;
+	static public final short TOKEN_LBRACE = 50;
+	static public final short TOKEN_RBRACE = 51;
+	static public final short TOKEN_THEN = 52;
+	static public final short TOKEN_ELSE = 53;
 	static public final short TOKEN_DO = 54;
-	static public final short TOKEN_TYPE = 55;
-	static public final short TOKEN_ELSE = 56;
+	static public final short TOKEN_DEFAULT = 55;
+	static public final short TOKEN_TYPE = 56;
 
 	static public final String[] NAMES = {
 		"EOF",
@@ -90,13 +90,13 @@ public class Terminals {
 		"TOKEN_NE",
 		"TOKEN_VAR",
 		"TOKEN_RPAR",
+		"TOKEN_IF",
 		"TOKEN_SWITCH",
 		"TOKEN_NEW",
 		"TOKEN_DISPOSE",
 		"TOKEN_PRINTLN",
 		"TOKEN_READLN",
 		"TOKEN_RETURN",
-		"TOKEN_IF",
 		"TOKEN_WHILE",
 		"TOKEN_ARRAY",
 		"TOKEN_STRUCT",
@@ -113,13 +113,13 @@ public class Terminals {
 		"TOKEN_AFF",
 		"TOKEN_DOTDOT",
 		"TOKEN_CASE",
-		"TOKEN_DEFAULT",
 		"TOKEN_OF",
 		"TOKEN_LBRACE",
 		"TOKEN_RBRACE",
 		"TOKEN_THEN",
+		"TOKEN_ELSE",
 		"TOKEN_DO",
-		"TOKEN_TYPE",
-		"TOKEN_ELSE"
+		"TOKEN_DEFAULT",
+		"TOKEN_TYPE"
 	};
 }

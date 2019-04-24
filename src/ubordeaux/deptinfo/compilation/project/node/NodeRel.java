@@ -79,7 +79,6 @@ public class NodeRel extends NodeExp {
 	}
 
 	public Binop generateIntermediateCodeRel() {
-
 		return new Binop(this.getCodeOp(), ((ExpList)this.getOp1().generateIntermediateCode()).getHead(), ((ExpList)this.getOp2().generateIntermediateCode()).getHead());
 	}
 }

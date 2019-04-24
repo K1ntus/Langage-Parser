@@ -88,13 +88,11 @@
 //PRIOTITIES
 %right TOKEN_CIRC, TOKEN_NOT;
 %right TOKEN_ELSE;
-%right TOKEN_IF_ELSE;
-//%left TOKEN_UNARY_IF;
+
 %left TOKEN_AND, TOKEN_AFF, TOKEN_OR;
 %left TOKEN_PLUS, TOKEN_MINUS, TOKEN_TIMES, TOKEN_DIV;
 %left TOKEN_LT, TOKEN_LE, TOKEN_GT, TOKEN_GE, TOKEN_EQ, TOKEN_NE;
 
-%left TOKEN_ONLY_IF;
 %left TOKEN_IF;
 %left TOKEN_THEN;
 
@@ -134,14 +132,16 @@
 %typeof range_type = "Type";
 %typeof feature_list_type = "TypeFeatureList";
 
-%typeof statement, else_statement = "Node";
+%typeof statement = "Node";
 %typeof literal  = "NodeLiteral";
 %typeof variable_access, expression = "NodeExp";
 //%typeof case_statement = "NodeList";
 %typeof argt = "NodeId";
+%typeof case_default = "NodeCase";
+%typeof case_statement = "NodeList";
 
 %typeof statement_list, expression_list, argt_list, block = "NodeList";
-%typeof case_statement_list, case_statement = "NodeCaseList";
+%typeof case_statement_list = "NodeCaseList";
 %typeof identifier_list = "IdentifierList";
 //%typeof case_identifier_list = "IdentifierList";
 
@@ -238,34 +238,49 @@ index_type=
 
 enumerated_type=//{: return new TypeEnumRange(new TypeItemEnum(0, list.first()), new TypeItemEnum(0, list.last())); :} //OLD
 	init_enumerated_type TOKEN_LPAR identifier_list.id_l TOKEN_RPAR	
-																	{: 
-																		Vector<Type> array_tmp = new Vector<>();
-																		int const_id = 0;
-																		for(String identifier : id_l) {
-																			array_tmp.add(new TypeItemEnum(const_id, identifier));
-																			const_id +=1;
-																		}
-																		return new TypeTuple(array_tmp);
-																	:}
+		{: 
+			Vector<Type> array_tmp = new Vector<>();
+			int const_id = 0;
+			for(String identifier : id_l) {
+				array_tmp.add(new TypeItemEnum(const_id, identifier));
+				const_id +=1;
+			}
+			return new TypeTuple(array_tmp);
+		:}
 	;
 	
 init_enumerated_type= 
 	;
 
 subrange_type= 
-	TOKEN_LIT_INTEGER.min TOKEN_DOTDOT TOKEN_LIT_INTEGER.max		{: return new TypeArrayRange(new TypeInt(min), new TypeInt(max)); :}
-	| TOKEN_IDENTIFIER.id_min TOKEN_DOTDOT TOKEN_IDENTIFIER.id_max	{:	
-																		try {
-																			int val_min = typeEnvironment.getEnumType(id_min).getValue();
-																			int val_max = typeEnvironment.getEnumType(id_max).getValue();
-																			
-																			return new TypeArrayRange(new TypeInt(val_min), new TypeInt(val_max));
-																			
-																		} catch (NoSuchFieldException e) {
-																			System.err.println("subrange_type: " + e );
-																			return new TypeArrayRange(new TypeInt(0), new TypeInt(0));
-																		}														
-																	:}
+	TOKEN_LIT_INTEGER.min TOKEN_DOTDOT TOKEN_LIT_INTEGER.max		
+		{: 	
+			if(min > max) {
+				System.err.println("[InvalidType@subrange_type] min@" + min + " is greater than max@" +max);
+				if(critical_mode)
+					System.exit(0);
+			}
+			return new TypeArrayRange(new TypeInt(min), new TypeInt(max)); 
+		:}
+	| TOKEN_IDENTIFIER.id_min TOKEN_DOTDOT TOKEN_IDENTIFIER.id_max	
+		{:	
+			try {
+				int val_min = typeEnvironment.getEnumType(id_min).getValue();
+				int val_max = typeEnvironment.getEnumType(id_max).getValue();
+
+				if(val_min > val_max) {
+					System.err.println("[InvalidType@subrange_type] min@[" + id_min + ":" + val_min + "] is greater than max@[" + id_max + ":" +val_max +"]");
+					if(critical_mode)
+						System.exit(0);
+				}
+				
+				return new TypeArrayRange(new TypeInt(val_min), new TypeInt(val_max));
+				
+			} catch (NoSuchFieldException e) {
+				System.err.println("subrange_type: " + e );
+				return new TypeArrayRange(new TypeInt(0), new TypeInt(0));
+			}														
+		:}
 	;
 	
 array_type=
@@ -390,7 +405,7 @@ procedure_definition_head=
 		try {
 			type_fct.setDefined(true); 
 			procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
-		} catch (RedefinitionFunction e) {
+		} catch (RedefinitionFunction|RedefinitionFunctionPrototype e) {
 			System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
 			if(critical_mode)
 				System.exit(0);
@@ -405,7 +420,7 @@ procedure_declaration_head=
 			try {
 				type_fct.setDefined(false); 
 				procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
-			} catch (RedefinitionFunction e) {
+			} catch (RedefinitionFunction|RedefinitionFunctionPrototype e) {
 				System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
 				if(critical_mode)
 					System.exit(0);
@@ -544,9 +559,20 @@ simple_statement=
 	
 //OK
 assignment_statement=
-	variable_access.e1 TOKEN_AFF expression.e2 TOKEN_SEMIC	{:  
-																return new NodeAssign(e1, e2); 
-															:}
+	variable_access.e1 TOKEN_AFF expression.e2 TOKEN_SEMIC	
+		{:  
+		//System.out.println("ASSIGN;::::" + e1.getType() + " -> " + e2.getType());
+			
+			//Type(e1) = Type(e2), ou Pointer(Type(e1)) = Type(e2) 
+			if(!e1.getType().equals(e2.getType()) && !(new TypePointer(e1.getType()).equals(e2.getType()) )) {
+				System.err.println("[InvalidAffectation] Impossible to assign a " + e1.getType() + " to " + e2.getType());
+				if(critical_mode)
+					System.exit(0);
+				System.err.println("[InvalidAffectation] Automatically recover from error.");
+				return new NodeAssign(e1,e1);
+			}
+			return new NodeAssign(e1, e2); 
+		:}
 	;
 
 procedure_statement=
@@ -603,6 +629,13 @@ expression_list=
 new_statement=
 	TOKEN_NEW variable_access.node TOKEN_SEMIC			
 	{: 
+		if(!(node.getType() instanceof TypePointer)) {
+			System.err.println("[InvalidPointerAccess] Trying to new a variable that is not a pointer.");
+			if(critical_mode)
+				System.exit(0);
+			return node;
+		}
+		/*
 		if(node instanceof NodeId) {
 			NodeId n_id = (NodeId) node;
 			try {
@@ -614,6 +647,8 @@ new_statement=
 				return node;
 			}
 		}
+		*/
+		
 		return new NodeNew(node); 
 	:}
 	;
@@ -623,7 +658,14 @@ new_statement=
 dispose_statement=
 	TOKEN_DISPOSE variable_access.node TOKEN_SEMIC		
 							{: 
-								if(node instanceof NodeId) {
+								if(!(node.getType() instanceof TypePointer)) {
+									System.err.println("[InvalidPointerAccess] Trying to dispose a variable that is not a pointer.");
+									if(critical_mode)
+										System.exit(0);
+									return node;
+								}
+								/*
+								 * if(node instanceof NodeId) {
 									NodeId n_id = (NodeId) node;
 									try {
 										stackEnvironment.dispose_variable(n_id.getName()); 
@@ -634,6 +676,7 @@ dispose_statement=
 										return node;
 									}
 								}
+								*/
 								return new NodeDispose(node); 
 							:}
 	;
@@ -687,19 +730,16 @@ structured_statement=
 
 //OK	
 if_statement=
-	TOKEN_IF expression.e TOKEN_THEN statement.stm_if else_statement.stm_else				
+	TOKEN_IF expression.e TOKEN_THEN statement.stm_if				
 		{:	
-			if(stm_else instanceof EmptyNode) {
-				return new NodeIf(e, stm_if);
-			} else {
-				return new NodeIf(e, stm_if, stm_else);	
-			}
+			return new NodeIf(e, stm_if);
+		:}
+	| TOKEN_IF expression.e TOKEN_THEN statement.stm_if TOKEN_ELSE statement.stm_else 
+		{: 
+			return new NodeIf(e, stm_if, stm_else); 
 		:}
 ;
-else_statement=
-	TOKEN_ELSE statement.stm_else  	 @TOKEN_IF_ELSE	{: System.out.println("IF...ELSE !!!!!!"); return stm_else; :}
-	|	@TOKEN_ONLY_IF			{: System.out.println("Solo If Statement (no else)"); return new EmptyNode(); :}
-	;
+
 
 //OK	
 while_statement=
@@ -712,14 +752,6 @@ switch_statement=
 	;
 
 /*
-
-//OK	
-case_statement=
-	//TOKEN_CASE case_identifier_statement TOKEN_COLON statement.state	{: return new NodeCase(name, state); :}
-	TOKEN_CASE TOKEN_IDENTIFIER.name TOKEN_COLON statement.state		{: return new NodeCase(name, state); :}
-	| TOKEN_DEFAULT TOKEN_COLON statement.state							{: return new NodeCase("default", state); :}
-	;
-	*/
 
 //OK	
 case_statement_list=
@@ -747,13 +779,57 @@ case_statement=
 		:}
 	| TOKEN_DEFAULT TOKEN_COLON statement.state {: return new NodeCaseList(new NodeCase(state)); :}
 	;
+*/
+case_statement_list=
+		case_statement_list.list case_statement.case_arr case_default.case_default
+			{:
+				Iterator<Node> it = case_arr.iterator();
+				while(it.hasNext()) {
+					NodeCase nc = (NodeCase) it.next();
+					list.add(nc);
+				}
+
+				if(case_default instanceof NodeCase) {
+					list.add(case_default);
+				}
+				
+				return list;
+				
+			:}
+		| case_statement.stm	
+			{: 
+				NodeCaseList list = new NodeCaseList();
+				
+				Iterator<Node> it = stm.iterator();
+				while(it.hasNext()) {
+					NodeCase nc = (NodeCase) it.next();
+					list.add(nc);
+				}
+				return list;
+			:}				
+		;
 		
+	case_statement=
+		TOKEN_CASE identifier_list.id_list TOKEN_COLON statement.stm 
+			{: 
+				NodeList res = new NodeList();
+				for(String case_name : id_list) {
+					res.add(new NodeCase(case_name, stm));
+				}
+				return res;
+			
+			:}
+		;
+		
+	case_default=
+		/* empty */
+		| TOKEN_DEFAULT TOKEN_COLON statement.stm	{: return new NodeCase(null, stm); :}
+		;
 
 /*
 Expressions
-
-normalement TODO
 */
+
 //Recup les valeurs stockees dans les environnements (ou pas, a check)
 variable_access=
 	TOKEN_IDENTIFIER.name		
@@ -770,10 +846,8 @@ variable_access=
 					}
 					return new NodeId(null, null);					
 					
-					//System.out.println("FINDDD");
 				} catch (NoSuchFieldException e2) {
 
-					//System.err.println("Variable [" + name + "]");
 					System.err.println(e2 + " at Line : ");
 					if(critical_mode)
 						System.exit(0);
@@ -783,10 +857,29 @@ variable_access=
 		:}
 
 	| variable_access.var TOKEN_LBRACKET expression.e TOKEN_RBRACKET	//Tableau
-		{: return new NodeArrayAccess(var, e); :}
+		{:
+			if(!(var.getType() instanceof TypeArray) ) {
+				System.err.println("[InvalidArrayAccess] Trying to access a variable as array@" + var.getType() + "with " +e);
+				if(critical_mode)
+					System.exit(0);
+				System.err.println("[InvalidArrayAccess] Automatically recover from syntax error.");
+				return var;
+				
+			}
+			if(e.getType() instanceof TypeBoolean || e.getType() instanceof TypeString) {
+				System.err.println("[InvalidArrayAccess] Invalid Type@" + e.getType() + " to access array.");
+				if(critical_mode)
+					System.exit(0);
+				System.err.println("[InvalidArrayAccess] Automatically recover from syntax error.");
+				return var;
+				//return new NodeArrayAccess(var, new NodeLiteral(new TypeInt(0), 0));
+			}
+			return new NodeArrayAccess(var, e); 
+		:}
 	
 	| expression.e TOKEN_CIRC	//Pointeur
 		{: 
+		/*
 		if(!(e.getType() instanceof TypePointer)){
 			System.err.println("[MEMLEAK] Trying to access free or undeclared pointer");
 			
@@ -794,15 +887,53 @@ variable_access=
 				System.exit(0);
 			return e;
 		}
+		*/
 		return new NodePtrAccess(e);	:}			
 	;
 	
 expression=
-	expression.e1 TOKEN_PLUS expression.e2		{: return new NodeOp("plus", e1, e2); :}
-	| expression.e1 TOKEN_MINUS expression.e2	{: return new NodeOp("minus", e1, e2); :}
-	| expression.e1 TOKEN_TIMES expression.e2	{: return new NodeOp("times", e1, e2); :}
-	| expression.e1 TOKEN_DIV expression.e2		{: return new NodeOp("divide", e1, e2); :}
-	| TOKEN_MINUS expression.e					{: return new NodeOp("u_minus", e); :}
+	expression.e1 TOKEN_PLUS expression.e2		
+		{: 
+
+			//Gerer cas pointeur aussi
+			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
+				System.out.println("[InvalidBinaryOperation->Arithmetic] Plus: left@"+e1.getType() + ", right@"+e2.getType());
+				return new NodeOp("invalid expr", e1, e2);
+			}
+			return new NodeOp("plus", e1, e2); 
+		:}
+	| expression.e1 TOKEN_MINUS expression.e2
+		{: 
+			//Gerer cas pointeur aussi
+			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
+				System.out.println("[InvalidBinaryOperation->Arithmetic] Minus: left@"+e1.getType() + ", right@"+e2.getType());
+				return new NodeOp("invalid expr", e1, e2);
+			}
+			return new NodeOp("minus", e1, e2); 
+		:}
+	| expression.e1 TOKEN_TIMES expression.e2
+		{: 
+			//Gerer cas pointeur aussi
+			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
+				System.out.println("[InvalidBinaryOperation->Arithmetic] Times: left@"+e1.getType() + ", right@"+e2.getType());
+				return new NodeOp("invalid expr", e1, e2);
+			}
+			return new NodeOp("times", e1, e2); 
+		:}
+	| expression.e1 TOKEN_DIV expression.e2
+		{: 
+			//Gerer cas pointeur aussi
+			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
+				System.out.println("[InvalidBinaryOperation->Arithmetic] Divide: left@"+e1.getType() + ", right@"+e2.getType());
+				return new NodeOp("invalid expr", e1, e2);
+			}
+			return new NodeOp("divide", e1, e2); 
+		:}
+	| TOKEN_MINUS expression.e
+		{: 
+			return new NodeOp("u_minus", e); 
+		:}
+	
 	| expression.e1 TOKEN_OR expression.e2		{: return new NodeRel("or", e1, e2); :}
 	| expression.e1 TOKEN_AND expression.e2		{: return new NodeRel("an", e1, e2); :}
 	| TOKEN_NOT expression.e					{: return new NodeRel("no", e, new NodeLiteral(new TypeBoolean(), false)); :}

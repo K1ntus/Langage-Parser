@@ -8,4 +8,10 @@ public class Const extends Exp {
 		this.value = value;
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

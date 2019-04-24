@@ -105,10 +105,16 @@ public final class NodeCallFct extends NodeExp {
 	
 	public Call generateIntermediateCodeCallFct() {
 		ExpList arg = (ExpList) this.getArgs().generateIntermediateCodeList();
+		//System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		
+		NodeList n = new NodeList(this.getArgs());
+		//ExpList arg = (ExpList) n.generateIntermediateCodeList();
+
 		LabelLocation label = new LabelLocation(this.getName());
 		Name function = new Name(label);
 		return new Call((Exp)function,arg);
 	}
+	
 
 
 }

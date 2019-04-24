@@ -1,6 +1,9 @@
 /* **************************************************
  ************************************************** */
 
+/**
+Type declaration part
+*/
 type
 
 chaine = string;
@@ -8,34 +11,51 @@ entier = integer;
 booleen = boolean;
 
 named1 = chaine;
-//named2 = unknown; // error
+//named2 = unknown; // error		//UnknownType
 
+/** Enum */
 Months = (January, February, March, April, May, June, July, August, September, October, November, December);
 DaysOfWeek = (Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday);
-//// xxx = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, aa, ab, ac, ad, ae, af, ag, ah); // error
+//xxx = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, aa, ab, ac, ad, ae, af, ag, ah); // error
 range1 = 64 .. 81;
 range2 = Monday .. Friday;
-//range3 = 81 .. 64; //error
-//range4 = Friday .. Unknown; // error
-//range5 = Friday .. Monday; // error
-//range6 = Monday .. December; //error
-//range7 = Friday .. Tuesday; // error "range not valid"
-//range8 = Monday .. April; // error "incoherent range"
 
+/* 
+Cas
+D'erreur
+*/
+//range3 = 81 .. 64; //error			//InvalidType
+//range4 = Friday .. Unknown; // error	//NoSuchField
+//range5 = Friday .. Monday; // error	//InvalidType@subrange_type
+//range6 = Monday .. December; //error	//A GERER
+//range7 = Friday .. Tuesday; // error "range not valid" //InvalidType@subrange_type
+//range8 = Monday .. April; // error "incoherent range" //A GERER
+
+/** Array */
 table1 = array [ 1 .. 32 ] of integer;
 table2 = array [ range1 ] of integer;
 table3 = array [ range2 ] of integer;
 table4 = array [ 1 .. 32 ] of array [ DaysOfWeek ] of integer;
-//table5 = array [ 1 .. 32 ] of array [ range3 ] of integer; // error "Range type expected"
-//table6 = array [ 1 .. 32 ] of array [ Wednesday..Saturday ] of integer;
 
+/* 
+Cas
+D'erreur
+*/
+// UNKNWOWN TYPE
+table5 = array [ 1 .. 32 ] of array [ range3 ] of integer; // error "Range type expected"
+table6 = array [ 1 .. 32 ] of array [ Wednesday..Saturday ] of integer;
+
+/** Pointers */
 ptr1 = ^integer;
 ptr2 = ^array [ 1 .. 32 ] of array [ DaysOfWeek ] of integer;
 
+/**
+Variable declaration part
+*/
 var
 
 x, y, z : integer;
-//x : boolean; // error "Variable x yet declared"
+//x : boolean; // error "Variable x yet declared" // RedefinitionVariable
 b : boolean;
 z2 : array [ 1 .. 32] of integer;
 k : array [ range2 ] of integer;
@@ -49,14 +69,14 @@ r2: range2;
 month : Months;
 
 function goo(i : integer, j : integer) : boolean;
-function goo(i : integer, j : integer) : boolean; //error "procedure or function declared twice"
+//function goo(i : integer, j : integer) : boolean;//RedefinitionFunctionPrototype //error "procedure or function declared twice"
 
 function foo(i : integer, j : integer) : ^boolean
 var
 	result : ^boolean;
 begin
 	new result;
-	//result^ = hoo(i, j); // error "function not declared"
+	//result^ = hoo(i, j); // error "function not declared" //NoSuchFieldException
 	result^ = goo(i, j);
 	return result;
 end
@@ -66,30 +86,36 @@ begin
 	return (i+j);
 end
 
-function goo(i : integer, j : integer) : boolean begin return false; end // error "function already defined"
+//function goo(i : integer, j : integer) : boolean begin return false; end //RedefinitionFunction // error "function already defined"
 
 begin
 	b = false;
-	b = 2; // error "Type error in affectation"
-	l = m2; // error "Type error in affectation"
+	///b = 2; // error "Type error in affectation"
+	///l = m2; // error "Type error in affectation" //m2 range 4, l range 5
 	l = l;
 	
-	//b = foo(3, 7)^;
-	//b = goo(3, 7);
-	//b = foo(3); // error "Type error in calling expression"
-	//b = foo(3, false); // error "Type error in calling expression"
-	//x = foo(3, 7); // error "Type error in calling expression"
+	b = foo(3, 7)^;
+	b = goo(3, 7);
+	///b = foo(3); // error "Type error in calling expression"			//PAS GERE Checktype invalid
+	///b = foo(3, false); // error "Type error in calling expression"	//PAS GERE Checktype invalid
+	///x = foo(3, 7); // error "Type error in calling expression"		//PAS GERE Checktype invalid
 	
-	//z2 [ Thursday ] = 36; // error "Type error in array access "
-	//z2 [ 1 ] = 36;
+	///z2 [ Thursday ] = 36; // error "Type error in array access "		//PAS GERE
+	
+	//IL Y AVAIT UN CRASH ICI RIP
+	
+	
+	z2 [ 1 ] = 36;
 	x = z2 [ 1 ];
 	b = goo(z2 [ 1 ], 1);
-	y = z [ false ]; // error "Type error in array access"
-	y = z [ 4 ]; // error "Type error in affectation"
-	b = z [ 4 ]; // error "Type error in affectation"
-	z = k [ 4 ]; // error "Type error in affectation"
-	b = z2 [ Thursday ]; // error "Type error in affectation"
-	z2 = 36; // Accessible variable expected
+	//y = z [ false ]; // error "Type error in array access" // InvalidArrayAccess
+	//y = z [ 4 ]; // error "Type error in affectation"			//HANDLED
+	//b = z [ 4 ]; // error "Type error in affectation"			//HANDLED
+	//z = k [ 4 ]; // error "Type error in affectation"			//HANDLED
+	//b = z2 [ Thursday ]; // error "Type error in affectation"	//HANDLED
+	///z2 = 36; // Accessible variable expected
+	
+	
 	
 
 	if (l [ Monday ]) then x = 1;
@@ -122,19 +148,19 @@ begin
 		end
 
 	x = -(36 + 45 / 7);
-	b = !(2 < false) && (x == 1) && (p == null); // // error "Type error in comparison"
-	b = !(2 < x) && (x == 1) && p ; // // error "Type error in logical expression"
-	b = !(2 < x) && (x == 1 + false) && p ; // // error "Type error in arithmetic expression"
+	///b = !(2 < false) && (x == 1) && (p == null); // // error "Type error in comparison"
+	///b = !(2 < x) && (x == 1) && p ; // // error "Type error in logical expression"
+	///b = !(2 < x) && (x == 1 + false) && p ; // // error "Type error in arithmetic expression"
 
-	p = null;
-	p = 0; // error "Type error in affectation"
+	///p = null;	//A CORRIGER CA DEVRAIT FONCTIONNER NORMALEMENT
+	//p = 0; // error "Type error in affectation" //InvalidAffectation
 	new p;
-	new x; // error "Type error in pointer access expression"
+	//new x; // error "Type error in pointer access expression" //InvalidPointerAccess
 	p^ = 36;
-	p^ = false;
-	x^ = null; // error "Type error in pointer access expression"
+	p^ = false;		//INVALID AFFECTATION OK
+	///x^ = null; // error "Type error in pointer access expression"
 	x = p^;
 	dispose p;
-	dispose x;  // error "Type error in pointer access expression"
+	//dispose x;  // error "Type error in pointer access expression" //InvalidPointerAccess
 
 end

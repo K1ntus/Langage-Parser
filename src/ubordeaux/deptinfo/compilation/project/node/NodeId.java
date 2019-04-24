@@ -38,6 +38,7 @@ public final class NodeId extends NodeExp {
 		return name;
 	}
 	
+	
 	public Type getType() {
 		return type;
 	}

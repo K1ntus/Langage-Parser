@@ -37,9 +37,8 @@ public class Main {
 					System.out.println("\n\nArbre Principal: ");
 					System.out.println(result.toString());
 					result.toDot("data/output_tree");
-					result.toDot("\n");
-					result.toDot("Generation de code intermediaire");
-					System.out.println(result.generateIntermediateCode()); //null pointer à finir 
+					//result.toDot("\n");	//NE //FAIS //PLUS //JAMAIS //CA
+					//System.out.println(result.generateIntermediateCode()); //null pointer à finir 
 					
 					
 				} catch (beaver.Parser.Exception e) {

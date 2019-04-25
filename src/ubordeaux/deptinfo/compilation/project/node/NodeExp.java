@@ -4,9 +4,7 @@ package ubordeaux.deptinfo.compilation.project.node;
 import java.util.ArrayList;
 import java.util.List;
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Binop;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypeBoolean;
 import ubordeaux.deptinfo.compilation.project.type.TypeInt;
@@ -47,15 +45,7 @@ public abstract class NodeExp extends Node {
 		 if(size() == 0) {
 			 if(this instanceof NodeLiteral) {
 				// System.out.println("node exp a lit" + this.getClass());
-				NodeLiteral n = (NodeLiteral) this;
-				
-				if(n.getType() instanceof TypeInt) { 
-					 res = new Const((int) n.getValue());
-			 	} else if(n.getType() instanceof TypeBoolean) {
-					 res = new Const((int) n.getValue());
-				} else if(n.getType() instanceof TypeString) {
-					 res = new Const(-1);
-				}
+				 return ((NodeLiteral)this).generateIntermediateCodeLiteral();
 			 }
 			 //System.out.println(((Const)res).toString());
 		 }else {
@@ -64,12 +54,11 @@ public abstract class NodeExp extends Node {
 				 return n.generateIntermediateCodeExp();
 			 }else if (this instanceof NodeRel) {
 				 NodeRel n = (NodeRel) this;
-				 return n.generateIntermediateCodeExp();
+				 return n.generateIntermediateCodeRel();
+			 }else if (this instanceof NodeId) {
+				 Name n = ((NodeId)this).generateIntermediateCodeId();
+				 return n;
 			 }
-			 //System.out.println("Size Exp@"+this+" = " +size());
-			 //res = null;
-			 //GERER NodeOP et NodeRel
-			 //System.out.println("Left: " + this.get(0)) ;
 		 }
 		 
 		 /*

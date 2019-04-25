@@ -2,6 +2,9 @@ package ubordeaux.deptinfo.compilation.project.node;
 
 import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 import ubordeaux.deptinfo.compilation.project.type.Type;
+import ubordeaux.deptinfo.compilation.project.type.TypeBoolean;
+import ubordeaux.deptinfo.compilation.project.type.TypeInt;
+import ubordeaux.deptinfo.compilation.project.type.TypeString;
 
 public final class NodeLiteral extends NodeExp {
 
@@ -41,7 +44,7 @@ public final class NodeLiteral extends NodeExp {
 		return type;
 	}
 
-	public Move generateIntermediateCodeLiteral() {
+	public Const generateIntermediateCodeLiteral() {
 		/*//System.out.println(this.getValue().getClass().toString());
 		ExpList l = new ExpList(null, null);
 		Exp exp = l.getHead();
@@ -49,8 +52,16 @@ public final class NodeLiteral extends NodeExp {
 		//if()
 		
 		return new Move(new Temp(tmp),exp);*/
-		System.err.println("Errr");
-		return null;
+		Const res = null;
+		
+		if(this.getType() instanceof TypeInt) { 
+			 res = new Const((int) this.getValue());
+	 	} else if(this.getType() instanceof TypeBoolean) {
+			 res = new Const((int) this.getValue());
+		} else if(this.getType() instanceof TypeString) {
+			 res = new Const(-1);
+		}
+		return res;
 	}
 
 	

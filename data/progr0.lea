@@ -1,9 +1,14 @@
 var
 a: integer;
 b: integer;
-c: boolean;
+c: integer;
 
 begin
 a = 100;
-b = 2 + 9;
+b = -(36 + 45 / 7);
+c = a;
+if ( a >= 0) then
+	begin
+	a = a - 1;
+	end 
 end

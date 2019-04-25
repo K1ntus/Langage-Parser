@@ -153,7 +153,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 		
 		intermediate_code_table.put(NodeId.class, new Handler() {
 	        public void handle(Node o) {
-	            ((NodeId)o).generateIntermediateCodeMem();
+	            ((NodeId)o).generateIntermediateCodeId();
 	        }
 	    });
 		
@@ -183,7 +183,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 		
 		intermediate_code_table.put(NodeIf.class, new Handler() {
 	        public void handle(Node o) {
-	          //((NodeIf)o).generateIntermediateCodeIf();	//genere une erreur null pointer
+	          ((NodeIf)o).generateIntermediateCodeIf();	//genere une erreur null pointer
 	        }
 	    });
 		

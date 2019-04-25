@@ -3,15 +3,15 @@ a: integer;
 
 begin
 a = 100;
-//a = 5 * 2;
+a = 5 * 2;
 end
 //while (a >= 0) do
 
-//if ( a >= 0) then
-//	begin
-//	println (a);
-//	a = a - 1;
-//	end
-//end
-*/
+if ( a >= 0) then
+	begin
+	println (a);
+	a = a - 1;
+	end
+end
+
 //NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeWhile(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeLiteral#1:TypeInt_null#)))))

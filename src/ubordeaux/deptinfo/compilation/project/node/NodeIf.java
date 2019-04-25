@@ -47,20 +47,27 @@ public final class NodeIf extends Node {
 
 	
 	public Cjump generateIntermediateCodeIf() {
-		LabelLocation iftrue = new LabelLocation();
-		LabelLocation ifFalse= new LabelLocation();
-		int i;
-		Exp e1, e2;
-		if(this.getExpNode() instanceof NodeRel) {	// cas de comparaison entre 2 objects 
-			System.out.println("NodeIf évalué correctement");
-			i = ((NodeRel)this.getExpNode()).getCodeOp(); //valeur du symbol de la relation
-			e1 = (Exp)((NodeRel)this.getExpNode()).generateIntermediateCodeRel();	//genere une erreure null pointer, verifier getExpNode()
-			e2 = (Exp)((NodeRel)this.getExpNode()).generateIntermediateCodeRel();
-			return new Cjump(i, e1, e2,iftrue,ifFalse);
-		}else{
-			i = -1;	//cas d'erreur...
-		}
-		System.out.println("NodeIf non évalué correctement");
-		return new Cjump(i, null, null, iftrue,ifFalse);	//cas erreur, surement buge
-	}
+
+        LabelLocation iftrue = new LabelLocation();
+        LabelLocation ifFalse= new LabelLocation();
+        int i;
+        Exp e1, e2;
+        Binop rel = null;
+        if(this.getExpNode() instanceof NodeRel) {    // cas de comparaison entre 2 objects 
+            rel = (Binop)((NodeExp)this.getExpNode()).generateIntermediateCodeExp();
+
+            /*
+            i = ((NodeRel)this.getExpNode()).getCodeOp(); //valeur du symbol de la relation
+            e1 = (Exp)((NodeRel)this.getExpNode()).generateIntermediateCodeRel();    //genere une erreure null pointer, verifier getExpNode()
+            e2 = (Exp)((NodeRel)this.getExpNode()).generateIntermediateCodeRel();
+            */
+        }else{
+            i = -1;    //cas d'erreur...
+        }
+        //System.out.println("rel is : "+rel.toString());
+        
+    	Cjump c = new Cjump(rel.getBinop(), rel.getLeft(), rel.getRight(), iftrue, ifFalse);    //cas erreur, surement buge
+    	System.out.println(c.toString());
+    	return c;
+    }
 }

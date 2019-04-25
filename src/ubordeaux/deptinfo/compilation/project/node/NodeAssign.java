@@ -1,12 +1,7 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Binop;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Move;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Name;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Temp;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.TempValue;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 
 public final class NodeAssign extends Node {
@@ -70,14 +65,23 @@ public final class NodeAssign extends Node {
 
 
 	public Move generateIntermediateCodeAssign() {
-		Name l = ((NodeId)this.getLhs()).generateIntermediateCodeMem();
 
+		Name l = ((NodeId)this.getLhs()).generateIntermediateCodeId();
+		
 		Exp right = getRhs().generateIntermediateCodeExp();
-			
-		Move m = new Move(l, right);
-		System.out.println("* " + m.toString());
+		if(this.getRhs() instanceof NodeId) {
+			Move m = new Move(new Mem(l),((NodeId)this.getRhs()).generateIntermediateCodeId());
+			System.out.println(m.toString());
+			return m;
+		}else {
+			Move m = new Move(l, right);
+			System.out.println("* " + m.toString());
 
-		return m;
+			return m;
+
+		}
+		
+		
 	}
-
+	//return new Jump(n.getLocation(),n.getLocation());
 }

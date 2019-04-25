@@ -9,8 +9,14 @@
 
 
 * Move(NAME(a),CONST:100)
-* Move(NAME(b),BINOP(0,CONST:2,CONST:9))
+* BINOP(0,CONST:36,CONST:45)
+* BINOP(3,BINOP(0,CONST:36,CONST:45),CONST:7)
+* BINOP(2,BINOP(3,BINOP(0,CONST:36,CONST:45),CONST:7),CONST:-1)
+* Move(NAME(b),BINOP(2,BINOP(3,BINOP(0,CONST:36,CONST:45),CONST:7),CONST:-1))
+Move(MEM(NAME(c)),NAME(a))
+BINOP(13,NAME(a),CONST:0)
+CJUMP(13,NAME(a),CONST:0,L0,L1)
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeAssign(NodeId#b:TypeInt_null#, NodeOp(NodeLiteral#2:TypeInt_null#, NodeLiteral#9:TypeInt_null#)))
+NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeAssign(NodeId#b:TypeInt_null#, NodeOp(NodeOp(NodeOp(NodeLiteral#36:TypeInt_null#, NodeLiteral#45:TypeInt_null#), NodeLiteral#7:TypeInt_null#), NULL)), NodeAssign(NodeId#c:TypeInt_null#, NodeId#a:TypeInt_null#), NodeIf(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeId#a:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))))

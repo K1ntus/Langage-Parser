@@ -13,6 +13,14 @@ public class Cjump extends Stm {
 		this.iftrue = iftrue;
 		this.iffalse = iffalse;
 	}
+	
+	
+
+	public Exp getLeft() {
+		return left;
+	}
+
+
 
 	public final static int EQ = 0, NE = 1, LT = 2, GT = 3, LE = 4, GE = 5, ULT = 6, ULE = 7, UGT = 8, UGE = 9;
 
@@ -44,8 +52,8 @@ public class Cjump extends Stm {
 	}
 
 	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public String toString() {
+       // System.out.println("CJUMP("+ relop +","+ left.toString() +","+ right.toString() +","+ iftrue.toString() +","+ iffalse.toString() + ")");
+        return "CJUMP("+ relop +","+ left.toString() +","+ right.toString() +","+ iftrue.toString() +","+ iffalse.toString() + ")";
+    }
 }

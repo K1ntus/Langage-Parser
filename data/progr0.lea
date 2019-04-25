@@ -1,74 +1,14 @@
-//Custom j'ai pas verif apres le merge
-
-type
-named2 = unknown; // UnknownType
-Months = (January, February, March, April, May, June, July, August, September, October, November, December);
-
 var
-x : integer;
-x : integer; //Erreur redefinition
-month : Months;
-
-
-/*
-FUNCTION
-AND ERROR
-HANDLER
-*/
-function sum(i : integer, j : integer) : integer
-var k:integer;
-begin
-  return (i+j);
-end
-
-function sum(i : integer, j : integer) : integer	//AlreadyDefinedFunction Error
-var k:integer;
-begin
-  return (i+j);
-end
-
-function sum(i : integer, j : string) : integer		//AlreadyDefinedFunction Error
-var k:integer;
-begin
-  return i;
-end
-
-function pgcd(i : integer, j : integer) : integer
-begin
-	while (i != j) do
-		if (i > j) then
-			i = i - j;
-		else
-			j = j - i;
-  return (i);
-end
+a: integer;
+b: integer;
+c: integer;
 
 begin
-x = 100;
-
-println sum(5,5);
-
-
-/*
-TEST
-CASE:
-*/
-	switch (month) 
-		begin
-		case March, April, May:
-			println ("spring");
-		
-		case June, July, August:
-			println("summer");
-		
-		case September, October, November:
-			println("autumn");
-		
-		case February, December, January:
-			println("winter");
-			
-		default:
-			println("none");
-		end
-
+a = 100;
+b = -(36 + 45 / 7);
+c = a;
+if ( a >= 0) then
+	begin
+	a = c;
+	end 
 end

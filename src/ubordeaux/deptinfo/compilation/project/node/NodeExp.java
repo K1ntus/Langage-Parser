@@ -4,9 +4,7 @@ package ubordeaux.deptinfo.compilation.project.node;
 import java.util.ArrayList;
 import java.util.List;
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypeBoolean;
 import ubordeaux.deptinfo.compilation.project.type.TypeInt;
@@ -37,24 +35,30 @@ public abstract class NodeExp extends Node {
 	}
 	
 	
+	public NodeExp getExp(int i) {
+		return ((NodeExp) this.get(i));
+	}
+	
 	 public Exp generateIntermediateCodeExp() {
 		 //System.out.println("Size node exp assign: " + size());
 		 Exp res = null;
 		 if(size() == 0) {
 			 if(this instanceof NodeLiteral) {
-				 NodeLiteral n = (NodeLiteral) this;
-				 if(n.getType() instanceof TypeInt) {
-					 res = new Const((int) n.getValue());
-			 	} else if(n.getType() instanceof TypeBoolean) {
-					 res = new Const((int) n.getValue());
-				 } else if(n.getType() instanceof TypeString)
-					 res = new Const(-1);
+				// System.out.println("node exp a lit" + this.getClass());
+				 return ((NodeLiteral)this).generateIntermediateCodeLiteral();
 			 }
 			 //System.out.println(((Const)res).toString());
 		 }else {
-			 //GERER NodeOP et NodeRel
-			 res = null;
-			 //System.out.println("Left: " + this.get(0)) ;
+			 if (this instanceof NodeOp) {
+				 NodeOp n = (NodeOp) this;
+				 return n.generateIntermediateCodeExp();
+			 }else if (this instanceof NodeRel) {
+				 NodeRel n = (NodeRel) this;
+				 return n.generateIntermediateCodeRel();
+			 }else if (this instanceof NodeId) {
+				 Name n = ((NodeId)this).generateIntermediateCodeId();
+				 return n;
+			 }
 		 }
 		 
 		 /*

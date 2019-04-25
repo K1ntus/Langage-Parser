@@ -43,7 +43,7 @@ public final class NodeId extends NodeExp {
 		return type;
 	}
 	
-	public Name generateIntermediateCodeMem() {
+	public Name generateIntermediateCodeId() {
 		LabelLocation l = new LabelLocation(this.getName());
 		return new Name(l);
 	}

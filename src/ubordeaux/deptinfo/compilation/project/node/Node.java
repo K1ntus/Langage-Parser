@@ -88,7 +88,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 			elt.toDot(stringBuffer);
 			stringBuffer.append("node_" + this.uniqId + " -> node_" + elt.uniqId + ";\n");
 		}
-
+ 
 	}
 
 	protected String toDotNodeName() {
@@ -135,7 +135,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 	static {
 		intermediate_code_table.put(NodeOp.class, new Handler() {
 	        public void handle(Node o) {
-	            ((NodeOp)o).generateIntermediateCodeOp();
+	            ((NodeOp)o).generateIntermediateCodeExp();
 	        }
 	    });
 		
@@ -147,13 +147,14 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 		
 		intermediate_code_table.put(NodeAssign.class, new Handler() {
 	        public void handle(Node o) {
+	        	System.out.println("IN NODE OBJECT IS : " + o);
 	            ((NodeAssign)o).generateIntermediateCodeAssign();
 	        }
 	    });
 		
 		intermediate_code_table.put(NodeId.class, new Handler() {
 	        public void handle(Node o) {
-	            ((NodeId)o).generateIntermediateCodeMem();
+	            ((NodeId)o).generateIntermediateCodeId();
 	        }
 	    });
 		
@@ -183,7 +184,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 		
 		intermediate_code_table.put(NodeIf.class, new Handler() {
 	        public void handle(Node o) {
-	          //((NodeIf)o).generateIntermediateCodeIf();	//genere une erreur null pointer
+	          ((NodeIf)o).generateIntermediateCodeIf();	//genere une erreur null pointer
 	        }
 	    });
 		
@@ -255,7 +256,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 		 for (Node elt : this.elts) {
 			 
 			try {
-				handle(elt);
+				handle(this);
 			} catch (UnknownNodeType e) {
 				System.err.println("Recover From Intermediate Code Generation Error:" + e);
 			}
@@ -333,6 +334,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 			}
 					*/
 		//}
+		 System.err.println("BUUUUUUUUUULLLLSHIIIIIIIIIIIT");
 		return null;
 	}
 

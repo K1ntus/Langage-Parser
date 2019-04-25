@@ -2,29 +2,75 @@
 
 
 *************************************************
-*** Fichier data/progr1.lea
+*** Fichier data/progr0.lea
 [INFO] $$  : multiple line comment.
 [INFO] $$$ : documentation comment.
 
 
-//while (a >= 0) do
-//NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeWhile(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeLiteral#1:TypeInt_null#)))))
 
-* Move(NAME(a),constante:100)
-*** Analyse syntaxique ok
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeIf
-- NodeList well typed
-*** Typage correct
+HEEYYYYYYYYYYYY : 
+SIZE : 4
+IS THIS NODE ASSIGN
+* Move(NAME(a),CONST:100)
+NODE ASSIGN DONNE Move(NAME(a),CONST:100)
+SIZE : 4
+SIZE : 3
+HEEYYYYYYYYYYYY : 
+SIZE : 3
+IS THIS NODE ASSIGN
+* BINOP(0,CONST:36,CONST:45)
+* BINOP(3,BINOP(0,CONST:36,CONST:45),CONST:7)
+* BINOP(2,BINOP(3,BINOP(0,CONST:36,CONST:45),CONST:7),CONST:-1)
+* Move(NAME(b),BINOP(2,BINOP(3,BINOP(0,CONST:36,CONST:45),CONST:7),CONST:-1))
+NODE ASSIGN DONNE Move(NAME(b),BINOP(2,BINOP(3,BINOP(0,CONST:36,CONST:45),CONST:7),CONST:-1))
+SIZE : 3
+SIZE : 2
+HEEYYYYYYYYYYYY : 
+SIZE : 2
+IS THIS NODE ASSIGN
+* Move(MEM(NAME(c)),NAME(a))
+NODE ASSIGN DONNE Move(MEM(NAME(c)),NAME(a))
+SIZE : 2
+SIZE : 1
+HEEYYYYYYYYYYYY : 
+SIZE : 1
+BINOP(13,NAME(a),CONST:0)
+rel is : BINOP(13,NAME(a),CONST:0)
+__________________________
+HEEYYYYYYYYYYYY : 
+SIZE : 1
+IS THIS NODE ASSIGN
+* Move(MEM(NAME(a)),NAME(c))
+NODE ASSIGN DONNE Move(MEM(NAME(a)),NAME(c))
+NO IF : Q_Q
+TMP IS : NodeAssign(NodeId#a:TypeInt_null#, NodeId#c:TypeInt_null#)
+STAT IS : Move(MEM(NAME(a)),NAME(c))
+NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeId#c:TypeInt_null#)) become Move(MEM(NAME(a)),NAME(c))
+__________________________
+__________________________
+HEEYYYYYYYYYYYY : 
+SIZE : 1
+IS THIS NODE ASSIGN
+* Move(MEM(NAME(a)),NAME(c))
+NODE ASSIGN DONNE Move(MEM(NAME(a)),NAME(c))
+NO IF : Q_Q
+TMP IS : NodeAssign(NodeId#a:TypeInt_null#, NodeId#c:TypeInt_null#)
+STAT IS : Move(MEM(NAME(a)),NAME(c))
+ARG OF SEQ CONSTRUCT : Move(MEM(NAME(a)),NAME(c))
+ARG OF SEQ CONSTRUCT : Label(L0)
+ARG OF SEQ CONSTRUCT : CJUMP(13,NAME(a),CONST:0,L0,L1)
+START PRINT C
+CJUMP(13,NAME(a),CONST:0,L0,L1)
+START PRINT S C'EST LE RESULTAT QU'ON RETURN
+SEQ(CJUMP(13,NAME(a),CONST:0,L0,L1),SEQ(Label(L0),SEQ(Move(MEM(NAME(a)),NAME(c)),Label(L1))))
+NO IF : Q_Q
+TMP IS : NodeIf(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeId#c:TypeInt_null#)))
+STAT IS : SEQ(CJUMP(13,NAME(a),CONST:0,L0,L1),SEQ(Label(L0),SEQ(Move(MEM(NAME(a)),NAME(c)),Label(L1))))
+ARG OF SEQ CONSTRUCT : Move(MEM(NAME(c)),NAME(a))
+ARG OF SEQ CONSTRUCT : Move(NAME(b),BINOP(2,BINOP(3,BINOP(0,CONST:36,CONST:45),CONST:7),CONST:-1))
+ARG OF SEQ CONSTRUCT : Move(NAME(a),CONST:100)
+BUUUUUUUUUULLLLSHIIIIIIIIIIIT
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeIf(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeId#a:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))))
-
-
-Code intermediaire: 
-* Move(NAME(a),constante:100)
+NodeList(NodeIf(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeId#c:TypeInt_null#))))

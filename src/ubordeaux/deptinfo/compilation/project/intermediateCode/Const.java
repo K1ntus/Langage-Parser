@@ -10,7 +10,7 @@ public class Const extends Exp {
 
 	@Override
 	public String toString() {
-		return "constante:" + value;
+		return "CONST:" + value;
 	}
 
 }

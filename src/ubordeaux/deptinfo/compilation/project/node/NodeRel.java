@@ -1,10 +1,7 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Binop;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
-import ubordeaux.deptinfo.compilation.project.type.TypeBoolean;
-import ubordeaux.deptinfo.compilation.project.type.TypeInt;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
+import ubordeaux.deptinfo.compilation.project.type.*;
 
 public class NodeRel extends NodeExp {
 
@@ -77,8 +74,45 @@ public class NodeRel extends NodeExp {
         }
        return operation;
 	}
+	
 
 	public Binop generateIntermediateCodeRel() {
-		return new Binop(this.getCodeOp(), ((ExpList)this.getOp1().generateIntermediateCode()).getHead(), ((ExpList)this.getOp2().generateIntermediateCode()).getHead());
+		/*
+		 //Exp left = new Const (((NodeLiteral)n.get(i)).getValue());
+		 //res = new Binop(n.getCodeOp(), n.getExp(0).generateIntermediateCodeExp(), n.getExp(1).generateIntermediateCodeExp());
+		
+		 Binop op = new Binop(this.getCodeOp(), 
+				 new Const(
+						 (int) ((NodeLiteral) this.getExp(0)).getValue()
+						 ), 
+				 new Const(
+						 (int) ((NodeLiteral) this.getExp(1)).getValue()
+						 )
+				 );
+		 System.out.println("* " + op.toString());
+		 return op;
+		//return new Binop(this.getCodeOp(), ((ExpList)this.getOp1().generateIntermediateCode()).getHead(), ((ExpList)this.getOp2().generateIntermediateCode()).getHead());
+	}
+	*/
+		
+		 //GERER NodeOP et NodeRel
+		Binop res = null;
+        Exp leftexp = null;
+        Exp rightexp = null;
+        int i = this.getCodeOp();
+        if(this.getOp1() instanceof NodeLiteral) {
+        	leftexp = ((NodeLiteral)this.getOp1()).generateIntermediateCodeLiteral();;
+        }else if(this.getOp1() instanceof NodeId) {
+        	leftexp = ((NodeId)this.getOp1()).generateIntermediateCodeId();
+        }
+        if(this.getOp2() instanceof NodeLiteral) {
+        	rightexp = ((NodeLiteral)this.getOp2()).generateIntermediateCodeLiteral();
+        }else if(this.getOp2() instanceof NodeId) {
+            rightexp = ((NodeId)this.getOp2()).generateIntermediateCodeId();
+        }
+       
+        res = new Binop(i,leftexp,rightexp);
+        System.out.println(res.toString());
+        return res;
 	}
 }

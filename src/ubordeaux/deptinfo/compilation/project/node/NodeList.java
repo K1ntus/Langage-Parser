@@ -8,6 +8,8 @@ import ubordeaux.deptinfo.compilation.project.type.Type;
 
 
 import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Seq;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 
 public final class NodeList extends Node {
 
@@ -70,10 +72,27 @@ public final class NodeList extends Node {
 	}
 
 
-	public IntermediateCode generateIntermediateCodeList() {
-		for (Node elt : this.elts) {
-			return elt.generateIntermediateCode();
+	public Stm generateIntermediateCodeList() {
+		Node tmp = this.get(0);
+		Stm stat = null;
+		if(tmp instanceof NodeAssign) {
+			System.out.println("IS THIS NODE ASSIGN" );
+			stat = (Stm)((NodeAssign)tmp).generateIntermediateCodeAssign();
+		}else if (tmp instanceof NodeIf){
+			stat = (Stm)((NodeIf)tmp).generateIntermediateCodeIf();
 		}
-		return null;
+
+		if (this.size() > 1 && this.get(0) != null) {
+			System.out.println("SIZE : " + this.size());
+			this.elts.remove(0);
+			System.out.println("SIZE : " + this.size());
+
+			return new Seq(stat,this.generateIntermediateCodeList());
+		}
+		System.out.println("NO IF : Q_Q" );
+		System.out.println("TMP IS : " +  tmp);
+		System.out.println("STAT IS : " +  stat);
+
+		return stat;
 	}
 }

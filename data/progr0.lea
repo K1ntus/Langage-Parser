@@ -9,6 +9,6 @@ b = -(36 + 45 / 7);
 c = a;
 if ( a >= 0) then
 	begin
-	a = a - 1;
+	a = c;
 	end 
 end

@@ -46,10 +46,13 @@ public final class NodeIf extends Node {
 	}
 
 	
-	public Cjump generateIntermediateCodeIf() {
+	public Seq generateIntermediateCodeIf() {
 
         LabelLocation iftrue = new LabelLocation();
         LabelLocation ifFalse= new LabelLocation();
+        Label l1 = new Label(iftrue);
+        Label l2 = new Label(ifFalse);
+        		
         int i;
         Exp e1, e2;
         Binop rel = null;
@@ -67,7 +70,18 @@ public final class NodeIf extends Node {
         //System.out.println("rel is : "+rel.toString());
         
     	Cjump c = new Cjump(rel.getBinop(), rel.getLeft(), rel.getRight(), iftrue, ifFalse);    //cas erreur, surement buge
+    	
+    	System.out.println(this.getThenNode().toString());
+    	
+    	//this.getThenNode().generateIntermediateCode().toString();
+
+    	Seq s = new Seq(c, 
+    			new Seq(l1,
+    				new Seq((Stm)((NodeList)this.getThenNode()).generateIntermediateCodeList(),
+    				l2)));
+    	
     	System.out.println(c.toString());
-    	return c;
+    	System.out.println(s.toString());
+    	return s;
     }
 }

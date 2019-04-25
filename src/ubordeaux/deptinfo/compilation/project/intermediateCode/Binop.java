@@ -33,7 +33,11 @@ public class Binop extends Exp {
 	
 	@Override
 	public String toString() {
-		return "BINOP(" + binop + "," + left.toString() + "," + right.toString() + ")";
+
+		if(left != null) {
+			return "BINOP(" + binop + "," + left.toString() + "," + right.toString() + ")";
+		}
+		return "BINOP(" + binop + "," + right.toString() + ")";
 	}
 
 } 

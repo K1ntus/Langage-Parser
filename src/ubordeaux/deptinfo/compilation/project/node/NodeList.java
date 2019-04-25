@@ -8,6 +8,8 @@ import ubordeaux.deptinfo.compilation.project.type.Type;
 
 
 import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Seq;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 
 public final class NodeList extends Node {
 
@@ -70,10 +72,12 @@ public final class NodeList extends Node {
 	}
 
 
-	public IntermediateCode generateIntermediateCodeList() {
-		for (Node elt : this.elts) {
-			return elt.generateIntermediateCode();
+	public Stm generateIntermediateCodeList() {
+		if (this.size() > 1 && this.get(0) != null) {
+			Node tmp = this.get(0);
+			this.elts.remove(0);
+			return new Seq((Stm)tmp.generateIntermediateCode(),this.generateIntermediateCodeList());
 		}
-		return null;
+		return (Stm)this.generateIntermediateCode();
 	}
 }

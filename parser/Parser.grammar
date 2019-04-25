@@ -48,7 +48,7 @@
 			System.err.format(" ligne %d, colonne %d\n",
 				Symbol.getLine(token.getStart()),
 				Symbol.getColumn(token.getStart()));
-		}
+	}
 		
 	private TypeEnvironment typeEnvironment = new TypeEnvironment("types");
 	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment("procedures");
@@ -146,28 +146,45 @@
 //%typeof case_identifier_list = "IdentifierList";
 
 %typeof readln_statement, println_statement, procedure_expression = "NodeCallFct";
-%typeof procedure_head, procedure_definition = "TypeFunct";
+%typeof procedure_head = "TypeFunct";//, procedure_definition = "TypeFunct";
 
 //%typeof pop_stackenv, push_stackenv = "Void";
 
-
+%typeof procedure_definition, procedure_definition_list, procedure_definition_part = "NodeList";
 
 
 
 
 
 program=   
-	type_declaration_part.tp			//Type env
-	variable_declaration_part.vp 		//Type var
-	procedure_definition_part.pp		//Type procedure
+	type_declaration_part.tp		//Type env
+	variable_declaration_part.vp 	//Type var
+	procedure_definition_part.pp	//Type procedure
 	DEBUG_clear_useless_stack
 	//DEBUG_print_stack
-	TOKEN_BEGIN	push_stackenv.pu		//On empile stackenv
+	TOKEN_BEGIN	push_stackenv		//On empile stackenv
 	statement_list.l 				//Inserer variable dans env
-	TOKEN_END	pop_stackenv.pop 		//On depile stackenv
+	TOKEN_END	pop_stackenv	 	//On depile stackenv
 	{: 
-	l.generateIntermediateCode();
-      return _symbol_l; 
+		System.out.println("\n[C.I.] Type Declaration Part:"); 
+		System.out.println(tp);
+		
+		System.out.println("\n[C.I.] Variable Declaration Part:"); 
+		Map<String, Type> variable_table = stackEnvironment.getEnvironment().get(0);
+		for(String key : variable_table.keySet()) {
+			System.out.println("Label:" + key + "@Type:" + variable_table.get(key));
+			//Generer code intermediaire
+		}
+
+		System.out.println("\n[C.I.] Procedure Declaration Part:"); 
+		if(pp != null) {
+			System.out.println(pp);
+			pp.generateIntermediateCode();
+		}
+		
+		System.out.println("\n[C.I.] Principal Program:");
+		l.generateIntermediateCode();
+		return _symbol_l; 
     :}	
 	;
 	
@@ -359,18 +376,32 @@ identifier_list=
 /*
 Declaration AND Definition of procedure and functions
 */
+	/*
+	 * 
+	 * c) pour implementer une liste, faites comme ceci:
+	 * xxx_list=
+	 *	xxx_list.list xxx.elt {: list.add(elt); return list; :}
+	 *	| xxx.elt {: MyList list = new MyList(); list.add(elt); return list; :}
+	 *	;
+	 */
 procedure_definition_part=
 	| procedure_definition_list
 	;
 	
 procedure_definition_list=
-	procedure_definition_list procedure_definition
-	| procedure_definition	
+	procedure_definition_list.l procedure_definition.elem	
+	{: 
+		l.add(elem); 
+		return l;:}
+	| procedure_definition.elem
+	{:
+		NodeList list = new NodeList(elem); return list;
+	:}
 		
 	;
 	
 procedure_definition=
-	procedure_definition_head.type_fct block.stm {: return type_fct; :}
+	procedure_definition_head.type_fct block.stm {: return stm; :}
 		/*{: 
 			type_fct.setDefined(true);
 			stackEnvironment.getEnvironment().pop(); 
@@ -384,7 +415,7 @@ procedure_definition=
 		
 			return type_fct; 
 		:}*/
-	| procedure_declaration_head TOKEN_SEMIC		
+	| procedure_declaration_head TOKEN_SEMIC	{: return new NodeList(); :}		
 		/*{: 
 			type_fct.setDefined(false); 
 			try {

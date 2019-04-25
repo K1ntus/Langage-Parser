@@ -3,6 +3,12 @@ a: integer;
 b: integer;
 c: integer;
 
+function sum(i : integer, j : integer) : integer
+var k:integer;
+begin
+  return (i+j);
+end
+
 begin
 a = 100;
 b = -(36 + 45 / 7);

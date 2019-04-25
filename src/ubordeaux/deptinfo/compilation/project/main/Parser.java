@@ -94,7 +94,7 @@ public class Parser extends beaver.Parser {
 			System.err.format(" ligne %d, colonne %d\n",
 				Symbol.getLine(token.getStart()),
 				Symbol.getColumn(token.getStart()));
-		}
+	}
 		
 	private TypeEnvironment typeEnvironment = new TypeEnvironment("types");
 	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment("procedures");
@@ -108,20 +108,34 @@ public class Parser extends beaver.Parser {
 	public Parser() {
 		super(PARSING_TABLES);
 		actions = new Action[] {
-			new Action() {	// [0] program = type_declaration_part.tp variable_declaration_part.vp procedure_definition_part.pp DEBUG_clear_useless_stack TOKEN_BEGIN push_stackenv.pu statement_list.l TOKEN_END pop_stackenv.pop
+			new Action() {	// [0] program = type_declaration_part.tp variable_declaration_part.vp procedure_definition_part.pp DEBUG_clear_useless_stack TOKEN_BEGIN push_stackenv statement_list.l TOKEN_END pop_stackenv
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol tp = _symbols[offset + 1];
 					final Symbol vp = _symbols[offset + 2];
 					final Symbol _symbol_pp = _symbols[offset + 3];
-					final ArrayList _list_pp = (ArrayList) _symbol_pp.value;
-					final TypeFunct[] pp = _list_pp == null ? new TypeFunct[0] : (TypeFunct[]) _list_pp.toArray(new TypeFunct[_list_pp.size()]);
-					final Symbol pu = _symbols[offset + 6];
+					final NodeList pp = (NodeList) _symbol_pp.value;
 					final Symbol _symbol_l = _symbols[offset + 7];
 					final NodeList l = (NodeList) _symbol_l.value;
-					final Symbol pop = _symbols[offset + 9];
 					 
-	l.generateIntermediateCode();
-      return _symbol_l;
+		System.out.println("\n[C.I.] Type Declaration Part:"); 
+		System.out.println(tp);
+		
+		System.out.println("\n[C.I.] Variable Declaration Part:"); 
+		Map<String, Type> variable_table = stackEnvironment.getEnvironment().get(0);
+		for(String key : variable_table.keySet()) {
+			System.out.println("Label:" + key + "@Type:" + variable_table.get(key));
+			//Generer code intermediaire
+		}
+
+		System.out.println("\n[C.I.] Procedure Declaration Part:"); 
+		if(pp != null) {
+			System.out.println(pp);
+			pp.generateIntermediateCode();
+		}
+		
+		System.out.println("\n[C.I.] Principal Program:");
+		l.generateIntermediateCode();
+		return _symbol_l;
 				}
 			},
 			Action.NONE,  	// [1] type_declaration_part = 
@@ -348,14 +362,23 @@ public class Parser extends beaver.Parser {
 			},
 			Action.NONE,  	// [38] procedure_definition_part = 
 			Action.RETURN,	// [39] procedure_definition_part = procedure_definition_list
-			new Action() {	// [40] procedure_definition_list = procedure_definition_list procedure_definition
+			new Action() {	// [40] procedure_definition_list = procedure_definition_list.l procedure_definition.elem
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 2].value); return _symbols[offset + 1];
+					final Symbol _symbol_l = _symbols[offset + 1];
+					final NodeList l = (NodeList) _symbol_l.value;
+					final Symbol _symbol_elem = _symbols[offset + 2];
+					final NodeList elem = (NodeList) _symbol_elem.value;
+					 
+		l.add(elem); 
+		return l;
 				}
 			},
-			new Action() {	// [41] procedure_definition_list = procedure_definition
+			new Action() {	// [41] procedure_definition_list = procedure_definition.elem
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1].value); return new Symbol(lst);
+					final Symbol _symbol_elem = _symbols[offset + 1];
+					final NodeList elem = (NodeList) _symbol_elem.value;
+					
+		NodeList list = new NodeList(elem); return list;
 				}
 			},
 			new Action() {	// [42] procedure_definition = procedure_definition_head.type_fct block.stm
@@ -363,10 +386,14 @@ public class Parser extends beaver.Parser {
 					final Symbol type_fct = _symbols[offset + 1];
 					final Symbol _symbol_stm = _symbols[offset + 2];
 					final NodeList stm = (NodeList) _symbol_stm.value;
-					 return type_fct;
+					 return stm;
 				}
 			},
-			RETURN2,	// [43] procedure_definition = procedure_declaration_head TOKEN_SEMIC; returns 'TOKEN_SEMIC' although none is marked
+			new Action() {	// [43] procedure_definition = procedure_declaration_head TOKEN_SEMIC
+				public Symbol reduce(Symbol[] _symbols, int offset) {
+					 return new NodeList();
+				}
+			},
 			new Action() {	// [44] procedure_definition_head = procedure_head.type_fct
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_type_fct = _symbols[offset + 1];

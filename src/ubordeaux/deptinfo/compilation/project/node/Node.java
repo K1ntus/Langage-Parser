@@ -135,7 +135,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 	static {
 		intermediate_code_table.put(NodeOp.class, new Handler() {
 	        public void handle(Node o) {
-	            ((NodeOp)o).generateIntermediateCodeOp();
+	            ((NodeOp)o).generateIntermediateCodeExp();
 	        }
 	    });
 		

@@ -78,8 +78,8 @@ public class NodeOp extends NodeExp {
         }
        return operation;
 	}
-		@Override
-        public Binop generateIntermediateCodeExp() { 
+		
+        public Binop generateIntermediateCodeOp() { 
 			Binop op = null;
 			if(this.getExp(1) != null) {
 				op = new Binop(this.getCodeOp(), 

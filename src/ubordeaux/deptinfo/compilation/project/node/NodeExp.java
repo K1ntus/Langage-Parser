@@ -51,7 +51,7 @@ public abstract class NodeExp extends Node {
 		 }else {
 			 if (this instanceof NodeOp) {
 				 NodeOp n = (NodeOp) this;
-				 return n.generateIntermediateCodeExp();
+				 return n.generateIntermediateCodeOp();
 			 }else if (this instanceof NodeRel) {
 				 NodeRel n = (NodeRel) this;
 				 return n.generateIntermediateCodeRel();

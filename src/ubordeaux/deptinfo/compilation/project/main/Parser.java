@@ -112,12 +112,12 @@ public class Parser extends beaver.Parser {
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol tp = _symbols[offset + 1];
 					final Symbol vp = _symbols[offset + 2];
-					final Symbol _symbol_pp = _symbols[offset + 3];
-					final NodeList pp = (NodeList) _symbol_pp.value;
+					final Symbol pp = _symbols[offset + 3];
 					final Symbol _symbol_l = _symbols[offset + 7];
 					final NodeList l = (NodeList) _symbol_l.value;
 					 
 		System.out.println("\n[C.I.] Type Declaration Part:"); 
+		//Peut-etre juste s occuper de gerer la taille du type ici ?
 		System.out.println(tp);
 		
 		System.out.println("\n[C.I.] Variable Declaration Part:"); 
@@ -128,10 +128,10 @@ public class Parser extends beaver.Parser {
 		}
 
 		System.out.println("\n[C.I.] Procedure Declaration Part:"); 
-		if(pp != null) {
-			System.out.println(pp);
-			pp.generateIntermediateCode();
-		}
+		//if(pp != null) {
+		//	System.out.println(pp);
+		//	pp.generateIntermediateCode();
+		//}
 		
 		System.out.println("\n[C.I.] Principal Program:");
 		l.generateIntermediateCode();
@@ -362,31 +362,28 @@ public class Parser extends beaver.Parser {
 			},
 			Action.NONE,  	// [38] procedure_definition_part = 
 			Action.RETURN,	// [39] procedure_definition_part = procedure_definition_list
-			new Action() {	// [40] procedure_definition_list = procedure_definition_list.l procedure_definition.elem
+			new Action() {	// [40] procedure_definition_list = procedure_definition_list procedure_definition
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_l = _symbols[offset + 1];
-					final NodeList l = (NodeList) _symbol_l.value;
-					final Symbol _symbol_elem = _symbols[offset + 2];
-					final NodeList elem = (NodeList) _symbol_elem.value;
-					 
-		l.add(elem); 
-		return l;
+					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 2]); return _symbols[offset + 1];
 				}
 			},
-			new Action() {	// [41] procedure_definition_list = procedure_definition.elem
+			new Action() {	// [41] procedure_definition_list = procedure_definition
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_elem = _symbols[offset + 1];
-					final NodeList elem = (NodeList) _symbol_elem.value;
-					
-		NodeList list = new NodeList(elem); return list;
+					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1]); return new Symbol(lst);
 				}
 			},
 			new Action() {	// [42] procedure_definition = procedure_definition_head.type_fct block.stm
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol type_fct = _symbols[offset + 1];
+					final Symbol _symbol_type_fct = _symbols[offset + 1];
+					final TypeFunct type_fct = (TypeFunct) _symbol_type_fct.value;
 					final Symbol _symbol_stm = _symbols[offset + 2];
 					final NodeList stm = (NodeList) _symbol_stm.value;
-					 return stm;
+					 
+		System.out.println("stm: " + stm);
+		System.out.println("Label:"+type_fct.getName());
+		System.out.println(stm.generateIntermediateCode());
+		stm.generateIntermediateCode();
+		return stm;
 				}
 			},
 			new Action() {	// [43] procedure_definition = procedure_declaration_head TOKEN_SEMIC

@@ -150,8 +150,8 @@
 
 //%typeof pop_stackenv, push_stackenv = "Void";
 
-%typeof procedure_definition, procedure_definition_list, procedure_definition_part = "NodeList";
-
+//%typeof procedure_definition, procedure_definition_list, procedure_definition_part = "NodeList";
+%typeof procedure_definition_head = "TypeFunct";
 
 
 
@@ -167,6 +167,7 @@ program=
 	TOKEN_END	pop_stackenv	 	//On depile stackenv
 	{: 
 		System.out.println("\n[C.I.] Type Declaration Part:"); 
+		//Peut-etre juste s occuper de gerer la taille du type ici ?
 		System.out.println(tp);
 		
 		System.out.println("\n[C.I.] Variable Declaration Part:"); 
@@ -177,10 +178,10 @@ program=
 		}
 
 		System.out.println("\n[C.I.] Procedure Declaration Part:"); 
-		if(pp != null) {
-			System.out.println(pp);
-			pp.generateIntermediateCode();
-		}
+		//if(pp != null) {
+		//	System.out.println(pp);
+		//	pp.generateIntermediateCode();
+		//}
 		
 		System.out.println("\n[C.I.] Principal Program:");
 		l.generateIntermediateCode();
@@ -373,61 +374,27 @@ identifier_list=
 	;
 	
 	
-/*
-Declaration AND Definition of procedure and functions
-*/
-	/*
-	 * 
-	 * c) pour implementer une liste, faites comme ceci:
-	 * xxx_list=
-	 *	xxx_list.list xxx.elt {: list.add(elt); return list; :}
-	 *	| xxx.elt {: MyList list = new MyList(); list.add(elt); return list; :}
-	 *	;
-	 */
+/**
+ * PROCEDURES
+ */
 procedure_definition_part=
 	| procedure_definition_list
 	;
 	
 procedure_definition_list=
-	procedure_definition_list.l procedure_definition.elem	
-	{: 
-		l.add(elem); 
-		return l;:}
-	| procedure_definition.elem
-	{:
-		NodeList list = new NodeList(elem); return list;
-	:}
-		
+	procedure_definition_list procedure_definition	
+	| procedure_definition
 	;
 	
 procedure_definition=
-	procedure_definition_head.type_fct block.stm {: return stm; :}
-		/*{: 
-			type_fct.setDefined(true);
-			stackEnvironment.getEnvironment().pop(); 
-			try {
-				//procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
-			} catch (RedefinitionFunction e) {
-				System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
-				if(critical_mode)
-					System.exit(0);
-			}
-		
-			return type_fct; 
-		:}*/
+	procedure_definition_head.type_fct block.stm 
+	{: 
+		System.out.println("stm: " + stm);
+		System.out.println("Label:"+type_fct.getName());
+		//System.out.println(stm.generateIntermediateCode());
+		stm.generateIntermediateCode();
+		return stm; :}
 	| procedure_declaration_head TOKEN_SEMIC	{: return new NodeList(); :}		
-		/*{: 
-			type_fct.setDefined(false); 
-			try {
-				procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
-			} catch (RedefinitionFunction e) {
-				System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
-				if(critical_mode)
-					System.exit(0);
-			}
-
-			return type_fct; 
-		:}*/
 	;
 
 procedure_definition_head=

@@ -8,10 +8,13 @@
 
 
 ** Enregistre fct:sum
+stm: NodeList(NodeReturn(NodeOp(NodeId#i:TypeInt_null#, NodeId#j:TypeInt_null#)))
+Label:sum
+null
 
 
 [C.I.] Type Declaration Part:
-beaver.Symbol@1654a892
+beaver.Symbol@bf71cec
 
 [C.I.] Variable Declaration Part:
 Label:a@Type:TypeInt_null
@@ -19,7 +22,6 @@ Label:b@Type:TypeInt_null
 Label:c@Type:TypeInt_null
 
 [C.I.] Procedure Declaration Part:
-NodeList(NodeList(NodeReturn(NodeOp(NodeId#i:TypeInt_null#, NodeId#j:TypeInt_null#))))
 
 [C.I.] Principal Program:
 * Move(NAME(a),CONST:100)

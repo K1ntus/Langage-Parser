@@ -27,8 +27,8 @@ public final class NodeSwitch extends Node {
 		return this.get(0);
 	}
 
-	@Override
-	public IntermediateCode generateIntermediateCode() {
+
+	public IntermediateCode generateIntermediateCodeSwitch() {
 		// TODO Auto-generated method stub
 		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
 		return null;

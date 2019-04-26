@@ -1,0 +1,28 @@
+
+
+
+*************************************************
+*** Fichier data/progr0.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+
+
+[C.I.] Variable Declaration Part:
+Label:a@Type:TypeInt_null
+Label:b@Type:TypeInt_null
+Label:c@Type:TypeInt_null
+* Move(NAME(a),CONST:100)
+* BINOP(0,CONST:36,CONST:45)
+* BINOP(3,BINOP(0,CONST:36,CONST:45),CONST:7)
+* BINOP(2,BINOP(3,BINOP(0,CONST:36,CONST:45),CONST:7),CONST:-1)
+* Move(NAME(b),BINOP(2,BINOP(3,BINOP(0,CONST:36,CONST:45),CONST:7),CONST:-1))
+* Move(MEM(NAME(c)),NAME(a))
+BINOP(12,NAME(a),CONST:0)
+* BINOP(0,CONST:1)
+* Move(NAME(a),BINOP(0,CONST:1))
+
+
+Arbre Principal: 
+NodeList(NodeIf(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeId#a:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))))

@@ -72,13 +72,13 @@ public final class NodeAssign extends Node {
 		if(this.getRhs() instanceof NodeId) {
 			Move m = new Move(new Mem(l),((NodeId)this.getRhs()).generateIntermediateCodeId());
 			System.out.println("* " + m.toString());
-			System.out.println("NODE ASSIGN DONNE " + m);
+			//System.out.println("NODE ASSIGN DONNE " + m);
 
 			return m;
 		}else {
 			Move m = new Move(l, right);
 			System.out.println("* " + m.toString());
-			System.out.println("NODE ASSIGN DONNE " + m);
+			//System.out.println("NODE ASSIGN DONNE " + m);
 
 			return m;
 

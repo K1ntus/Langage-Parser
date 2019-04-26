@@ -7,8 +7,8 @@ begin
 a = 100;
 b = -(36 + 45 / 7);
 c = a;
-if ( a >= 0) then
+if ( a > 0) then
 	begin
-	a = c;
+	a = a + 1;
 	end 
 end

@@ -8,43 +8,37 @@
 
 
 
+
+[C.I.] Variable Declaration Part:
+Label:a@Type:TypeInt_null
+Label:b@Type:TypeInt_null
+Label:c@Type:TypeInt_null
 code intermediaire list
-IS THIS NODE ASSIGN
+code intermediaire assign
 * Move(NAME(a),CONST:100)
 NODE ASSIGN DONNE Move(NAME(a),CONST:100)
-SIZE : 4
-SIZE : 3
-IS THIS NODE ASSIGN
+code intermediaire assign
 * BINOP(0,CONST:36,CONST:45)
 * BINOP(3,BINOP(0,CONST:36,CONST:45),CONST:7)
 * BINOP(2,BINOP(3,BINOP(0,CONST:36,CONST:45),CONST:7),CONST:-1)
 * Move(NAME(b),BINOP(2,BINOP(3,BINOP(0,CONST:36,CONST:45),CONST:7),CONST:-1))
 NODE ASSIGN DONNE Move(NAME(b),BINOP(2,BINOP(3,BINOP(0,CONST:36,CONST:45),CONST:7),CONST:-1))
-SIZE : 3
-SIZE : 2
-IS THIS NODE ASSIGN
+code intermediaire assign
 * Move(MEM(NAME(c)),NAME(a))
 NODE ASSIGN DONNE Move(MEM(NAME(c)),NAME(a))
-SIZE : 2
-SIZE : 1
+class ubordeaux.deptinfo.compilation.project.node.NodeIf
 BINOP(13,NAME(a),CONST:0)
 rel is : BINOP(13,NAME(a),CONST:0)
 __________________________
-IS THIS NODE ASSIGN
+code intermediaire assign
 * Move(MEM(NAME(a)),NAME(c))
 NODE ASSIGN DONNE Move(MEM(NAME(a)),NAME(c))
-NO IF : Q_Q
-TMP IS : NodeAssign(NodeId#a:TypeInt_null#, NodeId#c:TypeInt_null#)
-STAT IS : Move(MEM(NAME(a)),NAME(c))
 NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeId#c:TypeInt_null#)) become Move(MEM(NAME(a)),NAME(c))
 __________________________
 __________________________
-IS THIS NODE ASSIGN
+code intermediaire assign
 * Move(MEM(NAME(a)),NAME(c))
 NODE ASSIGN DONNE Move(MEM(NAME(a)),NAME(c))
-NO IF : Q_Q
-TMP IS : NodeAssign(NodeId#a:TypeInt_null#, NodeId#c:TypeInt_null#)
-STAT IS : Move(MEM(NAME(a)),NAME(c))
 ARG OF SEQ CONSTRUCT : Move(MEM(NAME(a)),NAME(c))
 ARG OF SEQ CONSTRUCT : Label(L0)
 ARG OF SEQ CONSTRUCT : CJUMP(13,NAME(a),CONST:0,L0,L1)
@@ -52,9 +46,6 @@ START PRINT C
 CJUMP(13,NAME(a),CONST:0,L0,L1)
 START PRINT S C'EST LE RESULTAT QU'ON RETURN
 SEQ(CJUMP(13,NAME(a),CONST:0,L0,L1),SEQ(Label(L0),SEQ(Move(MEM(NAME(a)),NAME(c)),Label(L1))))
-NO IF : Q_Q
-TMP IS : NodeIf(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeId#c:TypeInt_null#)))
-STAT IS : SEQ(CJUMP(13,NAME(a),CONST:0,L0,L1),SEQ(Label(L0),SEQ(Move(MEM(NAME(a)),NAME(c)),Label(L1))))
 ARG OF SEQ CONSTRUCT : Move(MEM(NAME(c)),NAME(a))
 ARG OF SEQ CONSTRUCT : Move(NAME(b),BINOP(2,BINOP(3,BINOP(0,CONST:36,CONST:45),CONST:7),CONST:-1))
 ARG OF SEQ CONSTRUCT : Move(NAME(a),CONST:100)

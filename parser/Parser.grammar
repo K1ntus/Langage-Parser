@@ -166,8 +166,14 @@ program=
 	statement_list.l 				//Inserer variable dans env
 	TOKEN_END	pop_stackenv.pop 		//On depile stackenv
 	{: 
-	l.generateIntermediateCode();
-      return _symbol_l; 
+		System.out.println("\n[C.I.] Variable Declaration Part:"); 
+		Map<String, Type> variable_table = stackEnvironment.getEnvironment().get(0);
+		for(String key : variable_table.keySet()) {
+		System.out.println("Label:" + key + "@Type:" + variable_table.get(key));
+		//Generer code intermediaire
+}
+		l.generateIntermediateCode();
+	    return _symbol_l; 
     :}	
 	;
 	
@@ -370,7 +376,12 @@ procedure_definition_list=
 	;
 	
 procedure_definition=
-	procedure_definition_head.type_fct block.stm {: return type_fct; :}
+	procedure_definition_head.type_fct block.stm {:	System.out.println("stm: " + stm);
+													//System.out.println("Label:"+type_fct.getName());
+													//System.out.println(stm.generateIntermediateCode());
+													System.out.println(new Label(new LabelLocation()));
+													stm.generateIntermediateCode();
+													return stm; :}
 		/*{: 
 			type_fct.setDefined(true);
 			stackEnvironment.getEnvironment().pop(); 

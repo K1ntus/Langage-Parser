@@ -120,8 +120,14 @@ public class Parser extends beaver.Parser {
 					final NodeList l = (NodeList) _symbol_l.value;
 					final Symbol pop = _symbols[offset + 9];
 					 
-	l.generateIntermediateCode();
-      return _symbol_l;
+		System.out.println("\n[C.I.] Variable Declaration Part:"); 
+		Map<String, Type> variable_table = stackEnvironment.getEnvironment().get(0);
+		for(String key : variable_table.keySet()) {
+		System.out.println("Label:" + key + "@Type:" + variable_table.get(key));
+		//Generer code intermediaire
+}
+		l.generateIntermediateCode();
+	    return _symbol_l;
 				}
 			},
 			Action.NONE,  	// [1] type_declaration_part = 
@@ -363,7 +369,12 @@ public class Parser extends beaver.Parser {
 					final Symbol type_fct = _symbols[offset + 1];
 					final Symbol _symbol_stm = _symbols[offset + 2];
 					final NodeList stm = (NodeList) _symbol_stm.value;
-					 return type_fct;
+						System.out.println("stm: " + stm);
+													//System.out.println("Label:"+type_fct.getName());
+													//System.out.println(stm.generateIntermediateCode());
+													System.out.println(new Label(new LabelLocation()));
+													stm.generateIntermediateCode();
+													return stm;
 				}
 			},
 			RETURN2,	// [43] procedure_definition = procedure_declaration_head TOKEN_SEMIC; returns 'TOKEN_SEMIC' although none is marked

@@ -23,7 +23,6 @@ public final class NodeCaseList extends NodeExp {
 		return new NodeCaseList();
 	}
 
-	
 	public IntermediateCode generateIntermediateCodeCaseList() {
 		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
 		return null;

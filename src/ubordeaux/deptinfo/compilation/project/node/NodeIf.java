@@ -90,18 +90,12 @@ public final class NodeIf extends Node {
 		//System.out.println("in NodeIf 3 ");
 
 
+
     	Seq s = new Seq(c, 
     			new Seq(l1,
     				new Seq((Stm)((NodeList)this.getThenNode()).generateIntermediateCodeList(),
     				l2)));
-		//System.out.println("in NodeIf 4 ");
 
-    	/*
-    	System.out.println("START PRINT C");
-    	System.out.println(c.toString());
-    	System.out.println("START PRINT S C'EST LE RESULTAT QU'ON RETURN");
-    	System.out.println(s.toString())
-    	*/
     	return s;
     }
 }

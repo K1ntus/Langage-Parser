@@ -286,6 +286,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeDispose":
 					//System.out.println(this.getClass().toString());
+
 					return ((NodeDispose)this).generateIntermediateCodeNodeDispose();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeExp":
@@ -319,6 +320,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 				case "class ubordeaux.deptinfo.compilation.project.node.NodePtrAccess":
 					//System.out.println(this.getClass().toString());
 					return ((NodePtrAccess)this).generateIntermediateCodePtr();
+
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeRel":
 					//System.out.println(this.getClass().toString());
@@ -337,12 +339,10 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 					return ((NodeWhile)this).generateIntermediateCodeWhile();
 					
 				default:
-					System.err.println("Bullshit");
+					System.out.println("Pas passé dans le switch : " + this.getClass().toString());
 					return null;
 			}
-			
-			
-					
+		
 		//}
 		 
 	}

@@ -20,7 +20,7 @@ public final class NodeDispose extends Node {
 	}
 
 
-	public IntermediateCode generateIntermediateCodeNodeDispose() {
+	public IntermediateCode generateIntermediateCodeDispose() {
 		System.err.println("Node dispose en code intermediaire ?????");
 		return null;
 	}

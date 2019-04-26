@@ -1,7 +1,12 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
+<<<<<<< HEAD
 import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
+=======
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
+>>>>>>> 3e6522c761ad4c548e7835977bd713ce70d44ac7
 
 public final class NodeReturn extends NodeExp {
 

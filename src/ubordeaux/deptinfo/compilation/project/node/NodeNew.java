@@ -21,6 +21,7 @@ public final class NodeNew extends Node {
 
 	
 	public IntermediateCode generateIntermediateCodeNew() {
+		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
 		return null;
 		
 	}

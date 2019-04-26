@@ -60,13 +60,15 @@ public final class NodeWhile extends Node {
 				i = 0;
 			}
 		}
-		return new Seq(
+		
+		Seq s = new Seq(
 				new Label(debut), 
 				new Seq(new Cjump(i,(Exp)((NodeRel)this.getExp()).getOp1().generateIntermediateCode(),(Exp)((NodeRel)this.getExp()).getOp2().generateIntermediateCode(), suite, sortie),
 						new Seq(new Label(suite),
 								new Seq((Stm) this.getStm().generateIntermediateCode(), new Seq(new Jump(debut), new Label(sortie))))));
 								//ce noeud Seq du code interm doit etre modifie sur le stm de gauche
-
+	System.out.println(s.toString());
+	return s;
 	}
 	
 }

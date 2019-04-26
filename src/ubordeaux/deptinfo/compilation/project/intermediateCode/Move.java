@@ -10,7 +10,6 @@ public class Move extends Stm {
 	}
 	
 	public String toString() {
-		//System.out.println("Move(" + dst.toString() + "," + src.toString() + ")");
 		return "Move(" + dst.toString() + "," + src.toString() + ")";
 	}
 }

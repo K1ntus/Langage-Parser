@@ -232,7 +232,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 		
 		intermediate_code_table.put(NodeDispose.class, new Handler() {
 	        public void handle(Node o) {
-	          ((NodeDispose)o).generateIntermediateCodeNodeDispose();	//genere une erreur null pointer
+	          ((NodeDispose)o).generateIntermediateCodeDispose();	//genere une erreur null pointer
 	        }
 	    });	
 	}
@@ -287,7 +287,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeDispose":
 					//System.out.println(this.getClass().toString());
 
-					return ((NodeDispose)this).generateIntermediateCodeNodeDispose();
+					return ((NodeDispose)this).generateIntermediateCodeDispose();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeExp":
 					//System.out.println("code intermediaire expression");

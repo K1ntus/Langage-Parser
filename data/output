@@ -1,0 +1,24 @@
+
+
+
+*************************************************
+*** Fichier data/progr0.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+plus here
+Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: sum trouvee. at Line : 0
+[InvalidAffectation] Impossible to assign a TypeInt_null to TypeVoid
+[InvalidAffectation] Automatically recover from error.
+
+
+[C.I.] Variable Declaration Part:
+Label:a@Type:TypeInt_null
+Label:b@Type:TypeInt_null
+Label:c@Type:TypeInt_null
+SEQ(Move(NAME(a),CONST:100),SEQ(Move(NAME(b),BINOP(0,CONST:36,CONST:45)),SEQ(Move(MEM(NAME(c)),NAME(c)),SEQ(CJUMP(11,BINOP(13,NAME(a),NAME(a)),BINOP(13,NAME(a),NAME(a)),L0,L1),SEQ(Label(L0),SEQ(Move(MEM(NAME(a)),NAME(c)),Label(L1)))))))
+
+
+Arbre Principal: 
+NodeList(NodeIf(NodeRel(NodeRel(NodeId#a:TypeInt_null#, NodeRel(NodeLiteral#0:TypeInt_null#, NodeId#a:TypeInt_null#)), NodeLiteral#10:TypeInt_null#), NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeId#c:TypeInt_null#))))

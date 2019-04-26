@@ -1,6 +1,7 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
 import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 
 public final class NodeReturn extends NodeExp {
 
@@ -20,10 +21,12 @@ public final class NodeReturn extends NodeExp {
 	}
 
 
-	public ExpList generateIntermediateCode() {
+	public IntermediateCode generateIntermediateCodeRet() {
 		// TODO Auto-generated method stub
 		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		return null;
+		Temp tmp = new Temp(new TempValue());
+		
+		return new Move(tmp, this.generateIntermediateCodeExp());
 		
 	}
 }

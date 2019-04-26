@@ -41,7 +41,10 @@ public abstract class NodeExp extends Node {
 	
 	 public Exp generateIntermediateCodeExp() {
 		 //System.out.println("Size node exp assign: " + size());
-		 Exp res = null;
+		 //Exp res = null;
+		 
+		 Exp resBis = null;
+		 /*
 		 if(size() == 0) {
 			 if(this instanceof NodeLiteral) {
 				// System.out.println("node exp a lit" + this.getClass());
@@ -59,7 +62,9 @@ public abstract class NodeExp extends Node {
 				 Name n = ((NodeId)this).generateIntermediateCodeId();
 				 return n;
 			 }
-		 }
+		 }*/
+		 
+		 resBis = (Exp)this.generateIntermediateCode();
 		 
 		 /*
 	        if(this.size()>1){
@@ -75,7 +80,8 @@ public abstract class NodeExp extends Node {
 	            return  e; 
 	        }
 	        */
-	        return res;
+		 
+	        return resBis;
   
 	 }
 }

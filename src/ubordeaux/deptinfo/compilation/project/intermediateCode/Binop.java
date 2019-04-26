@@ -33,7 +33,7 @@ public class Binop extends Exp {
 	
 	@Override
 	public String toString() {
-
+		//System.out.println("IN Binop left : "+ left + " right : " + right);
 		if(left != null) {
 			return "BINOP(" + binop + "," + left.toString() + "," + right.toString() + ")";
 		}

@@ -126,7 +126,7 @@ public class Parser extends beaver.Parser {
 		System.out.println("Label:" + key + "@Type:" + variable_table.get(key));
 		//Generer code intermediaire
 }
-		l.generateIntermediateCode();
+		System.out.println(l.generateIntermediateCode().toString());
 	    return _symbol_l;
 				}
 			},
@@ -910,6 +910,7 @@ public class Parser extends beaver.Parser {
 				System.out.println("[InvalidBinaryOperation->Arithmetic] Plus: left@"+e1.getType() + ", right@"+e2.getType());
 				return new NodeOp("invalid expr", e1, e2);
 			}
+			System.out.println("plus here");
 			return new NodeOp("plus", e1, e2);
 				}
 			},

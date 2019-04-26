@@ -10,6 +10,7 @@ import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Seq;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
 
 public final class NodeList extends Node {
 
@@ -70,6 +71,20 @@ public final class NodeList extends Node {
 		}
 		return node;
 	}
+	
+	public ExpList generateIntermediateCodeListArgs() {
+		
+		Node tmp = this.get(0);
+		ExpList tail = null;
+		if (this.size() > 0 && this.get(0) != null) {
+			this.elts.remove(0);
+			return new ExpList((Exp)tmp.generateIntermediateCode(), ((NodeList)this).generateIntermediateCodeListArgs());
+		}else {
+			return new ExpList((Exp)tmp.generateIntermediateCode(), null);
+		}
+		
+		
+	}
 
 
 	public IntermediateCode generateIntermediateCodeList() {
@@ -81,7 +96,7 @@ public final class NodeList extends Node {
 			this.elts.remove(0);
 			return new Seq((Stm)stat,(Stm)this.generateIntermediateCodeList());
 		}
-
+		
 		return stat;
 	}
 }

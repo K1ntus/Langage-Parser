@@ -97,9 +97,10 @@ public class NodeRel extends NodeExp {
 		
 		 //GERER NodeOP et NodeRel
 		Binop res = null;
-        Exp leftexp = null;
-        Exp rightexp = null;
+        Exp leftexp = (Exp)this.get(0).generateIntermediateCode();
+        Exp rightexp = (Exp)this.get(0).generateIntermediateCode();
         int i = this.getCodeOp();
+        /*
         if(this.getOp1() instanceof NodeLiteral) {
         	leftexp = ((NodeLiteral)this.getOp1()).generateIntermediateCodeLiteral();;
         }else if(this.getOp1() instanceof NodeId) {
@@ -109,10 +110,10 @@ public class NodeRel extends NodeExp {
         	rightexp = ((NodeLiteral)this.getOp2()).generateIntermediateCodeLiteral();
         }else if(this.getOp2() instanceof NodeId) {
             rightexp = ((NodeId)this.getOp2()).generateIntermediateCodeId();
-        }
+        }*/
        
         res = new Binop(i,leftexp,rightexp);
-        System.out.println(res.toString());
+        //System.out.println(res.toString());
         return res;
 	}
 }

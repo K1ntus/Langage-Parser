@@ -3,11 +3,12 @@ a: integer;
 b: integer;
 c: integer;
 
+
 begin
 a = 100;
-b = -(36 + 45 / 7);
-c = a;
-if ( a >= 0) then
+b = 36 + 45;
+c = sum(2,3);
+if ( a >= 0 && a <= 10) then
 	begin
 	a = c;
 	end 

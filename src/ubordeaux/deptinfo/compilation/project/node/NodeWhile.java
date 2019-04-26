@@ -35,7 +35,7 @@ public final class NodeWhile extends Node {
 		LabelLocation sortie = new LabelLocation();
 		int i = 0;
 		if((this.getExp()).getClass().toString() == "class ubordeaux.deptinfo.compilation.project.node.NodeOp") {
-			switch(((NodeOp)this.getExp()).getName()) {
+			switch(((NodeRel)this.getExp()).getName()) {
 			case "==":
 				i = 0;
 			case "!=":

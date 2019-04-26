@@ -12,7 +12,10 @@ public class LabelLocationList {
 	
 	@Override
 	public String toString(){
-		return head.toString() + "," + tail.toString();
+		if(tail != null)
+			return head.toString() + "," + tail.toString();
+		return head.toString();
+
 	}
 	
 

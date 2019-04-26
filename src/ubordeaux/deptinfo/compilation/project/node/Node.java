@@ -265,81 +265,82 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 			
 			switch(this.getClass().toString()) {
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeArrayAccess":
-					System.out.println(this.getClass().toString());
-					return null;
+					//System.out.println(this.getClass().toString());
+					return ((NodeArrayAccess)this).generateIntermediateCodeArray();
 
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeAssign":
-					System.out.println("code intermediaire assign");
+					//System.out.println("code intermediaire assign");
 					return ((NodeAssign)this).generateIntermediateCodeAssign();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeCallFct":
-					System.out.println("intermediate code call");
+					//System.out.println("intermediate code call");
 					return ((NodeCallFct)this).generateIntermediateCodeCallFct(); //null pointer exception
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeCase":
-					System.out.println(this.getClass().toString());
-					return null;
+					//System.out.println(this.getClass().toString());
+					return ((NodeCase)this).generateIntermediateCodeCase();
+					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeCaseList":
-					System.out.println(this.getClass().toString());
-					break;
+					//System.out.println(this.getClass().toString());
+					return ((NodeCaseList)this).generateIntermediateCodeCaseList();
+					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeDispose":
-					System.out.println(this.getClass().toString());
-					break;
+					//System.out.println(this.getClass().toString());
+					return ((NodeDispose)this).generateIntermediateCodeNodeDispose();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeExp":
-					System.out.println("code intermediaire expression");
+					//System.out.println("code intermediaire expression");
 					return ((NodeExp)this).generateIntermediateCodeExp();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeId":
-					System.out.println("code intermediaire ID");
+					//System.out.println("code intermediaire ID");
 					return ((NodeId)this).generateIntermediateCodeId();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeIf":
-					System.out.println(this.getClass().toString());
+					//System.out.println(this.getClass().toString());
 					return ((NodeIf)this).generateIntermediateCodeIf();
-
 					
-				case "class ubordeaux.deptinfo.compilation.project.node.NodeInterface":
-					System.out.println(this.getClass().toString());
-					return null;
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeList":
-					System.out.println("code intermediaire list");
+					//System.out.println("code intermediaire list");
 					return ((NodeList)this).generateIntermediateCodeList();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeLiteral":
-					System.out.println(this.getClass().toString());
+					//System.out.println(this.getClass().toString());
+					return ((NodeLiteral)this).generateIntermediateCodeLiteral();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeNew":
-					System.out.println(this.getClass().toString());
-					return null;
+					//System.out.println(this.getClass().toString());
+					return ((NodeNew)this).generateIntermediateCodeNew();
+					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeOp":
-					System.out.println("code intermediaire operation");
+					//System.out.println("code intermediaire operation");
 					return ((NodeOp)this).generateIntermediateCodeOp();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodePtrAccess":
-					System.out.println(this.getClass().toString());
-					return null;
+					//System.out.println(this.getClass().toString());
+					return ((NodePtrAccess)this).generateIntermediateCodePtr();
+					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeRel":
-					System.out.println(this.getClass().toString());
-					return null;
+					//System.out.println(this.getClass().toString());
+					return ((NodeRel)this).generateIntermediateCodeRel();
+					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeReturn":
-					System.out.println(this.getClass().toString());
-					return null;
+					//System.out.println(this.getClass().toString());
+					return ((NodeReturn)this).generateIntermediateCodeRet();
+					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeSwitch":
-					System.out.println(this.getClass().toString());
-					return null;
+					//System.out.println(this.getClass().toString());
+					return ((NodeSwitch)this).generateIntermediateCodeSwitch();
+					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeWhile":
-					System.out.println("Code intermediaire while");
+					//System.out.println("Code intermediaire while");
 					return ((NodeWhile)this).generateIntermediateCodeWhile();
 					
 				default:
-					System.out.println("-_-_-_-DEFAULT-_-_-_-");		//Ca doit etre beau comme message
-					System.err.println("BUUUUUUUUUULLLLSHIIIIIIIIIIIT");
+					System.err.println("Bullshit");
 					return null;
 			}
 			
-			System.out.println("END OF CODE");
-			return null;
 			
 					
 		//}

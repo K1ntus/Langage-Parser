@@ -47,6 +47,8 @@ public final class NodeIf extends Node {
 
 	
 	public Seq generateIntermediateCodeIf() {
+		
+		//System.out.println("in NodeIf 1 ");
 
         LabelLocation iftrue = new LabelLocation();
         LabelLocation ifFalse= new LabelLocation();
@@ -56,20 +58,22 @@ public final class NodeIf extends Node {
         int i;
         Exp e1, e2;
         Binop rel = null;
-        if(this.getExpNode() instanceof NodeRel) {    // cas de comparaison entre 2 objects 
-            rel = (Binop)((NodeExp)this.getExpNode()).generateIntermediateCodeExp();
+        //if(this.getExpNode() instanceof NodeRel) {    // cas de comparaison entre 2 objects 
+        rel = (Binop)((NodeRel)this.getExpNode()).generateIntermediateCode();
 
             /*
             i = ((NodeRel)this.getExpNode()).getCodeOp(); //valeur du symbol de la relation
             e1 = (Exp)((NodeRel)this.getExpNode()).generateIntermediateCodeRel();    //genere une erreure null pointer, verifier getExpNode()
             e2 = (Exp)((NodeRel)this.getExpNode()).generateIntermediateCodeRel();
             */
-        }else{
-            i = -1;    //cas d'erreur...
-        }
+        //}else{
+          //  i = -1;    //cas d'erreur...
+       // }
+		//System.out.println("in NodeIf 2 rel is : "+rel);
+
+        /*
         System.out.println("rel is : "+rel.toString());
         
-    	Cjump c = new Cjump(rel.getBinop(), rel.getLeft(), rel.getRight(), iftrue, ifFalse);    //cas erreur, surement buge
     	
     	System.out.println("__________________________");
     	
@@ -81,16 +85,23 @@ public final class NodeIf extends Node {
     	
     	System.out.println("__________________________");
     	
+    	*/
+    	Cjump c = new Cjump(rel.getBinop(), rel.getLeft(), rel.getRight(), iftrue, ifFalse);    //cas erreur, surement buge
+		//System.out.println("in NodeIf 3 ");
+
 
     	Seq s = new Seq(c, 
     			new Seq(l1,
     				new Seq((Stm)((NodeList)this.getThenNode()).generateIntermediateCodeList(),
     				l2)));
-    	
+		//System.out.println("in NodeIf 4 ");
+
+    	/*
     	System.out.println("START PRINT C");
     	System.out.println(c.toString());
     	System.out.println("START PRINT S C'EST LE RESULTAT QU'ON RETURN");
-    	System.out.println(s.toString());
+    	System.out.println(s.toString())
+    	*/
     	return s;
     }
 }

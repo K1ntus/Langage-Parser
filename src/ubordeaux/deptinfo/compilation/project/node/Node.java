@@ -253,7 +253,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 	
 	
 	public IntermediateCode generateIntermediateCode() {
-		 for (Node elt : this.elts) {
+		// for (Node elt : this.elts) {
 			 
 			try {
 				handle(this);
@@ -261,7 +261,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 				System.err.println("Recover From Intermediate Code Generation Error:" + e);
 			}
 			
-		 }	
+		// }	
 			/*
 			switch(elt.getClass().toString()) {
 				case NodeArrayAccess.class:
@@ -332,7 +332,8 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 				default:
 					System.out.println("-_-_-_-DEFAULT-_-_-_-");		//Ca doit etre beau comme message
 			}
-					*/
+			*/
+					
 		//}
 		 System.err.println("BUUUUUUUUUULLLLSHIIIIIIIIIIIT");
 		return null;

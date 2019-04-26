@@ -73,11 +73,26 @@ public final class NodeList extends Node {
 
 
 	public Stm generateIntermediateCodeList() {
-		if (this.size() > 1 && this.get(0) != null) {
-			Node tmp = this.get(0);
-			this.elts.remove(0);
-			return new Seq((Stm)tmp.generateIntermediateCode(),this.generateIntermediateCodeList());
+		Node tmp = this.get(0);
+		Stm stat = null;
+		if(tmp instanceof NodeAssign) {
+			System.out.println("IS THIS NODE ASSIGN" );
+			stat = (Stm)((NodeAssign)tmp).generateIntermediateCodeAssign();
+		}else if (tmp instanceof NodeIf){
+			stat = (Stm)((NodeIf)tmp).generateIntermediateCodeIf();
 		}
-		return (Stm)this.generateIntermediateCode();
+
+		if (this.size() > 1 && this.get(0) != null) {
+			System.out.println("SIZE : " + this.size());
+			this.elts.remove(0);
+			System.out.println("SIZE : " + this.size());
+
+			return new Seq(stat,this.generateIntermediateCodeList());
+		}
+		System.out.println("NO IF : Q_Q" );
+		System.out.println("TMP IS : " +  tmp);
+		System.out.println("STAT IS : " +  stat);
+
+		return stat;
 	}
 }

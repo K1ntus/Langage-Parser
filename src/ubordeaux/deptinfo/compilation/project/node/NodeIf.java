@@ -67,20 +67,29 @@ public final class NodeIf extends Node {
         }else{
             i = -1;    //cas d'erreur...
         }
-        //System.out.println("rel is : "+rel.toString());
+        System.out.println("rel is : "+rel.toString());
         
     	Cjump c = new Cjump(rel.getBinop(), rel.getLeft(), rel.getRight(), iftrue, ifFalse);    //cas erreur, surement buge
     	
-    	System.out.println(this.getThenNode().toString());
+    	System.out.println("__________________________");
     	
+    	System.out.println(this.getThenNode() +" become " + ((NodeList)this.getThenNode()).generateIntermediateCodeList());
+    	
+    	System.out.println("__________________________");
+
     	//this.getThenNode().generateIntermediateCode().toString();
+    	
+    	System.out.println("__________________________");
+    	
 
     	Seq s = new Seq(c, 
     			new Seq(l1,
     				new Seq((Stm)((NodeList)this.getThenNode()).generateIntermediateCodeList(),
     				l2)));
     	
+    	System.out.println("START PRINT C");
     	System.out.println(c.toString());
+    	System.out.println("START PRINT S C'EST LE RESULTAT QU'ON RETURN");
     	System.out.println(s.toString());
     	return s;
     }

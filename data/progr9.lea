@@ -26,7 +26,7 @@ D'erreur
 */
 //range3 = 81 .. 64; //error			//InvalidType
 //range4 = Friday .. Unknown; // error	//NoSuchField
-//range5 = Friday .. Monday; // error	//InvalidType@subrange_type
+range5 = Friday .. Monday; // error	//InvalidType@subrange_type
 //range6 = Monday .. December; //error	//A GERER
 //range7 = Friday .. Tuesday; // error "range not valid" //InvalidType@subrange_type
 //range8 = Monday .. April; // error "incoherent range" //A GERER

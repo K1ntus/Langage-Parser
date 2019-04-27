@@ -48,13 +48,14 @@
 			System.err.format(" ligne %d, colonne %d\n",
 				Symbol.getLine(token.getStart()),
 				Symbol.getColumn(token.getStart()));
-		}
+	}
 		
 	private TypeEnvironment typeEnvironment = new TypeEnvironment("types");
 	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment("procedures");
 	private StackEnvironment stackEnvironment = new StackEnvironment("local variables stack");
 	private String type_declaration_name;
 	
+	private boolean verbose_mode = true;	
 	private boolean critical_mode = false;
 	
 	
@@ -146,10 +147,12 @@
 //%typeof case_identifier_list = "IdentifierList";
 
 %typeof readln_statement, println_statement, procedure_expression = "NodeCallFct";
-%typeof procedure_head, procedure_definition = "TypeFunct";
+%typeof procedure_head = "TypeFunct";//, procedure_definition = "TypeFunct";
 
 //%typeof pop_stackenv, push_stackenv = "Void";
 
+//%typeof procedure_definition, procedure_definition_list, procedure_definition_part = "NodeList";
+%typeof procedure_definition_head = "TypeFunct";
 
 
 
@@ -163,18 +166,13 @@ program=
 	DEBUG_clear_useless_stack
 	//DEBUG_print_stack
 	TOKEN_BEGIN	push_stackenv.pu		//On empile stackenv
-	statement_list.l 				//Inserer variable dans env
+	statement_list.l 					//Inserer variable dans env
 	TOKEN_END	pop_stackenv.pop 		//On depile stackenv
 	{: 
-		System.out.println("\n[C.I.] Variable Declaration Part:"); 
-		Map<String, Type> variable_table = stackEnvironment.getEnvironment().get(0);
-		for(String key : variable_table.keySet()) {
-		System.out.println("Label:" + key + "@Type:" + variable_table.get(key));
-		//Generer code intermediaire
-}
+
 		System.out.println(l.generateIntermediateCode().toString());
 	    return _symbol_l; 
-    :}	
+    :}		
 	;
 	
 /*
@@ -199,7 +197,9 @@ type_declaration=
 				//System.out.println("Registering type:" + t.toString());
 				typeEnvironment.putVariable(name, t);
 			} catch (RedefinitionType e) {
-				System.err.println(e);
+				if(verbose_mode) {
+					e.printStackTrace();
+				}
 			} finally {
 				return new EmptySymbol();
 			}
@@ -231,7 +231,7 @@ named_type=
 		try {
 			return typeEnvironment.getVariableValue(r);
 		} catch(UnknownType e) {	//Si pas deja present
-			System.err.println(e);
+			//System.err.println(e);
 			return new TypeNamed(r);
 		}
 	:}
@@ -262,7 +262,7 @@ subrange_type=
 	TOKEN_LIT_INTEGER.min TOKEN_DOTDOT TOKEN_LIT_INTEGER.max		
 		{: 	
 			if(min > max) {
-				System.err.println("[InvalidType@subrange_type] min@" + min + " is greater than max@" +max);
+				new InvalidType("@subrange_type] min@" + min + " is greater than max@" +max);
 				if(critical_mode)
 					System.exit(0);
 			}
@@ -275,15 +275,17 @@ subrange_type=
 				int val_max = typeEnvironment.getEnumType(id_max).getValue();
 
 				if(val_min > val_max) {
-					System.err.println("[InvalidType@subrange_type] min@[" + id_min + ":" + val_min + "] is greater than max@[" + id_max + ":" +val_max +"]");
+					new InvalidType("@subrange_type] min@[" + id_min + ":" + val_min + "] is greater than max@[" + id_max + ":" +val_max +"]");
 					if(critical_mode)
 						System.exit(0);
 				}
 				
 				return new TypeArrayRange(new TypeInt(val_min), new TypeInt(val_max));
 				
-			} catch (NoSuchFieldException e) {
-				System.err.println("subrange_type: " + e );
+			} catch (UnknownEnumType e) {
+				if(verbose_mode) {
+					e.printStackTrace();
+				}
 				return new TypeArrayRange(new TypeInt(0), new TypeInt(0));
 			}														
 		:}
@@ -314,7 +316,7 @@ feature_list_type=
 	;
 	
 feature_type=
-	TOKEN_IDENTIFIER.id TOKEN_COLON type.t TOKEN_SEMIC	{: System.out.println("FEATURES"); return new TypeFeature(id, t); :}
+	TOKEN_IDENTIFIER.id TOKEN_COLON type.t TOKEN_SEMIC	{: return new TypeFeature(id, t); :}
 	;
 	
 	
@@ -342,7 +344,9 @@ variable_declaration=
 																	try {
 																		stackEnvironment.add_node_to_latest_portability(str, t);
 																	}catch ( RedefinitionVariable e) {
-																		System.err.println(e + " at Line : " + Symbol.getLine(t.getStart()));
+																		if(verbose_mode) {
+																			e.printStackTrace();
+																		}
 																		if(critical_mode)
 																			System.exit(0);
 																	}
@@ -376,38 +380,12 @@ procedure_definition_list=
 	;
 	
 procedure_definition=
-	procedure_definition_head.type_fct block.stm {:	System.out.println("stm: " + stm);
-													//System.out.println("Label:"+type_fct.getName());
-													//System.out.println(stm.generateIntermediateCode());
+	procedure_definition_head.type_fct block.stm {:	
 													System.out.println(new Label(new LabelLocation()));
 													stm.generateIntermediateCode();
-													return stm; :}
-		/*{: 
-			type_fct.setDefined(true);
-			stackEnvironment.getEnvironment().pop(); 
-			try {
-				//procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
-			} catch (RedefinitionFunction e) {
-				System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
-				if(critical_mode)
-					System.exit(0);
-			}
-		
-			return type_fct; 
-		:}*/
+													return stm; 
+												 :}
 	| procedure_declaration_head TOKEN_SEMIC		
-		/*{: 
-			type_fct.setDefined(false); 
-			try {
-				procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
-			} catch (RedefinitionFunction e) {
-				System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
-				if(critical_mode)
-					System.exit(0);
-			}
-
-			return type_fct; 
-		:}*/
 	;
 
 procedure_definition_head=
@@ -417,7 +395,10 @@ procedure_definition_head=
 			type_fct.setDefined(true); 
 			procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
 		} catch (RedefinitionFunction|RedefinitionFunctionPrototype e) {
-			System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
+			//System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
+			if(verbose_mode) {
+				e.printStackTrace();
+			}
 			if(critical_mode)
 				System.exit(0);
 		}
@@ -433,6 +414,9 @@ procedure_declaration_head=
 				procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
 			} catch (RedefinitionFunction|RedefinitionFunctionPrototype e) {
 				System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
+				if(verbose_mode) {
+					e.printStackTrace();
+				}
 				if(critical_mode)
 					System.exit(0);
 			}
@@ -458,6 +442,9 @@ procedure_head=
 				
 					}catch ( RedefinitionVariable e) {
 						System.err.println(e + " at Line : " + Symbol.getLine(args.getStart()));
+						if(verbose_mode) {
+							e.printStackTrace();
+						}
 						if(critical_mode)
 							System.exit(0);
 					}
@@ -480,7 +467,10 @@ procedure_head=
 						stackEnvironment.add_node_to_latest_portability(n_id.getName(), n_id.getType());
 
 					}catch ( RedefinitionVariable e) {
-						System.err.println(e + " at Line : " + Symbol.getLine(args.getStart()));
+						//System.err.println(e + " at Line : " + Symbol.getLine(args.getStart()));
+						if(verbose_mode) {
+							e.printStackTrace();
+						}
 						if(critical_mode)
 							System.exit(0);
 					}
@@ -576,10 +566,10 @@ assignment_statement=
 			
 			//Type(e1) = Type(e2), ou Pointer(Type(e1)) = Type(e2) 
 			if(!e1.getType().equals(e2.getType()) && !(new TypePointer(e1.getType()).equals(e2.getType()) )) {
-				System.err.println("[InvalidAffectation] Impossible to assign a " + e1.getType() + " to " + e2.getType());
+				new InvalidAffectation("Impossible to assign a " + e1.getType() + " to " + e2.getType() + " at line: " + Symbol.getColumn(e1.getStart()));
 				if(critical_mode)
 					System.exit(0);
-				System.err.println("[InvalidAffectation] Automatically recover from error.");
+				System.err.println("[InvalidAffectation] Automatically recover from error." );
 				return new NodeAssign(e1,e1);
 			}
 			return new NodeAssign(e1, e2); 
@@ -591,11 +581,6 @@ procedure_statement=
 	;
 	
 	
-//NOT FINISHED
-//faudrait match si les params sont valides aussi
-//On cree un nouveau stack, et args = params
-//Semble bon a check
-	//A refaire, il faut juste instancier les parametres lors du parcours de la fonction
 procedure_expression=
 	TOKEN_IDENTIFIER.func_name TOKEN_LPAR expression_part.args TOKEN_RPAR	{: 
 																				try{
@@ -609,13 +594,20 @@ procedure_expression=
 																							TypeFeature type_feature= (TypeFeature) it.next();
 																							stackEnvironment.add_node_to_latest_portability(type_feature.getName(), type_feature.getType());	
 																						} catch (RedefinitionVariable e) {
+																							if(verbose_mode) {
+																								e.printStackTrace();
+																							}
 																							System.err.println(e);
 																						}
 																					}
 																					return new NodeCallFct(func_name, fct_type, args);
 																				
-																				}catch(NoSuchFieldException e){
-																					System.out.println("Procedure Expression: " + e + " at Line : " + Symbol.getLine(args.getStart()));
+																				}catch(UnknownProcedure e){
+																					System.err.println("[UnknownProcedure] line: " + Symbol.getColumn(args.getStart()));
+																					if(verbose_mode) {
+																						e.printStackTrace();
+																					}
+																					//System.out.println("Procedure Expression: " + e + " at Line : " + Symbol.getLine(args.getStart()));
 																					return new NodeCallFct(func_name, new TypeFunct(func_name, new TypeTuple(), new TypeVoid()), args);
 																				}
 																				
@@ -641,25 +633,11 @@ new_statement=
 	TOKEN_NEW variable_access.node TOKEN_SEMIC			
 	{: 
 		if(!(node.getType() instanceof TypePointer)) {
-			System.err.println("[InvalidPointerAccess] Trying to new a variable that is not a pointer.");
+			new InvalidPointerAccess("Trying to new a variable that is not a pointer." + " at line: " + Symbol.getColumn(node.getStart()));
 			if(critical_mode)
 				System.exit(0);
 			return node;
 		}
-		/*
-		if(node instanceof NodeId) {
-			NodeId n_id = (NodeId) node;
-			try {
-				stackEnvironment.alloc_variable(n_id.getName()); 
-			}catch(MemoryLeak e) {
-				System.err.println(e + " at Line : " + Symbol.getLine(node.getStart()));
-				if(critical_mode)
-					System.exit(0);
-				return node;
-			}
-		}
-		*/
-		
 		return new NodeNew(node); 
 	:}
 	;
@@ -670,24 +648,12 @@ dispose_statement=
 	TOKEN_DISPOSE variable_access.node TOKEN_SEMIC		
 							{: 
 								if(!(node.getType() instanceof TypePointer)) {
-									System.err.println("[InvalidPointerAccess] Trying to dispose a variable that is not a pointer.");
+									new InvalidPointerAccess("Trying to dispose a variable that is not a pointer." + " at line: " + Symbol.getColumn(node.getStart()));
 									if(critical_mode)
 										System.exit(0);
 									return node;
 								}
-								/*
-								 * if(node instanceof NodeId) {
-									NodeId n_id = (NodeId) node;
-									try {
-										stackEnvironment.dispose_variable(n_id.getName()); 
-									}catch(MemoryLeak e) {
-										System.err.println(e + " at Line : " + Symbol.getLine(node.getStart()));
-										if(critical_mode)
-											System.exit(0);
-										return node;
-									}
-								}
-								*/
+
 								return new NodeDispose(node); 
 							:}
 	;
@@ -762,35 +728,7 @@ switch_statement=
 	TOKEN_SWITCH expression.root TOKEN_BEGIN case_statement_list.case_list TOKEN_END	{: return new NodeSwitch(root, case_list);	:}
 	;
 
-/*
-
-//OK	
-case_statement_list=
-	case_statement_list.list case_statement.item	
-		{: 
-			List<Node> lst_entry = item.getList();
-			for(Node n : lst_entry) {
-				NodeCase n_case = (NodeCase) n;
-				list.add(n_case); 
-			}
-			return list; 
-		:}
-	| case_statement.list		
-	;
-	
-case_statement=
-	TOKEN_CASE identifier_list.idl TOKEN_COLON statement.st 
-		{: 
-			NodeCaseList res = new NodeCaseList();
-			for(String id : idl) {
-				res.add(new NodeCase(id, st));
-			}
-			
-			return res;
-		:}
-	| TOKEN_DEFAULT TOKEN_COLON statement.state {: return new NodeCaseList(new NodeCase(state)); :}
-	;
-*/
+//OK
 case_statement_list=
 		case_statement_list.list case_statement.case_arr case_default.case_default
 			{:
@@ -819,23 +757,23 @@ case_statement_list=
 				return list;
 			:}				
 		;
+	
+case_statement=
+	TOKEN_CASE identifier_list.id_list TOKEN_COLON statement.stm 
+		{: 
+			NodeList res = new NodeList();
+			for(String case_name : id_list) {
+				res.add(new NodeCase(case_name, stm));
+			}
+			return res;
 		
-	case_statement=
-		TOKEN_CASE identifier_list.id_list TOKEN_COLON statement.stm 
-			{: 
-				NodeList res = new NodeList();
-				for(String case_name : id_list) {
-					res.add(new NodeCase(case_name, stm));
-				}
-				return res;
-			
-			:}
-		;
-		
-	case_default=
-		/* empty */
-		| TOKEN_DEFAULT TOKEN_COLON statement.stm	{: return new NodeCase(null, stm); :}
-		;
+		:}
+	;
+	
+case_default=
+	/* empty */
+	| TOKEN_DEFAULT TOKEN_COLON statement.stm	{: return new NodeCase(null, stm); :}
+	;
 
 /*
 Expressions
@@ -857,9 +795,11 @@ variable_access=
 					}
 					return new NodeId(null, null);					
 					
-				} catch (NoSuchFieldException e2) {
+				} catch (UnknownEnumType e2) {
+					if(verbose_mode) {
+						e2.printStackTrace();
+					}
 
-					System.err.println(e2 + " at Line : ");
 					if(critical_mode)
 						System.exit(0);
 					return new NodeId(null, null);
@@ -908,18 +848,23 @@ expression=
 
 			//Gerer cas pointeur aussi
 			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
-				System.out.println("[InvalidBinaryOperation->Arithmetic] Plus: left@"+e1.getType() + ", right@"+e2.getType());
-				return new NodeOp("invalid expr", e1, e2);
+				new InvalidBinOperation("Arithmetic: left@"+e1.getType() + ", right@"+e2.getType() + " at line: " + Symbol.getColumn(e2.getStart()));
+				if(critical_mode)
+					System.exit(0);
+				else
+					return new NodeOp("invalid expr", e1, e2);
 			}
-			System.out.println("plus here");
 			return new NodeOp("plus", e1, e2); 
 		:}
 	| expression.e1 TOKEN_MINUS expression.e2
 		{: 
 			//Gerer cas pointeur aussi
 			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
-				System.out.println("[InvalidBinaryOperation->Arithmetic] Minus: left@"+e1.getType() + ", right@"+e2.getType());
-				return new NodeOp("invalid expr", e1, e2);
+				new InvalidBinOperation("Arithmetic: left@"+e1.getType() + ", right@"+e2.getType() + " at line: " + Symbol.getColumn(e2.getStart()));
+				if(critical_mode)
+					System.exit(0);
+				else
+					return new NodeOp("invalid expr", e1, e2);
 			}
 			return new NodeOp("minus", e1, e2); 
 		:}
@@ -927,17 +872,22 @@ expression=
 		{: 
 			//Gerer cas pointeur aussi
 			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
-				System.out.println("[InvalidBinaryOperation->Arithmetic] Times: left@"+e1.getType() + ", right@"+e2.getType());
-				return new NodeOp("invalid expr", e1, e2);
+				new InvalidBinOperation("Arithmetic: left@"+e1.getType() + ", right@"+e2.getType() + " at line: " + Symbol.getColumn(e2.getStart()));
+				if(critical_mode)
+					System.exit(0);
+				else
+					return new NodeOp("invalid expr", e1, e2);
 			}
 			return new NodeOp("times", e1, e2); 
 		:}
 	| expression.e1 TOKEN_DIV expression.e2
 		{: 
-			//Gerer cas pointeur aussi
 			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
-				System.out.println("[InvalidBinaryOperation->Arithmetic] Divide: left@"+e1.getType() + ", right@"+e2.getType());
-				return new NodeOp("invalid expr", e1, e2);
+				new InvalidBinOperation("Arithmetic: left@"+e1.getType() + ", right@"+e2.getType() + " at line: " + Symbol.getColumn(e2.getStart()));
+				if(critical_mode)
+					System.exit(0);
+				else
+					return new NodeOp("invalid expr", e1, e2);
 			}
 			return new NodeOp("divide", e1, e2); 
 		:}

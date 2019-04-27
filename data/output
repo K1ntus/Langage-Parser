@@ -7,18 +7,711 @@
 [INFO] $$$ : documentation comment.
 
 
-plus here
-Procedure Expression: java.lang.NoSuchFieldException: Aucune fonction: sum trouvee. at Line : 0
-[InvalidAffectation] Impossible to assign a TypeInt_null to TypeVoid
+[InvalidBinaryOperation] Arithmetic: left@TypeInt_null, right@TypeBoolean at line: 7
+[InvalidAffectation] Impossible to assign a TypeInt_null to TypeBoolean at line: 7
+[InvalidAffectation] Automatically recover from error.
+[UnknownProcedure] Aucune fonction: sum trouvee.
+[UnknownProcedure] line: 10
+fr.c12.compilator.error.UnknownProcedure
+	at fr.c12.compilator.environment.ProcedureEnvironment.getTypeFct(Unknown Source)
+	at ubordeaux.deptinfo.compilation.project.main.Parser$42.reduce(Unknown Source)
+	at ubordeaux.deptinfo.compilation.project.main.Parser.invokeReduceAction(Unknown Source)
+	at beaver.Parser.reduce(Parser.java:561)
+	at beaver.Parser.parse(Parser.java:468)
+	at beaver.Parser.parse(Parser.java:428)
+	at ubordeaux.deptinfo.compilation.project.main.Main.main(Unknown Source)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tools.ant.taskdefs.ExecuteJava.run(ExecuteJava.java:223)
+	at org.apache.tools.ant.taskdefs.ExecuteJava.execute(ExecuteJava.java:155)
+	at org.apache.tools.ant.taskdefs.Java.run(Java.java:835)
+	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:227)
+	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:135)
+	at org.apache.tools.ant.taskdefs.Java.execute(Java.java:108)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:292)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)
+	at org.apache.tools.ant.Task.perform(Task.java:350)
+	at org.apache.tools.ant.Target.execute(Target.java:448)
+	at org.apache.tools.ant.Target.performTasks(Target.java:469)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1399)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1370)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.eclipse.ant.internal.launching.remote.EclipseDefaultExecutor.executeTargets(EclipseDefaultExecutor.java:36)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1260)
+	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.run(InternalAntRunner.java:460)
+	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.main(InternalAntRunner.java:142)
+[InvalidAffectation] Impossible to assign a TypeInt_null to TypeVoid at line: 10
 [InvalidAffectation] Automatically recover from error.
 
-
-[C.I.] Variable Declaration Part:
-Label:a@Type:TypeInt_null
-Label:b@Type:TypeInt_null
-Label:c@Type:TypeInt_null
-SEQ(Move(NAME(a),CONST:100),SEQ(Move(NAME(b),BINOP(0,CONST:36,CONST:45)),SEQ(Move(MEM(NAME(c)),NAME(c)),SEQ(CJUMP(11,BINOP(13,NAME(a),NAME(a)),BINOP(13,NAME(a),NAME(a)),L0,L1),SEQ(Label(L0),SEQ(Move(MEM(NAME(a)),NAME(c)),Label(L1)))))))
+CONST:0
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeId
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeOp
+- NodeOp well typed
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeId
+- Assign well typed
+--- CheckType NodeIf
+- NodeList well typed
+*** Typage correct
 
 
 Arbre Principal: 
-NodeList(NodeIf(NodeRel(NodeRel(NodeId#a:TypeInt_null#, NodeRel(NodeLiteral#0:TypeInt_null#, NodeId#a:TypeInt_null#)), NodeLiteral#10:TypeInt_null#), NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeId#c:TypeInt_null#))))
+NodeList(NodeAssign(NodeId#b:TypeInt_null#, NodeId#b:TypeInt_null#), NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeAssign(NodeId#b:TypeInt_null#, NodeOp(NodeLiteral#36:TypeInt_null#, NodeLiteral#45:TypeInt_null#)), NodeAssign(NodeId#c:TypeInt_null#, NodeId#c:TypeInt_null#), NodeIf(NodeRel(NodeRel(NodeId#a:TypeInt_null#, NodeRel(NodeLiteral#0:TypeInt_null#, NodeId#a:TypeInt_null#)), NodeLiteral#10:TypeInt_null#), NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeId#c:TypeInt_null#))))
+
+
+
+*************************************************
+*** Fichier data/progr1.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//end
+//while (a >= 0) do
+//NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeWhile(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeLiteral#1:TypeInt_null#)))))
+
+CONST:0
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeOp
+- NodeOp well typed
+- Assign well typed
+--- CheckType NodeIf
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeLiteral#5:TypeInt_null#, NodeLiteral#2:TypeInt_null#)), NodeIf(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeId#a:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))))
+
+
+
+*************************************************
+*** Fichier data/progr2.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// gestion des variables statiques
+//
+// 0x4995F6B5
+
+CONST:0
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#))))
+
+
+
+*************************************************
+*** Fichier data/progr3.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+// gestion des variables statiques
+// gestion du tas et des pointeurs
+// 
+// 0x4995F6B5
+// 0x41
+// resize the heap
+// heap memory error
+
+CONST:0
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+--- CheckType NodeNew
+--- CheckType NodeAssign
+--- CheckType NodePtrAccess
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodePtrAccess
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeNew
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeAssign
+--- CheckType NodePtrAccess
+--- CheckType NodeId
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodePtrAccess
+- NodeCallFct well typed
+--- CheckType NodeNew
+--- CheckType NodeAssign
+--- CheckType NodePtrAccess
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodePtrAccess
+- NodeCallFct well typed
+--- CheckType NodeDispose
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodePtrAccess
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#))), NodeNew(NodeId#q:TypePointer(TypeString)#), NodeAssign(NodePtrAccess(NodeId#q:TypePointer(TypeString)#), NodeLiteral#"A":TypeString#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#q:TypePointer(TypeString)#))), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeNew(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeAssign(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#), NodeId#x:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#))), NodeNew(NodeId#r:TypePointer(TypeInt_null)#), NodeAssign(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#), NodeLiteral#65536:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#))), NodeDispose(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#))))
+
+
+
+*************************************************
+*** Fichier data/progr4.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// Structure de contrôle
+//
+//
+
+CONST:0
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeWhile
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), NodeIf(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#y:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeOp(NodeOp(NodeLiteral#1000:TypeInt_null#, NULL), NodeId#y:TypeInt_null#))), NodeAssign(NodeId#y:TypeInt_null#, NodeOp(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#))))), println_NodeCallFct(NodeList(NodeLiteral#"X":TypeString#))), NodeAssign(NodeId#x:TypeInt_null#, NodeOp(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))))
+
+
+
+*************************************************
+*** Fichier data/progr5.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+** Enregistre fct:sum
+Label(L0)
+** Enregistre fct:pgcd
+Label(L1)
+
+CONST:0
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeAssign(NodeId#x:TypeInt_null#, sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#))), println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#)))), println_NodeCallFct(NodeList(pgcd_NodeCallFct(NodeList(NodeLiteral#78:TypeInt_null#, NodeLiteral#90:TypeInt_null#)))))
+
+
+
+*************************************************
+*** Fichier data/progr6.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// gestion complexe de la pile
+// 
+** Enregistre fct:fact1
+Label(L2)
+** Enregistre fct:fact2
+Label(L3)
+** Enregistre fct:hanoi
+Label(L4)
+** Enregistre fct:impair
+** Enregistre fct:pair
+Label(L5)
+** Enregistre fct:impair
+Label(L6)
+
+CONST:0
+--- CheckType NodeList
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(println_NodeCallFct(NodeList(fact1_NodeCallFct(NodeList(NodeLiteral#6:TypeInt_null#)))), println_NodeCallFct(NodeList(fact2_NodeCallFct(NodeList(NodeLiteral#6:TypeInt_null#)))), hanoi_NodeCallFct(NodeList(NodeLiteral#"A":TypeString#, NodeLiteral#"B":TypeString#, NodeLiteral#"C":TypeString#, NodeLiteral#4:TypeInt_null#)), println_NodeCallFct(NodeList(pair_NodeCallFct(NodeList(NodeLiteral#1001:TypeInt_null#)))), println_NodeCallFct(NodeList(pair_NodeCallFct(NodeList(NodeLiteral#1000:TypeInt_null#)))))
+
+
+
+*************************************************
+*** Fichier data/progr7.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// tableaux
+// 
+
+CONST:0
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#0:TypeInt_null#), NodeLiteral#"M":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"T":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"W":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#), NodeLiteral#"X":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#4:TypeInt_null#), NodeLiteral#22:TypeInt_null#), NodeLiteral#7:TypeInt_null#), NodeLiteral#"V":TypeString#), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#4:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#))))
+
+
+
+*************************************************
+*** Fichier data/progr8.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// tableaux et enumérés
+// 
+** Enregistre types: (TypeItemEnum@SUNDAY=0, TypeItemEnum@MONDAY=1, TypeItemEnum@TUESDAY=2, TypeItemEnum@WEDNESDAY=3, TypeItemEnum@THURSDAY=4, TypeItemEnum@FRIDAY=5, TypeItemEnum@SATURDAY=6)
+** Enregistre types: (TypeItemEnum@JANUARY=0, TypeItemEnum@FEBRUARY=1, TypeItemEnum@MARCH=2, TypeItemEnum@APRIL=3, TypeItemEnum@MAY=4, TypeItemEnum@JUNE=5, TypeItemEnum@JULY=6, TypeItemEnum@AUGUST=7, TypeItemEnum@SEPTEMBER=8, TypeItemEnum@OCTOBER=9, TypeItemEnum@NOVEMBER=10, TypeItemEnum@DECEMBER=11)
+
+CONST:0
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#MONDAY:TypeInt_1#), NodeLiteral#"M":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#TUESDAY:TypeInt_2#), NodeLiteral#"T":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#WEDNESDAY:TypeInt_3#), NodeLiteral#"W":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#17:TypeInt_null#), NodeId#MARCH:TypeInt_2#), NodeLiteral#"X":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#1:TypeInt_null#), NodeId#MARCH:TypeInt_2#), NodeLiteral#"V":TypeString#), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#1:TypeInt_null#), NodeId#MARCH:TypeInt_2#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#17:TypeInt_null#), NodeId#MARCH:TypeInt_2#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#TUESDAY:TypeInt_2#))))
+
+
+
+*************************************************
+*** Fichier data/progr9.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+$$ **************************************************
+ ************************************************** $$
+$$$
+Type declaration part
+$$$
+** Enregistre types: TypeString
+** Enregistre types: TypeInt_null
+** Enregistre types: TypeBoolean
+** Retrouve types: chaine TypeString
+//named2 = unknown; // error		//UnknownType
+$$$ Enum $$$
+** Enregistre types: TypeString
+** Enregistre types: (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
+//xxx = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, aa, ab, ac, ad, ae, af, ag, ah); // error
+** Enregistre types: (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
+** Enregistre types: TypeArrayRange[TypeInt_64..TypeInt_81]
+$$ 
+Cas
+D'erreur
+$$
+//range3 = 81 .. 64; //error			//InvalidType
+//range4 = Friday .. Unknown; // error	//NoSuchField
+** Enregistre types: TypeArrayRange[TypeInt_1..TypeInt_5]
+[InvalidType@subrange_type] min@[Friday:5] is greater than max@[Monday:1]
+// error	//InvalidType@subrange_type
+//range6 = Monday .. December; //error	//A GERER
+//range7 = Friday .. Tuesday; // error "range not valid" //InvalidType@subrange_type
+//range8 = Monday .. April; // error "incoherent range" //A GERER
+$$$ Array $$$
+** Enregistre types: TypeArrayRange[TypeInt_5..TypeInt_1]
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)
+** Retrouve types: range1 TypeArrayRange[TypeInt_64..TypeInt_81]
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_64..TypeInt_81], TypeInt_null)
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeInt_null)
+** Retrouve types: DaysOfWeek (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
+$$ 
+Cas
+D'erreur
+$$
+// UNKNWOWN TYPE
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray((TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6), TypeInt_null))
+[UnknownType] type: range3 has not been defined
+// error "Range type expected"
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray(TypeNamed_range3, TypeInt_null))
+$$$ Pointers $$$
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray(TypeArrayRange[TypeInt_3..TypeInt_6], TypeInt_null))
+** Enregistre types: TypePointer(TypeInt_null)
+** Retrouve types: DaysOfWeek (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
+$$$
+Variable declaration part
+$$$
+** Enregistre types: TypePointer(TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray((TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6), TypeInt_null)))
+//x : boolean; // error "Variable x yet declared" // RedefinitionVariable
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Retrouve types: ptr1 TypePointer(TypeInt_null)
+** Retrouve types: Months (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
+** Retrouve types: range1 TypeArrayRange[TypeInt_64..TypeInt_81]
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Retrouve types: Months (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
+** Enregistre fct:goo
+//function goo(i : integer, j : integer) : boolean;//RedefinitionFunctionPrototype //error "procedure or function declared twice"
+** Enregistre fct:foo
+//result^ = hoo(i, j); // error "function not declared" //NoSuchFieldException
+Label(L7)
+** Enregistre fct:goo
+//function goo(i : integer, j : integer) : boolean begin return false; end //RedefinitionFunction // error "function already defined"
+Label(L8)
+///b = 2; // error "Type error in affectation"
+///l = m2; // error "Type error in affectation" //m2 range 4, l range 5
+///b = foo(3); // error "Type error in calling expression"			//PAS GERE Checktype invalid
+///b = foo(3, false); // error "Type error in calling expression"	//PAS GERE Checktype invalid
+///x = foo(3, 7); // error "Type error in calling expression"		//PAS GERE Checktype invalid
+///z2 [ Thursday ] = 36; // error "Type error in array access "		//PAS GERE
+//IL Y AVAIT UN CRASH ICI RIP
+//y = z [ false ]; // error "Type error in array access" // InvalidArrayAccess
+//y = z [ 4 ]; // error "Type error in affectation"			//HANDLED
+//b = z [ 4 ]; // error "Type error in affectation"			//HANDLED
+//z = k [ 4 ]; // error "Type error in affectation"			//HANDLED
+//b = z2 [ Thursday ]; // error "Type error in affectation"	//HANDLED
+///z2 = 36; // Accessible variable expected
+///b = !(2 < false) && (x == 1) && (p == null); // // error "Type error in comparison"
+///b = !(2 < x) && (x == 1) && p ; // // error "Type error in logical expression"
+///b = !(2 < x) && (x == 1 + false) && p ; // // error "Type error in arithmetic expression"
+///p = null;	//A CORRIGER CA DEVRAIT FONCTIONNER NORMALEMENT
+//p = 0; // error "Type error in affectation" //InvalidAffectation
+//new x; // error "Type error in pointer access expression" //InvalidPointerAccess
+//INVALID AFFECTATION OK
+///x^ = null; // error "Type error in pointer access expression"
+[InvalidAffectation] Impossible to assign a TypeInt_null to TypeBoolean at line: 159
+[InvalidAffectation] Automatically recover from error.
+//dispose x;  // error "Type error in pointer access expression" //InvalidPointerAccess
+
+CONST:0
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeId
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodePtrAccess
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- Assign well typed
+--- CheckType NodeIf
+--- CheckType NodeIf
+--- CheckType NodeIf
+--- CheckType NodeWhile
+--- CheckType NodeWhile
+--- CheckType NodeSwitch
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeOp
+- NodeOp well typed
+- Assign well typed
+--- CheckType NodeNew
+--- CheckType NodeAssign
+--- CheckType NodePtrAccess
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodePtrAccess
+--- CheckType NodePtrAccess
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodePtrAccess
+- Assign well typed
+--- CheckType NodeDispose
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#false:TypeBoolean#), NodeAssign(NodeId#l:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeBoolean)#, NodeId#l:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeBoolean)#), NodeAssign(NodeId#b:TypeBoolean#, NodePtrAccess(foo_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#7:TypeInt_null#)))), NodeAssign(NodeId#b:TypeBoolean#, goo_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#7:TypeInt_null#))), NodeAssign(NodeArrayAccess(NodeId#z2:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#36:TypeInt_null#), NodeAssign(NodeId#x:TypeInt_null#, NodeArrayAccess(NodeId#z2:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)#, NodeLiteral#1:TypeInt_null#)), NodeAssign(NodeId#b:TypeBoolean#, goo_NodeCallFct(NodeList(NodeArrayAccess(NodeId#z2:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#1:TypeInt_null#))), NodeIf(NodeArrayAccess(NodeId#l:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeBoolean)#, NodeId#Monday:TypeInt_1#), NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#)), NodeIf(NodeArrayAccess(NodeId#l:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeBoolean)#, NodeId#Monday:TypeInt_1#), NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#2:TypeInt_null#)), NodeIf(NodeArrayAccess(NodeId#z2:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)#, NodeLiteral#7:TypeInt_null#), NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#)), NodeWhile(NodeArrayAccess(NodeId#z2:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)#, NodeLiteral#7:TypeInt_null#), NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#)), NodeWhile(NodeArrayAccess(NodeId#z2:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)#, NodeLiteral#7:TypeInt_null#), NodeList(NodeIf(NodeArrayAccess(NodeId#l:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeBoolean)#, NodeId#Monday:TypeInt_1#), NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#2:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), readln_NodeCallFct(NodeList))), NodeSwitch(NodeId#month:(TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)#, NodeCaseList(NodeCase(println_NodeCallFct(NodeList(NodeLiteral#"spring":TypeString#))), NodeCase(println_NodeCallFct(NodeList(NodeLiteral#"spring":TypeString#))), NodeCase(println_NodeCallFct(NodeList(NodeLiteral#"spring":TypeString#))), NodeCase(println_NodeCallFct(NodeList(NodeLiteral#"summer":TypeString#))), NodeCase(println_NodeCallFct(NodeList(NodeLiteral#"summer":TypeString#))), NodeCase(println_NodeCallFct(NodeList(NodeLiteral#"summer":TypeString#))), NodeCase(println_NodeCallFct(NodeList(NodeLiteral#"autumn":TypeString#))), NodeCase(println_NodeCallFct(NodeList(NodeLiteral#"autumn":TypeString#))), NodeCase(println_NodeCallFct(NodeList(NodeLiteral#"autumn":TypeString#))), NodeCase(println_NodeCallFct(NodeList(NodeLiteral#"winter":TypeString#))), NodeCase(println_NodeCallFct(NodeList(NodeLiteral#"winter":TypeString#))), NodeCase(println_NodeCallFct(NodeList(NodeLiteral#"winter":TypeString#))), NodeCase(println_NodeCallFct(NodeList(NodeLiteral#"none":TypeString#))))), NodeAssign(NodeId#x:TypeInt_null#, NodeOp(NodeOp(NodeOp(NodeLiteral#36:TypeInt_null#, NodeLiteral#45:TypeInt_null#), NodeLiteral#7:TypeInt_null#), NULL)), NodeNew(NodeId#p:TypePointer(TypeInt_null)#), NodeAssign(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#), NodeLiteral#36:TypeInt_null#), NodeAssign(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#), NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#)), NodeAssign(NodeId#x:TypeInt_null#, NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#)), NodeDispose(NodeId#p:TypePointer(TypeInt_null)#))

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import fr.c12.compilator.error.RedefinitionFunction;
 import fr.c12.compilator.error.RedefinitionFunctionPrototype;
+import fr.c12.compilator.error.UnknownProcedure;
 import ubordeaux.deptinfo.compilation.project.type.TypeFunct;
 
 public class ProcedureEnvironment {
@@ -39,15 +40,15 @@ public class ProcedureEnvironment {
 	
 
 
-	public TypeFunct getVariableValue(String name) throws NoSuchFieldException {
+	public TypeFunct getVariableValue(String name) throws UnknownProcedure {
 		System.out.println("** Retrouve fct: " +name);
 		return getTypeFct(name);
 	}
 	
-	public TypeFunct getTypeFct(String fct_name) throws NoSuchFieldException {
+	public TypeFunct getTypeFct(String fct_name) throws UnknownProcedure {
 		if(table.get(fct_name) != null)
 			return table.get(fct_name);
-		throw new NoSuchFieldException("Aucune fonction: " + fct_name + " trouvee.");
+		throw new UnknownProcedure("Aucune fonction: " + fct_name + " trouvee.");
 	}
 	
 	

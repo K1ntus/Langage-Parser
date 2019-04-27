@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import fr.c12.compilator.error.RedefinitionType;
+import fr.c12.compilator.error.UnknownEnumType;
 import fr.c12.compilator.error.UnknownType;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypeItemEnum;
@@ -40,7 +41,7 @@ public class TypeEnvironment {
 
 	public void putVariable(String t, Type n) throws RedefinitionType{//, UnknownType {
 		if(table.get(t) != null) {
-			throw new RedefinitionType(t);
+			throw new RedefinitionType("type: " + t + " has already been registered.");
 		}
 		//if(!isTypeRegistered(n)) {
 		//	throw new UnknownType(n.toString());
@@ -52,13 +53,13 @@ public class TypeEnvironment {
 
 	public Type getVariableValue(String t) throws UnknownType {
 		if(table.get(t) == null) {
-			throw new UnknownType(t);
+			throw new UnknownType("type: " + t + " has not been defined");
 		}
 		System.out.println("** Retrouve " + name + ": " + t + " " + table.get(t));
 		return table.get(t);
 	}
 	
-	public TypeItemEnum getEnumType(String id) throws NoSuchFieldException {
+	public TypeItemEnum getEnumType(String id) throws UnknownEnumType {
 		for(Type t : table.values()) {
 			if(t instanceof TypeTuple) {
 				TypeTuple t_tuple = (TypeTuple) t;
@@ -76,7 +77,7 @@ public class TypeEnvironment {
 			}
 		}
 
-		throw new NoSuchFieldException("No Enum type containing [" + id + "] has been find");
+		throw new UnknownEnumType("No Enum type containing [" + id + "] has been find");
 	}
 	
 	

@@ -94,13 +94,14 @@ public class Parser extends beaver.Parser {
 			System.err.format(" ligne %d, colonne %d\n",
 				Symbol.getLine(token.getStart()),
 				Symbol.getColumn(token.getStart()));
-		}
+	}
 		
 	private TypeEnvironment typeEnvironment = new TypeEnvironment("types");
 	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment("procedures");
 	private StackEnvironment stackEnvironment = new StackEnvironment("local variables stack");
 	private String type_declaration_name;
 	
+	private boolean verbose_mode = true;	
 	private boolean critical_mode = false;
 
 	private final Action[] actions;
@@ -112,20 +113,13 @@ public class Parser extends beaver.Parser {
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol tp = _symbols[offset + 1];
 					final Symbol vp = _symbols[offset + 2];
-					final Symbol _symbol_pp = _symbols[offset + 3];
-					final ArrayList _list_pp = (ArrayList) _symbol_pp.value;
-					final TypeFunct[] pp = _list_pp == null ? new TypeFunct[0] : (TypeFunct[]) _list_pp.toArray(new TypeFunct[_list_pp.size()]);
+					final Symbol pp = _symbols[offset + 3];
 					final Symbol pu = _symbols[offset + 6];
 					final Symbol _symbol_l = _symbols[offset + 7];
 					final NodeList l = (NodeList) _symbol_l.value;
 					final Symbol pop = _symbols[offset + 9];
 					 
-		System.out.println("\n[C.I.] Variable Declaration Part:"); 
-		Map<String, Type> variable_table = stackEnvironment.getEnvironment().get(0);
-		for(String key : variable_table.keySet()) {
-		System.out.println("Label:" + key + "@Type:" + variable_table.get(key));
-		//Generer code intermediaire
-}
+
 		System.out.println(l.generateIntermediateCode().toString());
 	    return _symbol_l;
 				}
@@ -153,7 +147,9 @@ public class Parser extends beaver.Parser {
 				//System.out.println("Registering type:" + t.toString());
 				typeEnvironment.putVariable(name, t);
 			} catch (RedefinitionType e) {
-				System.err.println(e);
+				if(verbose_mode) {
+					e.printStackTrace();
+				}
 			} finally {
 				return new EmptySymbol();
 			}
@@ -189,7 +185,7 @@ public class Parser extends beaver.Parser {
 		try {
 			return typeEnvironment.getVariableValue(r);
 		} catch(UnknownType e) {	//Si pas deja present
-			System.err.println(e);
+			//System.err.println(e);
 			return new TypeNamed(r);
 		}
 				}
@@ -219,7 +215,7 @@ public class Parser extends beaver.Parser {
 					final Integer max = (Integer) _symbol_max.value;
 					 	
 			if(min > max) {
-				System.err.println("[InvalidType@subrange_type] min@" + min + " is greater than max@" +max);
+				new InvalidType("@subrange_type] min@" + min + " is greater than max@" +max);
 				if(critical_mode)
 					System.exit(0);
 			}
@@ -238,15 +234,17 @@ public class Parser extends beaver.Parser {
 				int val_max = typeEnvironment.getEnumType(id_max).getValue();
 
 				if(val_min > val_max) {
-					System.err.println("[InvalidType@subrange_type] min@[" + id_min + ":" + val_min + "] is greater than max@[" + id_max + ":" +val_max +"]");
+					new InvalidType("@subrange_type] min@[" + id_min + ":" + val_min + "] is greater than max@[" + id_max + ":" +val_max +"]");
 					if(critical_mode)
 						System.exit(0);
 				}
 				
 				return new TypeArrayRange(new TypeInt(val_min), new TypeInt(val_max));
 				
-			} catch (NoSuchFieldException e) {
-				System.err.println("subrange_type: " + e );
+			} catch (UnknownEnumType e) {
+				if(verbose_mode) {
+					e.printStackTrace();
+				}
 				return new TypeArrayRange(new TypeInt(0), new TypeInt(0));
 			}
 				}
@@ -299,7 +297,7 @@ public class Parser extends beaver.Parser {
 					final String id = (String) _symbol_id.value;
 					final Symbol _symbol_t = _symbols[offset + 3];
 					final Type t = (Type) _symbol_t.value;
-					 System.out.println("FEATURES"); return new TypeFeature(id, t);
+					 return new TypeFeature(id, t);
 				}
 			},
 			Action.NONE,  	// [31] variable_declaration_part = 
@@ -325,7 +323,9 @@ public class Parser extends beaver.Parser {
 																	try {
 																		stackEnvironment.add_node_to_latest_portability(str, t);
 																	}catch ( RedefinitionVariable e) {
-																		System.err.println(e + " at Line : " + Symbol.getLine(t.getStart()));
+																		if(verbose_mode) {
+																			e.printStackTrace();
+																		}
 																		if(critical_mode)
 																			System.exit(0);
 																	}
@@ -356,22 +356,21 @@ public class Parser extends beaver.Parser {
 			Action.RETURN,	// [39] procedure_definition_part = procedure_definition_list
 			new Action() {	// [40] procedure_definition_list = procedure_definition_list procedure_definition
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 2].value); return _symbols[offset + 1];
+					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 2]); return _symbols[offset + 1];
 				}
 			},
 			new Action() {	// [41] procedure_definition_list = procedure_definition
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1].value); return new Symbol(lst);
+					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1]); return new Symbol(lst);
 				}
 			},
 			new Action() {	// [42] procedure_definition = procedure_definition_head.type_fct block.stm
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol type_fct = _symbols[offset + 1];
+					final Symbol _symbol_type_fct = _symbols[offset + 1];
+					final TypeFunct type_fct = (TypeFunct) _symbol_type_fct.value;
 					final Symbol _symbol_stm = _symbols[offset + 2];
 					final NodeList stm = (NodeList) _symbol_stm.value;
-						System.out.println("stm: " + stm);
-													//System.out.println("Label:"+type_fct.getName());
-													//System.out.println(stm.generateIntermediateCode());
+						
 													System.out.println(new Label(new LabelLocation()));
 													stm.generateIntermediateCode();
 													return stm;
@@ -387,7 +386,10 @@ public class Parser extends beaver.Parser {
 			type_fct.setDefined(true); 
 			procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
 		} catch (RedefinitionFunction|RedefinitionFunctionPrototype e) {
-			System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
+			//System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
+			if(verbose_mode) {
+				e.printStackTrace();
+			}
 			if(critical_mode)
 				System.exit(0);
 		}
@@ -404,6 +406,9 @@ public class Parser extends beaver.Parser {
 				procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
 			} catch (RedefinitionFunction|RedefinitionFunctionPrototype e) {
 				System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
+				if(verbose_mode) {
+					e.printStackTrace();
+				}
 				if(critical_mode)
 					System.exit(0);
 			}
@@ -428,6 +433,9 @@ public class Parser extends beaver.Parser {
 				
 					}catch ( RedefinitionVariable e) {
 						System.err.println(e + " at Line : " + Symbol.getLine(args.getStart()));
+						if(verbose_mode) {
+							e.printStackTrace();
+						}
 						if(critical_mode)
 							System.exit(0);
 					}
@@ -457,7 +465,10 @@ public class Parser extends beaver.Parser {
 						stackEnvironment.add_node_to_latest_portability(n_id.getName(), n_id.getType());
 
 					}catch ( RedefinitionVariable e) {
-						System.err.println(e + " at Line : " + Symbol.getLine(args.getStart()));
+						//System.err.println(e + " at Line : " + Symbol.getLine(args.getStart()));
+						if(verbose_mode) {
+							e.printStackTrace();
+						}
 						if(critical_mode)
 							System.exit(0);
 					}
@@ -565,10 +576,10 @@ public class Parser extends beaver.Parser {
 			
 			//Type(e1) = Type(e2), ou Pointer(Type(e1)) = Type(e2) 
 			if(!e1.getType().equals(e2.getType()) && !(new TypePointer(e1.getType()).equals(e2.getType()) )) {
-				System.err.println("[InvalidAffectation] Impossible to assign a " + e1.getType() + " to " + e2.getType());
+				new InvalidAffectation("Impossible to assign a " + e1.getType() + " to " + e2.getType() + " at line: " + Symbol.getColumn(e1.getStart()));
 				if(critical_mode)
 					System.exit(0);
-				System.err.println("[InvalidAffectation] Automatically recover from error.");
+				System.err.println("[InvalidAffectation] Automatically recover from error." );
 				return new NodeAssign(e1,e1);
 			}
 			return new NodeAssign(e1, e2);
@@ -599,13 +610,20 @@ public class Parser extends beaver.Parser {
 																							TypeFeature type_feature= (TypeFeature) it.next();
 																							stackEnvironment.add_node_to_latest_portability(type_feature.getName(), type_feature.getType());	
 																						} catch (RedefinitionVariable e) {
+																							if(verbose_mode) {
+																								e.printStackTrace();
+																							}
 																							System.err.println(e);
 																						}
 																					}
 																					return new NodeCallFct(func_name, fct_type, args);
 																				
-																				}catch(NoSuchFieldException e){
-																					System.out.println("Procedure Expression: " + e + " at Line : " + Symbol.getLine(args.getStart()));
+																				}catch(UnknownProcedure e){
+																					System.err.println("[UnknownProcedure] line: " + Symbol.getColumn(args.getStart()));
+																					if(verbose_mode) {
+																						e.printStackTrace();
+																					}
+																					//System.out.println("Procedure Expression: " + e + " at Line : " + Symbol.getLine(args.getStart()));
 																					return new NodeCallFct(func_name, new TypeFunct(func_name, new TypeTuple(), new TypeVoid()), args);
 																				}
 				}
@@ -634,25 +652,11 @@ public class Parser extends beaver.Parser {
 					final NodeExp node = (NodeExp) _symbol_node.value;
 					 
 		if(!(node.getType() instanceof TypePointer)) {
-			System.err.println("[InvalidPointerAccess] Trying to new a variable that is not a pointer.");
+			new InvalidPointerAccess("Trying to new a variable that is not a pointer." + " at line: " + Symbol.getColumn(node.getStart()));
 			if(critical_mode)
 				System.exit(0);
 			return node;
 		}
-		/*
-		if(node instanceof NodeId) {
-			NodeId n_id = (NodeId) node;
-			try {
-				stackEnvironment.alloc_variable(n_id.getName()); 
-			}catch(MemoryLeak e) {
-				System.err.println(e + " at Line : " + Symbol.getLine(node.getStart()));
-				if(critical_mode)
-					System.exit(0);
-				return node;
-			}
-		}
-		*/
-		
 		return new NodeNew(node);
 				}
 			},
@@ -662,24 +666,12 @@ public class Parser extends beaver.Parser {
 					final NodeExp node = (NodeExp) _symbol_node.value;
 					 
 								if(!(node.getType() instanceof TypePointer)) {
-									System.err.println("[InvalidPointerAccess] Trying to dispose a variable that is not a pointer.");
+									new InvalidPointerAccess("Trying to dispose a variable that is not a pointer." + " at line: " + Symbol.getColumn(node.getStart()));
 									if(critical_mode)
 										System.exit(0);
 									return node;
 								}
-								/*
-								 * if(node instanceof NodeId) {
-									NodeId n_id = (NodeId) node;
-									try {
-										stackEnvironment.dispose_variable(n_id.getName()); 
-									}catch(MemoryLeak e) {
-										System.err.println(e + " at Line : " + Symbol.getLine(node.getStart()));
-										if(critical_mode)
-											System.exit(0);
-										return node;
-									}
-								}
-								*/
+
 								return new NodeDispose(node);
 				}
 			},
@@ -812,11 +804,11 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_stm = _symbols[offset + 4];
 					final Node stm = (Node) _symbol_stm.value;
 					 
-				NodeList res = new NodeList();
-				for(String case_name : id_list) {
-					res.add(new NodeCase(case_name, stm));
-				}
-				return res;
+			NodeList res = new NodeList();
+			for(String case_name : id_list) {
+				res.add(new NodeCase(case_name, stm));
+			}
+			return res;
 				}
 			},
 			Action.NONE,  	// [91] case_default = 
@@ -844,9 +836,11 @@ public class Parser extends beaver.Parser {
 					}
 					return new NodeId(null, null);					
 					
-				} catch (NoSuchFieldException e2) {
+				} catch (UnknownEnumType e2) {
+					if(verbose_mode) {
+						e2.printStackTrace();
+					}
 
-					System.err.println(e2 + " at Line : ");
 					if(critical_mode)
 						System.exit(0);
 					return new NodeId(null, null);
@@ -907,10 +901,12 @@ public class Parser extends beaver.Parser {
 
 			//Gerer cas pointeur aussi
 			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
-				System.out.println("[InvalidBinaryOperation->Arithmetic] Plus: left@"+e1.getType() + ", right@"+e2.getType());
-				return new NodeOp("invalid expr", e1, e2);
+				new InvalidBinOperation("Arithmetic: left@"+e1.getType() + ", right@"+e2.getType() + " at line: " + Symbol.getColumn(e2.getStart()));
+				if(critical_mode)
+					System.exit(0);
+				else
+					return new NodeOp("invalid expr", e1, e2);
 			}
-			System.out.println("plus here");
 			return new NodeOp("plus", e1, e2);
 				}
 			},
@@ -923,8 +919,11 @@ public class Parser extends beaver.Parser {
 					 
 			//Gerer cas pointeur aussi
 			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
-				System.out.println("[InvalidBinaryOperation->Arithmetic] Minus: left@"+e1.getType() + ", right@"+e2.getType());
-				return new NodeOp("invalid expr", e1, e2);
+				new InvalidBinOperation("Arithmetic: left@"+e1.getType() + ", right@"+e2.getType() + " at line: " + Symbol.getColumn(e2.getStart()));
+				if(critical_mode)
+					System.exit(0);
+				else
+					return new NodeOp("invalid expr", e1, e2);
 			}
 			return new NodeOp("minus", e1, e2);
 				}
@@ -938,8 +937,11 @@ public class Parser extends beaver.Parser {
 					 
 			//Gerer cas pointeur aussi
 			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
-				System.out.println("[InvalidBinaryOperation->Arithmetic] Times: left@"+e1.getType() + ", right@"+e2.getType());
-				return new NodeOp("invalid expr", e1, e2);
+				new InvalidBinOperation("Arithmetic: left@"+e1.getType() + ", right@"+e2.getType() + " at line: " + Symbol.getColumn(e2.getStart()));
+				if(critical_mode)
+					System.exit(0);
+				else
+					return new NodeOp("invalid expr", e1, e2);
 			}
 			return new NodeOp("times", e1, e2);
 				}
@@ -951,10 +953,12 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_e2 = _symbols[offset + 3];
 					final NodeExp e2 = (NodeExp) _symbol_e2.value;
 					 
-			//Gerer cas pointeur aussi
 			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
-				System.out.println("[InvalidBinaryOperation->Arithmetic] Divide: left@"+e1.getType() + ", right@"+e2.getType());
-				return new NodeOp("invalid expr", e1, e2);
+				new InvalidBinOperation("Arithmetic: left@"+e1.getType() + ", right@"+e2.getType() + " at line: " + Symbol.getColumn(e2.getStart()));
+				if(critical_mode)
+					System.exit(0);
+				else
+					return new NodeOp("invalid expr", e1, e2);
 			}
 			return new NodeOp("divide", e1, e2);
 				}

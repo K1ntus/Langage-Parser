@@ -58,7 +58,7 @@
 	private boolean verbose_mode = true;	
 	private boolean critical_mode = false;
 
-	private boolean generate_intermediate_code = true;
+	private boolean generate_intermediate_code = false;
 	
 	
 :};
@@ -171,7 +171,6 @@ program=
 	statement_list.l 					//Inserer variable dans env
 	TOKEN_END	pop_stackenv.pop 		//On depile stackenv
 	{: 
-
 		if(generate_intermediate_code)
 			System.out.println(l.generateIntermediateCode().toString());
 	    return _symbol_l; 
@@ -265,7 +264,10 @@ subrange_type=
 	TOKEN_LIT_INTEGER.min TOKEN_DOTDOT TOKEN_LIT_INTEGER.max		
 		{: 	
 			if(min > max) {
-				new InvalidType("@subrange_type] min@" + min + " is greater than max@" +max);
+				InvalidType e = new InvalidType("@subrange_type] min@" + min + " is greater than max@" +max);
+				if(verbose_mode) {
+					e.printStackTrace();
+				}
 				if(critical_mode)
 					System.exit(0);
 			}
@@ -278,7 +280,10 @@ subrange_type=
 				int val_max = typeEnvironment.getEnumType(id_max).getValue();
 
 				if(val_min > val_max) {
-					new InvalidType("@subrange_type] min@[" + id_min + ":" + val_min + "] is greater than max@[" + id_max + ":" +val_max +"]");
+					InvalidType e = new InvalidType("@subrange_type] min@[" + id_min + ":" + val_min + "] is greater than max@[" + id_max + ":" +val_max +"]");
+					if(verbose_mode) {
+						e.printStackTrace();
+					}
 					if(critical_mode)
 						System.exit(0);
 				}
@@ -383,15 +388,16 @@ procedure_definition_list=
 	;
 	
 procedure_definition=
-	procedure_definition_head.type_fct block.stm {:	
+	procedure_definition_head.type_fct block.stm 
+	{:	
 
-													if(generate_intermediate_code) {
-														System.out.println(new Label(new LabelLocation()));
-														stm.generateIntermediateCode();
-													}
-				stackEnvironment.getEnvironment().pop();
-													return stm; 
-												 :}
+		if(generate_intermediate_code) {
+			System.out.println(new Label(new LabelLocation()));
+			stm.generateIntermediateCode();
+		}
+		stackEnvironment.getEnvironment().pop();
+		return stm; 
+	 :}
 	| procedure_declaration_head TOKEN_SEMIC		
 	;
 
@@ -577,7 +583,10 @@ assignment_statement=
 			
 			//Type(e1) = Type(e2), ou Pointer(Type(e1)) = Type(e2) 
 			if(!e1.getType().equals(e2.getType()) && !(new TypePointer(e1.getType()).equals(e2.getType()) )) {
-				new InvalidAffectation("Impossible to assign a " + e1.getType() + " to " + e2.getType() + " at line: " + Symbol.getColumn(e1.getStart()));
+				InvalidAffectation e = new InvalidAffectation("Impossible to assign a " + e1.getType() + " to " + e2.getType() + " at line: " + Symbol.getColumn(e1.getStart()));
+				if(verbose_mode) {
+					e.printStackTrace();
+				}
 				if(critical_mode)
 					System.exit(0);
 				System.err.println("[InvalidAffectation] Automatically recover from error." );
@@ -615,6 +624,9 @@ procedure_expression=
 																				
 																				}catch(UnknownProcedure e){
 																					System.err.println("[UnknownProcedure] line: " + Symbol.getColumn(args.getStart()));
+																					/*if(verbose_mode) {
+																						e.printStackTrace();
+																					}*/
 																					if(verbose_mode) {
 																						e.printStackTrace();
 																					}
@@ -644,7 +656,10 @@ new_statement=
 	TOKEN_NEW variable_access.node TOKEN_SEMIC			
 	{: 
 		if(!(node.getType() instanceof TypePointer)) {
-			new InvalidPointerAccess("Trying to new a variable that is not a pointer." + " at line: " + Symbol.getColumn(node.getStart()));
+			InvalidPointerAccess e = new InvalidPointerAccess("Trying to new a variable that is not a pointer." + " at line: " + Symbol.getColumn(node.getStart()));
+			if(verbose_mode) {
+				e.printStackTrace();
+			}
 			if(critical_mode)
 				System.exit(0);
 			return node;
@@ -659,7 +674,10 @@ dispose_statement=
 	TOKEN_DISPOSE variable_access.node TOKEN_SEMIC		
 							{: 
 								if(!(node.getType() instanceof TypePointer)) {
-									new InvalidPointerAccess("Trying to dispose a variable that is not a pointer." + " at line: " + Symbol.getColumn(node.getStart()));
+									InvalidPointerAccess e = new InvalidPointerAccess("Trying to dispose a variable that is not a pointer." + " at line: " + Symbol.getColumn(node.getStart()));
+									if(verbose_mode) {
+										e.printStackTrace();
+									}
 									if(critical_mode)
 										System.exit(0);
 									return node;
@@ -859,7 +877,10 @@ expression=
 
 			//Gerer cas pointeur aussi
 			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
-				new InvalidBinOperation("Arithmetic: left@"+e1.getType() + ", right@"+e2.getType() + " at line: " + Symbol.getColumn(e2.getStart()));
+				InvalidBinOperation e = new InvalidBinOperation("Arithmetic: left@"+e1.getType() + ", right@"+e2.getType() + " at line: " + Symbol.getColumn(e2.getStart()));
+				if(verbose_mode) {
+					e.printStackTrace();
+				}
 				if(critical_mode)
 					System.exit(0);
 				else
@@ -871,7 +892,10 @@ expression=
 		{: 
 			//Gerer cas pointeur aussi
 			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
-				new InvalidBinOperation("Arithmetic: left@"+e1.getType() + ", right@"+e2.getType() + " at line: " + Symbol.getColumn(e2.getStart()));
+				InvalidBinOperation e = new InvalidBinOperation("Arithmetic: left@"+e1.getType() + ", right@"+e2.getType() + " at line: " + Symbol.getColumn(e2.getStart()));
+				if(verbose_mode) {
+					e.printStackTrace();
+				}
 				if(critical_mode)
 					System.exit(0);
 				else
@@ -883,7 +907,10 @@ expression=
 		{: 
 			//Gerer cas pointeur aussi
 			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
-				new InvalidBinOperation("Arithmetic: left@"+e1.getType() + ", right@"+e2.getType() + " at line: " + Symbol.getColumn(e2.getStart()));
+				InvalidBinOperation e = new InvalidBinOperation("Arithmetic: left@"+e1.getType() + ", right@"+e2.getType() + " at line: " + Symbol.getColumn(e2.getStart()));
+				if(verbose_mode) {
+					e.printStackTrace();
+				}
 				if(critical_mode)
 					System.exit(0);
 				else
@@ -894,7 +921,10 @@ expression=
 	| expression.e1 TOKEN_DIV expression.e2
 		{: 
 			if(!(e1.getType() instanceof TypeInt) || !(e2.getType() instanceof TypeInt)) {
-				new InvalidBinOperation("Arithmetic: left@"+e1.getType() + ", right@"+e2.getType() + " at line: " + Symbol.getColumn(e2.getStart()));
+				InvalidBinOperation e = new InvalidBinOperation("Arithmetic: left@"+e1.getType() + ", right@"+e2.getType() + " at line: " + Symbol.getColumn(e2.getStart()));
+				if(verbose_mode) {
+					e.printStackTrace();
+				}
 				if(critical_mode)
 					System.exit(0);
 				else

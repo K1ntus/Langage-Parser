@@ -9,7 +9,7 @@ a = 5 * 2;
 
 if ( a >= 0) then
 	begin
-	println (a);
+	//println (a);
 	a = a - 1;
 	end
 end

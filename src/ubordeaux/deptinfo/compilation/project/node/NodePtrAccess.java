@@ -1,6 +1,10 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Binop;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Mem;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypeComplex;
 import ubordeaux.deptinfo.compilation.project.type.TypePointer;
@@ -31,10 +35,13 @@ public final class NodePtrAccess extends NodeExp {
 		return new NodePtrAccess((NodeExp) this.get(0).clone());
 	}
 
-	public ExpList generateIntermediateCodePtr() {
-		// TODO Auto-generated method stub
-		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		return null;
+	public Mem generateIntermediateCodePtr() {	//p. 163
+		//System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		Exp name = (Exp) get(0).generateIntermediateCode();
+		//Exp indice = ((NodeExp)get(1)).generateIntermediateCodeExp();
+		
+		return new Mem(new Binop(0, name, new Const(1)));
+		//return null;
 		
 	}
 }

@@ -1,5 +1,6 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
 
 public final class NodeDispose extends Node {
@@ -21,7 +22,7 @@ public final class NodeDispose extends Node {
 
 
 	public IntermediateCode generateIntermediateCodeDispose() {
-		System.err.println("Node dispose en code intermediaire ?????");
-		return null;
+		System.err.println("* FREE("+this+") - Todo");
+		return new Const(0);
 	}
 }

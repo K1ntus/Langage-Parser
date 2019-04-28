@@ -1,5 +1,6 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
 
 public final class NodeCaseList extends NodeExp {
@@ -25,6 +26,6 @@ public final class NodeCaseList extends NodeExp {
 
 	public IntermediateCode generateIntermediateCodeCaseList() {
 		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		return null;
+		return new Const(0);
 	}
 }

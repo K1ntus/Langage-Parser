@@ -2,181 +2,6 @@
 
 
 *************************************************
-*** Fichier data/progr0.lea
-[INFO] $$  : multiple line comment.
-[INFO] $$$ : documentation comment.
-
-
-[InvalidBinaryOperation] Arithmetic: left@TypeInt_null, right@TypeBoolean at line: 7
-fr.c12.compilator.error.InvalidBinOperation
-	at ubordeaux.deptinfo.compilation.project.main.Parser$60.reduce(Unknown Source)
-	at ubordeaux.deptinfo.compilation.project.main.Parser.invokeReduceAction(Unknown Source)
-	at beaver.Parser.reduce(Parser.java:561)
-	at beaver.Parser.parse(Parser.java:468)
-	at beaver.Parser.parse(Parser.java:428)
-	at ubordeaux.deptinfo.compilation.project.main.Main.main(Unknown Source)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.tools.ant.taskdefs.ExecuteJava.run(ExecuteJava.java:223)
-	at org.apache.tools.ant.taskdefs.ExecuteJava.execute(ExecuteJava.java:155)
-	at org.apache.tools.ant.taskdefs.Java.run(Java.java:835)
-	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:227)
-	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:135)
-	at org.apache.tools.ant.taskdefs.Java.execute(Java.java:108)
-	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:292)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)
-	at org.apache.tools.ant.Task.perform(Task.java:350)
-	at org.apache.tools.ant.Target.execute(Target.java:448)
-	at org.apache.tools.ant.Target.performTasks(Target.java:469)
-	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1399)
-	at org.apache.tools.ant.Project.executeTarget(Project.java:1370)
-	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
-	at org.eclipse.ant.internal.launching.remote.EclipseDefaultExecutor.executeTargets(EclipseDefaultExecutor.java:36)
-	at org.apache.tools.ant.Project.executeTargets(Project.java:1260)
-	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.run(InternalAntRunner.java:460)
-	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.main(InternalAntRunner.java:142)
-[InvalidAffectation] Impossible to assign a TypeInt_null to TypeBoolean at line: 7
-fr.c12.compilator.error.InvalidAffectation
-	at ubordeaux.deptinfo.compilation.project.main.Parser$39.reduce(Unknown Source)
-	at ubordeaux.deptinfo.compilation.project.main.Parser.invokeReduceAction(Unknown Source)
-	at beaver.Parser.reduce(Parser.java:561)
-	at beaver.Parser.parse(Parser.java:468)
-	at beaver.Parser.parse(Parser.java:428)
-	at ubordeaux.deptinfo.compilation.project.main.Main.main(Unknown Source)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.tools.ant.taskdefs.ExecuteJava.run(ExecuteJava.java:223)
-	at org.apache.tools.ant.taskdefs.ExecuteJava.execute(ExecuteJava.java:155)
-	at org.apache.tools.ant.taskdefs.Java.run(Java.java:835)
-	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:227)
-	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:135)
-	at org.apache.tools.ant.taskdefs.Java.execute(Java.java:108)
-	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:292)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)
-	at org.apache.tools.ant.Task.perform(Task.java:350)
-	at org.apache.tools.ant.Target.execute(Target.java:448)
-	at org.apache.tools.ant.Target.performTasks(Target.java:469)
-	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1399)
-	at org.apache.tools.ant.Project.executeTarget(Project.java:1370)
-	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
-	at org.eclipse.ant.internal.launching.remote.EclipseDefaultExecutor.executeTargets(EclipseDefaultExecutor.java:36)
-	at org.apache.tools.ant.Project.executeTargets(Project.java:1260)
-	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.run(InternalAntRunner.java:460)
-	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.main(InternalAntRunner.java:142)
-[InvalidAffectation] Automatically recover from error.
-[UnknownProcedure] Aucune fonction: sum trouvee.
-[UnknownProcedure] line: 10
-fr.c12.compilator.error.UnknownProcedure
-	at fr.c12.compilator.environment.ProcedureEnvironment.getTypeFct(Unknown Source)
-	at ubordeaux.deptinfo.compilation.project.main.Parser$41.reduce(Unknown Source)
-	at ubordeaux.deptinfo.compilation.project.main.Parser.invokeReduceAction(Unknown Source)
-	at beaver.Parser.reduce(Parser.java:561)
-	at beaver.Parser.parse(Parser.java:468)
-	at beaver.Parser.parse(Parser.java:428)
-	at ubordeaux.deptinfo.compilation.project.main.Main.main(Unknown Source)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.tools.ant.taskdefs.ExecuteJava.run(ExecuteJava.java:223)
-	at org.apache.tools.ant.taskdefs.ExecuteJava.execute(ExecuteJava.java:155)
-	at org.apache.tools.ant.taskdefs.Java.run(Java.java:835)
-	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:227)
-	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:135)
-	at org.apache.tools.ant.taskdefs.Java.execute(Java.java:108)
-	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:292)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)
-	at org.apache.tools.ant.Task.perform(Task.java:350)
-	at org.apache.tools.ant.Target.execute(Target.java:448)
-	at org.apache.tools.ant.Target.performTasks(Target.java:469)
-	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1399)
-	at org.apache.tools.ant.Project.executeTarget(Project.java:1370)
-	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
-	at org.eclipse.ant.internal.launching.remote.EclipseDefaultExecutor.executeTargets(EclipseDefaultExecutor.java:36)
-	at org.apache.tools.ant.Project.executeTargets(Project.java:1260)
-	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.run(InternalAntRunner.java:460)
-	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.main(InternalAntRunner.java:142)
-[InvalidAffectation] Impossible to assign a TypeInt_null to TypeVoid at line: 10
-fr.c12.compilator.error.InvalidAffectation
-	at ubordeaux.deptinfo.compilation.project.main.Parser$39.reduce(Unknown Source)
-	at ubordeaux.deptinfo.compilation.project.main.Parser.invokeReduceAction(Unknown Source)
-	at beaver.Parser.reduce(Parser.java:561)
-	at beaver.Parser.parse(Parser.java:468)
-	at beaver.Parser.parse(Parser.java:428)
-	at ubordeaux.deptinfo.compilation.project.main.Main.main(Unknown Source)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.tools.ant.taskdefs.ExecuteJava.run(ExecuteJava.java:223)
-	at org.apache.tools.ant.taskdefs.ExecuteJava.execute(ExecuteJava.java:155)
-	at org.apache.tools.ant.taskdefs.Java.run(Java.java:835)
-	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:227)
-	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:135)
-	at org.apache.tools.ant.taskdefs.Java.execute(Java.java:108)
-	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:292)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)
-	at org.apache.tools.ant.Task.perform(Task.java:350)
-	at org.apache.tools.ant.Target.execute(Target.java:448)
-	at org.apache.tools.ant.Target.performTasks(Target.java:469)
-	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1399)
-	at org.apache.tools.ant.Project.executeTarget(Project.java:1370)
-	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
-	at org.eclipse.ant.internal.launching.remote.EclipseDefaultExecutor.executeTargets(EclipseDefaultExecutor.java:36)
-	at org.apache.tools.ant.Project.executeTargets(Project.java:1260)
-	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.run(InternalAntRunner.java:460)
-	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.main(InternalAntRunner.java:142)
-[InvalidAffectation] Automatically recover from error.
-
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeId
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeOp
-- NodeOp well typed
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeId
-- Assign well typed
---- CheckType NodeIf
-- NodeList well typed
-*** Typage correct
-
-
-Arbre Principal: 
-NodeList(NodeAssign(NodeId#b:TypeInt_null#, NodeId#b:TypeInt_null#), NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeAssign(NodeId#b:TypeInt_null#, NodeOp(NodeLiteral#36:TypeInt_null#, NodeLiteral#45:TypeInt_null#)), NodeAssign(NodeId#c:TypeInt_null#, NodeId#c:TypeInt_null#), NodeIf(NodeRel(NodeRel(NodeId#a:TypeInt_null#, NodeRel(NodeLiteral#0:TypeInt_null#, NodeId#a:TypeInt_null#)), NodeLiteral#10:TypeInt_null#), NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeId#c:TypeInt_null#))))
-
-
-
-*************************************************
 *** Fichier data/progr1.lea
 [INFO] $$  : multiple line comment.
 [INFO] $$$ : documentation comment.
@@ -186,23 +11,18 @@ NodeList(NodeAssign(NodeId#b:TypeInt_null#, NodeId#b:TypeInt_null#), NodeAssign(
 //while (a >= 0) do
 //NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeWhile(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeLiteral#1:TypeInt_null#)))))
 
+* MOVE(NAME(a),CONST:100)
+* MOVE(NAME(a),BINOP(2,CONST:5,CONST:2))
+* CALL(NAME(println),NAME(a))
+* MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))
+SEQ(MOVE(NAME(a),CONST:100),EXP(CONST:0))
 --- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeOp
-- NodeOp well typed
-- Assign well typed
---- CheckType NodeIf
 - NodeList well typed
 *** Typage correct
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeLiteral#5:TypeInt_null#, NodeLiteral#2:TypeInt_null#)), NodeIf(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeId#a:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))))
+NodeList
 
 
 
@@ -217,65 +37,79 @@ NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), Node
 //
 // 0x4995F6B5
 
+* MOVE(NAME(x),CONST:1234564789)
+* MOVE(NAME(y),CONST:2147483647)
+* MOVE(NAME(b),CONST:1)
+* MOVE(NAME(c),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1)
+* CALL(NAME(println),NAME(x))
+* CALL(NAME(println),NAME(y))
+* CALL(NAME(println),NAME(b))
+* CALL(NAME(println),NAME(c))
+* CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
+SEQ(MOVE(NAME(x),CONST:1234564789),EXP(CONST:0))
 --- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeCallFct
---- CheckType NodeId
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeId
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeId
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeId
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
 - NodeList well typed
 *** Typage correct
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#))))
+NodeList
+
+
+
+*************************************************
+*** Fichier data/progr3.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+// gestion des variables statiques
+// gestion du tas et des pointeurs
+// 
+// 0x4995F6B5
+// 0x41
+// resize the heap
+// heap memory error
+
+* MOVE(NAME(x),CONST:1234564789)
+* MOVE(NAME(y),CONST:2147483647)
+* MOVE(NAME(b),CONST:1)
+* MOVE(NAME(c),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1)
+* CALL(NAME(println),NAME(x))
+* CALL(NAME(println),NAME(y))
+* CALL(NAME(println),NAME(b))
+* CALL(NAME(println),NAME(c))
+* CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
+* ALLOC(NodeNew(NodeId#q:TypePointer(TypeString)#)) - Todo
+* MOVE(MEM(BINOP(0,NAME(q),CONST:1)),CONST:-1)
+* CALL(NAME(println),MEM(BINOP(0,NAME(q),CONST:1)))
+* CALL(NAME(println),NAME(p))
+* ALLOC(NodeNew(NodeId#p:TypePointer(TypeInt_null)#)) - Todo
+* CALL(NAME(println),NAME(p))
+* MOVE(MEM(MEM(BINOP(0,NAME(p),CONST:1))),NAME(x))
+* CALL(NAME(println),MEM(BINOP(0,NAME(p),CONST:1)))
+* ALLOC(NodeNew(NodeId#r:TypePointer(TypeInt_null)#)) - Todo
+* MOVE(MEM(BINOP(0,NAME(r),CONST:1)),CONST:65536)
+* CALL(NAME(println),MEM(BINOP(0,NAME(r),CONST:1)))
+* FREE(NodeDispose(NodeId#p:TypePointer(TypeInt_null)#)) - Todo
+* CALL(NAME(println),NAME(p))
+* CALL(NAME(println),MEM(BINOP(0,NAME(p),CONST:1)))
+SEQ(MOVE(NAME(x),CONST:1234564789),EXP(CONST:0))
+--- CheckType NodeList
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList
 
 
 
@@ -290,18 +124,22 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#
 //
 //
 
+* MOVE(NAME(x),CONST:1)
+* CALL(NAME(println),NAME(x))
+* MOVE(NAME(y),CONST:1)
+* CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))
+* MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))
+SEQ(Label(L7),SEQ(CJUMP(0,NAME(y),CONST:5,L8,L9),SEQ(Label(L8),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),EXP(CONST:0)),SEQ(JUMP(NAME(L7),L7),Label(L9))))))
+* MOVE(NAME(x),BINOP(0,NAME(x),CONST:1))
+SEQ(Label(L2),SEQ(CJUMP(0,NAME(x),CONST:10,L3,L4),SEQ(Label(L3),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),EXP(CONST:0)),SEQ(JUMP(NAME(L2),L2),Label(L4))))))
+SEQ(MOVE(NAME(x),CONST:1),EXP(CONST:0))
 --- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeWhile
 - NodeList well typed
 *** Typage correct
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), NodeIf(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#y:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeOp(NodeOp(NodeLiteral#1000:TypeInt_null#, NULL), NodeId#y:TypeInt_null#))), NodeAssign(NodeId#y:TypeInt_null#, NodeOp(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#))))), println_NodeCallFct(NodeList(NodeLiteral#"X":TypeString#))), NodeAssign(NodeId#x:TypeInt_null#, NodeOp(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))))
+NodeList
 
 
 
@@ -312,146 +150,9 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWh
 
 
 ** Enregistre fct:sum
+Label(L10)
+return@tmp: EXP(t0)
+return@this: NodeId#i:TypeInt_null#
+return@res: MOVE(EXP(t0),NAME(i))
 ** Enregistre fct:pgcd
-//println(pgcd(78, 90));
-
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeCallFct
---- CheckType NodeLiteral
---- CheckType NodeLiteral
-- NodeCallFct well typed
-- Assign well typed
---- CheckType NodeCallFct
---- CheckType NodeCallFct
---- CheckType NodeLiteral
---- CheckType NodeLiteral
-- NodeCallFct well typed
-- NodeCallFct well typed
-- NodeList well typed
-*** Typage correct
-
-
-Arbre Principal: 
-NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeAssign(NodeId#x:TypeInt_null#, sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#))), println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#)))))
-
-
-
-*************************************************
-*** Fichier data/progr7.lea
-[INFO] $$  : multiple line comment.
-[INFO] $$$ : documentation comment.
-
-
-//
-// tableaux
-// 
-
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
-- NodeList well typed
-*** Typage correct
-
-
-Arbre Principal: 
-NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#0:TypeInt_null#), NodeLiteral#"M":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"T":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"W":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#), NodeLiteral#"X":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#4:TypeInt_null#), NodeLiteral#22:TypeInt_null#), NodeLiteral#7:TypeInt_null#), NodeLiteral#"V":TypeString#), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#4:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#))))
-
-
-
-*************************************************
-*** Fichier data/progr8.lea
-[INFO] $$  : multiple line comment.
-[INFO] $$$ : documentation comment.
-
-
-//
-// tableaux et enumérés
-// 
-** Enregistre types: (TypeItemEnum@SUNDAY=0, TypeItemEnum@MONDAY=1, TypeItemEnum@TUESDAY=2, TypeItemEnum@WEDNESDAY=3, TypeItemEnum@THURSDAY=4, TypeItemEnum@FRIDAY=5, TypeItemEnum@SATURDAY=6)
-** Enregistre types: (TypeItemEnum@JANUARY=0, TypeItemEnum@FEBRUARY=1, TypeItemEnum@MARCH=2, TypeItemEnum@APRIL=3, TypeItemEnum@MAY=4, TypeItemEnum@JUNE=5, TypeItemEnum@JULY=6, TypeItemEnum@AUGUST=7, TypeItemEnum@SEPTEMBER=8, TypeItemEnum@OCTOBER=9, TypeItemEnum@NOVEMBER=10, TypeItemEnum@DECEMBER=11)
-
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
-- NodeList well typed
-*** Typage correct
-
-
-Arbre Principal: 
-NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#MONDAY:TypeInt_1#), NodeLiteral#"M":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#TUESDAY:TypeInt_2#), NodeLiteral#"T":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#WEDNESDAY:TypeInt_3#), NodeLiteral#"W":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#17:TypeInt_null#), NodeId#MARCH:TypeInt_2#), NodeLiteral#"X":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#1:TypeInt_null#), NodeId#MARCH:TypeInt_2#), NodeLiteral#"V":TypeString#), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#1:TypeInt_null#), NodeId#MARCH:TypeInt_2#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#17:TypeInt_null#), NodeId#MARCH:TypeInt_2#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#TUESDAY:TypeInt_2#))))
+Label(L11)

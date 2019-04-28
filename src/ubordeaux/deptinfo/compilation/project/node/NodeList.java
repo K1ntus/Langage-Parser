@@ -85,9 +85,28 @@ public final class NodeList extends Node {
 
 
 	public IntermediateCode generateIntermediateCodeList() {
-		if(this.size() == 0) {
+		/*
+		if(this.size() == 0) {	//Aucun fils, erreur ?
 			return new ExpStm(new Const(0));	//statement sans effet p.185
 		}
+		*/
+		
+		
+		/*
+		//Vieux code, genere bien le seq
+		Node tmp = this.get(0);
+		IntermediateCode stat = tmp.generateIntermediateCode();
+	
+		if (this.size() > 1 && this.get(0) != null) {
+			this.elts.remove(0);
+			return new Seq((Stm)stat,(Stm)this.generateIntermediateCodeList());
+		}
+				
+		return stat;
+		*/
+
+		
+		
 		if (this.size() > 1) {
 			Node tmp = this.get(0);
 			this.elts.remove(0);
@@ -97,7 +116,6 @@ public final class NodeList extends Node {
 			if(left instanceof Exp)
 				left = new ExpStm((Exp) left);
 			
-			System.out.println("CodeList: left@" + left + ", right@" + this.generateIntermediateCodeList());
 			if(!(this.generateIntermediateCodeList() instanceof Stm)){
 				return new Seq((Stm)left,new ExpStm((Exp)this.generateIntermediateCodeList()));
 			}
@@ -108,9 +126,10 @@ public final class NodeList extends Node {
 			IntermediateCode left = tmp.generateIntermediateCode();
 			if(left instanceof Exp)
 				left = new ExpStm((Exp) left);
-			return left;
+			return new Seq((Stm) left, (Stm)this.generateIntermediateCodeList());
 			
 		}
+		//return new Seq((Stm)this.generateIntermediateCodeList(), null);
 		return new ExpStm(new Const(0));
 	}
 }

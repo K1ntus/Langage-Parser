@@ -1,5 +1,6 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
 
 public final class NodeNew extends Node {
@@ -21,8 +22,8 @@ public final class NodeNew extends Node {
 
 	
 	public IntermediateCode generateIntermediateCodeNew() {
-		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		return null;
+		System.err.println("* ALLOC("+this+") - Todo");
+		return new Const(0);
 		
 	}
 }

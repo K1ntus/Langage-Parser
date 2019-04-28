@@ -101,10 +101,11 @@ public class Parser extends beaver.Parser {
 	private StackEnvironment stackEnvironment = new StackEnvironment("local variables stack");
 	private String type_declaration_name;
 	
+	
 	private boolean verbose_mode = true;	
-	private boolean critical_mode = false;
+	private boolean critical_mode = true;
 
-	private boolean generate_intermediate_code = false;
+	private boolean generate_intermediate_code = true;
 
 	private final Action[] actions;
 
@@ -146,7 +147,6 @@ public class Parser extends beaver.Parser {
 					final Type t = (Type) _symbol_t.value;
 					
 			try{
-				//System.out.println("Registering type:" + t.toString());
 				typeEnvironment.putVariable(name, t);
 			} catch (RedefinitionType e) {
 				if(verbose_mode) {
@@ -246,13 +246,16 @@ public class Parser extends beaver.Parser {
 					if(critical_mode)
 						System.exit(0);
 				}
-				
+
 				return new TypeArrayRange(new TypeInt(val_min), new TypeInt(val_max));
 				
 			} catch (UnknownEnumType e) {
 				if(verbose_mode) {
 					e.printStackTrace();
 				}
+				if(critical_mode)
+					System.exit(0);
+				System.err.println("[InvalidAffectation] Automatically recover from error." );
 				return new TypeArrayRange(new TypeInt(0), new TypeInt(0));
 			}
 				}
@@ -923,8 +926,9 @@ public class Parser extends beaver.Parser {
 				}
 				if(critical_mode)
 					System.exit(0);
-				else
-					return new NodeOp("invalid expr", e1, e2);
+
+				System.err.println("[InvalidBinOperation] Automatically recover from error." );
+				return new NodeOp("invalid expr", e1, e2);
 			}
 			return new NodeOp("plus", e1, e2);
 				}
@@ -944,8 +948,9 @@ public class Parser extends beaver.Parser {
 				}
 				if(critical_mode)
 					System.exit(0);
-				else
-					return new NodeOp("invalid expr", e1, e2);
+
+				System.err.println("[InvalidBinOperation] Automatically recover from error." );
+				return new NodeOp("invalid expr", e1, e2);
 			}
 			return new NodeOp("minus", e1, e2);
 				}
@@ -965,8 +970,9 @@ public class Parser extends beaver.Parser {
 				}
 				if(critical_mode)
 					System.exit(0);
-				else
-					return new NodeOp("invalid expr", e1, e2);
+
+				System.err.println("[InvalidBinOperation] Automatically recover from error." );
+				return new NodeOp("invalid expr", e1, e2);
 			}
 			return new NodeOp("times", e1, e2);
 				}
@@ -985,8 +991,9 @@ public class Parser extends beaver.Parser {
 				}
 				if(critical_mode)
 					System.exit(0);
-				else
-					return new NodeOp("invalid expr", e1, e2);
+
+				System.err.println("[InvalidBinOperation] Automatically recover from error." );
+				return new NodeOp("invalid expr", e1, e2);
 			}
 			return new NodeOp("divide", e1, e2);
 				}
@@ -996,6 +1003,17 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_e = _symbols[offset + 2];
 					final NodeExp e = (NodeExp) _symbol_e.value;
 					 
+			if(!(e.getType() instanceof TypeInt)) {
+				InvalidBinOperation err = new InvalidBinOperation("Arithmetic: UnaryMinus:@"+e.getType() + " at line: " + Symbol.getColumn(e.getStart()));
+				if(verbose_mode) {
+					err.printStackTrace();
+				}
+				if(critical_mode)
+					System.exit(0);
+
+				System.err.println("[InvalidBinOperation] Automatically recover from error." );
+				return new NodeOp("invalid expr", e);
+			}
 			return new NodeOp("u_minus", e);
 				}
 			},

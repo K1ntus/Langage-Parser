@@ -165,8 +165,8 @@ program=
 	type_declaration_part.tp			//Type env
 	variable_declaration_part.vp 		//Type var
 	procedure_definition_part.pp		//Type procedure
-	DEBUG_clear_useless_stack
 	//DEBUG_print_stack
+	//DEBUG_clear_useless_stack
 	TOKEN_BEGIN	push_stackenv.pu		//On empile stackenv
 	statement_list.l 					//Inserer variable dans env
 	TOKEN_END	pop_stackenv.pop 		//On depile stackenv
@@ -389,6 +389,7 @@ procedure_definition=
 														System.out.println(new Label(new LabelLocation()));
 														stm.generateIntermediateCode();
 													}
+				stackEnvironment.getEnvironment().pop();
 													return stm; 
 												 :}
 	| procedure_declaration_head TOKEN_SEMIC		
@@ -415,6 +416,7 @@ procedure_definition_head=
 procedure_declaration_head=
 	procedure_head.type_fct
 		{:
+			stackEnvironment.getEnvironment().pop();
 			try {
 				type_fct.setDefined(false); 
 				procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
@@ -530,7 +532,8 @@ push_stackenv =		{:
 						return new EmptySymbol(); 
 					:}	
 				;
-//DEBUG_print_stack = {: System.out.println("Size: " + stackEnvironment.getEnvironment().size() + "\nCurrent Stack State: " + stackEnvironment.getEnvironment().toString()); return new EmptySymbol(); :};
+/*
+DEBUG_print_stack = {: System.out.println("Size: " + stackEnvironment.getEnvironment().size() + "\nCurrent Stack State: " + stackEnvironment.getEnvironment().toString()); return new EmptySymbol(); :};
 
 DEBUG_clear_useless_stack = 
 	{: 
@@ -540,6 +543,8 @@ DEBUG_clear_useless_stack =
 		return new EmptySymbol(); 
 	:}
 	;
+*/
+
 /*
 Instructions
 */

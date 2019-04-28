@@ -253,6 +253,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 	
 	
 	public IntermediateCode generateIntermediateCode() {
+		//Node n = (Node) this.clone();
 		/* for (Node elt : this.elts) {
 			 
 			try {
@@ -277,15 +278,15 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 					return ((NodeCallFct)this).generateIntermediateCodeCallFct(); //null pointer exception
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeCase":
-					//System.out.println(this.getClass().toString());
+					//System.out.println(n.getClass().toString());
 					return ((NodeCase)this).generateIntermediateCodeCase();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeCaseList":
-					//System.out.println(this.getClass().toString());
+					//System.out.println(n.getClass().toString());
 					return ((NodeCaseList)this).generateIntermediateCodeCaseList();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeDispose":
-					//System.out.println(this.getClass().toString());
+					//System.out.println(n.getClass().toString());
 
 					return ((NodeDispose)this).generateIntermediateCodeDispose();
 					
@@ -298,7 +299,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 					return ((NodeId)this).generateIntermediateCodeId();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeIf":
-					//System.out.println(this.getClass().toString());
+					//System.out.println(n.getClass().toString());
 					return ((NodeIf)this).generateIntermediateCodeIf();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeList":
@@ -306,11 +307,11 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 					return ((NodeList)this).generateIntermediateCodeList();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeLiteral":
-					//System.out.println(this.getClass().toString());
+					//System.out.println(n.getClass().toString());
 					return ((NodeLiteral)this).generateIntermediateCodeLiteral();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeNew":
-					//System.out.println(this.getClass().toString());
+					//System.out.println(n.getClass().toString());
 					return ((NodeNew)this).generateIntermediateCodeNew();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeOp":
@@ -318,20 +319,20 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 					return ((NodeOp)this).generateIntermediateCodeOp();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodePtrAccess":
-					//System.out.println(this.getClass().toString());
+					//System.out.println(n.getClass().toString());
 					return ((NodePtrAccess)this).generateIntermediateCodePtr();
 
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeRel":
-					//System.out.println(this.getClass().toString());
+					//System.out.println(n.getClass().toString());
 					return ((NodeRel)this).generateIntermediateCodeRel();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeReturn":
-					//System.out.println(this.getClass().toString());
+					//System.out.println(n.getClass().toString());
 					return ((NodeReturn)this).generateIntermediateCodeRet();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeSwitch":
-					//System.out.println(this.getClass().toString());
+					//System.out.println(n.getClass().toString());
 					return ((NodeSwitch)this).generateIntermediateCodeSwitch();
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeWhile":

@@ -1,5 +1,6 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Move;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Temp;
@@ -23,12 +24,17 @@ public final class NodeReturn extends NodeExp {
 	}
 
 
-	public IntermediateCode generateIntermediateCodeRet() {
+	public IntermediateCode generateIntermediateCodeRet() {// p.186, 174
 		// TODO Auto-generated method stub
-		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		Temp tmp = new Temp(new TempValue());
+		//System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
+		Temp tmp = new Temp(new TempValue());	//Mettre vers celui qui a call la fct
+		Node n = this.get(0).get(0);
+		System.out.println("return@tmp: " + tmp);
+		System.out.println("return@this: " + n);
+		Move res = new Move(tmp, (Exp) (n).generateIntermediateCode());
+		System.out.println("return@res: " + res);
 		
-		return new Move(tmp, this.generateIntermediateCodeExp());
+		return res;
 		
 	}
 }

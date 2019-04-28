@@ -8,6 +8,6 @@
 	<classpathentry kind="lib" path="lib/beaver-rt-0.9.11.jar"/>
 	<classpathentry kind="lib" path="lib/beaver-rt.jar"/>
 	<classpathentry kind="lib" path="lib/jflex-full-1.7.0.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/oracle-java8-jdk-amd64"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -15,9 +15,9 @@ begin
    d[2] = "B";
    d[3] = "C";
    d[10] = "Z";
-   //println x;
-   //println y;
-   //println b;
-   //println c;
-   //println d[2];
+   println x;
+   println y;
+   println b;
+   println c;
+   println d[2];
 end

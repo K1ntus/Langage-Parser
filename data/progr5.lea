@@ -8,6 +8,7 @@ begin
   return (i+j);
 end
 
+
 function pgcd(i : integer, j : integer) : integer
 begin
 	while (i != j) do
@@ -18,9 +19,10 @@ begin
   return (i);
 end
 
+
 begin
 x = 5;
 x = sum(3, 5);
 println sum(3, 5);
-println(pgcd(78, 90));
+//println(pgcd(78, 90));
 end

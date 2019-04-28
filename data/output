@@ -49,15 +49,27 @@ fr.c12.compilator.error.UnknownProcedure
 [InvalidAffectation] Impossible to assign a TypeInt_null to TypeVoid at line: 10
 [InvalidAffectation] Automatically recover from error.
 
-SEQ(Move(MEM(NAME(b)),NAME(b)),SEQ(Move(NAME(a),CONST:100),SEQ(Move(NAME(b),BINOP(0,CONST:36,CONST:45)),SEQ(Move(MEM(NAME(c)),NAME(c)),SEQ(CJUMP(11,BINOP(13,NAME(a),NAME(a)),BINOP(13,NAME(a),NAME(a)),L0,L1),SEQ(Label(L0),SEQ(Move(MEM(NAME(a)),NAME(c)),Label(L1))))))))
+* MOVE(MEM(NAME(b)),NAME(b))
+* MOVE(NAME(a),CONST:100)
+* MOVE(NAME(b),BINOP(0,CONST:36,CONST:45))
+* MOVE(MEM(NAME(c)),NAME(c))
+* MOVE(MEM(NAME(a)),NAME(c))
+* MOVE(MEM(NAME(a)),NAME(c))
+* MOVE(MEM(NAME(a)),NAME(c))
+CodeList: left@SEQ(CJUMP(11,BINOP(13,NAME(a),NAME(a)),BINOP(13,NAME(a),NAME(a)),L2,L3),SEQ(Label(L2),SEQ(MOVE(MEM(NAME(a)),NAME(c)),Label(L3)))), right@SEQ(CJUMP(11,BINOP(13,NAME(a),NAME(a)),BINOP(13,NAME(a),NAME(a)),L4,L5),SEQ(Label(L4),SEQ(MOVE(MEM(NAME(a)),NAME(c)),Label(L5))))
+CodeList: left@SEQ(CJUMP(11,BINOP(13,NAME(a),NAME(a)),BINOP(13,NAME(a),NAME(a)),L0,L1),SEQ(Label(L0),SEQ(MOVE(MEM(NAME(a)),NAME(c)),Label(L1)))), right@SEQ(SEQ(CJUMP(11,BINOP(13,NAME(a),NAME(a)),BINOP(13,NAME(a),NAME(a)),L2,L3),SEQ(Label(L2),SEQ(MOVE(MEM(NAME(a)),NAME(c)),Label(L3)))),EXP(CONST:0))
+CodeList: left@MOVE(MEM(NAME(c)),NAME(c)), right@SEQ(SEQ(CJUMP(11,BINOP(13,NAME(a),NAME(a)),BINOP(13,NAME(a),NAME(a)),L0,L1),SEQ(Label(L0),SEQ(MOVE(MEM(NAME(a)),NAME(c)),Label(L1)))),EXP(CONST:0))
+CodeList: left@MOVE(NAME(b),BINOP(0,CONST:36,CONST:45)), right@SEQ(MOVE(MEM(NAME(c)),NAME(c)),EXP(CONST:0))
+CodeList: left@MOVE(NAME(a),CONST:100), right@SEQ(MOVE(NAME(b),BINOP(0,CONST:36,CONST:45)),EXP(CONST:0))
+CodeList: left@MOVE(MEM(NAME(b)),NAME(b)), right@SEQ(MOVE(NAME(a),CONST:100),EXP(CONST:0))
+SEQ(MOVE(MEM(NAME(b)),NAME(b)),EXP(CONST:0))
 --- CheckType NodeList
---- CheckType NodeIf
 - NodeList well typed
 *** Typage correct
 
 
 Arbre Principal: 
-NodeList(NodeIf(NodeRel(NodeRel(NodeId#a:TypeInt_null#, NodeRel(NodeLiteral#0:TypeInt_null#, NodeId#a:TypeInt_null#)), NodeLiteral#10:TypeInt_null#), NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeId#c:TypeInt_null#))))
+NodeList
 
 
 
@@ -69,18 +81,23 @@ NodeList(NodeIf(NodeRel(NodeRel(NodeId#a:TypeInt_null#, NodeRel(NodeLiteral#0:Ty
 
 //end
 //while (a >= 0) do
-//println (a);
 //NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeWhile(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeLiteral#1:TypeInt_null#)))))
 
-SEQ(Move(NAME(a),CONST:100),SEQ(Move(NAME(a),BINOP(2,CONST:5,CONST:2)),SEQ(CJUMP(13,NAME(a),NAME(a),L2,L3),SEQ(Label(L2),SEQ(Move(NAME(a),BINOP(1,NAME(a),CONST:1)),Label(L3))))))
+* MOVE(NAME(a),CONST:100)
+* MOVE(NAME(a),BINOP(2,CONST:5,CONST:2))
+* CALL(NAME(println),NAME(a))
+* MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))
+CodeList: left@EXP(CALL(NAME(println),NAME(a))), right@MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))
+CodeList: left@MOVE(NAME(a),BINOP(2,CONST:5,CONST:2)), right@SEQ(CJUMP(13,NAME(a),NAME(a),L6,L7),SEQ(Label(L6),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),EXP(CONST:0)),Label(L7))))
+CodeList: left@MOVE(NAME(a),CONST:100), right@SEQ(MOVE(NAME(a),BINOP(2,CONST:5,CONST:2)),EXP(CONST:0))
+SEQ(MOVE(NAME(a),CONST:100),EXP(CONST:0))
 --- CheckType NodeList
---- CheckType NodeIf
 - NodeList well typed
 *** Typage correct
 
 
 Arbre Principal: 
-NodeList(NodeIf(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeId#a:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))))
+NodeList
 
 
 
@@ -94,9 +111,88 @@ NodeList(NodeIf(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), No
 // gestion des variables statiques
 //
 // 0x4995F6B5
-//println x;
-//println y;
-//println b;
-//println c;
-//println d[2];
 
+* MOVE(NAME(x),CONST:1234564789)
+* MOVE(NAME(y),CONST:2147483647)
+* MOVE(NAME(b),CONST:1)
+* MOVE(NAME(c),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1)
+* CALL(NAME(println),NAME(x))
+* CALL(NAME(println),NAME(y))
+* CALL(NAME(println),NAME(b))
+* CALL(NAME(println),NAME(c))
+* CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
+CodeList: left@EXP(CALL(NAME(println),NAME(c))), right@EXP(CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2))))
+CodeList: left@EXP(CALL(NAME(println),NAME(b))), right@SEQ(EXP(CALL(NAME(println),NAME(c))),EXP(CONST:0))
+CodeList: left@EXP(CALL(NAME(println),NAME(y))), right@SEQ(EXP(CALL(NAME(println),NAME(b))),EXP(CONST:0))
+CodeList: left@EXP(CALL(NAME(println),NAME(x))), right@SEQ(EXP(CALL(NAME(println),NAME(y))),EXP(CONST:0))
+CodeList: left@MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1), right@SEQ(EXP(CALL(NAME(println),NAME(x))),EXP(CONST:0))
+CodeList: left@MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1), right@SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1),EXP(CONST:0))
+CodeList: left@MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1), right@SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1),EXP(CONST:0))
+CodeList: left@MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1), right@SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1),EXP(CONST:0))
+CodeList: left@MOVE(NAME(c),CONST:-1), right@SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1),EXP(CONST:0))
+CodeList: left@MOVE(NAME(b),CONST:1), right@SEQ(MOVE(NAME(c),CONST:-1),EXP(CONST:0))
+CodeList: left@MOVE(NAME(y),CONST:2147483647), right@SEQ(MOVE(NAME(b),CONST:1),EXP(CONST:0))
+CodeList: left@MOVE(NAME(x),CONST:1234564789), right@SEQ(MOVE(NAME(y),CONST:2147483647),EXP(CONST:0))
+SEQ(MOVE(NAME(x),CONST:1234564789),EXP(CONST:0))
+--- CheckType NodeList
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList
+
+
+
+*************************************************
+*** Fichier data/progr4.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// Structure de contrôle
+//
+//
+
+* MOVE(NAME(x),CONST:1)
+* CALL(NAME(println),NAME(x))
+* MOVE(NAME(y),CONST:1)
+* CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))
+* MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))
+CodeList: left@EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))), right@MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))
+SEQ(Label(L13),SEQ(CJUMP(0,NAME(y),CONST:5,L14,L15),SEQ(Label(L14),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),EXP(CONST:0)),SEQ(JUMP(NAME(L13),L13),Label(L15))))))
+CodeList: left@MOVE(NAME(y),CONST:1), right@SEQ(Label(L13),SEQ(CJUMP(0,NAME(y),CONST:5,L14,L15),SEQ(Label(L14),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),EXP(CONST:0)),SEQ(JUMP(NAME(L13),L13),Label(L15))))))
+* MOVE(NAME(x),BINOP(0,NAME(x),CONST:1))
+CodeList: left@SEQ(CJUMP(14,NAME(x),NAME(x),L11,L12),SEQ(Label(L11),SEQ(SEQ(MOVE(NAME(y),CONST:1),EXP(CONST:0)),Label(L12)))), right@MOVE(NAME(x),BINOP(0,NAME(x),CONST:1))
+CodeList: left@EXP(CALL(NAME(println),NAME(x))), right@SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L11,L12),SEQ(Label(L11),SEQ(SEQ(MOVE(NAME(y),CONST:1),EXP(CONST:0)),Label(L12)))),EXP(CONST:0))
+SEQ(Label(L8),SEQ(CJUMP(0,NAME(x),CONST:10,L9,L10),SEQ(Label(L9),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),EXP(CONST:0)),SEQ(JUMP(NAME(L8),L8),Label(L10))))))
+CodeList: left@MOVE(NAME(x),CONST:1), right@SEQ(Label(L8),SEQ(CJUMP(0,NAME(x),CONST:10,L9,L10),SEQ(Label(L9),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),EXP(CONST:0)),SEQ(JUMP(NAME(L8),L8),Label(L10))))))
+SEQ(MOVE(NAME(x),CONST:1),EXP(CONST:0))
+--- CheckType NodeList
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList
+
+
+
+*************************************************
+*** Fichier data/progr5.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+** Enregistre fct:sum
+Label(L16)
+return@tmp: EXP(t0)
+return@this: NodeId#i:TypeInt_null#
+return@res: MOVE(EXP(t0),NAME(i))
+** Enregistre fct:pgcd
+Label(L17)

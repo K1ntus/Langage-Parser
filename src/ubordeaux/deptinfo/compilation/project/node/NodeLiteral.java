@@ -1,6 +1,8 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
+import java.math.BigInteger;
+
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypeBoolean;
 import ubordeaux.deptinfo.compilation.project.type.TypeInt;
@@ -43,6 +45,15 @@ public final class NodeLiteral extends NodeExp {
 	public Type getType() {
 		return type;
 	}
+	private String stringToHex(String arg) {
+	    return String.format("%040x", new BigInteger(1, arg.getBytes(/*YOUR_CHARSET?*/)));
+	}
+	
+	private int hexToString(String hexa) {
+		int res = new Integer(Integer.decode (hexa));
+		//BigInteger res = new BigInteger(hexa, 16);
+		return res;
+	}
 
 	public Const generateIntermediateCodeLiteral() {
 		/*//System.out.println(this.getValue().getClass().toString());
@@ -55,11 +66,13 @@ public final class NodeLiteral extends NodeExp {
 		Const res = null;
 		
 		if(this.getType() instanceof TypeInt) { 
-			 res = new Const((int) this.getValue());
+			res = new Const((int) this.getValue());
 	 	} else if(this.getType() instanceof TypeBoolean) {
-			 res = new Const((int) this.getValue());
-		} else if(this.getType() instanceof TypeString) {
-			 res = new Const(-1);
+	 		int val = (boolean) (this.getValue()) ? 1 : 0;
+			res = new Const(val);
+		} else if(this.getType() instanceof TypeString) {	//p. 168
+			res = new Const(-1);
+			//res = new Const(this.hexToString(this.stringToHex((String) this.getValue())));
 		}
 		return res;
 	}

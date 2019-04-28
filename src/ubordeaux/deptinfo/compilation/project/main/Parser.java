@@ -104,6 +104,8 @@ public class Parser extends beaver.Parser {
 	private boolean verbose_mode = true;	
 	private boolean critical_mode = false;
 
+	private boolean generate_intermediate_code = true;
+
 	private final Action[] actions;
 
 	public Parser() {
@@ -120,7 +122,8 @@ public class Parser extends beaver.Parser {
 					final Symbol pop = _symbols[offset + 9];
 					 
 
-		System.out.println(l.generateIntermediateCode().toString());
+		if(generate_intermediate_code)
+			System.out.println(l.generateIntermediateCode().toString());
 	    return _symbol_l;
 				}
 			},
@@ -371,8 +374,11 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_stm = _symbols[offset + 2];
 					final NodeList stm = (NodeList) _symbol_stm.value;
 						
-													System.out.println(new Label(new LabelLocation()));
-													stm.generateIntermediateCode();
+
+													if(generate_intermediate_code) {
+														System.out.println(new Label(new LabelLocation()));
+														stm.generateIntermediateCode();
+													}
 													return stm;
 				}
 			},

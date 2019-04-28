@@ -108,7 +108,10 @@ public final class NodeCallFct extends NodeExp {
         LabelLocation label = new LabelLocation(this.getName());
         Name function = new Name(label);
         ExpList largs = this.getArgs().generateIntermediateCodeListArgs();
-        return new Call((Exp)function, largs);
+        Call res = new Call((Exp)function, largs);
+        
+		System.out.println("* " + res.toString());
+        return res;
     }
 
 }

@@ -5,12 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import ubordeaux.deptinfo.compilation.project.type.Type;
-
-
-import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Seq;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
 
 public final class NodeList extends Node {
 
@@ -74,29 +69,48 @@ public final class NodeList extends Node {
 	
 	public ExpList generateIntermediateCodeListArgs() {
 		
-		Node tmp = this.get(0);
-		ExpList tail = null;
-		if (this.size() > 0 && this.get(0) != null) {
-			this.elts.remove(0);
-			return new ExpList((Exp)tmp.generateIntermediateCode(), ((NodeList)this).generateIntermediateCodeListArgs());
-		}else {
-			return new ExpList((Exp)tmp.generateIntermediateCode(), null);
+		if (this.size() > 0) {
+			Node head = this.getList().get(0);
+				this.elts.remove(0);
+				if(this.size() > 0)
+					return new ExpList((Exp)head.generateIntermediateCode(), ((NodeList)this).generateIntermediateCodeListArgs());
+				else
+					return new ExpList((Exp)head.generateIntermediateCode(), null);
 		}
+		return new ExpList((Exp) this.generateIntermediateCode(), null);
+
 		
 		
 	}
 
 
 	public IntermediateCode generateIntermediateCodeList() {
-		
-		Node tmp = this.get(0);
-		IntermediateCode stat = tmp.generateIntermediateCode();
-	
-		if (this.size() > 1 && this.get(0) != null) {
-			this.elts.remove(0);
-			return new Seq((Stm)stat,(Stm)this.generateIntermediateCodeList());
+		if(this.size() == 0) {
+			return new ExpStm(new Const(0));	//statement sans effet p.185
 		}
-		
-		return stat;
+		if (this.size() > 1) {
+			Node tmp = this.get(0);
+			this.elts.remove(0);
+			
+			IntermediateCode left = tmp.generateIntermediateCode();
+			
+			if(left instanceof Exp)
+				left = new ExpStm((Exp) left);
+			
+			System.out.println("CodeList: left@" + left + ", right@" + this.generateIntermediateCodeList());
+			if(!(this.generateIntermediateCodeList() instanceof Stm)){
+				return new Seq((Stm)left,new ExpStm((Exp)this.generateIntermediateCodeList()));
+			}
+			return new Seq((Stm)left,(Stm)this.generateIntermediateCodeList());
+		} else if (this.size() == 1) {
+			Node tmp = this.get(0);
+			this.elts.remove(0);
+			IntermediateCode left = tmp.generateIntermediateCode();
+			if(left instanceof Exp)
+				left = new ExpStm((Exp) left);
+			return left;
+			
+		}
+		return new ExpStm(new Const(0));
 	}
 }

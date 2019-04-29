@@ -20,7 +20,7 @@ public class NodeOp extends NodeExp {
 	}
 
 	public NodeOp(String name, NodeExp op) {
-		super(op,null);
+		super(op, null);
 		this.name = name;
 		// le type d'un opérateur 
 		NodeExp exprFct = (NodeExp) this.get(0);
@@ -52,9 +52,9 @@ public class NodeOp extends NodeExp {
 
 	@Override
 	public NodeOp clone() {
-		if (this.size()==1)
+		if (this.getOp2() == null)
 			return new NodeOp(name, (NodeExp) getOp1().clone());
-		else if (this.size()==2)
+		else if (!(this.getOp2() == null))
 			return new NodeOp(name, (NodeExp) getOp1().clone(), (NodeExp) getOp2().clone());
 		return null;
 		};

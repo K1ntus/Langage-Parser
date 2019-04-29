@@ -84,7 +84,7 @@ public final class NodeList extends Node {
 	}
 
 
-	public IntermediateCode generateIntermediateCodeList() {
+	public Stm generateIntermediateCodeList() {
 		/*
 		if(this.size() == 0) {	//Aucun fils, erreur ?
 			return new ExpStm(new Const(0));	//statement sans effet p.185
@@ -92,20 +92,23 @@ public final class NodeList extends Node {
 		*/
 		
 		
-		/*
+		Node clone = this.clone();
 		//Vieux code, genere bien le seq
-		Node tmp = this.get(0);
+		Node tmp = clone.get(0);
 		IntermediateCode stat = tmp.generateIntermediateCode();
+		
+		if(stat instanceof Exp)
+			stat = new ExpStm((Exp) stat);
 	
-		if (this.size() > 1 && this.get(0) != null) {
-			this.elts.remove(0);
-			return new Seq((Stm)stat,(Stm)this.generateIntermediateCodeList());
+		if (clone.size() > 1 && clone.get(0) != null) {
+			clone.elts.remove(0);
+			return new Seq((Stm)stat,(Stm)((NodeList)clone).generateIntermediateCodeList());
 		}
 				
-		return stat;
-		*/
-
+		return (Stm) stat;
 		
+
+		/*
 		
 		if (this.size() > 1) {
 			Node tmp = this.get(0);
@@ -117,7 +120,7 @@ public final class NodeList extends Node {
 				left = new ExpStm((Exp) left);
 			
 			if(!(this.generateIntermediateCodeList() instanceof Stm)){
-				return new Seq((Stm)left,new ExpStm((Exp)this.generateIntermediateCodeList()));
+				return new Seq((Stm)left, (this.generateIntermediateCodeList()));
 			}
 			return new Seq((Stm)left,(Stm)this.generateIntermediateCodeList());
 		} else if (this.size() == 1) {
@@ -129,7 +132,8 @@ public final class NodeList extends Node {
 			return new Seq((Stm) left, (Stm)this.generateIntermediateCodeList());
 			
 		}
+		*/
 		//return new Seq((Stm)this.generateIntermediateCodeList(), null);
-		return new ExpStm(new Const(0));
+		//return new ExpStm(new Const(0));
 	}
 }

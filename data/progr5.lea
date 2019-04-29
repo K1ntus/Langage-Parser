@@ -12,10 +12,18 @@ end
 function pgcd(i : integer, j : integer) : integer
 begin
 	while (i != j) do
+	i = 0;
+	
+	
+	begin
 		if (i > j) then
+		begin
 			i = i - j;
-		else
-			j = j - i;
+		end
+		//else
+		//	j = j - i;
+	end
+	
   return (i);
 end
 

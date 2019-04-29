@@ -11,11 +11,13 @@
 //while (a >= 0) do
 //NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeWhile(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeLiteral#1:TypeInt_null#)))))
 
+NodeList(NodeAssign(NodeId#null:TypeNull#, NodeLiteral#null:TypeNull#), NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeLiteral#5:TypeInt_null#, NodeLiteral#2:TypeInt_null#)), NodeIf(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeId#a:TypeInt_null#, NodeLiteral#1:TypeInt_null#))))))
+* MOVE(NAME(null),CONST:0)
 * MOVE(NAME(a),CONST:100)
 * MOVE(NAME(a),BINOP(2,CONST:5,CONST:2))
 * CALL(NAME(println),NAME(a))
 * MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))
-SEQ(MOVE(NAME(a),CONST:100),SEQ(MOVE(NAME(a),BINOP(2,CONST:5,CONST:2)),SEQ(CJUMP(13,NAME(a),NAME(a),L0,L1),SEQ(Label(L0),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),Label(L1))))))
+SEQ(MOVE(NAME(null),CONST:0),SEQ(MOVE(NAME(a),CONST:100),SEQ(MOVE(NAME(a),BINOP(2,CONST:5,CONST:2)),SEQ(CJUMP(13,NAME(a),NAME(a),L0,L1),SEQ(Label(L0),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),Label(L1)))))))
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -47,6 +49,8 @@ NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), Node
 //
 // 0x4995F6B5
 
+NodeList(NodeAssign(NodeId#null:TypeNull#, NodeLiteral#null:TypeNull#), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#)))))
+* MOVE(NAME(null),CONST:0)
 * MOVE(NAME(x),CONST:1234564789)
 * MOVE(NAME(y),CONST:2147483647)
 * MOVE(NAME(b),CONST:1)
@@ -60,7 +64,7 @@ NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), Node
 * CALL(NAME(println),NAME(b))
 * CALL(NAME(println),NAME(c))
 * CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
-SEQ(MOVE(NAME(x),CONST:1234564789),SEQ(MOVE(NAME(y),CONST:2147483647),SEQ(MOVE(NAME(b),CONST:1),SEQ(MOVE(NAME(c),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1),SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(EXP(CALL(NAME(println),NAME(y))),SEQ(EXP(CALL(NAME(println),NAME(b))),SEQ(EXP(CALL(NAME(println),NAME(c))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2))))))))))))))))
+SEQ(MOVE(NAME(null),CONST:0),SEQ(MOVE(NAME(x),CONST:1234564789),SEQ(MOVE(NAME(y),CONST:2147483647),SEQ(MOVE(NAME(b),CONST:1),SEQ(MOVE(NAME(c),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1),SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(EXP(CALL(NAME(println),NAME(y))),SEQ(EXP(CALL(NAME(println),NAME(b))),SEQ(EXP(CALL(NAME(println),NAME(c))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))))))))))))))))
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -137,6 +141,8 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#
 // resize the heap
 // heap memory error
 
+NodeList(NodeAssign(NodeId#null:TypeNull#, NodeLiteral#null:TypeNull#), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#))), NodeNew(NodeId#q:TypePointer(TypeString)#), NodeAssign(NodePtrAccess(NodeId#q:TypePointer(TypeString)#), NodeLiteral#"A":TypeString#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#q:TypePointer(TypeString)#))), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeNew(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeAssign(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#), NodeId#x:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#))), NodeNew(NodeId#r:TypePointer(TypeInt_null)#), NodeAssign(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#), NodeLiteral#65536:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#))), NodeDispose(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#)))))
+* MOVE(NAME(null),CONST:0)
 * MOVE(NAME(x),CONST:1234564789)
 * MOVE(NAME(y),CONST:2147483647)
 * MOVE(NAME(b),CONST:1)
@@ -164,7 +170,7 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#
 * FREE(NodeDispose(NodeId#p:TypePointer(TypeInt_null)#)) - Todo
 * CALL(NAME(println),NAME(p))
 * CALL(NAME(println),MEM(BINOP(0,NAME(p),CONST:1)))
-SEQ(MOVE(NAME(x),CONST:1234564789),SEQ(MOVE(NAME(y),CONST:2147483647),SEQ(MOVE(NAME(b),CONST:1),SEQ(MOVE(NAME(c),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1),SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(EXP(CALL(NAME(println),NAME(y))),SEQ(EXP(CALL(NAME(println),NAME(b))),SEQ(EXP(CALL(NAME(println),NAME(c))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))),SEQ(EXP(CONST:0),SEQ(MOVE(MEM(BINOP(0,NAME(q),CONST:1)),CONST:-1),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,NAME(q),CONST:1)))),SEQ(EXP(CALL(NAME(println),NAME(p))),SEQ(EXP(CONST:0),SEQ(EXP(CALL(NAME(println),NAME(p))),SEQ(MOVE(MEM(MEM(BINOP(0,NAME(p),CONST:1))),NAME(x)),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,NAME(p),CONST:1)))),SEQ(EXP(CONST:0),SEQ(MOVE(MEM(BINOP(0,NAME(r),CONST:1)),CONST:65536),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,NAME(r),CONST:1)))),SEQ(EXP(CONST:0),SEQ(EXP(CALL(NAME(println),NAME(p))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(p),CONST:1))))))))))))))))))))))))))))))
+SEQ(MOVE(NAME(null),CONST:0),SEQ(MOVE(NAME(x),CONST:1234564789),SEQ(MOVE(NAME(y),CONST:2147483647),SEQ(MOVE(NAME(b),CONST:1),SEQ(MOVE(NAME(c),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1),SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(EXP(CALL(NAME(println),NAME(y))),SEQ(EXP(CALL(NAME(println),NAME(b))),SEQ(EXP(CALL(NAME(println),NAME(c))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))),SEQ(EXP(CONST:0),SEQ(MOVE(MEM(BINOP(0,NAME(q),CONST:1)),CONST:-1),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,NAME(q),CONST:1)))),SEQ(EXP(CALL(NAME(println),NAME(p))),SEQ(EXP(CONST:0),SEQ(EXP(CALL(NAME(println),NAME(p))),SEQ(MOVE(MEM(MEM(BINOP(0,NAME(p),CONST:1))),NAME(x)),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,NAME(p),CONST:1)))),SEQ(EXP(CONST:0),SEQ(MOVE(MEM(BINOP(0,NAME(r),CONST:1)),CONST:65536),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,NAME(r),CONST:1)))),SEQ(EXP(CONST:0),SEQ(EXP(CALL(NAME(println),NAME(p))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(p),CONST:1)))))))))))))))))))))))))))))))
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -275,6 +281,8 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#
 //
 //
 
+NodeList(NodeAssign(NodeId#null:TypeNull#, NodeLiteral#null:TypeNull#), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), NodeIf(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#y:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeOp(NodeOp(NodeLiteral#1000:TypeInt_null#, NULL), NodeId#y:TypeInt_null#))), NodeAssign(NodeId#y:TypeInt_null#, NodeOp(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#))))), println_NodeCallFct(NodeList(NodeLiteral#"X":TypeString#))), NodeAssign(NodeId#x:TypeInt_null#, NodeOp(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#))))))
+* MOVE(NAME(null),CONST:0)
 * MOVE(NAME(x),CONST:1)
 * CALL(NAME(println),NAME(x))
 * MOVE(NAME(y),CONST:1)
@@ -283,7 +291,7 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#
 SEQ(Label(L7),SEQ(CJUMP(0,NAME(y),CONST:5,L8,L9),SEQ(Label(L8),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L7),L7),Label(L9))))))
 * MOVE(NAME(x),BINOP(0,NAME(x),CONST:1))
 SEQ(Label(L2),SEQ(CJUMP(0,NAME(x),CONST:10,L3,L4),SEQ(Label(L3),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L5,L6),SEQ(Label(L5),SEQ(SEQ(MOVE(NAME(y),CONST:1),SEQ(Label(L7),SEQ(CJUMP(0,NAME(y),CONST:5,L8,L9),SEQ(Label(L8),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L7),L7),Label(L9))))))),Label(L6)))),MOVE(NAME(x),BINOP(0,NAME(x),CONST:1)))),SEQ(JUMP(NAME(L2),L2),Label(L4))))))
-SEQ(MOVE(NAME(x),CONST:1),SEQ(Label(L2),SEQ(CJUMP(0,NAME(x),CONST:10,L3,L4),SEQ(Label(L3),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L5,L6),SEQ(Label(L5),SEQ(SEQ(MOVE(NAME(y),CONST:1),SEQ(Label(L7),SEQ(CJUMP(0,NAME(y),CONST:5,L8,L9),SEQ(Label(L8),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L7),L7),Label(L9))))))),Label(L6)))),MOVE(NAME(x),BINOP(0,NAME(x),CONST:1)))),SEQ(JUMP(NAME(L2),L2),Label(L4)))))))
+SEQ(MOVE(NAME(null),CONST:0),SEQ(MOVE(NAME(x),CONST:1),SEQ(Label(L2),SEQ(CJUMP(0,NAME(x),CONST:10,L3,L4),SEQ(Label(L3),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L5,L6),SEQ(Label(L5),SEQ(SEQ(MOVE(NAME(y),CONST:1),SEQ(Label(L7),SEQ(CJUMP(0,NAME(y),CONST:5,L8,L9),SEQ(Label(L8),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L7),L7),Label(L9))))))),Label(L6)))),MOVE(NAME(x),BINOP(0,NAME(x),CONST:1)))),SEQ(JUMP(NAME(L2),L2),Label(L4))))))))
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId

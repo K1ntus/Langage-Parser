@@ -6,6 +6,7 @@ import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypeBoolean;
 import ubordeaux.deptinfo.compilation.project.type.TypeInt;
+import ubordeaux.deptinfo.compilation.project.type.TypeNull;
 import ubordeaux.deptinfo.compilation.project.type.TypeString;
 
 public final class NodeLiteral extends NodeExp {
@@ -73,6 +74,8 @@ public final class NodeLiteral extends NodeExp {
 		} else if(this.getType() instanceof TypeString) {	//p. 168
 			res = new Const(-1);
 			//res = new Const(this.hexToString(this.stringToHex((String) this.getValue())));
+		}else if (this.getType() instanceof TypeNull) {
+			res = new Const(0);
 		}
 		return res;
 	}

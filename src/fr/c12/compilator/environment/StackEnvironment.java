@@ -13,40 +13,65 @@ import ubordeaux.deptinfo.compilation.project.type.TypePointer;
 
 
 //Local variable stack
+/**
+ * Manage the variable stack. Each stack is equivalent to a local scope.
+ * The "First" one contains every variable that has been declared at the beginning of the program.
+ *
+ */
 public class StackEnvironment {
+	/**
+	 * The Stack that will store the variable name and his type.
+	 * Each variable can be find using his name (so a string) as a key and get his type (value of the key in the map)
+	 */
 	private Stack<Map<String, Type>> environment;
 
+	/**
+	 * If enabled, more informations will be displayed during the parsing of the LEA code
+	 */
 	private static boolean verbose = false;
 	
+	/**
+	 * Initialize the Environment Stack
+	 */
 	public StackEnvironment() {		
 		environment = new Stack<>();
 		
 	}
 	
 	//Input: "local variables stack"
+	/**
+	 * 
+	 * @param str name parameter of the environment using in the %embed part of the lalr parser, somehow useless.
+	 */
 	public StackEnvironment(String str) {
 		this();
 	}
 
+	/**
+	 * Return the Map containing the latest scope of the program, but check before if the stack is not empty
+	 * @return Map<String,  Type> latest scope
+	 */
 	public Map<String, Type> get_last_portability(){
 		if(environment.isEmpty())
 			return environment.push(new HashMap<String, Type>());
 		return environment.peek();
 	}
-
-	public Map<String, Type> get_last2_portability(){
-		if(environment.isEmpty())
-			return environment.push(new HashMap<String, Type>());
-		Map<String,Type> top, top_0;
-		top = environment.pop();
-		top_0 = environment.peek();
-		environment.push(top);
-		return top_0;
-	}
 	
+	/**
+	 * Get a variable type depending of his name as a key.
+	 * This function explore the whole Stack to get the latest 
+	 * Type corresponding to this key.
+	 * 
+	 * This function is somehow deprecated because was made when we was manipuling node directly into the table
+	 * And whatever the scope, the result here would be the same so we should just check the last scope.
+	 * 
+	 * @param id the name of the variable to find in the stack
+	 * @return the Type linked to this variable name in the stack
+	 * @throws UnknownVariable Exception throw when there s no key with this value in the table in the whole stack
+	 */
 	//haut vers bas, faut get le last equals sinon modifier et utiliser listIterator+hasPrevious
 	public Type get_node_reachable(String id) throws UnknownVariable {
-		int layer = 0;
+		//int layer = 0;	//Debugging purpose
 		Type res = null;
 		Iterator<Map<String, Type>> it = environment.iterator();
 		
@@ -56,11 +81,11 @@ public class StackEnvironment {
 			//System.out.println("map:" + map.toString());
 			
 			try {
-				res = getLiteralFromId(id, map);
+				res = getTypeFromId(id, map);
 			} catch (UnknownVariable e) {
 				continue;
 			}
-			layer +=1;
+			//layer +=1;
 			
 		}
 		if(res != null) {
@@ -72,7 +97,15 @@ public class StackEnvironment {
 	}
 	
 
-	public Type getLiteralFromId(String id, Map<String, Type> map) throws UnknownVariable {
+	/**
+	 * Get the type linked to a string in the map passed as a parameter
+	 * 
+	 * @param id Name of the variable to get
+	 * @param map The map to explore
+	 * @return Type of this variable string
+	 * @throws UnknownVariable exception when there s no such key into the table
+	 */
+	private Type getTypeFromId(String id, Map<String, Type> map) throws UnknownVariable {
 		Type res = map.get(id);
 		if(res == null)
 			throw new UnknownVariable("Aucune variable ["+id+"] enregistree a la couche :" + environment.size());
@@ -80,7 +113,13 @@ public class StackEnvironment {
 	}
 
 	
-
+	/**
+	 * This function insert a (String, Type) to the latest scope of the stack table
+	 * 
+	 * @param id the name of the variable (used as the key of the table)
+	 * @param n the type of the variable (used as the value of the table)
+	 * @throws RedefinitionVariable exception throw if there s alreay a key (ie. a variable) with this name
+	 */
 	public void add_node_to_latest_portability(String id, Type n) throws RedefinitionVariable {
 		if(verbose)
 			System.out.println("* Enregistre " + id.toString());
@@ -93,6 +132,14 @@ public class StackEnvironment {
 		this.get_last_portability().put(id, n);
 	}
 
+	/**
+	 * Add a variable (String, Type) to every current table of the stack
+	 * Was used when misunterpreting the TOKEN_NEW usage
+	 * 
+	 * @param id
+	 * @param n
+	 */
+	@Deprecated
 	public void add_node_to_every_layer(String id, Type n) {
 		Iterator<Map<String, Type>> it = environment.iterator();
 		
@@ -105,11 +152,18 @@ public class StackEnvironment {
 			i +=1;
 		}
 	}
-	
+
+	/**
+	 * Add a variable (String, Type) to every current table of the stack
+	 * Was used when misunterpreting the TOKEN_NEW usage
+	 * 
+	 * @param id name of the pointer to alloc
+	 * @throws MemoryLeak was throw when double or more new
+	 */
+	@Deprecated
 	public void alloc_variable(String id) throws MemoryLeak {
 		Iterator<Map<String, Type>> it = environment.iterator();
 		
-		int i = 0;
 		while(it.hasNext()) {
 			Map<String, Type> map = it.next();
 			//System.out.println("* Removed " + id.toString() + " at layer: " + i);
@@ -119,15 +173,20 @@ public class StackEnvironment {
 			TypePointer n_type = new TypePointer(map.get(id));
 			map.put(id, n_type);
 			
-			i +=1;
 		}
 	}
 
-
+	/**
+	 * Remove a variable (String, Type) to every current table of the stack
+	 * Was used when misunterpreting the TOKEN_NEW usage
+	 * 
+	 * @param id name of the pointer to free
+	 * @throws MemoryLeak was throw when double or more free
+	 */
+	@Deprecated
 	public void dispose_variable(String id) throws MemoryLeak {
 		Iterator<Map<String, Type>> it = environment.iterator();
 		
-		int i = 0;
 		while(it.hasNext()) {
 			Map<String, Type> map = it.next();
 			//System.out.println("* Removed " + id.toString() + " at layer: " + i);
@@ -137,7 +196,6 @@ public class StackEnvironment {
 			TypePointer n_type = (TypePointer) map.get(id);
 			map.put(id, n_type.get(n_type.size()-1));
 			
-			i +=1;
 		}
 	}
 

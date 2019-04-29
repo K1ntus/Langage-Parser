@@ -102,7 +102,10 @@ public final class NodeList extends Node {
 	
 		if (clone.size() > 1 && clone.get(0) != null) {
 			clone.elts.remove(0);
-			return new Seq((Stm)stat,(Stm)((NodeList)clone).generateIntermediateCodeList());
+			
+			return new Seq((Stm)stat,(Stm)clone.generateIntermediateCode());
+			
+			//return new Seq((Stm)stat,(Stm)((NodeList)clone).generateIntermediateCodeList());
 		}
 				
 		return (Stm) stat;

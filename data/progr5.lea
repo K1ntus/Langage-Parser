@@ -20,8 +20,8 @@ begin
 		begin
 			i = i - j;
 		end
-		//else
-		//	j = j - i;
+		else
+			j = j - i;
 	end
 	
   return (i);

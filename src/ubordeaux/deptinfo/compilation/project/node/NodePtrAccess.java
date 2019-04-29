@@ -40,7 +40,7 @@ public final class NodePtrAccess extends NodeExp {
 		Exp name = (Exp) get(0).generateIntermediateCode();
 		//Exp indice = ((NodeExp)get(1)).generateIntermediateCodeExp();
 		
-		return new Mem(new Binop(0, name, new Const(1)));
+		return new Mem(new Binop(0, name, new Const(0)));
 		//return null;
 		
 	}

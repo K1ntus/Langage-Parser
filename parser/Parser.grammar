@@ -173,7 +173,8 @@ program=
 	TOKEN_END	pop_stackenv.pop 		//On depile stackenv
 	{: 
 		if(generate_intermediate_code)
-			System.out.println(l.generateIntermediateCode().toString());
+			System.out.println("Intermediate Code Generation:");
+			System.out.println(l.generateIntermediateCode().toString() + "\n");
 	    return _symbol_l; 
     :}		
 	;
@@ -741,18 +742,18 @@ structured_statement=
 if_statement=
 	TOKEN_IF expression.e TOKEN_THEN statement.stm_if				
 		{:	
-			return new NodeIf(e, stm_if);
+			return new NodeIf(e, new NodeList(stm_if));
 		:}
 	| TOKEN_IF expression.e TOKEN_THEN statement.stm_if TOKEN_ELSE statement.stm_else 
 		{: 
-			return new NodeIf(e, stm_if, stm_else); 
+			return new NodeIf(e, new NodeList(stm_if), new NodeList(stm_else)); 
 		:}
 ;
 
 
 //OK	
 while_statement=
-	TOKEN_WHILE expression.e1 TOKEN_DO statement.stm	{:	return new NodeWhile(e1, stm);	:}
+	TOKEN_WHILE expression.e1 TOKEN_DO statement.stm	{:	return new NodeWhile(e1, new NodeList(stm));	:}
 	;
 
 //OK	
@@ -795,7 +796,7 @@ case_statement=
 		{: 
 			NodeList res = new NodeList();
 			for(String case_name : id_list) {
-				res.add(new NodeCase(case_name, stm));
+				res.add(new NodeCase(case_name, new NodeList(stm)));
 			}
 			return res;
 		
@@ -804,7 +805,7 @@ case_statement=
 	
 case_default=
 	/* empty */
-	| TOKEN_DEFAULT TOKEN_COLON statement.stm	{: return new NodeCase(null, stm); :}
+	| TOKEN_DEFAULT TOKEN_COLON statement.stm	{: return new NodeCase(null, new NodeList(stm)); :}
 	;
 
 /*

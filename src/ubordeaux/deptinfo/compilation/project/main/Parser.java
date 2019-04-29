@@ -123,7 +123,8 @@ public class Parser extends beaver.Parser {
 					final Symbol pop = _symbols[offset + 8];
 					 
 		if(generate_intermediate_code)
-			System.out.println(l.generateIntermediateCode().toString());
+			System.out.println("Intermediate Code Generation:");
+			System.out.println(l.generateIntermediateCode().toString() + "\n");
 	    return _symbol_l;
 				}
 			},
@@ -746,7 +747,7 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_stm_if = _symbols[offset + 4];
 					final Node stm_if = (Node) _symbol_stm_if.value;
 						
-			return new NodeIf(e, stm_if);
+			return new NodeIf(e, new NodeList(stm_if));
 				}
 			},
 			new Action() {	// [84] if_statement = TOKEN_IF expression.e TOKEN_THEN statement.stm_if TOKEN_ELSE statement.stm_else
@@ -758,7 +759,7 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_stm_else = _symbols[offset + 6];
 					final Node stm_else = (Node) _symbol_stm_else.value;
 					 
-			return new NodeIf(e, stm_if, stm_else);
+			return new NodeIf(e, new NodeList(stm_if), new NodeList(stm_else));
 				}
 			},
 			new Action() {	// [85] while_statement = TOKEN_WHILE expression.e1 TOKEN_DO statement.stm
@@ -767,7 +768,7 @@ public class Parser extends beaver.Parser {
 					final NodeExp e1 = (NodeExp) _symbol_e1.value;
 					final Symbol _symbol_stm = _symbols[offset + 4];
 					final Node stm = (Node) _symbol_stm.value;
-						return new NodeWhile(e1, stm);
+						return new NodeWhile(e1, new NodeList(stm));
 				}
 			},
 			new Action() {	// [86] switch_statement = TOKEN_SWITCH expression.root TOKEN_BEGIN case_statement_list.case_list TOKEN_END
@@ -825,7 +826,7 @@ public class Parser extends beaver.Parser {
 					 
 			NodeList res = new NodeList();
 			for(String case_name : id_list) {
-				res.add(new NodeCase(case_name, stm));
+				res.add(new NodeCase(case_name, new NodeList(stm)));
 			}
 			return res;
 				}
@@ -835,7 +836,7 @@ public class Parser extends beaver.Parser {
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_stm = _symbols[offset + 3];
 					final Node stm = (Node) _symbol_stm.value;
-					 return new NodeCase(null, stm);
+					 return new NodeCase(null, new NodeList(stm));
 				}
 			},
 			new Action() {	// [92] variable_access = TOKEN_IDENTIFIER.name

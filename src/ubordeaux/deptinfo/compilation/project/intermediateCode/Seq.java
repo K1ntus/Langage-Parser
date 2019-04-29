@@ -12,7 +12,7 @@ public class Seq extends Stm {
 	@Override
 	public String toString(){
 		//System.out.println(left.toString());
-		return "SEQ("+ left.toString() + "," + right.toString() + ")";
+		return "** SEQ("+ left.toString() + "," + right.toString() + ")";
 	}
 	
 

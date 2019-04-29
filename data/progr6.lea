@@ -1,7 +1,6 @@
 //
 // gestion complexe de la pile
 // 
-
 var
 x : integer;
 
@@ -21,15 +20,19 @@ begin
 		return (fact2(k-1) * k);
 end
 
+
 procedure hanoi(a: string, b: string, c: string, k: integer)
   begin
-  if (k>1) then hanoi(a, c, b, k-1);
+  if (k>1) then
+	 hanoi(a, c, b, k-1);
   print(a); print(">"); println(c);
-  if (k>1) then hanoi(b, a, c, k-1);
+  if (k>1) then
+	hanoi(b, a, c, k-1);
 end
 
 function impair(i : integer) : boolean;
 function pair(i : integer) : boolean
+
 var
   b : boolean;
 begin

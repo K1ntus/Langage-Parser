@@ -1,7 +1,6 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
 
 public final class NodeDispose extends Node {
 
@@ -21,8 +20,18 @@ public final class NodeDispose extends Node {
 	}
 
 
-	public IntermediateCode generateIntermediateCodeDispose() {
+	public Const generateIntermediateCodeDispose() {
 		System.err.println("* FREE("+this+") - Todo");
+		/*
+		System.out.println("FREE3" + ((NodeId)this.get(0)).getName());
+		Name n = new Name(
+				new LabelLocation(
+				((NodeId)this.get(0)).getName()))
+			
+		return new Move(n, new Const(0));	;
+		*/
+		
 		return new Const(0);
 	}
+	
 }

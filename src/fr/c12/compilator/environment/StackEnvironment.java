@@ -47,15 +47,6 @@ public class StackEnvironment {
 		this();
 	}
 
-	/**
-	 * Return the Map containing the latest scope of the program, but check before if the stack is not empty
-	 * @return Map<String,  Type> latest scope
-	 */
-	public Map<String, Type> get_last_portability(){
-		if(environment.isEmpty())
-			return environment.push(new HashMap<String, Type>());
-		return environment.peek();
-	}
 	
 	/**
 	 * Get a variable type depending of his name as a key.
@@ -70,7 +61,7 @@ public class StackEnvironment {
 	 * @throws UnknownVariable Exception throw when there s no key with this value in the table in the whole stack
 	 */
 	//haut vers bas, faut get le last equals sinon modifier et utiliser listIterator+hasPrevious
-	public Type get_node_reachable(String id) throws UnknownVariable {
+	public Type get_type_reachable(String id) throws UnknownVariable {
 		//int layer = 0;	//Debugging purpose
 		Type res = null;
 		Iterator<Map<String, Type>> it = environment.iterator();
@@ -112,6 +103,16 @@ public class StackEnvironment {
 		return res;
 	}
 
+
+	/**
+	 * Return the Map containing the latest scope of the program, but check before if the stack is not empty
+	 * @return Map<String,  Type> latest scope
+	 */
+	private Map<String, Type> get_latest_scope(){
+		if(environment.isEmpty())
+			return environment.push(new HashMap<String, Type>());
+		return environment.peek();
+	}
 	
 	/**
 	 * This function insert a (String, Type) to the latest scope of the stack table
@@ -120,18 +121,46 @@ public class StackEnvironment {
 	 * @param n the type of the variable (used as the value of the table)
 	 * @throws RedefinitionVariable exception throw if there s alreay a key (ie. a variable) with this name
 	 */
-	public void add_node_to_latest_portability(String id, Type n) throws RedefinitionVariable {
+	public void add_type_to_latest_portability(String id, Type n) throws RedefinitionVariable {
 		if(verbose)
 			System.out.println("* Enregistre " + id.toString());
 		
 		
-		if(this.get_last_portability().get(id) != null)
+		if(this.get_latest_scope().get(id) != null)
 			throw new RedefinitionVariable(id);
 		
 		
-		this.get_last_portability().put(id, n);
+		this.get_latest_scope().put(id, n);
 	}
 
+	/*
+	 * Getter&Setter
+	 */
+	
+	/**
+	 * @return the environment
+	 */
+	public Stack<Map<String, Type>> getEnvironment() {
+		return environment;
+	}
+
+	/**
+	 * @param environment the environment to set
+	 */
+	public void setEnvironment(Stack<Map<String, Type>> environment) {
+		this.environment = environment;
+	}
+	
+	
+	
+	
+	/*
+	 * 
+	 * Deprecated Functions
+	 * 
+	 */
+	
+	
 	/**
 	 * Add a variable (String, Type) to every current table of the stack
 	 * Was used when misunterpreting the TOKEN_NEW usage
@@ -198,22 +227,4 @@ public class StackEnvironment {
 			
 		}
 	}
-
-
-	
-	/**
-	 * @return the environment
-	 */
-	public Stack<Map<String, Type>> getEnvironment() {
-		return environment;
-	}
-
-	/**
-	 * @param environment the environment to set
-	 */
-	public void setEnvironment(Stack<Map<String, Type>> environment) {
-		this.environment = environment;
-	}
-	
-	
 }

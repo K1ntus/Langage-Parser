@@ -608,36 +608,88 @@ $$
 //range4 = Friday .. Unknown; // error	//NoSuchField
 ** Enregistre types: TypeArrayRange[TypeInt_1..TypeInt_5]
 [InvalidType@subrange_type] min@[Friday:5] is greater than max@[Monday:1]
-fr.c12.compilator.error.InvalidType
-	at ubordeaux.deptinfo.compilation.project.main.Parser$13.reduce(Unknown Source)
-	at ubordeaux.deptinfo.compilation.project.main.Parser.invokeReduceAction(Unknown Source)
-	at beaver.Parser.reduce(Parser.java:561)
-	at beaver.Parser.parse(Parser.java:468)
-	at beaver.Parser.parse(Parser.java:428)
-	at ubordeaux.deptinfo.compilation.project.main.Main.main(Unknown Source)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.tools.ant.taskdefs.ExecuteJava.run(ExecuteJava.java:221)
-	at org.apache.tools.ant.taskdefs.ExecuteJava.execute(ExecuteJava.java:154)
-	at org.apache.tools.ant.taskdefs.Java.run(Java.java:834)
-	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:228)
-	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:137)
-	at org.apache.tools.ant.taskdefs.Java.execute(Java.java:110)
-	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:293)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)
-	at org.apache.tools.ant.Task.perform(Task.java:348)
-	at org.apache.tools.ant.Target.execute(Target.java:435)
-	at org.apache.tools.ant.Target.performTasks(Target.java:456)
-	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1405)
-	at org.apache.tools.ant.Project.executeTarget(Project.java:1376)
-	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
-	at org.eclipse.ant.internal.launching.remote.EclipseDefaultExecutor.executeTargets(EclipseDefaultExecutor.java:36)
-	at org.apache.tools.ant.Project.executeTargets(Project.java:1260)
-	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.run(InternalAntRunner.java:460)
-	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.main(InternalAntRunner.java:142)
+// error	//InvalidType@subrange_type
+//range6 = Monday .. December; //error	//A GERER
+//range7 = Friday .. Tuesday; // error "range not valid" //InvalidType@subrange_type
+//range8 = Monday .. April; // error "incoherent range" //A GERER
+$$$ Array $$$
+** Enregistre types: TypeArrayRange[TypeInt_5..TypeInt_1]
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)
+** Retrouve types: range1 TypeArrayRange[TypeInt_64..TypeInt_81]
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_64..TypeInt_81], TypeInt_null)
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeInt_null)
+** Retrouve types: DaysOfWeek (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
+$$ 
+Cas
+D'erreur
+$$
+// UNKNWOWN TYPE
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray((TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6), TypeInt_null))
+[UnknownType] type: range3 has not been defined
+// error "Range type expected"
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray(TypeNamed_range3, TypeInt_null))
+$$$ Pointers $$$
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray(TypeArrayRange[TypeInt_3..TypeInt_6], TypeInt_null))
+** Enregistre types: TypePointer(TypeInt_null)
+** Retrouve types: DaysOfWeek (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
+$$$
+Variable declaration part
+$$$
+** Enregistre types: TypePointer(TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray((TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6), TypeInt_null)))
+//x : boolean; // error "Variable x yet declared" // RedefinitionVariable
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Retrouve types: ptr1 TypePointer(TypeInt_null)
+** Retrouve types: Months (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
+** Retrouve types: range1 TypeArrayRange[TypeInt_64..TypeInt_81]
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Retrouve types: Months (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
+** Enregistre fct:goo
+//function goo(i : integer, j : integer) : boolean;//RedefinitionFunctionPrototype //error "procedure or function declared twice"
+** Enregistre fct:foo
+//result^ = hoo(i, j); // error "function not declared" //NoSuchFieldException
+Label(L34)
+* ALLOC(NodeNew(NodeId#result:TypePointer(TypeBoolean)#)) - Todo
+* CALL(NAME(goo),NAME(i)NAME(j))
+* MOVE(MEM(BINOP(0,NAME(result),CONST:0)),CALL(NAME(goo),NAME(i)NAME(j)))
+** Enregistre fct:goo
+//function goo(i : integer, j : integer) : boolean begin return false; end //RedefinitionFunction // error "function already defined"
+Label(L35)
+///b = 2; // error "Type error in affectation"
+///l = m2; // error "Type error in affectation" //m2 range 4, l range 5
+///b = foo(3); // error "Type error in calling expression"			//PAS GERE Checktype invalid
+///b = foo(3, false); // error "Type error in calling expression"	//PAS GERE Checktype invalid
+///x = foo(3, 7); // error "Type error in calling expression"		//PAS GERE Checktype invalid
+///z2 [ Thursday ] = 36; // error "Type error in array access "		//PAS GERE
+//IL Y AVAIT UN CRASH ICI RIP
+//y = z [ false ]; // error "Type error in array access" // InvalidArrayAccess
+//y = z [ 4 ]; // error "Type error in affectation"			//HANDLED
+//b = z [ 4 ]; // error "Type error in affectation"			//HANDLED
+//z = k [ 4 ]; // error "Type error in affectation"			//HANDLED
+//b = z2 [ Thursday ]; // error "Type error in affectation"	//HANDLED
+///z2 = 36; // Accessible variable expected
+///b = !(2 < false) && (x == 1) && (p == null); // // error "Type error in comparison"
+///b = !(2 < x) && (x == 1) && p ; // // error "Type error in logical expression"
+///b = !(2 < x) && (x == 1 + false) && p ; // // error "Type error in arithmetic expression"
+///p = null;	//A CORRIGER CA DEVRAIT FONCTIONNER NORMALEMENT
+//p = 0; // error "Type error in affectation" //InvalidAffectation
+//new x; // error "Type error in pointer access expression" //InvalidPointerAccess
+//INVALID AFFECTATION OK
+///x^ = null; // error "Type error in pointer access expression"
+[InvalidAffectation] Impossible to assign a TypeInt_null to TypeBoolean at line: 159
+[InvalidAffectation] Automatically recover from error.
+//dispose x;  // error "Type error in pointer access expression" //InvalidPointerAccess
+
+NodeList(NodeAssign(NodeId#null:TypeNull#, NodeLiteral#null:TypeNull#), NodeList(NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#false:TypeBoolean#), NodeAssign(NodeId#l:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeBoolean)#, NodeId#l:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeBoolean)#), NodeAssign(NodeId#b:TypeBoolean#, NodePtrAccess(foo_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#7:TypeInt_null#)))), NodeAssign(NodeId#b:TypeBoolean#, goo_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#7:TypeInt_null#))), NodeAssign(NodeArrayAccess(NodeId#z2:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#36:TypeInt_null#), NodeAssign(NodeId#x:TypeInt_null#, NodeArrayAccess(NodeId#z2:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)#, NodeLiteral#1:TypeInt_null#)), NodeAssign(NodeId#b:TypeBoolean#, goo_NodeCallFct(NodeList(NodeArrayAccess(NodeId#z2:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#1:TypeInt_null#))), NodeIf(NodeArrayAccess(NodeId#l:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeBoolean)#, NodeId#Monday:TypeInt_1#), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#))), NodeIf(NodeArrayAccess(NodeId#l:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeBoolean)#, NodeId#Monday:TypeInt_1#), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#)), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#2:TypeInt_null#))), NodeIf(NodeArrayAccess(NodeId#z2:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)#, NodeLiteral#7:TypeInt_null#), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#))), NodeWhile(NodeArrayAccess(NodeId#z2:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)#, NodeLiteral#7:TypeInt_null#), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#))), NodeWhile(NodeArrayAccess(NodeId#z2:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)#, NodeLiteral#7:TypeInt_null#), NodeList(NodeList(NodeIf(NodeArrayAccess(NodeId#l:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeBoolean)#, NodeId#Monday:TypeInt_1#), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#)), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#2:TypeInt_null#))), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), readln_NodeCallFct(NodeList)))), NodeSwitch(NodeId#month:(TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)#, NodeCaseList(NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"spring":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"spring":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"spring":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"summer":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"summer":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"summer":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"autumn":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"autumn":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"autumn":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"winter":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"winter":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"winter":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"none":TypeString#)))))), NodeAssign(NodeId#x:TypeInt_null#, NodeOp(NodeOp(NodeOp(NodeLiteral#36:TypeInt_null#, NodeLiteral#45:TypeInt_null#), NodeLiteral#7:TypeInt_null#), NULL)), NodeNew(NodeId#p:TypePointer(TypeInt_null)#), NodeAssign(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#), NodeLiteral#36:TypeInt_null#), NodeAssign(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#), NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#)), NodeAssign(NodeId#x:TypeInt_null#, NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#)), NodeDispose(NodeId#p:TypePointer(TypeInt_null)#)))
+Intermediate Code Generation:
+* MOVE(NAME(b),CONST:0)
+* MOVE(MEM(NAME(l)),NAME(l))
+* CALL(NAME(foo),CONST:3CONST:7)
+* MOVE(NAME(b),MEM(BINOP(0,CALL(NAME(foo),CONST:3CONST:7),CONST:0)))
+* CALL(NAME(goo),CONST:3CONST:7)
+* MOVE(NAME(b),CALL(NAME(goo),CONST:3CONST:7))
+* MOVE(MEM(BINOP(0,NAME(z2),CONST:1)),CONST:36)
+* MOVE(NAME(x),MEM(BINOP(0,NAME(z2),CONST:1)))
+* CALL(NAME(goo),MEM(BINOP(0,NAME(z2),CONST:1))CONST:1)
+* MOVE(NAME(b),CALL(NAME(goo),MEM(BINOP(0,NAME(z2),CONST:1))CONST:1))

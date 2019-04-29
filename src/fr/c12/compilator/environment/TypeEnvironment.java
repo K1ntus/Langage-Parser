@@ -18,7 +18,7 @@ public class TypeEnvironment {
 		table = new HashMap<String, Type>();
 		//table.put("integer",new TypeInt());
 		//table.put("string",new TypeString());
-		//table.put("boolean",new TypeBoolean());
+		//table.put("boolean",new TypeBoolean()); 
 	}
 	
 	/**

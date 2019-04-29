@@ -36,12 +36,8 @@ public final class NodePtrAccess extends NodeExp {
 	}
 
 	public Mem generateIntermediateCodePtr() {	//p. 163
-		//System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
 		Exp name = (Exp) get(0).generateIntermediateCode();
-		//Exp indice = ((NodeExp)get(1)).generateIntermediateCodeExp();
 		
 		return new Mem(new Binop(0, name, new Const(0)));
-		//return null;
-		
 	}
 }

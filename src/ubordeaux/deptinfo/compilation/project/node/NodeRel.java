@@ -77,41 +77,11 @@ public class NodeRel extends NodeExp {
 	
 
 	public Binop generateIntermediateCodeRel() {
-		/*
-		 //Exp left = new Const (((NodeLiteral)n.get(i)).getValue());
-		 //res = new Binop(n.getCodeOp(), n.getExp(0).generateIntermediateCodeExp(), n.getExp(1).generateIntermediateCodeExp());
-		
-		 Binop op = new Binop(this.getCodeOp(), 
-				 new Const(
-						 (int) ((NodeLiteral) this.getExp(0)).getValue()
-						 ), 
-				 new Const(
-						 (int) ((NodeLiteral) this.getExp(1)).getValue()
-						 )
-				 );
-		 System.out.println("* " + op.toString());
-		 return op;
-		//return new Binop(this.getCodeOp(), ((ExpList)this.getOp1().generateIntermediateCode()).getHead(), ((ExpList)this.getOp2().generateIntermediateCode()).getHead());
-	}
-	*/
-		
-		 //GERER NodeOP et NodeRel
 		Binop res = null;
         Exp leftexp = (Exp)this.get(0).generateIntermediateCode();
         Exp rightexp = (Exp)this.get(0).generateIntermediateCode();
         int i = this.getCodeOp();
-        /*
-        if(this.getOp1() instanceof NodeLiteral) {
-        	leftexp = ((NodeLiteral)this.getOp1()).generateIntermediateCodeLiteral();;
-        }else if(this.getOp1() instanceof NodeId) {
-        	leftexp = ((NodeId)this.getOp1()).generateIntermediateCodeId();
-        }
-        if(this.getOp2() instanceof NodeLiteral) {
-        	rightexp = ((NodeLiteral)this.getOp2()).generateIntermediateCodeLiteral();
-        }else if(this.getOp2() instanceof NodeId) {
-            rightexp = ((NodeId)this.getOp2()).generateIntermediateCodeId();
-        }*/
-       
+        
         res = new Binop(i,leftexp,rightexp);
         //System.out.println(res.toString());
         return res;

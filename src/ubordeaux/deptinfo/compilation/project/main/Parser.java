@@ -102,8 +102,8 @@ public class Parser extends beaver.Parser {
 	private String type_declaration_name;
 	
 	
-	private boolean verbose_mode = true;	
-	private boolean critical_mode = true;
+	private boolean verbose_mode = false;	
+	private boolean critical_mode = false;
 
 	private boolean generate_intermediate_code = true;
 
@@ -129,7 +129,7 @@ public class Parser extends beaver.Parser {
 			System.out.println(l1);
 			System.out.println("Intermediate Code Generation:");
 			System.out.println(l.generateIntermediateCode().toString() + "\n");
-			//ZSystem.out.println(l1.generateIntermediateCode().toString());
+			//System.out.println(l1.generateIntermediateCode().toString());
 	    return _symbol_l;
 				}
 			},
@@ -344,7 +344,7 @@ public class Parser extends beaver.Parser {
 					
 																for(String str : id_list){
 																	try {
-																		stackEnvironment.add_node_to_latest_portability(str, t);
+																		stackEnvironment.add_type_to_latest_portability(str, t);
 																	}catch ( RedefinitionVariable e) {
 																		if(verbose_mode) {
 																			e.printStackTrace();
@@ -457,7 +457,7 @@ public class Parser extends beaver.Parser {
 					try {
 						NodeId n_id = (NodeId) n;
 						params_tuple.add(new TypeFeature(n_id.getName(), n_id.getType()));
-						stackEnvironment.add_node_to_latest_portability(n_id.getName(), n_id.getType());
+						stackEnvironment.add_type_to_latest_portability(n_id.getName(), n_id.getType());
 				
 					}catch ( RedefinitionVariable e) {
 						System.err.println(e + " at Line : " + Symbol.getLine(args.getStart()));
@@ -490,7 +490,7 @@ public class Parser extends beaver.Parser {
 					try {
 						NodeId n_id = (NodeId) n;
 						params_tuple.add(new TypeFeature(n_id.getName(), n_id.getType()));
-						stackEnvironment.add_node_to_latest_portability(n_id.getName(), n_id.getType());
+						stackEnvironment.add_type_to_latest_portability(n_id.getName(), n_id.getType());
 
 					}catch ( RedefinitionVariable e) {
 						//System.err.println(e + " at Line : " + Symbol.getLine(args.getStart()));
@@ -630,7 +630,7 @@ public class Parser extends beaver.Parser {
 																					while(it.hasNext()) {
 																						try {
 																							TypeFeature type_feature= (TypeFeature) it.next();
-																							stackEnvironment.add_node_to_latest_portability(type_feature.getName(), type_feature.getType());	
+																							stackEnvironment.add_type_to_latest_portability(type_feature.getName(), type_feature.getType());	
 																						} catch (RedefinitionVariable e) {
 																							if(verbose_mode) {
 																								e.printStackTrace();
@@ -856,7 +856,7 @@ public class Parser extends beaver.Parser {
 					final String name = (String) _symbol_name.value;
 						
 			try{
-				Type t = stackEnvironment.get_node_reachable(name);  
+				Type t = stackEnvironment.get_type_reachable(name);  
 				return new NodeId(name, t);
 			} catch (UnknownVariable e) {	//Not a normal variable
 				try {						//Check enum

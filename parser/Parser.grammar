@@ -178,7 +178,7 @@ program=
 			System.out.println(l1);
 			System.out.println("Intermediate Code Generation:");
 			System.out.println(l.generateIntermediateCode().toString() + "\n");
-			System.out.println(l1.generateIntermediateCode().toString());
+			//System.out.println(l1.generateIntermediateCode().toString());
 	    return _symbol_l; 
     :}		
 	;

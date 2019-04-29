@@ -125,14 +125,11 @@ public class Parser extends beaver.Parser {
 					final Symbol pop = _symbols[offset + 9];
 					 
 		if(generate_intermediate_code)
-<<<<<<< HEAD
-			System.out.println("Intermediate Code Generation:");
-			System.out.println(l.generateIntermediateCode().toString() + "\n");
-=======
 			l1.add(l);
 			System.out.println(l1);
-			System.out.println(l1.generateIntermediateCode().toString());
->>>>>>> 157395d84057718cf89cfd3f73eacbfda0c147fe
+			System.out.println("Intermediate Code Generation:");
+			System.out.println(l.generateIntermediateCode().toString() + "\n");
+			//ZSystem.out.println(l1.generateIntermediateCode().toString());
 	    return _symbol_l;
 				}
 			},

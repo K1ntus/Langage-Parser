@@ -144,7 +144,7 @@
 %typeof case_default = "NodeCase";
 %typeof case_statement = "NodeList";
 
-%typeof statement_list, expression_list, argt_list, block = "NodeList";
+%typeof constant_declaration_part, statement_list, expression_list, argt_list, block = "NodeList";
 %typeof case_statement_list = "NodeCaseList";
 %typeof identifier_list = "IdentifierList";
 //%typeof case_identifier_list = "IdentifierList";
@@ -162,7 +162,8 @@
 
 
 
-program=   
+program=
+	constant_declaration_part.l1
 	type_declaration_part.tp			//Type env
 	variable_declaration_part.vp 		//Type var
 	procedure_definition_part.pp		//Type procedure
@@ -173,8 +174,11 @@ program=
 	TOKEN_END	pop_stackenv.pop 		//On depile stackenv
 	{: 
 		if(generate_intermediate_code)
+			l1.add(l);
+			System.out.println(l1);
 			System.out.println("Intermediate Code Generation:");
 			System.out.println(l.generateIntermediateCode().toString() + "\n");
+			System.out.println(l1.generateIntermediateCode().toString());
 	    return _symbol_l; 
     :}		
 	;
@@ -184,6 +188,24 @@ Declaration named type
 
 normalement OK
 */
+constant_declaration_part =
+								{: 
+									return new NodeList(new NodeAssign(new NodeId("null", new TypeNull()), new NodeLiteral(new TypeNull() , null)));	
+								:}
+	;
+
+	/*
+constant_declaration_list =
+	constant_declaration_list constant_declaration
+	|
+	;
+	
+
+constant_declaration =
+	|
+	
+	*/
+	
 type_declaration_part= 
 	/* empty */	
 	| TOKEN_TYPE type_declaration_list

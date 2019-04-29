@@ -1,6 +1,10 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
+<<<<<<< HEAD
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
+=======
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
+>>>>>>> 157395d84057718cf89cfd3f73eacbfda0c147fe
 
 public final class NodeDispose extends Node {
 
@@ -22,6 +26,7 @@ public final class NodeDispose extends Node {
 
 	public Const generateIntermediateCodeDispose() {
 		System.err.println("* FREE("+this+") - Todo");
+<<<<<<< HEAD
 		/*
 		System.out.println("FREE3" + ((NodeId)this.get(0)).getName());
 		Name n = new Name(
@@ -32,6 +37,9 @@ public final class NodeDispose extends Node {
 		*/
 		
 		return new Const(0);
+=======
+		return new Move(new Mem( (Exp) this.get(0).generateIntermediateCode() ),new Name( new LabelLocation("null")));
+>>>>>>> 157395d84057718cf89cfd3f73eacbfda0c147fe
 	}
 	
 }

@@ -30,21 +30,7 @@ public final class NodeSwitch extends Node {
 		return this.get(0);
 	}
 
-	public IntermediateCode generateIntermediateCodeSwitch() {
-		//System.out.println("Size node : "+this.size());
-		//System.out.println("Statement switch : "+this.getStm() + " Sise of stm(Caslist) is : " + this.getStm().size());
-		//System.out.println("Statement switch : "+this.casel + " Sise of stm(Caslist) is : " + this.casel.size());
-
-		//System.out.println("Expression switch : "+this.getExp());
-		
-		//Cjump c = new Cj
-		
-		//Seq s = new Seq(
-		
-		IntermediateCode c = ((NodeCaseList)this.getStm()).generateIntermediateCodeCaseList((NodeExp) this.getExp());
-		//System.out.println("Code inter switch :"+c);
-		return c;
-		
-		
+	public IntermediateCode generateIntermediateCodeSwitch() {		
+		return ((NodeCaseList)this.getStm()).generateIntermediateCodeCaseList((NodeExp) this.getExp());	
 	}
 }

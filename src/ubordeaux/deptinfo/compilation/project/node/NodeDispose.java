@@ -25,7 +25,6 @@ public final class NodeDispose extends Node {
 
 
 	public Move generateIntermediateCodeDispose() {
-		System.err.println("* FREE("+this+") - Todo");
 		return new Move(new Mem( (Exp) this.get(0).generateIntermediateCode() ),new Name( new LabelLocation("null")));
 	}
 	

@@ -57,13 +57,6 @@ public final class NodeLiteral extends NodeExp {
 	}
 
 	public Const generateIntermediateCodeLiteral() {
-		/*//System.out.println(this.getValue().getClass().toString());
-		ExpList l = new ExpList(null, null);
-		Exp exp = l.getHead();
-		TempValue tmp = new TempValue();
-		//if()
-		
-		return new Move(new Temp(tmp),exp);*/
 		Const res = null;
 		
 		if(this.getType() instanceof TypeInt) { 

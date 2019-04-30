@@ -57,36 +57,9 @@ public final class NodeIf extends Node {
         Label l2 = new Label(ifFalse);
 
         Binop rel = null;
-        //if(this.getExpNode() instanceof NodeRel) {    // cas de comparaison entre 2 objects 
         rel = (Binop)((NodeRel)this.getExpNode()).generateIntermediateCode();
-
-            /*
-            i = ((NodeRel)this.getExpNode()).getCodeOp(); //valeur du symbol de la relation
-            e1 = (Exp)((NodeRel)this.getExpNode()).generateIntermediateCodeRel();    //genere une erreure null pointer, verifier getExpNode()
-            e2 = (Exp)((NodeRel)this.getExpNode()).generateIntermediateCodeRel();
-            */
-        //}else{
-          //  i = -1;    //cas d'erreur...
-       // }
-		//System.out.println("in NodeIf 2 rel is : "+rel);
-
-        /*
-        System.out.println("rel is : "+rel.toString());
         
-    	
-    	System.out.println("__________________________");
-    	
-    	System.out.println(this.getThenNode() +" become " + ((NodeList)this.getThenNode()).generateIntermediateCodeList());
-    	
-    	System.out.println("__________________________");
-
-    	//this.getThenNode().generateIntermediateCode().toString();
-    	
-    	System.out.println("__________________________");
-    	
-    	*/
-    	Cjump c = new Cjump(rel.getBinop(), rel.getLeft(), rel.getRight(), iftrue, ifFalse);    //cas erreur, surement buge
-		//System.out.println("in NodeIf 3 ");
+    	Cjump c = new Cjump(rel.getBinop(), rel.getLeft(), rel.getRight(), iftrue, ifFalse);
 
     	Seq s;
     	if(this.getElseNode() != null) {

@@ -39,12 +39,6 @@ public final class NodeCaseList extends NodeExp {
 		LabelLocation l = new LabelLocation();
 		NodeCaseList clone = this.clone();
 		
-		/*
-		if(clone.size()==0) {
-			System.out.println("aaaaé");
-			return new Const(0);
-		}
-		*/
 		
 		NodeCase tmp = (NodeCase)clone.get(0);
 		IntermediateCode stat = tmp.generateIntermediateCodeCase(exp,l);

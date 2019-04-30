@@ -52,7 +52,6 @@ public final class NodeCase extends Node {
 	        Label l1 = new Label(iftrue);
 	        Label l2 = new Label(ifFalse);	        
 	        
-	        Node op1 = e;
 	        NodeId  n = new NodeId(this.getNameValue(), e.getType());
 	        NodeRel rel = new NodeRel("==",e,n) ;
 	        Binop b = rel.generateIntermediateCodeRel();

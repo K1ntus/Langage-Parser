@@ -104,7 +104,6 @@ public final class NodeList extends Node {
 			
 			return new Seq((Stm)stat,(Stm)clone.generateIntermediateCode());
 			
-			//return new Seq((Stm)stat,(Stm)((NodeList)clone).generateIntermediateCodeList());
 		}
 				
 		return (Stm) stat;

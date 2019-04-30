@@ -1,12 +1,11 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
 
-import fr.c12.compilator.error.UnknownNodeType;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Mem;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Move;
 import ubordeaux.deptinfo.compilation.project.type.Type;
+import ubordeaux.deptinfo.compilation.project.type.TypeFunct;
 
 public final class NodeAssign extends Node {
 
@@ -37,7 +36,7 @@ public final class NodeAssign extends Node {
 				System.err.println("Problem with RightType. mb null.");
 			}
 			
-			/*
+			
 			if(!(rhsType == null)) {
 				if(rhsType instanceof TypeFunct) {
 					if(!((TypeFunct) rhsType).getRet().equals(lhsType)) {
@@ -45,7 +44,7 @@ public final class NodeAssign extends Node {
 					}
 				}
 			}
-			*/
+			
 			
 			return false;
 		}
@@ -74,19 +73,15 @@ public final class NodeAssign extends Node {
 		if(this.getRhs() instanceof NodeId) {
 			Move m = new Move(new Mem(l),((NodeId)this.getRhs()).generateIntermediateCodeId());
 			System.out.println("* " + m.toString());
-			//System.out.println("NODE ASSIGN DONNE " + m);
 
 			return m;
 		}else {
 			Move m = new Move(l, right);
 			System.out.println("* " + m.toString());
-			//System.out.println("NODE ASSIGN DONNE " + m);
-
+			
 			return m;
 
 		}
 		
-		
 	}
-	//return new Jump(n.getLocation(),n.getLocation());
 }

@@ -129,9 +129,7 @@ public class Parser extends beaver.Parser {
 			System.out.println("Intermediate Code:");
 			System.out.println(l.generateIntermediateCode().toString());
 		}
-			//System.out.println("Intermediate Code Generation:");
-			//System.out.println(l1.generateIntermediateCode().toString() + "\n");
-			//System.out.println(l1.generateIntermediateCode().toString());
+
 	    return _symbol_l;
 				}
 			},

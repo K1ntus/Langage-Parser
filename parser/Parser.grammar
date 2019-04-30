@@ -139,7 +139,6 @@
 %typeof statement = "Node";
 %typeof literal  = "NodeLiteral";
 %typeof variable_access, expression = "NodeExp";
-//%typeof case_statement = "NodeList";
 %typeof argt = "NodeId";
 %typeof case_default = "NodeCase";
 %typeof case_statement = "NodeList";
@@ -147,14 +146,9 @@
 %typeof constant_declaration_part, statement_list, expression_list, argt_list, block = "NodeList";
 %typeof case_statement_list = "NodeCaseList";
 %typeof identifier_list = "IdentifierList";
-//%typeof case_identifier_list = "IdentifierList";
 
 %typeof readln_statement, println_statement, procedure_expression = "NodeCallFct";
-%typeof procedure_head = "TypeFunct";//, procedure_definition = "TypeFunct";
-
-//%typeof pop_stackenv, push_stackenv = "Void";
-
-//%typeof procedure_definition, procedure_definition_list, procedure_definition_part = "NodeList";
+%typeof procedure_head = "TypeFunct";
 %typeof procedure_definition_head = "TypeFunct";
 
 
@@ -178,9 +172,7 @@ program=
 			System.out.println("Intermediate Code:");
 			System.out.println(l.generateIntermediateCode().toString());
 		}
-			//System.out.println("Intermediate Code Generation:");
-			//System.out.println(l1.generateIntermediateCode().toString() + "\n");
-			//System.out.println(l1.generateIntermediateCode().toString());
+
 	    return _symbol_l; 
     :}		
 	;
@@ -254,11 +246,9 @@ simple_type=
 	
 named_type=
 	TOKEN_IDENTIFIER.r /*empty*/	{: 
-		//System.out.println("Named: " + r); 
 		try {
 			return typeEnvironment.getVariableValue(r);
 		} catch(UnknownType e) {	//Si pas deja present
-			//System.err.println(e);
 			return new TypeNamed(r);
 		}
 	:}
@@ -269,7 +259,7 @@ index_type=
 	| subrange_type	//OK
 	;
 
-enumerated_type=//{: return new TypeEnumRange(new TypeItemEnum(0, list.first()), new TypeItemEnum(0, list.last())); :} //OLD
+enumerated_type=
 	init_enumerated_type TOKEN_LPAR identifier_list.id_l TOKEN_RPAR	
 		{: 
 			Vector<Type> array_tmp = new Vector<>();
@@ -333,7 +323,7 @@ array_type=
 	
 range_type=
 	enumerated_type	//OK
-	| subrange_type//.t	{: System.out.println(t.toString()); return t; :}	//OK
+	| subrange_type	//OK
 	| named_type	//OK
 	;
 	
@@ -436,7 +426,6 @@ procedure_definition_head=
 			type_fct.setDefined(true); 
 			procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
 		} catch (RedefinitionFunction|RedefinitionFunctionPrototype e) {
-			//System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
 			if(verbose_mode) {
 				e.printStackTrace();
 			}
@@ -509,7 +498,6 @@ procedure_head=
 						stackEnvironment.add_type_to_latest_portability(n_id.getName(), n_id.getType());
 
 					}catch ( RedefinitionVariable e) {
-						//System.err.println(e + " at Line : " + Symbol.getLine(args.getStart()));
 						if(verbose_mode) {
 							e.printStackTrace();
 						}
@@ -520,9 +508,7 @@ procedure_head=
 				
 				TypeFunct type_function = new TypeFunct(funct_name, params_tuple, t);
 
-				//stackEnvironment.getEnvironment().pop(); 
 				return type_function;
-				//return new NodeCallFct(funct_name, type_function, new NodeList());
 			:}
 	;
 	
@@ -554,14 +540,12 @@ block=
 	{: return _symbol_list; :}
 	;
 pop_stackenv  =		{:	
-						//System.out.println("[STACK] Poped one more stack layer"); 
 						stackEnvironment.getEnvironment().pop(); 
 						return new EmptySymbol();	
 					:}	
 				;
 
 push_stackenv =		{:	
-						//System.out.println("[STACK] Pushed one more stack layer"); 
 						stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); 
 						return new EmptySymbol(); 
 					:}	
@@ -607,9 +591,6 @@ simple_statement=
 assignment_statement=
 	variable_access.e1 TOKEN_AFF expression.e2 TOKEN_SEMIC	
 		{:  
-		//System.out.println("ASSIGN;::::" + e1.getType() + " -> " + e2.getType());
-			
-			//Type(e1) = Type(e2), ou Pointer(Type(e1)) = Type(e2) 
 			if(!e1.getType().equals(e2.getType()) && !(new TypePointer(e1.getType()).equals(e2.getType()) )) {
 				InvalidAffectation e = new InvalidAffectation("Impossible to assign a " + e1.getType() + " to " + e2.getType() + " at line: " + Symbol.getColumn(e1.getStart()));
 				if(verbose_mode) {
@@ -652,13 +633,10 @@ procedure_expression=
 																				
 																				}catch(UnknownProcedure e){
 																					System.err.println("[UnknownProcedure] line: " + Symbol.getColumn(args.getStart()));
-																					/*if(verbose_mode) {
-																						e.printStackTrace();
-																					}*/
 																					if(verbose_mode) {
 																						e.printStackTrace();
 																					}
-																					//System.out.println("Procedure Expression: " + e + " at Line : " + Symbol.getLine(args.getStart()));
+
 																					return new NodeCallFct(func_name, new TypeFunct(func_name, new TypeTuple(), new TypeVoid()), args);
 																				}
 																				
@@ -880,23 +858,14 @@ variable_access=
 					System.exit(0);
 				System.err.println("[InvalidArrayAccess] Automatically recover from syntax error.");
 				return var;
-				//return new NodeArrayAccess(var, new NodeLiteral(new TypeInt(0), 0));
 			}
 			return new NodeArrayAccess(var, e); 
 		:}
 	
 	| expression.e TOKEN_CIRC	//Pointeur
 		{: 
-		/*
-		if(!(e.getType() instanceof TypePointer)){
-			System.err.println("[MEMLEAK] Trying to access free or undeclared pointer");
-			
-			if(critical_mode)
-				System.exit(0);
-			return e;
-		}
-		*/
-		return new NodePtrAccess(e);	:}			
+		return new NodePtrAccess(e);	
+		:}			
 	;
 	
 expression=

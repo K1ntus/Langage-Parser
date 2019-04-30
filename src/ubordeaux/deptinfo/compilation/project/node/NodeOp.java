@@ -82,38 +82,17 @@ public class NodeOp extends NodeExp {
         public Binop generateIntermediateCodeOp() { 
 			Binop op = null;
 			if(this.getExp(1) != null) {
-				//System.out.println("In NodeOP get 0 : " + this.getExp(0) + " get 1 : "+this.get(1)+ this + this.name);
 				op = new Binop(this.getCodeOp(), 
 						 	this.getExp(0).generateIntermediateCodeExp(), 
 						 		this.getExp(1).generateIntermediateCodeExp()
 						 );
 			}else {
-				//System.out.println("In NodeOP get 0 : " + this.getExp(0) +  this + this.name);
 				op = new Binop(2, 
 					 	this.getExp(0).generateIntermediateCodeExp(), 
 					 		new Const(-1)
 					 );
 			}
-			//System.out.println("* " + op.toString());
+
 			return op;
-			
-			/*
-			Binop op = new Binop(this.getCodeOp(), 
-					 new Const(
-							 (int) ((NodeLiteral) this.getExp(0)).getValue()
-							 ), 
-					 new Const(
-							 (int) ((NodeLiteral) this.getExp(1)).getValue()
-							 )
-					 );
-			System.out.println("* " + op.toString());
-			return op;
-			*/
-	
-			
-        	//Binop res = null;
-			//Exp left = new Const (((NodeLiteral)n.get(i)).getValue());
-			//res = new Binop(this.getCodeOp(), this.getExp(0).generateIntermediateCodeExp(), this.getExp(1).generateIntermediateCodeExp());
-        	//return new ExpList(new Binop(this.getCodeOp(),  ((ExpList)this.getOp1().generateIntermediateCode()).getHead(), ((ExpList)this.getOp2().generateIntermediateCode()).getHead()),null);
         }
 }

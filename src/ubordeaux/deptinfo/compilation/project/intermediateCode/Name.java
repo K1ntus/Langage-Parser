@@ -17,5 +17,10 @@ public class Name extends Exp {
 		return "NAME("+ label.toString() + ")";
 	}
 	
+	@Override
+	public String toy86() {
+		return "";
+	}
+	
 
 }

@@ -33,5 +33,10 @@ public class ExpList extends IntermediateCode {
 			return this.head.toString();
 		return "Explist(null,null)";
 	}
+	
+	@Override
+	public String toy86() {
+		return "";
+	}
 
 }

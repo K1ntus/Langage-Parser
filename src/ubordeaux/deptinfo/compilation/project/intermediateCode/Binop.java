@@ -39,5 +39,10 @@ public class Binop extends Exp {
 		}
 		return "BINOP(" + binop + "," + right.toString() + ")";
 	}
+	
+	@Override
+	public String toy86() {
+		return "";
+	}
 
 } 

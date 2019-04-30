@@ -23,4 +23,10 @@ public class TypeFeatureList extends TypeComplex {
 		return new TypeFeatureList((Type)this.get(0).clone());
 	}
 
+	@Override
+	public String declarey86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

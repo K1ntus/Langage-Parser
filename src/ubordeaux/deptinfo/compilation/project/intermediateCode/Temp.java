@@ -12,5 +12,12 @@ public class Temp extends Exp {
 	public String toString(){
 		return "EXP("+ temp.toString() + ")";
 	}
+
+
+	@Override
+	public String toy86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

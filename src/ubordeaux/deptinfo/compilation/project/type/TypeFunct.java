@@ -60,4 +60,10 @@ public class TypeFunct extends TypeComplex {
 		return this.name;
 	}
 
+	@Override
+	public String declarey86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

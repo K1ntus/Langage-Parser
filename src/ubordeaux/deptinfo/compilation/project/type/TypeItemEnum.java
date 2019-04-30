@@ -62,4 +62,10 @@ public class TypeItemEnum extends TypeAtomic {
 		this.refEnumRange = refEnumRange;
 	}
 
+	@Override
+	public String declarey86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

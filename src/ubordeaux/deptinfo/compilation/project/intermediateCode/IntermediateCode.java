@@ -10,4 +10,6 @@ public abstract class IntermediateCode {
 	// Transforme l'arbre pour éliminer les ESEQ locaux
 	public abstract void canonicalTransformation();
 	
+	// Intermediate code -> y86 as String
+	public abstract String toy86();
 }

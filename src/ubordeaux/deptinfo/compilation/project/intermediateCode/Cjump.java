@@ -56,4 +56,9 @@ public class Cjump extends Stm {
        // System.out.println("CJUMP("+ relop +","+ left.toString() +","+ right.toString() +","+ iftrue.toString() +","+ iffalse.toString() + ")");
         return "CJUMP("+ relop +","+ left.toString() +","+ right.toString() +","+ iftrue.toString() +","+ iffalse.toString() + ")";
     }
+	
+	@Override
+	public String toy86() {
+		return "";
+	}
 }

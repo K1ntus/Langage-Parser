@@ -16,4 +16,9 @@ public class Mem extends Exp {
 		return "MEM("+ exp.toString() + ")";
 	}
 	
+	@Override
+	public String toy86() {
+		return "";
+	}
+	
 }

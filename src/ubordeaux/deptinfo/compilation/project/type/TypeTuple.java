@@ -68,4 +68,10 @@ public class TypeTuple extends TypeComplex {
 		return this.componant.size();
 	}
 
+	@Override
+	public String declarey86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

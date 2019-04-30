@@ -31,4 +31,10 @@ public class TypeArray extends TypeComplex {
 		return result;
 	}
 
+	@Override
+	public String declarey86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

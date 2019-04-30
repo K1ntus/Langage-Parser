@@ -17,6 +17,13 @@ public class ExpStm extends Stm {
 	public String toString(){
 		return "EXP("+ e.toString() + ")";
 	}
+
+
+	@Override
+	public String toy86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

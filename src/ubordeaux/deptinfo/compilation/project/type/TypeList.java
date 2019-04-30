@@ -22,4 +22,10 @@ public class TypeList extends TypeComplex {
 		return new TypeList((Type) get(0).clone());
 	}
 
+
+	@Override
+	public String declarey86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

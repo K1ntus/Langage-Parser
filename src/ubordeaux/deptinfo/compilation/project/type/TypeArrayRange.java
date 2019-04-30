@@ -30,5 +30,11 @@ public class TypeArrayRange extends TypeRange {
 	public ClonableSymbol clone() {
 		return new TypeArrayRange((Type) first.clone(), (Type) last.clone());
 	}
+
+	@Override
+	public String declarey86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

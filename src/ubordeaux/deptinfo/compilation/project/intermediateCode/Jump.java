@@ -18,5 +18,10 @@ public class Jump extends Stm {
 	public String toString(){
 		return "JUMP("+ exp.toString() + "," + targets.toString() + ")";
 	}
+
+	public String toy86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

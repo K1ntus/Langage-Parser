@@ -9,6 +9,11 @@ public class TypeNull extends TypeAtomic {
 		return new TypeNull();
 	}
 	
+	@Override
+	public String declarey86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

@@ -15,4 +15,11 @@ public class Call extends Exp {
 		return "CALL(" + func.toString() + "," + args.toString() + ")";
 	}
 
+
+	@Override
+	public String toy86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -11,4 +11,11 @@ public class Label extends Stm {
 	public String toString() {
 		return "Label(" + this.label.toString() + ")";
 	}
+
+
+	@Override
+	public String toy86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

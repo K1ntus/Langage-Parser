@@ -22,5 +22,11 @@ public class TypeNamed extends TypeAtomic {
 		return super.toString() + '_' + name;
 	}
 
+	@Override
+	public String declarey86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

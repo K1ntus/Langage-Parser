@@ -1,9 +1,14 @@
 package ubordeaux.deptinfo.compilation.project.main;
 
 import java.io.FileReader;
+import java.util.HashMap;
+import java.util.Map;
 
 import fr.c12.compilator.environment.StackEnvironment;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Y86Converter;
 import ubordeaux.deptinfo.compilation.project.node.Node;
+import ubordeaux.deptinfo.compilation.project.type.Type;
+import ubordeaux.deptinfo.compilation.project.type.TypeInt;
 
 
 //import ubordeaux.deptinfo.compilation.project.node.Node;
@@ -12,6 +17,17 @@ public class Main {
 	private static boolean checksType;
 
 	public static void main(String[] args) throws Exception {
+		if (false) {
+			@SuppressWarnings("serial")
+			Map<String, Type> testMap = new HashMap<String, Type>(){
+				{
+					put("a", new TypeInt(5));
+					put("dix", new TypeInt(10));
+				}
+			};
+			Y86Converter converter = new Y86Converter();
+			System.out.println(converter.convert(testMap));
+		}
 		for (String arg : args) {
 			if (arg.charAt(0) == '-') {
 				if (arg.equals("-checkType"))

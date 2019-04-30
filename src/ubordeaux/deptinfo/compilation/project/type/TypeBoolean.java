@@ -9,4 +9,10 @@ public class TypeBoolean extends TypeAtomic {
 		return new TypeBoolean();
 	}
 
+	@Override
+	public String declarey86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

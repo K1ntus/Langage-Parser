@@ -9,4 +9,10 @@ public class TypeVoid extends TypeAtomic {
 		return new TypeVoid();
 	}
 
+	@Override
+	public String declarey86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

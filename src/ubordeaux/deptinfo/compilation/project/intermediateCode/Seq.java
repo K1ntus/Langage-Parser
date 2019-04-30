@@ -15,5 +15,18 @@ public class Seq extends Stm {
 		return "** SEQ("+ left.toString() + "," + right.toString() + ")";
 	}
 	
+	@Override
+	public String toy86() {
+		return "";
+	}
+	
+	public Stm getRight() {
+		return right;
+	}
+	
+	public Stm getLeft() {
+		return left;
+	}
+	
 
 }

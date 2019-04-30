@@ -44,4 +44,10 @@ public class TypeFeature extends TypeComplex {
 		return name;
 	}
 
+	@Override
+	public String declarey86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

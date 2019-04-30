@@ -37,5 +37,13 @@ public final class TypeInt extends TypeAtomic {
 		}
 		return 0;
 	}
+
+	@Override
+	public String declarey86() {
+		if (const_value != null)
+			return ".long " + const_value;
+		else
+			return ".long 0";
+	}
 	
 }

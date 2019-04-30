@@ -48,4 +48,10 @@ public class TypeTemplate extends TypeAtomic {
 	public Type clone() {
 		return new TypeTemplate(this.name);
 	}
+
+	@Override
+	public String declarey86() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

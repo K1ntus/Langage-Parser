@@ -38,6 +38,11 @@ public final class NodeList extends Node {
 		return this.elts.iterator();
 	}
 	
+	public void addAll(NodeList l) {
+		for(Node n : l.getList()) {
+			this.add(n);
+		}
+	}
 
 	public int size() {
 		return this.elts.size();
@@ -87,7 +92,7 @@ public final class NodeList extends Node {
 	public Stm generateIntermediateCodeList() {
 
 		Node clone = this.clone();
-		//Vieux code, genere bien le seq
+
 		Node tmp = clone.get(0);
 		IntermediateCode stat = tmp.generateIntermediateCode();
 		

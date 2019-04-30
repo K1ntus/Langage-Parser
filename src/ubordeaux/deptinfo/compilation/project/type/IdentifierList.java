@@ -43,4 +43,12 @@ public class IdentifierList extends TypeAtomic implements Iterable<String> {
 		return list.get(list.size()-1);
 	}
 
+	@Override
+	public String declarey86() {
+
+		System.out.println("TODO: IdentifierList (y86)");
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

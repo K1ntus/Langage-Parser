@@ -2,45 +2,72 @@
 
 
 *************************************************
-*** Fichier data/progr1.lea
+*** Fichier data/progr0.lea
 [INFO] $$  : multiple line comment.
 [INFO] $$$ : documentation comment.
 
 
-$$
-a = 100;
-a = 5 * 2;
-//end
-//while (a >= 0) do
+** Enregistre types: (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
+** Retrouve types: Months (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
+Size is : 13
 
-if ( a >= 0) then
-	begin
-	println (a);
-	a = a - 1;
-	end
-	$$
-Size is : 5
-//NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeWhile(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeLiteral#1:TypeInt_null#)))))
-
-NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), NodeList(NodeAssign(NodeId#b:TypeString#, NodeLiteral#"coucou":TypeString#), NodeSwitch(NodeId#b:TypeString#, NodeCaseList(NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"summer":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"summer":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"autumn":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"autumn":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"none":TypeString#))))))))
+Intermediate Code:
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L1,L2),SEQ(Label(L1),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L0),L0),Label(L2))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L4,L5),SEQ(Label(L4),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L3),L3),Label(L5))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L7,L8),SEQ(Label(L7),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L6),L6),Label(L8))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L10,L11),SEQ(Label(L10),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L9),L9),Label(L11))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L13,L14),SEQ(Label(L13),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L12),L12),Label(L14))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L16,L17),SEQ(Label(L16),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L15),L15),Label(L17))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L19,L20),SEQ(Label(L19),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L18),L18),Label(L20))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L22,L23),SEQ(Label(L22),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L21),L21),Label(L23))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L25,L26),SEQ(Label(L25),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L24),L24),Label(L26))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L28,L29),SEQ(Label(L28),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L27),L27),Label(L29))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L31,L32),SEQ(Label(L31),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L30),L30),Label(L32))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L34,L35),SEQ(Label(L34),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L33),L33),Label(L35))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L37,L38),SEQ(Label(L37),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L36),L36),Label(L38))))),Label(L36))))))))))))))
 --- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
 --- CheckType NodeSwitch
-- NodeList well typed
 - NodeList well typed
 *** Typage correct
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), NodeList(NodeAssign(NodeId#b:TypeString#, NodeLiteral#"coucou":TypeString#), NodeSwitch(NodeId#b:TypeString#, NodeCaseList(NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"summer":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"summer":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"autumn":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"autumn":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"none":TypeString#))))))))
+NodeList(NodeSwitch(NodeId#month:(TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)#, NodeCaseList(NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"spring":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"spring":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"spring":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"summer":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"summer":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"summer":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"autumn":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"autumn":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"autumn":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"winter":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"winter":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"winter":TypeString#)))), NodeCase(NodeList(println_NodeCallFct(NodeList(NodeLiteral#"none":TypeString#)))))))
+
+
+
+*************************************************
+*** Fichier data/progr1.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+
+Intermediate Code:
+* MOVE(NAME(a),CONST:100)
+* MOVE(NAME(a),BINOP(2,CONST:5,CONST:2))
+* CALL(NAME(println),NAME(a))
+* MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))
+SEQ(Label(L39),SEQ(CJUMP(0,NAME(a),CONST:0,L40,L41),SEQ(Label(L40),SEQ(SEQ(CJUMP(13,NAME(a),NAME(a),L42,L43),SEQ(Label(L42),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),Label(L43)))),SEQ(JUMP(NAME(L39),L39),Label(L41))))))
+SEQ(MOVE(NAME(a),CONST:100),SEQ(MOVE(NAME(a),BINOP(2,CONST:5,CONST:2)),SEQ(Label(L39),SEQ(CJUMP(0,NAME(a),CONST:0,L40,L41),SEQ(Label(L40),SEQ(SEQ(CJUMP(13,NAME(a),NAME(a),L42,L43),SEQ(Label(L42),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),Label(L43)))),SEQ(JUMP(NAME(L39),L39),Label(L41))))))))
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeOp
+- NodeOp well typed
+- Assign well typed
+--- CheckType NodeWhile
+- NodeList well typed
+*** Typage correct
+
+
+Arbre Principal: 
+NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeLiteral#5:TypeInt_null#, NodeLiteral#2:TypeInt_null#)), NodeWhile(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(NodeIf(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeId#a:TypeInt_null#, NodeLiteral#1:TypeInt_null#))))))))
 
 
 
@@ -55,17 +82,26 @@ NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), No
 //
 // 0x4995F6B5
 
-NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#)))))
+Intermediate Code:
+* MOVE(NAME(x),CONST:1234564789)
+* MOVE(NAME(y),CONST:2147483647)
+* MOVE(NAME(b),CONST:1)
+* MOVE(NAME(c),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1)
+* CALL(NAME(println),NAME(x))
+* CALL(NAME(println),NAME(y))
+* CALL(NAME(println),NAME(b))
+* CALL(NAME(println),NAME(c))
+* CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
+SEQ(MOVE(NAME(x),CONST:1234564789),SEQ(MOVE(NAME(y),CONST:2147483647),SEQ(MOVE(NAME(b),CONST:1),SEQ(MOVE(NAME(c),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1),SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(EXP(CALL(NAME(println),NAME(y))),SEQ(EXP(CALL(NAME(println),NAME(b))),SEQ(EXP(CALL(NAME(println),NAME(c))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2))))))))))))))))
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
 --- CheckType NodeLiteral
 - Assign well typed
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
 --- CheckType NodeAssign
 --- CheckType NodeId
 --- CheckType NodeLiteral
@@ -114,13 +150,12 @@ NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), No
 --- CheckType NodeArrayAccess
 - ArrayAccess well typed
 - NodeCallFct well typed
-- NodeList well typed
 - NodeList well typed
 *** Typage correct
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#)))))
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#))))
 
 
 
@@ -138,12 +173,35 @@ NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), No
 // resize the heap
 // heap memory error
 
-NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#))), NodeNew(NodeId#q:TypePointer(TypeString)#), NodeAssign(NodePtrAccess(NodeId#q:TypePointer(TypeString)#), NodeLiteral#"A":TypeString#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#q:TypePointer(TypeString)#))), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeNew(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeAssign(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#), NodeId#x:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#))), NodeNew(NodeId#r:TypePointer(TypeInt_null)#), NodeAssign(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#), NodeLiteral#65536:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#))), NodeDispose(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#)))))
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
+Intermediate Code:
+* MOVE(NAME(x),CONST:1234564789)
+* MOVE(NAME(y),CONST:2147483647)
+* MOVE(NAME(b),CONST:1)
+* MOVE(NAME(c),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1)
+* CALL(NAME(println),NAME(x))
+* CALL(NAME(println),NAME(y))
+* CALL(NAME(println),NAME(b))
+* CALL(NAME(println),NAME(c))
+* CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
+* ALLOC(NodeNew(NodeId#q:TypePointer(TypeString)#)1) - Todo
+* MOVE(MEM(NAME(q)),CONST:-1)
+* CALL(NAME(println),MEM(NAME(q)))
+* CALL(NAME(println),NAME(p))
+* ALLOC(NodeNew(NodeId#p:TypePointer(TypeInt_null)#)1) - Todo
+* CALL(NAME(println),NAME(p))
+* MOVE(MEM(MEM(NAME(p))),NAME(x))
+* CALL(NAME(println),MEM(NAME(p)))
+* ALLOC(NodeNew(NodeId#r:TypePointer(TypeInt_null)#)1) - Todo
+* MOVE(MEM(NAME(r)),CONST:65536)
+* CALL(NAME(println),MEM(NAME(r)))
+* FREE(NodeDispose(NodeId#p:TypePointer(TypeInt_null)#)) - Todo
+* CALL(NAME(println),NAME(p))
+* CALL(NAME(println),MEM(NAME(p)))
+SEQ(MOVE(NAME(x),CONST:1234564789),SEQ(MOVE(NAME(y),CONST:2147483647),SEQ(MOVE(NAME(b),CONST:1),SEQ(MOVE(NAME(c),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1),SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(EXP(CALL(NAME(println),NAME(y))),SEQ(EXP(CALL(NAME(println),NAME(b))),SEQ(EXP(CALL(NAME(println),NAME(c))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))),SEQ(MOVE(MEM(NAME(q)),NAME(null)),SEQ(MOVE(MEM(NAME(q)),CONST:-1),SEQ(EXP(CALL(NAME(println),MEM(NAME(q)))),SEQ(EXP(CALL(NAME(println),NAME(p))),SEQ(MOVE(MEM(NAME(p)),NAME(null)),SEQ(EXP(CALL(NAME(println),NAME(p))),SEQ(MOVE(MEM(MEM(NAME(p))),NAME(x)),SEQ(EXP(CALL(NAME(println),MEM(NAME(p)))),SEQ(MOVE(MEM(NAME(r)),NAME(null)),SEQ(MOVE(MEM(NAME(r)),CONST:65536),SEQ(EXP(CALL(NAME(println),MEM(NAME(r)))),SEQ(MOVE(MEM(NAME(p)),NAME(null)),SEQ(EXP(CALL(NAME(println),NAME(p))),EXP(CALL(NAME(println),MEM(NAME(p))))))))))))))))))))))))))))))
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -235,12 +293,11 @@ NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), No
 --- CheckType NodePtrAccess
 - NodeCallFct well typed
 - NodeList well typed
-- NodeList well typed
 *** Typage correct
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#))), NodeNew(NodeId#q:TypePointer(TypeString)#), NodeAssign(NodePtrAccess(NodeId#q:TypePointer(TypeString)#), NodeLiteral#"A":TypeString#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#q:TypePointer(TypeString)#))), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeNew(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeAssign(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#), NodeId#x:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#))), NodeNew(NodeId#r:TypePointer(TypeInt_null)#), NodeAssign(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#), NodeLiteral#65536:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#))), NodeDispose(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#)))))
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#))), NodeNew(NodeId#q:TypePointer(TypeString)#), NodeAssign(NodePtrAccess(NodeId#q:TypePointer(TypeString)#), NodeLiteral#"A":TypeString#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#q:TypePointer(TypeString)#))), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeNew(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeAssign(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#), NodeId#x:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#))), NodeNew(NodeId#r:TypePointer(TypeInt_null)#), NodeAssign(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#), NodeLiteral#65536:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#))), NodeDispose(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#))))
 
 
 
@@ -255,12 +312,17 @@ NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), No
 //
 //
 
-NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(NodeList(println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), NodeIf(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(NodeList(NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#y:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeList(NodeList(println_NodeCallFct(NodeList(NodeOp(NodeOp(NodeLiteral#1000:TypeInt_null#, NULL), NodeId#y:TypeInt_null#))), NodeAssign(NodeId#y:TypeInt_null#, NodeOp(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#))))))), NodeList(println_NodeCallFct(NodeList(NodeLiteral#"X":TypeString#)))), NodeAssign(NodeId#x:TypeInt_null#, NodeOp(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))))))
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
+Intermediate Code:
+* MOVE(NAME(x),CONST:1)
+* CALL(NAME(println),NAME(x))
+* MOVE(NAME(y),CONST:1)
+* CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))
+* MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))
+SEQ(Label(L49),SEQ(CJUMP(0,NAME(y),CONST:5,L50,L51),SEQ(Label(L50),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L49),L49),Label(L51))))))
+* CALL(NAME(println),CONST:-1)
+* MOVE(NAME(x),BINOP(0,NAME(x),CONST:1))
+SEQ(Label(L44),SEQ(CJUMP(0,NAME(x),CONST:10,L45,L46),SEQ(Label(L45),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L47,L48),SEQ(Label(L47),SEQ(SEQ(MOVE(NAME(y),CONST:1),SEQ(Label(L49),SEQ(CJUMP(0,NAME(y),CONST:5,L50,L51),SEQ(Label(L50),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L49),L49),Label(L51))))))),SEQ(Label(L48),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(NAME(x),BINOP(0,NAME(x),CONST:1)))),SEQ(JUMP(NAME(L44),L44),Label(L46))))))
+SEQ(MOVE(NAME(x),CONST:1),SEQ(Label(L44),SEQ(CJUMP(0,NAME(x),CONST:10,L45,L46),SEQ(Label(L45),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L47,L48),SEQ(Label(L47),SEQ(SEQ(MOVE(NAME(y),CONST:1),SEQ(Label(L49),SEQ(CJUMP(0,NAME(y),CONST:5,L50,L51),SEQ(Label(L50),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L49),L49),Label(L51))))))),SEQ(Label(L48),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(NAME(x),BINOP(0,NAME(x),CONST:1)))),SEQ(JUMP(NAME(L44),L44),Label(L46)))))))
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -268,12 +330,11 @@ NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), No
 - Assign well typed
 --- CheckType NodeWhile
 - NodeList well typed
-- NodeList well typed
 *** Typage correct
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(NodeList(println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), NodeIf(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(NodeList(NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#y:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeList(NodeList(println_NodeCallFct(NodeList(NodeOp(NodeOp(NodeLiteral#1000:TypeInt_null#, NULL), NodeId#y:TypeInt_null#))), NodeAssign(NodeId#y:TypeInt_null#, NodeOp(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#))))))), NodeList(println_NodeCallFct(NodeList(NodeLiteral#"X":TypeString#)))), NodeAssign(NodeId#x:TypeInt_null#, NodeOp(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#)))))))
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(NodeList(println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), NodeIf(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(NodeList(NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#y:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeList(NodeList(println_NodeCallFct(NodeList(NodeOp(NodeOp(NodeLiteral#1000:TypeInt_null#, NULL), NodeId#y:TypeInt_null#))), NodeAssign(NodeId#y:TypeInt_null#, NodeOp(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#))))))), NodeList(println_NodeCallFct(NodeList(NodeLiteral#"X":TypeString#)))), NodeAssign(NodeId#x:TypeInt_null#, NodeOp(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#))))))
 
 
 
@@ -284,26 +345,27 @@ NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), No
 
 
 ** Enregistre fct:sum
-Label(L0)
+Label(L52)
 ** Enregistre fct:pgcd
-Label(L1)
+Label(L53)
 * MOVE(NAME(i),CONST:0)
-** SEQ(Label(L2),** SEQ(CJUMP(0,NAME(i),NAME(j),L3,L4),** SEQ(Label(L3),** SEQ(MOVE(NAME(i),CONST:0),** SEQ(JUMP(NAME(L2),L2),Label(L4))))))
+SEQ(Label(L54),SEQ(CJUMP(0,NAME(i),NAME(j),L55,L56),SEQ(Label(L55),SEQ(MOVE(NAME(i),CONST:0),SEQ(JUMP(NAME(L54),L54),Label(L56))))))
 * MOVE(NAME(i),BINOP(1,NAME(i),NAME(j)))
 * MOVE(NAME(j),BINOP(1,NAME(j),NAME(i)))
 //println(pgcd(78, 90));
 
-NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeAssign(NodeId#x:TypeInt_null#, sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#))), println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#))))))
+Intermediate Code:
+* MOVE(NAME(x),CONST:5)
+* CALL(NAME(sum),CONST:3CONST:5)
+* MOVE(NAME(x),CALL(NAME(sum),CONST:3CONST:5))
+* CALL(NAME(sum),CONST:3CONST:5)
+* CALL(NAME(println),CALL(NAME(sum),CONST:3CONST:5))
+SEQ(MOVE(NAME(x),CONST:5),SEQ(MOVE(NAME(x),CALL(NAME(sum),CONST:3CONST:5)),EXP(CALL(NAME(println),CALL(NAME(sum),CONST:3CONST:5)))))
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
 --- CheckType NodeLiteral
 - Assign well typed
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
 --- CheckType NodeAssign
 --- CheckType NodeId
 --- CheckType NodeCallFct
@@ -317,13 +379,12 @@ NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), No
 --- CheckType NodeLiteral
 - NodeCallFct well typed
 - NodeCallFct well typed
-- NodeList well typed
 - NodeList well typed
 *** Typage correct
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeAssign(NodeId#x:TypeInt_null#, sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#))), println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#))))))
+NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeAssign(NodeId#x:TypeInt_null#, sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#))), println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#)))))
 
 
 
@@ -337,13 +398,13 @@ NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), No
 // gestion complexe de la pile
 // 
 ** Enregistre fct:fact1
-Label(L7)
+Label(L59)
 * CALL(NAME(fact1),BINOP(1,NAME(k),CONST:1))
 ** Enregistre fct:fact2
-Label(L10)
+Label(L62)
 * CALL(NAME(fact2),BINOP(1,NAME(k),CONST:1))
 ** Enregistre fct:hanoi
-Label(L13)
+Label(L65)
 * CALL(NAME(hanoi),NAME(a)NAME(c)NAME(b)BINOP(1,NAME(k),CONST:1))
 * CALL(NAME(println),NAME(a))
 * CALL(NAME(println),CONST:-1)
@@ -351,22 +412,27 @@ Label(L13)
 * CALL(NAME(hanoi),NAME(b)NAME(a)NAME(c)BINOP(1,NAME(k),CONST:1))
 ** Enregistre fct:impair
 ** Enregistre fct:pair
-Label(L18)
+Label(L70)
 * MOVE(NAME(b),CONST:0)
 * MOVE(NAME(b),CONST:1)
 * CALL(NAME(impair),BINOP(1,NAME(i),CONST:1))
 * MOVE(NAME(b),CALL(NAME(impair),BINOP(1,NAME(i),CONST:1)))
 ** Enregistre fct:impair
-Label(L23)
+Label(L75)
 * CALL(NAME(pair),BINOP(1,NAME(i),CONST:1))
 
-NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), NodeList(println_NodeCallFct(NodeList(fact1_NodeCallFct(NodeList(NodeLiteral#6:TypeInt_null#)))), println_NodeCallFct(NodeList(fact2_NodeCallFct(NodeList(NodeLiteral#6:TypeInt_null#)))), hanoi_NodeCallFct(NodeList(NodeLiteral#"A":TypeString#, NodeLiteral#"B":TypeString#, NodeLiteral#"C":TypeString#, NodeLiteral#4:TypeInt_null#)), println_NodeCallFct(NodeList(pair_NodeCallFct(NodeList(NodeLiteral#1001:TypeInt_null#)))), println_NodeCallFct(NodeList(pair_NodeCallFct(NodeList(NodeLiteral#1000:TypeInt_null#))))))
+Intermediate Code:
+* CALL(NAME(fact1),CONST:6)
+* CALL(NAME(println),CALL(NAME(fact1),CONST:6))
+* CALL(NAME(fact2),CONST:6)
+* CALL(NAME(println),CALL(NAME(fact2),CONST:6))
+* CALL(NAME(hanoi),CONST:-1CONST:-1CONST:-1CONST:4)
+* CALL(NAME(pair),CONST:1001)
+* CALL(NAME(println),CALL(NAME(pair),CONST:1001))
+* CALL(NAME(pair),CONST:1000)
+* CALL(NAME(println),CALL(NAME(pair),CONST:1000))
+SEQ(EXP(CALL(NAME(println),CALL(NAME(fact1),CONST:6))),SEQ(EXP(CALL(NAME(println),CALL(NAME(fact2),CONST:6))),SEQ(EXP(CALL(NAME(hanoi),CONST:-1CONST:-1CONST:-1CONST:4)),SEQ(EXP(CALL(NAME(println),CALL(NAME(pair),CONST:1001))),EXP(CALL(NAME(println),CALL(NAME(pair),CONST:1000)))))))
 --- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeList
 --- CheckType NodeCallFct
 --- CheckType NodeCallFct
 --- CheckType NodeLiteral
@@ -393,13 +459,12 @@ NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), No
 --- CheckType NodeLiteral
 - NodeCallFct well typed
 - NodeCallFct well typed
-- NodeList well typed
 - NodeList well typed
 *** Typage correct
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), NodeList(println_NodeCallFct(NodeList(fact1_NodeCallFct(NodeList(NodeLiteral#6:TypeInt_null#)))), println_NodeCallFct(NodeList(fact2_NodeCallFct(NodeList(NodeLiteral#6:TypeInt_null#)))), hanoi_NodeCallFct(NodeList(NodeLiteral#"A":TypeString#, NodeLiteral#"B":TypeString#, NodeLiteral#"C":TypeString#, NodeLiteral#4:TypeInt_null#)), println_NodeCallFct(NodeList(pair_NodeCallFct(NodeList(NodeLiteral#1001:TypeInt_null#)))), println_NodeCallFct(NodeList(pair_NodeCallFct(NodeList(NodeLiteral#1000:TypeInt_null#))))))
+NodeList(println_NodeCallFct(NodeList(fact1_NodeCallFct(NodeList(NodeLiteral#6:TypeInt_null#)))), println_NodeCallFct(NodeList(fact2_NodeCallFct(NodeList(NodeLiteral#6:TypeInt_null#)))), hanoi_NodeCallFct(NodeList(NodeLiteral#"A":TypeString#, NodeLiteral#"B":TypeString#, NodeLiteral#"C":TypeString#, NodeLiteral#4:TypeInt_null#)), println_NodeCallFct(NodeList(pair_NodeCallFct(NodeList(NodeLiteral#1001:TypeInt_null#)))), println_NodeCallFct(NodeList(pair_NodeCallFct(NodeList(NodeLiteral#1000:TypeInt_null#)))))
 
 
 
@@ -413,14 +478,18 @@ NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), No
 // tableaux
 // 
 
-NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#0:TypeInt_null#), NodeLiteral#"M":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"T":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"W":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#), NodeLiteral#"X":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#4:TypeInt_null#), NodeLiteral#22:TypeInt_null#), NodeLiteral#7:TypeInt_null#), NodeLiteral#"V":TypeString#), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#4:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#)))))
+Intermediate Code:
+* MOVE(MEM(BINOP(0,NAME(week),CONST:0)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(week),CONST:1)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(week),CONST:2)),CONST:-1)
+* MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)),CONST:-1)
+* MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:4)),CONST:22)),CONST:7)),CONST:-1)
+* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)))
+* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:4)))
+* CALL(NAME(println),MEM(BINOP(0,NAME(week),CONST:1)))
+SEQ(MOVE(MEM(BINOP(0,NAME(week),CONST:0)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(week),CONST:1)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(week),CONST:2)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:4)),CONST:22)),CONST:7)),CONST:-1),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:4)))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(week),CONST:1)))))))))))
 --- CheckType NodeList
 --- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeList
---- CheckType NodeAssign
 --- CheckType NodeArrayAccess
 - ArrayAccess well typed
 --- CheckType NodeLiteral
@@ -457,13 +526,12 @@ NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), No
 --- CheckType NodeArrayAccess
 - ArrayAccess well typed
 - NodeCallFct well typed
-- NodeList well typed
 - NodeList well typed
 *** Typage correct
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#0:TypeInt_null#), NodeLiteral#"M":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"T":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"W":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#), NodeLiteral#"X":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#4:TypeInt_null#), NodeLiteral#22:TypeInt_null#), NodeLiteral#7:TypeInt_null#), NodeLiteral#"V":TypeString#), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#4:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#)))))
+NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#0:TypeInt_null#), NodeLiteral#"M":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"T":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"W":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#), NodeLiteral#"X":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#4:TypeInt_null#), NodeLiteral#22:TypeInt_null#), NodeLiteral#7:TypeInt_null#), NodeLiteral#"V":TypeString#), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#4:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#))))
 
 
 
@@ -479,14 +547,18 @@ NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), No
 ** Enregistre types: (TypeItemEnum@SUNDAY=0, TypeItemEnum@MONDAY=1, TypeItemEnum@TUESDAY=2, TypeItemEnum@WEDNESDAY=3, TypeItemEnum@THURSDAY=4, TypeItemEnum@FRIDAY=5, TypeItemEnum@SATURDAY=6)
 ** Enregistre types: (TypeItemEnum@JANUARY=0, TypeItemEnum@FEBRUARY=1, TypeItemEnum@MARCH=2, TypeItemEnum@APRIL=3, TypeItemEnum@MAY=4, TypeItemEnum@JUNE=5, TypeItemEnum@JULY=6, TypeItemEnum@AUGUST=7, TypeItemEnum@SEPTEMBER=8, TypeItemEnum@OCTOBER=9, TypeItemEnum@NOVEMBER=10, TypeItemEnum@DECEMBER=11)
 
-NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#MONDAY:TypeInt_1#), NodeLiteral#"M":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#TUESDAY:TypeInt_2#), NodeLiteral#"T":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#WEDNESDAY:TypeInt_3#), NodeLiteral#"W":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#17:TypeInt_null#), NodeId#MARCH:TypeInt_2#), NodeLiteral#"X":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#1:TypeInt_null#), NodeId#MARCH:TypeInt_2#), NodeLiteral#"V":TypeString#), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#1:TypeInt_null#), NodeId#MARCH:TypeInt_2#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#17:TypeInt_null#), NodeId#MARCH:TypeInt_2#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#TUESDAY:TypeInt_2#)))))
+Intermediate Code:
+* MOVE(MEM(BINOP(0,NAME(week),NAME(MONDAY))),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(week),NAME(TUESDAY))),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(week),NAME(WEDNESDAY))),CONST:-1)
+* MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))),CONST:-1)
+* MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))),CONST:-1)
+* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))))
+* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))))
+* CALL(NAME(println),MEM(BINOP(0,NAME(week),NAME(TUESDAY))))
+SEQ(MOVE(MEM(BINOP(0,NAME(week),NAME(MONDAY))),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(week),NAME(TUESDAY))),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(week),NAME(WEDNESDAY))),CONST:-1),SEQ(MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))),CONST:-1),SEQ(MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))),CONST:-1),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(week),NAME(TUESDAY))))))))))))
 --- CheckType NodeList
 --- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeList
---- CheckType NodeAssign
 --- CheckType NodeArrayAccess
 - ArrayAccess well typed
 --- CheckType NodeLiteral
@@ -523,13 +595,12 @@ NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), No
 --- CheckType NodeArrayAccess
 - ArrayAccess well typed
 - NodeCallFct well typed
-- NodeList well typed
 - NodeList well typed
 *** Typage correct
 
 
 Arbre Principal: 
-NodeList(NodeAssign(NodeId#null:TypePointer#, NodeLiteral#null:TypePointer#), NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#MONDAY:TypeInt_1#), NodeLiteral#"M":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#TUESDAY:TypeInt_2#), NodeLiteral#"T":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#WEDNESDAY:TypeInt_3#), NodeLiteral#"W":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#17:TypeInt_null#), NodeId#MARCH:TypeInt_2#), NodeLiteral#"X":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#1:TypeInt_null#), NodeId#MARCH:TypeInt_2#), NodeLiteral#"V":TypeString#), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#1:TypeInt_null#), NodeId#MARCH:TypeInt_2#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#17:TypeInt_null#), NodeId#MARCH:TypeInt_2#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#TUESDAY:TypeInt_2#)))))
+NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#MONDAY:TypeInt_1#), NodeLiteral#"M":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#TUESDAY:TypeInt_2#), NodeLiteral#"T":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#WEDNESDAY:TypeInt_3#), NodeLiteral#"W":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#17:TypeInt_null#), NodeId#MARCH:TypeInt_2#), NodeLiteral#"X":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#1:TypeInt_null#), NodeId#MARCH:TypeInt_2#), NodeLiteral#"V":TypeString#), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#1:TypeInt_null#), NodeId#MARCH:TypeInt_2#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#17:TypeInt_null#), NodeId#MARCH:TypeInt_2#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#TUESDAY:TypeInt_2#))))
 
 
 
@@ -569,28 +640,28 @@ fr.c12.compilator.error.InvalidType
 	at beaver.Parser.reduce(Parser.java:561)
 	at beaver.Parser.parse(Parser.java:468)
 	at beaver.Parser.parse(Parser.java:428)
-	at ubordeaux.deptinfo.compilation.project.main.Main.main(Main.java:44)
+	at ubordeaux.deptinfo.compilation.project.main.Main.main(Unknown Source)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.tools.ant.taskdefs.ExecuteJava.run(ExecuteJava.java:221)
-	at org.apache.tools.ant.taskdefs.ExecuteJava.execute(ExecuteJava.java:154)
-	at org.apache.tools.ant.taskdefs.Java.run(Java.java:834)
-	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:228)
-	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:137)
-	at org.apache.tools.ant.taskdefs.Java.execute(Java.java:110)
-	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:293)
+	at org.apache.tools.ant.taskdefs.ExecuteJava.run(ExecuteJava.java:223)
+	at org.apache.tools.ant.taskdefs.ExecuteJava.execute(ExecuteJava.java:155)
+	at org.apache.tools.ant.taskdefs.Java.run(Java.java:835)
+	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:227)
+	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:135)
+	at org.apache.tools.ant.taskdefs.Java.execute(Java.java:108)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:292)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.lang.reflect.Method.invoke(Method.java:498)
 	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)
-	at org.apache.tools.ant.Task.perform(Task.java:348)
-	at org.apache.tools.ant.Target.execute(Target.java:435)
-	at org.apache.tools.ant.Target.performTasks(Target.java:456)
-	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1405)
-	at org.apache.tools.ant.Project.executeTarget(Project.java:1376)
+	at org.apache.tools.ant.Task.perform(Task.java:350)
+	at org.apache.tools.ant.Target.execute(Target.java:448)
+	at org.apache.tools.ant.Target.performTasks(Target.java:469)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1399)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1370)
 	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
 	at org.eclipse.ant.internal.launching.remote.EclipseDefaultExecutor.executeTargets(EclipseDefaultExecutor.java:36)
 	at org.apache.tools.ant.Project.executeTargets(Project.java:1260)

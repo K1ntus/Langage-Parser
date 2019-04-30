@@ -12,4 +12,12 @@ public class Move extends Stm {
 	public String toString() {
 		return "MOVE(" + dst.toString() + "," + src.toString() + ")";
 	}
+
+	@Override
+	public String toy86() {
+
+		System.out.println("TODO: Move (y86)");
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

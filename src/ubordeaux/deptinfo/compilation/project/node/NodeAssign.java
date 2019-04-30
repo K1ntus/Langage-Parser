@@ -1,7 +1,11 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
+import fr.c12.compilator.error.UnknownNodeType;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Mem;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Move;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 
 public final class NodeAssign extends Node {
@@ -66,7 +70,6 @@ public final class NodeAssign extends Node {
 
 	public Move generateIntermediateCodeAssign() {
 		Exp l = (Exp) this.getLhs().generateIntermediateCode();
-
 		Exp right = getRhs().generateIntermediateCodeExp();
 		if(this.getRhs() instanceof NodeId) {
 			Move m = new Move(new Mem(l),((NodeId)this.getRhs()).generateIntermediateCodeId());

@@ -13,4 +13,11 @@ public class Const extends Exp {
 		return "CONST:" + value;
 	}
 
+	@Override
+	public String toy86() {
+		System.out.println("TODO: Const (y86)");
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -163,7 +163,7 @@
 
 
 program=
-	constant_declaration_part.l1
+	constant_declaration_part.l_res
 	type_declaration_part.tp			//Type env
 	variable_declaration_part.vp 		//Type var
 	procedure_definition_part.pp		//Type procedure
@@ -173,13 +173,15 @@ program=
 	statement_list.l 					//Inserer variable dans env
 	TOKEN_END	pop_stackenv.pop 		//On depile stackenv
 	{: 
-		if(generate_intermediate_code)
-			l1.add(l);
-			System.out.println(l1);
+		if(generate_intermediate_code) {
+			l_res.addAll(l);
+			System.out.println("Intermediate Code:");
+			System.out.println(l.generateIntermediateCode().toString());
+		}
 			//System.out.println("Intermediate Code Generation:");
 			//System.out.println(l1.generateIntermediateCode().toString() + "\n");
 			//System.out.println(l1.generateIntermediateCode().toString());
-	    return _symbol_l1; 
+	    return _symbol_l; 
     :}		
 	;
 	

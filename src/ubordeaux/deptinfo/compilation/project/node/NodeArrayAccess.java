@@ -1,6 +1,11 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
+import fr.c12.compilator.error.UnknownNodeType;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Binop;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Mem;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypeArray;
 import ubordeaux.deptinfo.compilation.project.type.TypeComplex;
@@ -52,10 +57,9 @@ public final class NodeArrayAccess extends NodeExp {
 
 
 	public IntermediateCode generateIntermediateCodeArray() {
-		//System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		Exp name = (Exp) get(0).generateIntermediateCode();
-		Exp indice = ((NodeExp)get(1)).generateIntermediateCodeExp();
-		
+		Exp name = (Exp) this.get(0).generateIntermediateCode();
+		Exp indice = ((NodeExp)this.get(1)).generateIntermediateCodeExp();
+			
 		return new Mem(new Binop(0, name, indice));
 		
 	}

@@ -112,10 +112,10 @@ public class Parser extends beaver.Parser {
 	public Parser() {
 		super(PARSING_TABLES);
 		actions = new Action[] {
-			new Action() {	// [0] program = constant_declaration_part.l1 type_declaration_part.tp variable_declaration_part.vp procedure_definition_part.pp TOKEN_BEGIN push_stackenv.pu statement_list.l TOKEN_END pop_stackenv.pop
+			new Action() {	// [0] program = constant_declaration_part.l_res type_declaration_part.tp variable_declaration_part.vp procedure_definition_part.pp TOKEN_BEGIN push_stackenv.pu statement_list.l TOKEN_END pop_stackenv.pop
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_l1 = _symbols[offset + 1];
-					final NodeList l1 = (NodeList) _symbol_l1.value;
+					final Symbol _symbol_l_res = _symbols[offset + 1];
+					final NodeList l_res = (NodeList) _symbol_l_res.value;
 					final Symbol tp = _symbols[offset + 2];
 					final Symbol vp = _symbols[offset + 3];
 					final Symbol pp = _symbols[offset + 4];
@@ -124,13 +124,15 @@ public class Parser extends beaver.Parser {
 					final NodeList l = (NodeList) _symbol_l.value;
 					final Symbol pop = _symbols[offset + 9];
 					 
-		if(generate_intermediate_code)
-			l1.add(l);
-			System.out.println(l1);
+		if(generate_intermediate_code) {
+			l_res.addAll(l);
+			System.out.println("Intermediate Code:");
+			System.out.println(l.generateIntermediateCode().toString());
+		}
 			//System.out.println("Intermediate Code Generation:");
 			//System.out.println(l1.generateIntermediateCode().toString() + "\n");
 			//System.out.println(l1.generateIntermediateCode().toString());
-	    return _symbol_l1;
+	    return _symbol_l;
 				}
 			},
 			new Action() {	// [1] constant_declaration_part = 

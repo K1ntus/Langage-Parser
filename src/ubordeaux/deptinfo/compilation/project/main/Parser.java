@@ -102,8 +102,8 @@ public class Parser extends beaver.Parser {
 	private String type_declaration_name;
 	
 	
-	private boolean verbose_mode = false;	
-	private boolean critical_mode = false;
+	private boolean verbose_mode = true;	
+	private boolean critical_mode = true;
 
 	private boolean generate_intermediate_code = true;
 
@@ -127,16 +127,16 @@ public class Parser extends beaver.Parser {
 		if(generate_intermediate_code)
 			l1.add(l);
 			System.out.println(l1);
-			System.out.println("Intermediate Code Generation:");
-			System.out.println(l.generateIntermediateCode().toString() + "\n");
+			//System.out.println("Intermediate Code Generation:");
+			//System.out.println(l1.generateIntermediateCode().toString() + "\n");
 			//System.out.println(l1.generateIntermediateCode().toString());
-	    return _symbol_l;
+	    return _symbol_l1;
 				}
 			},
 			new Action() {	// [1] constant_declaration_part = 
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					 
-									return new NodeList(new NodeAssign(new NodeId("null", new TypeNull()), new NodeLiteral(new TypeNull() , null)));
+									return new NodeList(new NodeAssign(new NodeId("null", new TypePointer()), new NodeLiteral(new TypePointer() , null)));
 				}
 			},
 			Action.NONE,  	// [2] type_declaration_part = 
@@ -788,7 +788,8 @@ public class Parser extends beaver.Parser {
 					final NodeExp root = (NodeExp) _symbol_root.value;
 					final Symbol _symbol_case_list = _symbols[offset + 4];
 					final NodeCaseList case_list = (NodeCaseList) _symbol_case_list.value;
-					 return new NodeSwitch(root, case_list);
+					  System.out.println("Size is : " + case_list.size());
+																							return new NodeSwitch(root, case_list);
 				}
 			},
 			new Action() {	// [88] case_statement_list = case_statement_list.list case_statement.case_arr case_default.case_default
@@ -809,7 +810,6 @@ public class Parser extends beaver.Parser {
 				if(case_default instanceof NodeCase) {
 					list.add(case_default);
 				}
-				
 				return list;
 				}
 			},

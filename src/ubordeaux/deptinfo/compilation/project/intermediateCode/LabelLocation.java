@@ -9,6 +9,8 @@ package ubordeaux.deptinfo.compilation.project.intermediateCode;
 public class LabelLocation {
 	private String name;
 	private static int count;
+	private static int casecount;
+
 
 	public LabelLocation(String name) {
 		super();
@@ -28,7 +30,10 @@ public class LabelLocation {
 	//public LabelLocation(Symbol s) {
 //		this(s.toString());
 //	}
-
+	public int getCount() {
+		return this.count;
+	}
+	
 	/**
 	 * a printable representation of the label, for use in assembly language output.
 	 */

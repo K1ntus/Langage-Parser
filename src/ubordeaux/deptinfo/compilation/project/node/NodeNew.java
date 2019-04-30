@@ -2,11 +2,15 @@ package ubordeaux.deptinfo.compilation.project.node;
 
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.LabelLocation;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Mem;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Move;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Name;
 
 public final class NodeNew extends Node {
 
-	public NodeNew(Node stm) {
-		super(stm);
+	public NodeNew(Node exp) {
+		super(exp);
 	}
 
 	@Override
@@ -22,8 +26,10 @@ public final class NodeNew extends Node {
 
 	
 	public IntermediateCode generateIntermediateCodeNew() {
-		System.err.println("* ALLOC("+this+") - Todo");
-		return new Const(0);
+		System.err.println("* ALLOC("+this+ + this.size()+") - Todo");
+		LabelLocation init = new LabelLocation("null");
+		Name name = (Name) this.get(0).generateIntermediateCode();
+		return new Move(new Mem(name), new Name(init));
 		
 	}
 }

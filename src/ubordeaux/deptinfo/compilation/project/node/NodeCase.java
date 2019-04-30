@@ -41,13 +41,34 @@ public final class NodeCase extends Node {
 		return defaultValue;
 	}
 
-	public Const generateIntermediateCodeCase() {
-		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		return new Const(0);
+	public IntermediateCode generateIntermediateCodeCase(NodeExp e, LabelLocation l) {
 		
+			
 		
-		//IntermediateCode i =  this.getStm().generateIntermediateCode();
-		//ExpList l = new ExpList(this.getStm(),this.pop(this.getStm()).generateIntermediateCodeCase(this.getNameValue,this.getStm()));
-		//return (ExpList) i; //a modifier... T.T	
+		if(!defaultValue) {
+			LabelLocation iftrue = new LabelLocation();
+	        LabelLocation ifFalse= new LabelLocation();
+	        
+	        Label l1 = new Label(iftrue);
+	        Label l2 = new Label(ifFalse);	        
+	        
+	        Node op1 = e;
+	        NodeId  n = new NodeId(this.getNameValue(), e.getType());
+	        NodeRel rel = new NodeRel("==",e,n) ;
+	        Binop b = rel.generateIntermediateCodeRel();
+	        
+			Cjump c = new Cjump(b.getBinop(), b.getLeft(), b.getRight(), iftrue, ifFalse);    //cas erreur, surement buge
+	    	
+			Seq s = new Seq(c, 
+	    				new Seq(l1,
+	    						new Seq((Stm)this.getStm().generateIntermediateCode(), new Seq(new Jump(l),l2))));
+			
+	    	return s;
+		}else {
+			return new Seq((Stm)this.getStm().generateIntermediateCode(), (Stm)(new Label(l)));
+		}
+	    	
+	    	
+	 	
 	}
 }

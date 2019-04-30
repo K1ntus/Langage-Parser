@@ -176,10 +176,10 @@ program=
 		if(generate_intermediate_code)
 			l1.add(l);
 			System.out.println(l1);
-			System.out.println("Intermediate Code Generation:");
-			System.out.println(l.generateIntermediateCode().toString() + "\n");
+			//System.out.println("Intermediate Code Generation:");
+			//System.out.println(l1.generateIntermediateCode().toString() + "\n");
 			//System.out.println(l1.generateIntermediateCode().toString());
-	    return _symbol_l; 
+	    return _symbol_l1; 
     :}		
 	;
 	
@@ -190,7 +190,7 @@ normalement OK
 */
 constant_declaration_part =
 								{: 
-									return new NodeList(new NodeAssign(new NodeId("null", new TypeNull()), new NodeLiteral(new TypeNull() , null)));	
+									return new NodeList(new NodeAssign(new NodeId("null", new TypePointer()), new NodeLiteral(new TypePointer() , null)));	
 								:}
 	;
 
@@ -780,7 +780,8 @@ while_statement=
 
 //OK	
 switch_statement=
-	TOKEN_SWITCH expression.root TOKEN_BEGIN case_statement_list.case_list TOKEN_END	{: return new NodeSwitch(root, case_list);	:}
+	TOKEN_SWITCH expression.root TOKEN_BEGIN case_statement_list.case_list TOKEN_END	{:  System.out.println("Size is : " + case_list.size());
+																							return new NodeSwitch(root, case_list);	:}
 	;
 
 //OK
@@ -796,7 +797,6 @@ case_statement_list=
 				if(case_default instanceof NodeCase) {
 					list.add(case_default);
 				}
-				
 				return list;
 				
 			:}

@@ -12,6 +12,7 @@ public final class NodeIf extends Node {
 		super(e, stm1, stm2);
 	}
 
+	
 	@Override
 	public boolean checksType() {
 		super.checksType();
@@ -54,9 +55,7 @@ public final class NodeIf extends Node {
         LabelLocation ifFalse= new LabelLocation();
         Label l1 = new Label(iftrue);
         Label l2 = new Label(ifFalse);
-        		
-        int i;
-        Exp e1, e2;
+
         Binop rel = null;
         //if(this.getExpNode() instanceof NodeRel) {    // cas de comparaison entre 2 objects 
         rel = (Binop)((NodeRel)this.getExpNode()).generateIntermediateCode();
@@ -89,13 +88,18 @@ public final class NodeIf extends Node {
     	Cjump c = new Cjump(rel.getBinop(), rel.getLeft(), rel.getRight(), iftrue, ifFalse);    //cas erreur, surement buge
 		//System.out.println("in NodeIf 3 ");
 
-
-
-    	Seq s = new Seq(c, 
+    	Seq s;
+    	if(this.getElseNode() != null) {
+    		 s = new Seq(c, 
     			new Seq(l1,
     				new Seq((Stm)((NodeList)this.getThenNode()).generateIntermediateCodeList(),
-    				l2)));
-
+    				new Seq(l2,(Stm)((NodeList)this.getElseNode()).generateIntermediateCodeList()))));
+    	}else {
+    		 s = new Seq(c, 
+        			new Seq(l1,
+        				new Seq((Stm)((NodeList)this.getThenNode()).generateIntermediateCodeList(),
+        				l2)));
+    	}
     	return s;
     }
 }

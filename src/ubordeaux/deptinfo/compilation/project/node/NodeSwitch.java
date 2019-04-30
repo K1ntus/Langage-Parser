@@ -3,9 +3,12 @@ package ubordeaux.deptinfo.compilation.project.node;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
 
 public final class NodeSwitch extends Node {
+	
+	Node casel;
 
 	public NodeSwitch(Node e, Node stm) {
 		super(e, stm);
+		this.casel = stm;
 	}
 
 	@Override
@@ -28,9 +31,20 @@ public final class NodeSwitch extends Node {
 	}
 
 	public IntermediateCode generateIntermediateCodeSwitch() {
-		// TODO Auto-generated method stub
-		System.err.println("TODO: " + this.getClass().getSimpleName() + ".generateIntermediateCode()");
-		return null;
+		System.out.println("Size node : "+this.size());
+		System.out.println("Statement switch : "+this.getStm() + " Sise of stm(Caslist) is : " + this.getStm().size());
+		System.out.println("Statement switch : "+this.casel + " Sise of stm(Caslist) is : " + this.casel.size());
+
+		System.out.println("Expression switch : "+this.getExp());
+		
+		//Cjump c = new Cj
+		
+		//Seq s = new Seq(
+		
+		IntermediateCode c = ((NodeCaseList)this.getStm()).generateIntermediateCodeCaseList((NodeExp) this.getExp());
+		System.out.println("Code inter switch :"+c);
+		return c;
+		
 		
 	}
 }

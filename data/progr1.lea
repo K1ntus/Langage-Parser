@@ -1,7 +1,12 @@
 var
 a: integer;
+b: string;
+d: string;
+c: string;
 
 begin
+
+/*
 a = 100;
 a = 5 * 2;
 //end
@@ -12,6 +17,22 @@ if ( a >= 0) then
 	println (a);
 	a = a - 1;
 	end
+	*/
+
+b = "coucou";
+
+switch (b) 
+		begin
+		case a, d:
+			println("summer");
+		
+		case b, c:
+			println("autumn");
+
+		default:
+			println("none");
+		end
+	
 end
 
 //NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeWhile(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeLiteral#1:TypeInt_null#)))))

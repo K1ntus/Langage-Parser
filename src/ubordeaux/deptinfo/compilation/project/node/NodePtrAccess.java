@@ -38,6 +38,6 @@ public final class NodePtrAccess extends NodeExp {
 	public Mem generateIntermediateCodePtr() {	//p. 163
 		Exp name = (Exp) get(0).generateIntermediateCode();
 		
-		return new Mem(new Binop(0, name, new Const(0)));
+		return new Mem(name);
 	}
 }

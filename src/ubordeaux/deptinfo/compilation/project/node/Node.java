@@ -277,13 +277,13 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 					//System.out.println("intermediate code call");
 					return ((NodeCallFct)this).generateIntermediateCodeCallFct(); //null pointer exception
 					
-				case "class ubordeaux.deptinfo.compilation.project.node.NodeCase":
+				//case "class ubordeaux.deptinfo.compilation.project.node.NodeCase":
 					//System.out.println(n.getClass().toString());
-					return ((NodeCase)this).generateIntermediateCodeCase();
+					//return ((NodeCase)this).generateIntermediateCodeCase();
 					
-				case "class ubordeaux.deptinfo.compilation.project.node.NodeCaseList":
+				/*case "class ubordeaux.deptinfo.compilation.project.node.NodeCaseList":
 					//System.out.println(n.getClass().toString());
-					return ((NodeCaseList)this).generateIntermediateCodeCaseList();
+					return ((NodeCaseList)this).generateIntermediateCodeCaseList();*/
 					
 				case "class ubordeaux.deptinfo.compilation.project.node.NodeDispose":
 					//System.out.println(n.getClass().toString());

@@ -123,7 +123,7 @@ public class AssemblyTable {
     public ArrayList<String> assemble () {
 	ArrayList<String> sa = new ArrayList<String> ();
 	sa.add ("\t.align 4");
-	Iterator si = dataset.iterator();
+	Iterator<String> si = dataset.iterator();
 	while (si.hasNext ())
 	    sa.add (si.next () + ":\t.long 0");
 	return sa;

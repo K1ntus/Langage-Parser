@@ -30,15 +30,16 @@ a = #t1
 Programme y86 :
 
 .pos 0
-a: .long 0
-b: .long 0
-c: .long 0
-d: .long 0
+	irmovl stack,%esp
+	jmp main
+mult:
+	popl %eax
+	popl %eax
 
-Init:
-	irmovl 0x492,%esp
-	irmovl 0x492,%ebp
-.pos 0x492
+div:
+	popl %eax
+	popl %eax
+
 
 main:
 	irmovl 100,%eax
@@ -53,6 +54,7 @@ main:
 	isubl 1,%eax
 	rmmovl %eax,la
 	halt
+
 	.align 4
 la:	.long 0
 --- CheckType NodeList
@@ -113,16 +115,16 @@ c = -1
 Programme y86 :
 
 .pos 0
-b: .long 0
-c: .long 0
-d: .long 0
-x: .long 0
-y: .long 0
+	irmovl stack,%esp
+	jmp main
+mult:
+	popl %eax
+	popl %eax
 
-Init:
-	irmovl 0x624,%esp
-	irmovl 0x624,%ebp
-.pos 0x624
+div:
+	popl %eax
+	popl %eax
+
 
 main:
 	pushl ebx
@@ -136,6 +138,7 @@ main:
 	rmmovl %ebx,lc
 	popl ebx
 	halt
+
 	.align 4
 lb:	.long 0
 lc:	.long 0

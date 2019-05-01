@@ -76,8 +76,37 @@
 	    int pos = 0;
 
 	    as.add (".pos 0");
+	    as.add ("\tirmovl stack,%esp");
+	    as.add ("\tjmp main");
+	    
+	    as.add ("mult:");
+	    as.add ("\tpopl %eax");
+		as.add ("\tpopl %eax\n");
+	    
+	    as.add ("div:");
+	    as.add ("\tpopl %eax");
+		as.add ("\tpopl %eax\n");
+
+	    as.add ("\nmain:");
+	    as.addAll (at.registerCalleeSave ());
+	    as.addAll (ac);
+	    as.addAll (at.registerCalleeRestore ());
+	    
+	    as.add ("\thalt\n");
+	    
+	    
+	    as.addAll (at.assemble ());
+	    
+
+	    /*	Basics Functions	*/
+	    
+	    
+	    /*	Stack	*/
+		/*
+	    as.add (".pos 0x200");
+	    as.add ("stack:");
 	    for(String key : stackEnvironment.getEnvironment().get(0).keySet()) {
-	    	as.add(key+": .long "+0);
+	    	as.add("l"+key+": .long "+0);
 			Type value = stackEnvironment.getEnvironment().get(0).get(key);
 			
 			if(value instanceof TypeInt)
@@ -90,19 +119,8 @@
 				pos +=120;	
 				
 			}
-	    as.add ("\nInit:");
-	    pos +=6;
-	    as.add ("\tirmovl 0x"+pos+",%esp");
-	    as.add ("\tirmovl 0x"+pos+",%ebp");
-		as.add(".pos 0x" + pos);
-
-	    as.add ("\nmain:");
-	    as.addAll (at.registerCalleeSave ());
-	    as.addAll (ac);
-	    as.addAll (at.registerCalleeRestore ());
-	    
-	    as.add ("\thalt");
-	    as.addAll (at.assemble ());
+	    as.add("\n");
+	    */
 	    System.out.format ("Programme y86 :\n\n");
 	    for (int i = 0; i < as.size (); i ++) {
 	          System.out.format ("%s\n", as.get (i));

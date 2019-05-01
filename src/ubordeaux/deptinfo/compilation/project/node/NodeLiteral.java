@@ -59,7 +59,7 @@ public final class NodeLiteral extends NodeExp {
 		return res;
 	}
 
-	public Const generateIntermediateCodeLiteral() {
+	public Const generateIntermediateCode() {
 		Const res = null;
 		
 		if(this.getType() instanceof TypeInt) { 

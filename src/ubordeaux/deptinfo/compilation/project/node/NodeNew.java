@@ -24,7 +24,7 @@ public final class NodeNew extends Node {
 	}
 
 	
-	public IntermediateCode generateIntermediateCodeNew() {
+	public IntermediateCode generateIntermediateCode() {
 		LabelLocation init = new LabelLocation("null");
 		Name name = (Name) this.get(0).generateIntermediateCode();
 		return new Move(new Mem(name), new Name(init));

@@ -82,14 +82,16 @@ public final class NodeList extends Node {
 				else
 					return new ExpList((Exp)head.generateIntermediateCode(), null);
 		}
-		return new ExpList((Exp) this.generateIntermediateCode(), null);
+		
+		
+		return new ExpList(this.generateIntermediateCodeListArgs().getHead(), null);
 
 		
 		
 	}
 
 
-	public Stm generateIntermediateCodeList() {
+	public Stm generateIntermediateCode() {
 
 		Node clone = this.clone();
 

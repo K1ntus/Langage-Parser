@@ -32,7 +32,7 @@ public final class NodePtrAccess extends NodeExp {
 		return new NodePtrAccess((NodeExp) this.get(0).clone());
 	}
 
-	public Mem generateIntermediateCodePtr() {	//p. 163
+	public Mem generateIntermediateCode() {	//p. 163
 		Exp name = (Exp) get(0).generateIntermediateCode();
 		
 		return new Mem(name);

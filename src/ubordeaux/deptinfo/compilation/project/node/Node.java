@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
 import ubordeaux.deptinfo.compilation.project.main.ClonableSymbol;
 
@@ -108,63 +107,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 	}
 
 	
-	
-	
-	public IntermediateCode generateIntermediateCode() {
-		switch(this.getClass().toString()) {
-			case "class ubordeaux.deptinfo.compilation.project.node.NodeArrayAccess":
-				return ((NodeArrayAccess)this).generateIntermediateCodeArray();
-	
-			case "class ubordeaux.deptinfo.compilation.project.node.NodeAssign":
-				return ((NodeAssign)this).generateIntermediateCodeAssign();
-				
-			case "class ubordeaux.deptinfo.compilation.project.node.NodeCallFct":
-				return ((NodeCallFct)this).generateIntermediateCodeCallFct(); //null pointer exception
-				
-			case "class ubordeaux.deptinfo.compilation.project.node.NodeDispose":
-				return ((NodeDispose)this).generateIntermediateCodeDispose();
-				
-			case "class ubordeaux.deptinfo.compilation.project.node.NodeExp":
-				return ((NodeExp)this).generateIntermediateCodeExp();
-				
-			case "class ubordeaux.deptinfo.compilation.project.node.NodeId":
-				return ((NodeId)this).generateIntermediateCodeId();
-				
-			case "class ubordeaux.deptinfo.compilation.project.node.NodeIf":
-				return ((NodeIf)this).generateIntermediateCodeIf();
-				
-			case "class ubordeaux.deptinfo.compilation.project.node.NodeList":
-				return ((NodeList)this).generateIntermediateCodeList();
-				
-			case "class ubordeaux.deptinfo.compilation.project.node.NodeLiteral":
-				return ((NodeLiteral)this).generateIntermediateCodeLiteral();
-				
-			case "class ubordeaux.deptinfo.compilation.project.node.NodeNew":
-				return ((NodeNew)this).generateIntermediateCodeNew();
-				
-			case "class ubordeaux.deptinfo.compilation.project.node.NodeOp":
-				return ((NodeOp)this).generateIntermediateCodeOp();
-				
-			case "class ubordeaux.deptinfo.compilation.project.node.NodePtrAccess":
-				return ((NodePtrAccess)this).generateIntermediateCodePtr();
-				
-			case "class ubordeaux.deptinfo.compilation.project.node.NodeRel":
-				return ((NodeRel)this).generateIntermediateCodeRel();
-				
-			case "class ubordeaux.deptinfo.compilation.project.node.NodeReturn":
-				return ((NodeReturn)this).generateIntermediateCodeRet();
-				
-			case "class ubordeaux.deptinfo.compilation.project.node.NodeSwitch":
-				return ((NodeSwitch)this).generateIntermediateCodeSwitch();
-				
-			case "class ubordeaux.deptinfo.compilation.project.node.NodeWhile":
-				return ((NodeWhile)this).generateIntermediateCodeWhile();
-				
-			default:
-				System.err.println("Unknown node Type: " + this.toString() + " during the intermediate code generation process.");
-				return new Const(0);
-		}
-	}
+	public abstract IntermediateCode generateIntermediateCode();
 	
 	
 }

@@ -2,6 +2,7 @@ package ubordeaux.deptinfo.compilation.project.node;
 
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Binop;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
 
 public class NodeOp extends NodeExp {
 
@@ -77,16 +78,16 @@ public class NodeOp extends NodeExp {
        return operation;
 	}
 		
-        public Binop generateIntermediateCodeOp() { 
+        public Binop generateIntermediateCode() { 
 			Binop op = null;
 			if(this.getExp(1) != null) {
 				op = new Binop(this.getCodeOp(), 
-						 	this.getExp(0).generateIntermediateCodeExp(), 
-						 		this.getExp(1).generateIntermediateCodeExp()
+						 	(Exp) this.getExp(0).generateIntermediateCode(), 
+						 		(Exp) this.getExp(1).generateIntermediateCode()
 						 );
 			}else {
 				op = new Binop(2, 
-					 	this.getExp(0).generateIntermediateCodeExp(), 
+					 	(Exp) this.getExp(0).generateIntermediateCode(), 
 					 		new Const(-1)
 					 );
 			}

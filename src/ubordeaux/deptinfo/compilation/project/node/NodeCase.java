@@ -54,7 +54,7 @@ public final class NodeCase extends Node {
 	        
 	        NodeId  n = new NodeId(this.getNameValue(), e.getType());
 	        NodeRel rel = new NodeRel("==",e,n) ;
-	        Binop b = rel.generateIntermediateCodeRel();
+	        Binop b = rel.generateIntermediateCode();
 	        
 			Cjump c = new Cjump(b.getBinop(), b.getLeft(), b.getRight(), iftrue, ifFalse);    //cas erreur, surement buge
 	    	
@@ -69,5 +69,12 @@ public final class NodeCase extends Node {
 	    	
 	    	
 	 	
+	}
+
+	@Override
+	public IntermediateCode generateIntermediateCode() {
+		// TODO Auto-generated method stub
+		System.err.println("errr!");
+		return null;
 	}
 }

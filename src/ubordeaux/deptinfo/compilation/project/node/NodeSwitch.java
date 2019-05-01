@@ -30,8 +30,8 @@ public final class NodeSwitch extends Node {
 		return this.get(0);
 	}
 
-	public IntermediateCode generateIntermediateCodeSwitch() {
+	public IntermediateCode generateIntermediateCode() {
 		LabelLocation l = new LabelLocation();
-		return ((NodeCaseList)this.getStm()).generateIntermediateCodeCaseList((NodeExp) this.getExp(), l);	
+		return ((NodeCaseList)this.getStm()).generateIntermediateCode((NodeExp) this.getExp(), l);	
 	}
 }

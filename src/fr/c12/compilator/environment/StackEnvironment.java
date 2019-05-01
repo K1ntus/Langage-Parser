@@ -53,7 +53,7 @@ public class StackEnvironment {
 	 * This function explore the whole Stack to get the latest 
 	 * Type corresponding to this key.
 	 * 
-	 * This function is somehow deprecated because was made when we was manipulating node directly into the table
+	 * This function is somehow deprecated because was made when we was manipulat poing node directly into the table
 	 * And whatever the scope, the result here would be the same so we should just check the last scope.
 	 * 
 	 * @param id the name of the variable to find in the stack

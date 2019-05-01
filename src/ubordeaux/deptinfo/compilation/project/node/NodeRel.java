@@ -76,7 +76,7 @@ public class NodeRel extends NodeExp {
 	}
 	
 
-	public Binop generateIntermediateCodeRel() {
+	public Binop generateIntermediateCode() {
 		Binop res = null;
         Exp leftexp = (Exp)this.get(0).generateIntermediateCode();
         Exp rightexp = (Exp)this.get(0).generateIntermediateCode();

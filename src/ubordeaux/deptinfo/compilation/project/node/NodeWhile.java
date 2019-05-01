@@ -28,7 +28,7 @@ public final class NodeWhile extends Node {
 		return this.get(0);
 	}
 
-	public Seq generateIntermediateCodeWhile() {
+	public Seq generateIntermediateCode() {
 
 		LabelLocation debut = new LabelLocation();
 		LabelLocation suite = new LabelLocation();

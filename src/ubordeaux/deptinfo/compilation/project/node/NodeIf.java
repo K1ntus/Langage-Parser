@@ -47,7 +47,7 @@ public final class NodeIf extends Node {
 	}
 
 	
-	public Seq generateIntermediateCodeIf() {
+	public Seq generateIntermediateCode() {
 		
 		//System.out.println("in NodeIf 1 ");
 
@@ -65,12 +65,12 @@ public final class NodeIf extends Node {
     	if(this.getElseNode() != null) {
     		 s = new Seq(c, 
     			new Seq(l1,
-    				new Seq((Stm)((NodeList)this.getThenNode()).generateIntermediateCodeList(),
-    				new Seq(l2,(Stm)((NodeList)this.getElseNode()).generateIntermediateCodeList()))));
+    				new Seq((Stm)((NodeList)this.getThenNode()).generateIntermediateCode(),
+    				new Seq(l2,(Stm)((NodeList)this.getElseNode()).generateIntermediateCode()))));
     	}else {
     		 s = new Seq(c, 
         			new Seq(l1,
-        				new Seq((Stm)((NodeList)this.getThenNode()).generateIntermediateCodeList(),
+        				new Seq((Stm)((NodeList)this.getThenNode()).generateIntermediateCode(),
         				l2)));
     	}
     	return s;

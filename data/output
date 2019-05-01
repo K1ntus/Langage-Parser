@@ -8,40 +8,53 @@
 
 
 
-* MOVE(NAME(a),CONST:100)
-* MOVE(NAME(a),BINOP(2,CONST:5,CONST:2))
+* MOVE(CONST:100,NAME(a))
+* MOVE(BINOP(2,CONST:5,CONST:2),NAME(a))
 * CALL(NAME(println),NAME(a))
-* MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))
-SEQ(Label(L0),SEQ(CJUMP(0,NAME(a),CONST:0,L1,L2),SEQ(Label(L1),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),SEQ(JUMP(NAME(L0),L0),Label(L2))))))
+* MOVE(BINOP(1,NAME(a),CONST:1),NAME(a))
+SEQ(Label(L0),SEQ(CJUMP(0,NAME(a),CONST:0,L1,L2),SEQ(Label(L1),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(BINOP(1,NAME(a),CONST:1),NAME(a))),SEQ(JUMP(NAME(L0),L0),Label(L2))))))
+Left: a
+Right: 100
+Left: a
+Right: #t0
+Left: a
+Right: #t1
+
+Pre-y86: 
+a = 100
+#t0 = 5 2 2
+a = #t0
+#t1 = a 1 1
+a = #t1
+
 Programme y86 :
 
 .pos 0
-a:
-	.long 0
-b:
-	.long 0
-c:
-	.long 0
-d:
-	.long 0
+a: .long 0
+b: .long 0
+c: .long 0
+d: .long 0
 
 Init:
-	irmovl 0x498,%esp
-	irmovl 0x498,%ebp
-.pos 0x498
+	irmovl 0x492,%esp
+	irmovl 0x492,%ebp
+.pos 0x492
 
 main:
-	irmovl 5,%eax
-	pushl %eax
-	irmovl 2,%eax
-	pushl %eax
+	irmovl 100,%eax
+	rmmovl %eax,la
+	irmovl 5,%ecx
+	pushl %ecx
+	irmovl 2,%ecx
+	pushl %ecx
 	call mult
 	iaddl 8,%esp
-	mrmovl la,%eax
+	rmmovl %eax,la
 	isubl 1,%eax
-	mrmovl la,%eax
+	rmmovl %eax,la
 	halt
 	.align 4
+la:	.long 0
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -69,41 +82,65 @@ main:
 //
 // 0x4995F6B5
 
-* MOVE(NAME(x),CONST:1234564789)
-* MOVE(NAME(y),CONST:2147483647)
-* MOVE(NAME(b),CONST:1)
-* MOVE(NAME(c),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1)
+* MOVE(CONST:1234564789,NAME(x))
+* MOVE(CONST:2147483647,NAME(y))
+* MOVE(CONST:1,NAME(b))
+* MOVE(CONST:-1,NAME(c))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:1)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:2)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:3)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:10)))
 * CALL(NAME(println),NAME(x))
 * CALL(NAME(println),NAME(y))
 * CALL(NAME(println),NAME(b))
 * CALL(NAME(println),NAME(c))
 * CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
+Left: x
+Right: 1234564789
+Left: y
+Right: 2147483647
+Left: b
+Right: 1
+Left: c
+Right: -1
+
+Pre-y86: 
+x = 1234564789
+y = 2147483647
+b = 1
+c = -1
+
 Programme y86 :
 
 .pos 0
-b:
-	.long 0
-c:
-	.long 0
-d:
-	.long 0
-x:
-	.long 0
-y:
-	.long 0
+b: .long 0
+c: .long 0
+d: .long 0
+x: .long 0
+y: .long 0
 
 Init:
-	irmovl 0x642,%esp
-	irmovl 0x642,%ebp
-.pos 0x642
+	irmovl 0x624,%esp
+	irmovl 0x624,%ebp
+.pos 0x624
 
 main:
+	pushl ebx
+	irmovl 1234564789,%eax
+	rmmovl %eax,lx
+	irmovl 2147483647,%ecx
+	rmmovl %ecx,ly
+	irmovl 1,%edx
+	rmmovl %edx,lb
+	irmovl -1,%ebx
+	rmmovl %ebx,lc
+	popl ebx
 	halt
 	.align 4
+lb:	.long 0
+lc:	.long 0
+lx:	.long 0
+ly:	.long 0
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -176,26 +213,42 @@ main:
 // resize the heap
 // heap memory error
 
-* MOVE(NAME(x),CONST:1234564789)
-* MOVE(NAME(y),CONST:2147483647)
-* MOVE(NAME(b),CONST:1)
-* MOVE(NAME(c),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1)
+* MOVE(CONST:1234564789,NAME(x))
+* MOVE(CONST:2147483647,NAME(y))
+* MOVE(CONST:1,NAME(b))
+* MOVE(CONST:-1,NAME(c))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:1)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:2)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:3)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:10)))
 * CALL(NAME(println),NAME(x))
 * CALL(NAME(println),NAME(y))
 * CALL(NAME(println),NAME(b))
 * CALL(NAME(println),NAME(c))
 * CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
-* MOVE(MEM(NAME(q)),CONST:-1)
+* MOVE(CONST:-1,MEM(NAME(q)))
 * CALL(NAME(println),MEM(NAME(q)))
 * CALL(NAME(println),NAME(p))
 * CALL(NAME(println),NAME(p))
-* MOVE(MEM(MEM(NAME(p))),NAME(x))
+* MOVE(NAME(x),MEM(NAME(p)))
 * CALL(NAME(println),MEM(NAME(p)))
-* MOVE(MEM(NAME(r)),CONST:65536)
+* MOVE(CONST:65536,MEM(NAME(r)))
 * CALL(NAME(println),MEM(NAME(r)))
 * CALL(NAME(println),NAME(p))
 * CALL(NAME(println),MEM(NAME(p)))
+Left: x
+Right: 1234564789
+Left: y
+Right: 2147483647
+Left: b
+Right: 1
+Left: c
+Right: -1
+Left: null
+Right: null
+Left: null
+Right: null
+Left: null
+Right: null
+Left: null
+Right: null

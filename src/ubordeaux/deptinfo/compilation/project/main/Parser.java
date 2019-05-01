@@ -101,31 +101,35 @@ public class Parser extends beaver.Parser {
 		AssemblyTable at = new AssemblyTable();
 		CodeList cl = new CodeList ();
 		inter_code.linearize(cl);
-		if(cl == null) {
-			System.err.println("Error while generating assembly");
-			return cl;
-		}
+		//if(cl == null) {
+		//	System.err.println("Error while generating assembly");
+		//	return cl;
+		//}
 	      
 
 	    ArrayList<String> ac = cl.assemble (at);
+
+	    System.out.println("\nPre-y86: ");
+	    System.out.println(cl);
+	    
+	    
 	    ArrayList<String> as = new ArrayList<String> ();
 	    int pos = 0;
 
 	    as.add (".pos 0");
 	    for(String key : stackEnvironment.getEnvironment().get(0).keySet()) {
-	    	as.add(key+":");
+	    	as.add(key+": .long "+0);
 			Type value = stackEnvironment.getEnvironment().get(0).get(key);
 			
 			if(value instanceof TypeInt)
-				pos +=12;
+				pos +=6;
 			if(value instanceof TypeBoolean)
-				pos +=12;
+				pos +=6;
 			if(value instanceof TypeVoid)
 				pos +=6;
 			else
 				pos +=120;	
 				
-			as.add("\t.long "+0);
 			}
 	    as.add ("\nInit:");
 	    pos +=6;

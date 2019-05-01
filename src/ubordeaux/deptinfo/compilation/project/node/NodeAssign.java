@@ -68,20 +68,11 @@ public final class NodeAssign extends Node {
 
 
 	public Move generateIntermediateCode() {
-		Exp l = (Exp) this.getLhs().generateIntermediateCode();
+		Exp left = (Exp) this.getLhs().generateIntermediateCode();
 		Exp right = (Exp) getRhs().generateIntermediateCode();
-		if(this.getRhs() instanceof NodeId) {
-			Move m = new Move(new Mem(l),((NodeId)this.getRhs()).generateIntermediateCode());
-			System.out.println("* " + m.toString());
-
-			return m;
-		}else {
-			Move m = new Move(l, right);
-			System.out.println("* " + m.toString());
-			
-			return m;
-
-		}
+		Move m = new Move(right, left);
+		System.out.println("* " + m.toString());
 		
+		return m;		
 	}
 }

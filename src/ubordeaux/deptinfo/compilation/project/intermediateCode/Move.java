@@ -24,7 +24,11 @@ public class Move extends Stm {
 		Code l = src.linearize (cl);
 		if (! (l instanceof CodeIdent))
 		    return (null);
+		
+		//System.out.println("Move - linearized: "+this);
 
+		System.out.println("Left: "+l);
+		System.out.println("Right: "+r);
 		cl.add (new CodeAssign ((CodeIdent) l, r));
 		return (l);
 	}

@@ -1,8 +1,5 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
-import fr.c12.compilator.converter.code.Code;
-import fr.c12.compilator.converter.code.CodeList;
-
 public interface NodeInterface {
 	
 	// Cette méthode vérifie le type localement au Node

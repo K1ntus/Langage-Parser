@@ -1,8 +1,6 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
 
-import fr.c12.compilator.converter.code.Code;
-import fr.c12.compilator.converter.code.CodeList;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.LabelLocation;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Name;
 import ubordeaux.deptinfo.compilation.project.type.Type;

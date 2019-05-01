@@ -1,7 +1,5 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
-import fr.c12.compilator.converter.code.Code;
-import fr.c12.compilator.converter.code.CodeList;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Binop;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;

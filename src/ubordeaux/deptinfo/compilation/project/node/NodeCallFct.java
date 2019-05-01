@@ -2,8 +2,6 @@ package ubordeaux.deptinfo.compilation.project.node;
 
 import java.util.Iterator;
 
-import fr.c12.compilator.converter.code.Code;
-import fr.c12.compilator.converter.code.CodeList;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Call;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;

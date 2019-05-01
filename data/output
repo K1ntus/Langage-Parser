@@ -25,7 +25,7 @@ Intermediate Code:
 * CALL(NAME(println),CONST:-1)
 * CALL(NAME(println),CONST:-1)
 * CALL(NAME(println),CONST:-1)
-** SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L1,L2),SEQ(Label(L1),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L0),L0),Label(L2))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L4,L5),SEQ(Label(L4),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L3),L3),Label(L5))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L7,L8),SEQ(Label(L7),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L6),L6),Label(L8))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L10,L11),SEQ(Label(L10),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L9),L9),Label(L11))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L13,L14),SEQ(Label(L13),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L12),L12),Label(L14))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L16,L17),SEQ(Label(L16),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L15),L15),Label(L17))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L19,L20),SEQ(Label(L19),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L18),L18),Label(L20))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L22,L23),SEQ(Label(L22),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L21),L21),Label(L23))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L25,L26),SEQ(Label(L25),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L24),L24),Label(L26))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L28,L29),SEQ(Label(L28),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L27),L27),Label(L29))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L31,L32),SEQ(Label(L31),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L30),L30),Label(L32))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L34,L35),SEQ(Label(L34),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L33),L33),Label(L35))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L37,L38),SEQ(Label(L37),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L36),L36),Label(L38))))),Label(L36))))))))))))))
+** SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L1,L2),SEQ(Label(L1),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L0),L0),Label(L2))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L3,L4),SEQ(Label(L3),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L0),L0),Label(L4))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L5,L6),SEQ(Label(L5),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L0),L0),Label(L6))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L7,L8),SEQ(Label(L7),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L0),L0),Label(L8))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L9,L10),SEQ(Label(L9),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L0),L0),Label(L10))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L11,L12),SEQ(Label(L11),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L0),L0),Label(L12))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L13,L14),SEQ(Label(L13),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L0),L0),Label(L14))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L15,L16),SEQ(Label(L15),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L0),L0),Label(L16))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L17,L18),SEQ(Label(L17),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L0),L0),Label(L18))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L19,L20),SEQ(Label(L19),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L0),L0),Label(L20))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L21,L22),SEQ(Label(L21),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L0),L0),Label(L22))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L23,L24),SEQ(Label(L23),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L0),L0),Label(L24))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L25,L26),SEQ(Label(L25),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L0),L0),Label(L26))))),Label(L0))))))))))))))
 --- CheckType NodeList
 --- CheckType NodeSwitch
 - NodeList well typed
@@ -49,8 +49,8 @@ Intermediate Code:
 * MOVE(NAME(a),BINOP(2,CONST:5,CONST:2))
 * CALL(NAME(println),NAME(a))
 * MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))
-SEQ(Label(L39),SEQ(CJUMP(0,NAME(a),CONST:0,L40,L41),SEQ(Label(L40),SEQ(SEQ(CJUMP(13,NAME(a),NAME(a),L42,L43),SEQ(Label(L42),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),Label(L43)))),SEQ(JUMP(NAME(L39),L39),Label(L41))))))
-** SEQ(MOVE(NAME(a),CONST:100),SEQ(MOVE(NAME(a),BINOP(2,CONST:5,CONST:2)),SEQ(Label(L39),SEQ(CJUMP(0,NAME(a),CONST:0,L40,L41),SEQ(Label(L40),SEQ(SEQ(CJUMP(13,NAME(a),NAME(a),L42,L43),SEQ(Label(L42),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),Label(L43)))),SEQ(JUMP(NAME(L39),L39),Label(L41))))))))
+SEQ(Label(L27),SEQ(CJUMP(0,NAME(a),CONST:0,L28,L29),SEQ(Label(L28),SEQ(SEQ(CJUMP(13,NAME(a),NAME(a),L30,L31),SEQ(Label(L30),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),Label(L31)))),SEQ(JUMP(NAME(L27),L27),Label(L29))))))
+** SEQ(MOVE(NAME(a),CONST:100),SEQ(MOVE(NAME(a),BINOP(2,CONST:5,CONST:2)),SEQ(Label(L27),SEQ(CJUMP(0,NAME(a),CONST:0,L28,L29),SEQ(Label(L28),SEQ(SEQ(CJUMP(13,NAME(a),NAME(a),L30,L31),SEQ(Label(L30),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),Label(L31)))),SEQ(JUMP(NAME(L27),L27),Label(L29))))))))
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -314,11 +314,11 @@ Intermediate Code:
 * MOVE(NAME(y),CONST:1)
 * CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))
 * MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))
-SEQ(Label(L49),SEQ(CJUMP(0,NAME(y),CONST:5,L50,L51),SEQ(Label(L50),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L49),L49),Label(L51))))))
+SEQ(Label(L37),SEQ(CJUMP(0,NAME(y),CONST:5,L38,L39),SEQ(Label(L38),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L37),L37),Label(L39))))))
 * CALL(NAME(println),CONST:-1)
 * MOVE(NAME(x),BINOP(0,NAME(x),CONST:1))
-SEQ(Label(L44),SEQ(CJUMP(0,NAME(x),CONST:10,L45,L46),SEQ(Label(L45),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L47,L48),SEQ(Label(L47),SEQ(SEQ(MOVE(NAME(y),CONST:1),SEQ(Label(L49),SEQ(CJUMP(0,NAME(y),CONST:5,L50,L51),SEQ(Label(L50),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L49),L49),Label(L51))))))),SEQ(Label(L48),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(NAME(x),BINOP(0,NAME(x),CONST:1)))),SEQ(JUMP(NAME(L44),L44),Label(L46))))))
-** SEQ(MOVE(NAME(x),CONST:1),SEQ(Label(L44),SEQ(CJUMP(0,NAME(x),CONST:10,L45,L46),SEQ(Label(L45),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L47,L48),SEQ(Label(L47),SEQ(SEQ(MOVE(NAME(y),CONST:1),SEQ(Label(L49),SEQ(CJUMP(0,NAME(y),CONST:5,L50,L51),SEQ(Label(L50),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L49),L49),Label(L51))))))),SEQ(Label(L48),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(NAME(x),BINOP(0,NAME(x),CONST:1)))),SEQ(JUMP(NAME(L44),L44),Label(L46)))))))
+SEQ(Label(L32),SEQ(CJUMP(0,NAME(x),CONST:10,L33,L34),SEQ(Label(L33),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L35,L36),SEQ(Label(L35),SEQ(SEQ(MOVE(NAME(y),CONST:1),SEQ(Label(L37),SEQ(CJUMP(0,NAME(y),CONST:5,L38,L39),SEQ(Label(L38),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L37),L37),Label(L39))))))),SEQ(Label(L36),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(NAME(x),BINOP(0,NAME(x),CONST:1)))),SEQ(JUMP(NAME(L32),L32),Label(L34))))))
+** SEQ(MOVE(NAME(x),CONST:1),SEQ(Label(L32),SEQ(CJUMP(0,NAME(x),CONST:10,L33,L34),SEQ(Label(L33),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L35,L36),SEQ(Label(L35),SEQ(SEQ(MOVE(NAME(y),CONST:1),SEQ(Label(L37),SEQ(CJUMP(0,NAME(y),CONST:5,L38,L39),SEQ(Label(L38),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L37),L37),Label(L39))))))),SEQ(Label(L36),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(NAME(x),BINOP(0,NAME(x),CONST:1)))),SEQ(JUMP(NAME(L32),L32),Label(L34)))))))
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -341,11 +341,11 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWh
 
 
 ** Enregistre fct:sum
-Label(L52)
+Label(L40)
 ** Enregistre fct:pgcd
-Label(L53)
+Label(L41)
 * MOVE(NAME(i),CONST:0)
-SEQ(Label(L54),SEQ(CJUMP(0,NAME(i),NAME(j),L55,L56),SEQ(Label(L55),SEQ(MOVE(NAME(i),CONST:0),SEQ(JUMP(NAME(L54),L54),Label(L56))))))
+SEQ(Label(L42),SEQ(CJUMP(0,NAME(i),NAME(j),L43,L44),SEQ(Label(L43),SEQ(MOVE(NAME(i),CONST:0),SEQ(JUMP(NAME(L42),L42),Label(L44))))))
 * MOVE(NAME(i),BINOP(1,NAME(i),NAME(j)))
 * MOVE(NAME(j),BINOP(1,NAME(j),NAME(i)))
 //println(pgcd(78, 90));
@@ -394,13 +394,13 @@ NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeAs
 // gestion complexe de la pile
 // 
 ** Enregistre fct:fact1
-Label(L59)
+Label(L47)
 * CALL(NAME(fact1),BINOP(1,NAME(k),CONST:1))
 ** Enregistre fct:fact2
-Label(L62)
+Label(L50)
 * CALL(NAME(fact2),BINOP(1,NAME(k),CONST:1))
 ** Enregistre fct:hanoi
-Label(L65)
+Label(L53)
 * CALL(NAME(hanoi),NAME(a)NAME(c)NAME(b)BINOP(1,NAME(k),CONST:1))
 * CALL(NAME(println),NAME(a))
 * CALL(NAME(println),CONST:-1)
@@ -408,13 +408,13 @@ Label(L65)
 * CALL(NAME(hanoi),NAME(b)NAME(a)NAME(c)BINOP(1,NAME(k),CONST:1))
 ** Enregistre fct:impair
 ** Enregistre fct:pair
-Label(L70)
+Label(L58)
 * MOVE(NAME(b),CONST:0)
 * MOVE(NAME(b),CONST:1)
 * CALL(NAME(impair),BINOP(1,NAME(i),CONST:1))
 * MOVE(NAME(b),CALL(NAME(impair),BINOP(1,NAME(i),CONST:1)))
 ** Enregistre fct:impair
-Label(L75)
+Label(L63)
 * CALL(NAME(pair),BINOP(1,NAME(i),CONST:1))
 
 Intermediate Code:
@@ -630,7 +630,6 @@ $$
 ///range4 = Friday .. Unknown; // error	//NoSuchField
 ///range5 = Friday .. Monday; // error	//InvalidType@subrange_type
 ** Enregistre types: TypeArrayRange[TypeInt_1..TypeInt_5]
-//error	//A GERER
 ///range7 = Friday .. Tuesday; // error "range not valid" //InvalidType@subrange_type
 ///range8 = Monday .. April; // error "incoherent range" //A GERER
 $$$ Array $$$
@@ -670,12 +669,12 @@ $$$
 ///function goo(i : integer, j : integer) : boolean;//RedefinitionFunctionPrototype //error "procedure or function declared twice"
 ** Enregistre fct:foo
 ///result^ = hoo(i, j); // error "function not declared" //NoSuchFieldException
-Label(L80)
+Label(L68)
 * CALL(NAME(goo),NAME(i)NAME(j))
 * MOVE(MEM(NAME(result)),CALL(NAME(goo),NAME(i)NAME(j)))
 ** Enregistre fct:goo
 ///function goo(i : integer, j : integer) : boolean begin return false; end //RedefinitionFunction // error "function already defined"
-Label(L81)
+Label(L69)
 ///b = 2; // error "Type error in affectation"
 ///l = m2; // error "Type error in affectation" //m2 range 4, l range 5
 //b = foo(3); // error "Type error in calling expression"			//PAS GERE Checktype invalid
@@ -684,10 +683,10 @@ Label(L81)
 //z2 [ Thursday ] = 36; // error "Type error in array access "		//PAS GERE
 //IL Y AVAIT UN CRASH ICI RIP
 ///y = z [ false ]; // error "Type error in array access" 		// InvalidArrayAccess
-///y = z [ 4 ]; // error "Type error in affectation"			//HANDLED
-///b = z [ 4 ]; // error "Type error in affectation"			//HANDLED
-///z = k [ 4 ]; // error "Type error in affectation"			//HANDLED
-///b = z2 [ Thursday ]; // error "Type error in affectation"	//HANDLED
+///y = z [ 4 ]; // error "Type error in affectation"			// HANDLED
+///b = z [ 4 ]; // error "Type error in affectation"			// HANDLED
+///z = k [ 4 ]; // error "Type error in affectation"			// HANDLED
+///b = z2 [ Thursday ]; // error "Type error in affectation"	// HANDLED
 ///z2 = 36; 													// Accessible variable expected
 Size is : 13
 ///b = !(2 < false) && (x == 1) && (p == null); // // error "Type error in comparison"

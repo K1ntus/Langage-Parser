@@ -9,16 +9,24 @@ import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypeItemEnum;
 import ubordeaux.deptinfo.compilation.project.type.TypeTuple;
 
-public class TypeEnvironment {
-	private String name;
-	private Map<String, Type> table;
 
+/**
+ * Class that will contain the table linking the type name and his new Type
+ * 
+ */
+public class TypeEnvironment {
+	private Map<String, Type> table;
+	/**
+	 * Environment name
+	 */
+	private String name;
 	
+
+	/**
+	 * Initialize the hashmap
+	 */
 	public TypeEnvironment(){
 		table = new HashMap<String, Type>();
-		//table.put("integer",new TypeInt());
-		//table.put("string",new TypeString());
-		//table.put("boolean",new TypeBoolean()); 
 	}
 	
 	/**
@@ -29,6 +37,12 @@ public class TypeEnvironment {
 		this.name = name;
 	}
 	
+	/**
+	 * Check if a type is already registered in the table, whatever the key
+	 * @param t_to_compare Type to compare with those in the table
+	 * @return True if this type is already present. Else, false.
+	 */
+	@SuppressWarnings("unused")
 	private boolean isTypeRegistered(Type t_to_compare) {
 		for(Type t : table.values()) {
 			if(t.getClass().equals(t_to_compare.getClass())) {
@@ -39,6 +53,13 @@ public class TypeEnvironment {
 		return false;
 	}
 
+	/**
+	 * Register a Type depending of his key (a string representing the type name)
+	 * 
+	 * @param t the key (String corresponding to the type name)
+	 * @param n the value (Type corresponding to the custom type)
+	 * @throws RedefinitionType sent when there's already a type register with this key
+	 */
 	public void putVariable(String t, Type n) throws RedefinitionType{//, UnknownType {
 		if(table.get(t) != null) {
 			throw new RedefinitionType("type: " + t + " has already been registered.");
@@ -51,6 +72,11 @@ public class TypeEnvironment {
 		System.out.println("** Enregistre " + name + ": " + n.toString());
 	}
 
+	/**
+	 * @param t the type name to find
+	 * @return the type corresponding to this key
+	 * @throws UnknownType If there s no type with this key as name
+	 */
 	public Type getVariableValue(String t) throws UnknownType {
 		if(table.get(t) == null) {
 			throw new UnknownType("type: " + t + " has not been defined");

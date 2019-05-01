@@ -14,15 +14,21 @@ import ubordeaux.deptinfo.compilation.project.type.TypeFunct;
  */
 public class ProcedureEnvironment {
 	/**
-	 * table that content the <Funct_name, Type_funct>. This table is somehow useless, because we can
+	 * table that content the <Function_name, TypeFunct>. This table is somehow useless, because we can
 	 * have the name of the function directly from TypeFunct, so an
 	 * classical collections like a List would be enough to manage
 	 * the procedures
 	 */
 	private Map<String, TypeFunct> table;
+	/**
+	 * Environment name
+	 */
 	private String name;
 	
 
+	/**
+	 * Initialize the hashmap
+	 */
 	public ProcedureEnvironment() {
 		table = new HashMap<>();
 		this.setName("procedures");

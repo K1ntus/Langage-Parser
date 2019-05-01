@@ -1,9 +1,5 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Binop;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Cjump;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Label;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.LabelLocation;
@@ -45,7 +41,7 @@ public final class NodeCaseList extends NodeExp {
 
 		if (clone.size() > 1 && clone.get(0) != null) {
 			clone.elts.remove(0);
-			return new Seq((Stm)stat, (Stm)clone.generateIntermediateCodeCaseList(exp)) ;
+			return new Seq((Stm)stat, (Stm)clone.generateIntermediateCodeCaseList(exp, l)) ;
 		}
 
 		return new Seq((Stm)stat, new Label(l));

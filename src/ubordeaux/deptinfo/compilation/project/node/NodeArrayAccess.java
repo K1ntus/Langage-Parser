@@ -1,8 +1,6 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
-import fr.c12.compilator.error.UnknownNodeType;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Binop;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Mem;

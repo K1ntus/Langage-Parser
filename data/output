@@ -12,13 +12,25 @@
 * MOVE(NAME(a),BINOP(2,CONST:5,CONST:2))
 * CALL(NAME(println),NAME(a))
 * MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))
-SEQ(Label(L0),SEQ(CJUMP(0,NAME(a),CONST:0,L1,L2),SEQ(Label(L1),SEQ(SEQ(CJUMP(13,NAME(a),NAME(a),L3,L4),SEQ(Label(L3),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),Label(L4)))),SEQ(JUMP(NAME(L0),L0),Label(L2))))))
-
-
-Linearized Code: 
+SEQ(Label(L0),SEQ(CJUMP(0,NAME(a),CONST:0,L1,L2),SEQ(Label(L1),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),SEQ(JUMP(NAME(L0),L0),Label(L2))))))
 Programme y86 :
-	.pos 0
-	irmovl 0x200,%esp
+
+.pos 0
+a:
+	.long 0
+b:
+	.long 0
+c:
+	.long 0
+d:
+	.long 0
+
+Init:
+	irmovl 0x498,%esp
+	irmovl 0x498,%ebp
+.pos 0x498
+
+main:
 	irmovl 5,%eax
 	pushl %eax
 	irmovl 2,%eax
@@ -70,12 +82,26 @@ Programme y86 :
 * CALL(NAME(println),NAME(b))
 * CALL(NAME(println),NAME(c))
 * CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
-
-
-Linearized Code: 
 Programme y86 :
-	.pos 0
-	irmovl 0x200,%esp
+
+.pos 0
+b:
+	.long 0
+c:
+	.long 0
+d:
+	.long 0
+x:
+	.long 0
+y:
+	.long 0
+
+Init:
+	irmovl 0x642,%esp
+	irmovl 0x642,%ebp
+.pos 0x642
+
+main:
 	halt
 	.align 4
 --- CheckType NodeList
@@ -173,6 +199,3 @@ Programme y86 :
 * CALL(NAME(println),MEM(NAME(r)))
 * CALL(NAME(println),NAME(p))
 * CALL(NAME(println),MEM(NAME(p)))
-
-
-Linearized Code: 

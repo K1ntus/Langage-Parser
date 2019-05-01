@@ -11,7 +11,6 @@ a = 100;
 a = 5 * 2;
 
 while (a >= 0) do
-if ( a >= 0) then
 	begin
 	println (a);
 	a = a - 1;

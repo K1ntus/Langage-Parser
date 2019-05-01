@@ -53,34 +53,58 @@
 				Symbol.getColumn(token.getStart()));
 	}
 	
+	
+	
 	public CodeList generateAssemblyCode(IntermediateCode inter_code){
 
 		AssemblyTable at = new AssemblyTable();
 		CodeList cl = new CodeList ();
 		inter_code.linearize(cl);
-		System.out.println("\n\nLinearized Code: ");
-	      //System.out.format ("Programme code 3 adresses :\n");
-	      //System.out.format ("%s\n", cl.toString ());
+		//if(cl == null) {
+		//	System.err.println("Error while generating assembly");
+		//	return cl;
+		//}
 	      
 
-	      ArrayList<String> ac = cl.assemble (at);
-	      ArrayList<String> as = new ArrayList<String> ();
-	      
+	    ArrayList<String> ac = cl.assemble (at);
+	    ArrayList<String> as = new ArrayList<String> ();
+	    int pos = 0;
 
-	      as.add (".pos 0");
-	      as.add ("Init:");
-	      as.add ("\tirmovl 0x200,%esp");
-	      as.addAll (at.registerCalleeSave ());
-	      as.addAll (ac);
-	      as.addAll (at.registerCalleeRestore ());
-	      as.add ("\thalt");
-	      as.addAll (at.assemble ());
-	      System.out.format ("Programme y86 :\n");
-	      for (int i = 0; i < as.size (); i ++) {
-	            System.out.format ("%s\n", as.get (i));
-	      }
+	    as.add (".pos 0");
+	    for(String key : stackEnvironment.getEnvironment().get(0).keySet()) {
+	    	as.add(key+":");
+			Type value = stackEnvironment.getEnvironment().get(0).get(key);
+			
+			if(value instanceof TypeInt)
+				pos +=12;
+			if(value instanceof TypeBoolean)
+				pos +=12;
+			if(value instanceof TypeVoid)
+				pos +=6;
+			else
+				pos +=120;	
+				
+			as.add("\t.long "+0);
+			}
+	    as.add ("\nInit:");
+	    pos +=6;
+	    as.add ("\tirmovl 0x"+pos+",%esp");
+	    as.add ("\tirmovl 0x"+pos+",%ebp");
+		as.add(".pos 0x" + pos);
+
+	    as.add ("\nmain:");
+	    as.addAll (at.registerCalleeSave ());
+	    as.addAll (ac);
+	    as.addAll (at.registerCalleeRestore ());
+	    
+	    as.add ("\thalt");
+	    as.addAll (at.assemble ());
+	    System.out.format ("Programme y86 :\n\n");
+	    for (int i = 0; i < as.size (); i ++) {
+	          System.out.format ("%s\n", as.get (i));
+	    }
 	      
-	      return cl;
+	    return cl;
 	}
 		
 	private TypeEnvironment typeEnvironment = new TypeEnvironment("types");

@@ -170,7 +170,7 @@ program=
 		if(generate_intermediate_code) {
 			l_res.addAll(l);
 			System.out.println("Intermediate Code:");
-			System.out.println(l.generateIntermediateCode().toString());
+			System.out.println("** " + l.generateIntermediateCode().toString());
 		}
 
 	    return _symbol_l; 
@@ -183,9 +183,9 @@ Declaration named type
 normalement OK
 */
 constant_declaration_part =
-								{: 
-									return new NodeList(new NodeAssign(new NodeId("null", new TypePointer()), new NodeLiteral(new TypePointer() , null)));	
-								:}
+	{: 
+		return new NodeList(new NodeAssign(new NodeId("null", new TypePointer()), new NodeLiteral(new TypePointer() , null)));	
+	:}
 	;
 
 	/*
@@ -592,12 +592,21 @@ assignment_statement=
 	variable_access.e1 TOKEN_AFF expression.e2 TOKEN_SEMIC	
 		{:  
 			if(!e1.getType().equals(e2.getType()) && !(new TypePointer(e1.getType()).equals(e2.getType()) )) {
+				if(e1.getType() instanceof TypePointer) {
+					if(e2.getType() instanceof TypeVoid) {
+						return new NodeAssign(e1, e2); 
+					}else if(e1.get(0).equals(e2)) {
+						return new NodeAssign(e1, e2); 
+					}
+				}
+				
 				InvalidAffectation e = new InvalidAffectation("Impossible to assign a " + e1.getType() + " to " + e2.getType() + " at line: " + Symbol.getColumn(e1.getStart()));
 				if(verbose_mode) {
 					e.printStackTrace();
 				}
 				if(critical_mode)
 					System.exit(0);
+				
 				System.err.println("[InvalidAffectation] Automatically recover from error." );
 				return new NodeAssign(e1,e1);
 			}

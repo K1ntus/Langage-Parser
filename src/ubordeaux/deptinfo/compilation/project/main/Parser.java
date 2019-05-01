@@ -127,7 +127,7 @@ public class Parser extends beaver.Parser {
 		if(generate_intermediate_code) {
 			l_res.addAll(l);
 			System.out.println("Intermediate Code:");
-			System.out.println(l.generateIntermediateCode().toString());
+			System.out.println("** " + l.generateIntermediateCode().toString());
 		}
 
 	    return _symbol_l;
@@ -136,7 +136,7 @@ public class Parser extends beaver.Parser {
 			new Action() {	// [1] constant_declaration_part = 
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					 
-									return new NodeList(new NodeAssign(new NodeId("null", new TypePointer()), new NodeLiteral(new TypePointer() , null)));
+		return new NodeList(new NodeAssign(new NodeId("null", new TypePointer()), new NodeLiteral(new TypePointer() , null)));
 				}
 			},
 			Action.NONE,  	// [2] type_declaration_part = 
@@ -195,11 +195,9 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_r = _symbols[offset + 1];
 					final String r = (String) _symbol_r.value;
 					 
-		//System.out.println("Named: " + r); 
 		try {
 			return typeEnvironment.getVariableValue(r);
 		} catch(UnknownType e) {	//Si pas deja present
-			//System.err.println(e);
 			return new TypeNamed(r);
 		}
 				}
@@ -413,7 +411,6 @@ public class Parser extends beaver.Parser {
 			type_fct.setDefined(true); 
 			procedureEnvironment.putVariable(type_fct.getName(), type_fct); 
 		} catch (RedefinitionFunction|RedefinitionFunctionPrototype e) {
-			//System.err.println(e + " at Line : " + Symbol.getLine(type_fct.getStart()));
 			if(verbose_mode) {
 				e.printStackTrace();
 			}
@@ -493,7 +490,6 @@ public class Parser extends beaver.Parser {
 						stackEnvironment.add_type_to_latest_portability(n_id.getName(), n_id.getType());
 
 					}catch ( RedefinitionVariable e) {
-						//System.err.println(e + " at Line : " + Symbol.getLine(args.getStart()));
 						if(verbose_mode) {
 							e.printStackTrace();
 						}
@@ -504,9 +500,7 @@ public class Parser extends beaver.Parser {
 				
 				TypeFunct type_function = new TypeFunct(funct_name, params_tuple, t);
 
-				//stackEnvironment.getEnvironment().pop(); 
 				return type_function;
-				//return new NodeCallFct(funct_name, type_function, new NodeList());
 				}
 			},
 			Action.NONE,  	// [49] argt_part = 
@@ -546,7 +540,6 @@ public class Parser extends beaver.Parser {
 			new Action() {	// [55] pop_stackenv = 
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 						
-						//System.out.println("[STACK] Poped one more stack layer"); 
 						stackEnvironment.getEnvironment().pop(); 
 						return new EmptySymbol();
 				}
@@ -554,7 +547,6 @@ public class Parser extends beaver.Parser {
 			new Action() {	// [56] push_stackenv = 
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 						
-						//System.out.println("[STACK] Pushed one more stack layer"); 
 						stackEnvironment.getEnvironment().push(new HashMap<String, Type>(stackEnvironment.getEnvironment().peek())); 
 						return new EmptySymbol();
 				}
@@ -591,16 +583,22 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_e2 = _symbols[offset + 3];
 					final NodeExp e2 = (NodeExp) _symbol_e2.value;
 					  
-		//System.out.println("ASSIGN;::::" + e1.getType() + " -> " + e2.getType());
-			
-			//Type(e1) = Type(e2), ou Pointer(Type(e1)) = Type(e2) 
 			if(!e1.getType().equals(e2.getType()) && !(new TypePointer(e1.getType()).equals(e2.getType()) )) {
+				if(e1.getType() instanceof TypePointer) {
+					if(e2.getType() instanceof TypeVoid) {
+						return new NodeAssign(e1, e2); 
+					}else if(e1.get(0).equals(e2)) {
+						return new NodeAssign(e1, e2); 
+					}
+				}
+				
 				InvalidAffectation e = new InvalidAffectation("Impossible to assign a " + e1.getType() + " to " + e2.getType() + " at line: " + Symbol.getColumn(e1.getStart()));
 				if(verbose_mode) {
 					e.printStackTrace();
 				}
 				if(critical_mode)
 					System.exit(0);
+				
 				System.err.println("[InvalidAffectation] Automatically recover from error." );
 				return new NodeAssign(e1,e1);
 			}
@@ -642,13 +640,10 @@ public class Parser extends beaver.Parser {
 																				
 																				}catch(UnknownProcedure e){
 																					System.err.println("[UnknownProcedure] line: " + Symbol.getColumn(args.getStart()));
-																					/*if(verbose_mode) {
-																						e.printStackTrace();
-																					}*/
 																					if(verbose_mode) {
 																						e.printStackTrace();
 																					}
-																					//System.out.println("Procedure Expression: " + e + " at Line : " + Symbol.getLine(args.getStart()));
+
 																					return new NodeCallFct(func_name, new TypeFunct(func_name, new TypeTuple(), new TypeVoid()), args);
 																				}
 				}
@@ -900,7 +895,6 @@ public class Parser extends beaver.Parser {
 					System.exit(0);
 				System.err.println("[InvalidArrayAccess] Automatically recover from syntax error.");
 				return var;
-				//return new NodeArrayAccess(var, new NodeLiteral(new TypeInt(0), 0));
 			}
 			return new NodeArrayAccess(var, e);
 				}
@@ -910,15 +904,6 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_e = _symbols[offset + 1];
 					final NodeExp e = (NodeExp) _symbol_e.value;
 					 
-		/*
-		if(!(e.getType() instanceof TypePointer)){
-			System.err.println("[MEMLEAK] Trying to access free or undeclared pointer");
-			
-			if(critical_mode)
-				System.exit(0);
-			return e;
-		}
-		*/
 		return new NodePtrAccess(e);
 				}
 			},

@@ -26,12 +26,9 @@ public final class NodeReturn extends NodeExp {
 
 	public IntermediateCode generateIntermediateCodeRet() {// p.186, 174		
 		Temp tmp = new Temp(new TempValue());	//Mettre vers celui qui a call la fct
-		
 		Node n = this.get(0);
-		
 		Move res = new Move(tmp, (Exp) n.generateIntermediateCode());
 		
 		return res;
-		
 	}
 }

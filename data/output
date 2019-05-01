@@ -25,7 +25,7 @@ Intermediate Code:
 * CALL(NAME(println),CONST:-1)
 * CALL(NAME(println),CONST:-1)
 * CALL(NAME(println),CONST:-1)
-SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L1,L2),SEQ(Label(L1),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L0),L0),Label(L2))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L4,L5),SEQ(Label(L4),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L3),L3),Label(L5))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L7,L8),SEQ(Label(L7),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L6),L6),Label(L8))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L10,L11),SEQ(Label(L10),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L9),L9),Label(L11))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L13,L14),SEQ(Label(L13),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L12),L12),Label(L14))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L16,L17),SEQ(Label(L16),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L15),L15),Label(L17))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L19,L20),SEQ(Label(L19),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L18),L18),Label(L20))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L22,L23),SEQ(Label(L22),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L21),L21),Label(L23))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L25,L26),SEQ(Label(L25),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L24),L24),Label(L26))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L28,L29),SEQ(Label(L28),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L27),L27),Label(L29))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L31,L32),SEQ(Label(L31),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L30),L30),Label(L32))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L34,L35),SEQ(Label(L34),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L33),L33),Label(L35))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L37,L38),SEQ(Label(L37),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L36),L36),Label(L38))))),Label(L36))))))))))))))
+** SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L1,L2),SEQ(Label(L1),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L0),L0),Label(L2))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L4,L5),SEQ(Label(L4),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L3),L3),Label(L5))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L7,L8),SEQ(Label(L7),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L6),L6),Label(L8))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L10,L11),SEQ(Label(L10),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L9),L9),Label(L11))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L13,L14),SEQ(Label(L13),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L12),L12),Label(L14))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L16,L17),SEQ(Label(L16),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L15),L15),Label(L17))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L19,L20),SEQ(Label(L19),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L18),L18),Label(L20))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L22,L23),SEQ(Label(L22),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L21),L21),Label(L23))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L25,L26),SEQ(Label(L25),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L24),L24),Label(L26))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L28,L29),SEQ(Label(L28),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L27),L27),Label(L29))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L31,L32),SEQ(Label(L31),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L30),L30),Label(L32))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L34,L35),SEQ(Label(L34),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L33),L33),Label(L35))))),SEQ(SEQ(CJUMP(-1,NAME(month),NAME(month),L37,L38),SEQ(Label(L37),SEQ(EXP(CALL(NAME(println),CONST:-1)),SEQ(JUMP(NAME(L36),L36),Label(L38))))),Label(L36))))))))))))))
 --- CheckType NodeList
 --- CheckType NodeSwitch
 - NodeList well typed
@@ -50,7 +50,7 @@ Intermediate Code:
 * CALL(NAME(println),NAME(a))
 * MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))
 SEQ(Label(L39),SEQ(CJUMP(0,NAME(a),CONST:0,L40,L41),SEQ(Label(L40),SEQ(SEQ(CJUMP(13,NAME(a),NAME(a),L42,L43),SEQ(Label(L42),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),Label(L43)))),SEQ(JUMP(NAME(L39),L39),Label(L41))))))
-SEQ(MOVE(NAME(a),CONST:100),SEQ(MOVE(NAME(a),BINOP(2,CONST:5,CONST:2)),SEQ(Label(L39),SEQ(CJUMP(0,NAME(a),CONST:0,L40,L41),SEQ(Label(L40),SEQ(SEQ(CJUMP(13,NAME(a),NAME(a),L42,L43),SEQ(Label(L42),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),Label(L43)))),SEQ(JUMP(NAME(L39),L39),Label(L41))))))))
+** SEQ(MOVE(NAME(a),CONST:100),SEQ(MOVE(NAME(a),BINOP(2,CONST:5,CONST:2)),SEQ(Label(L39),SEQ(CJUMP(0,NAME(a),CONST:0,L40,L41),SEQ(Label(L40),SEQ(SEQ(CJUMP(13,NAME(a),NAME(a),L42,L43),SEQ(Label(L42),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),Label(L43)))),SEQ(JUMP(NAME(L39),L39),Label(L41))))))))
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -96,7 +96,7 @@ Intermediate Code:
 * CALL(NAME(println),NAME(b))
 * CALL(NAME(println),NAME(c))
 * CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
-SEQ(MOVE(NAME(x),CONST:1234564789),SEQ(MOVE(NAME(y),CONST:2147483647),SEQ(MOVE(NAME(b),CONST:1),SEQ(MOVE(NAME(c),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1),SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(EXP(CALL(NAME(println),NAME(y))),SEQ(EXP(CALL(NAME(println),NAME(b))),SEQ(EXP(CALL(NAME(println),NAME(c))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2))))))))))))))))
+** SEQ(MOVE(NAME(x),CONST:1234564789),SEQ(MOVE(NAME(y),CONST:2147483647),SEQ(MOVE(NAME(b),CONST:1),SEQ(MOVE(NAME(c),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1),SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(EXP(CALL(NAME(println),NAME(y))),SEQ(EXP(CALL(NAME(println),NAME(b))),SEQ(EXP(CALL(NAME(println),NAME(c))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2))))))))))))))))
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -187,21 +187,17 @@ Intermediate Code:
 * CALL(NAME(println),NAME(b))
 * CALL(NAME(println),NAME(c))
 * CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
-* ALLOC(NodeNew(NodeId#q:TypePointer(TypeString)#)1) - Todo
 * MOVE(MEM(NAME(q)),CONST:-1)
 * CALL(NAME(println),MEM(NAME(q)))
 * CALL(NAME(println),NAME(p))
-* ALLOC(NodeNew(NodeId#p:TypePointer(TypeInt_null)#)1) - Todo
 * CALL(NAME(println),NAME(p))
 * MOVE(MEM(MEM(NAME(p))),NAME(x))
 * CALL(NAME(println),MEM(NAME(p)))
-* ALLOC(NodeNew(NodeId#r:TypePointer(TypeInt_null)#)1) - Todo
 * MOVE(MEM(NAME(r)),CONST:65536)
 * CALL(NAME(println),MEM(NAME(r)))
-* FREE(NodeDispose(NodeId#p:TypePointer(TypeInt_null)#)) - Todo
 * CALL(NAME(println),NAME(p))
 * CALL(NAME(println),MEM(NAME(p)))
-SEQ(MOVE(NAME(x),CONST:1234564789),SEQ(MOVE(NAME(y),CONST:2147483647),SEQ(MOVE(NAME(b),CONST:1),SEQ(MOVE(NAME(c),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1),SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(EXP(CALL(NAME(println),NAME(y))),SEQ(EXP(CALL(NAME(println),NAME(b))),SEQ(EXP(CALL(NAME(println),NAME(c))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))),SEQ(MOVE(MEM(NAME(q)),NAME(null)),SEQ(MOVE(MEM(NAME(q)),CONST:-1),SEQ(EXP(CALL(NAME(println),MEM(NAME(q)))),SEQ(EXP(CALL(NAME(println),NAME(p))),SEQ(MOVE(MEM(NAME(p)),NAME(null)),SEQ(EXP(CALL(NAME(println),NAME(p))),SEQ(MOVE(MEM(MEM(NAME(p))),NAME(x)),SEQ(EXP(CALL(NAME(println),MEM(NAME(p)))),SEQ(MOVE(MEM(NAME(r)),NAME(null)),SEQ(MOVE(MEM(NAME(r)),CONST:65536),SEQ(EXP(CALL(NAME(println),MEM(NAME(r)))),SEQ(MOVE(MEM(NAME(p)),NAME(null)),SEQ(EXP(CALL(NAME(println),NAME(p))),EXP(CALL(NAME(println),MEM(NAME(p))))))))))))))))))))))))))))))
+** SEQ(MOVE(NAME(x),CONST:1234564789),SEQ(MOVE(NAME(y),CONST:2147483647),SEQ(MOVE(NAME(b),CONST:1),SEQ(MOVE(NAME(c),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1),SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(EXP(CALL(NAME(println),NAME(y))),SEQ(EXP(CALL(NAME(println),NAME(b))),SEQ(EXP(CALL(NAME(println),NAME(c))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))),SEQ(MOVE(MEM(NAME(q)),NAME(null)),SEQ(MOVE(MEM(NAME(q)),CONST:-1),SEQ(EXP(CALL(NAME(println),MEM(NAME(q)))),SEQ(EXP(CALL(NAME(println),NAME(p))),SEQ(MOVE(MEM(NAME(p)),NAME(null)),SEQ(EXP(CALL(NAME(println),NAME(p))),SEQ(MOVE(MEM(MEM(NAME(p))),NAME(x)),SEQ(EXP(CALL(NAME(println),MEM(NAME(p)))),SEQ(MOVE(MEM(NAME(r)),NAME(null)),SEQ(MOVE(MEM(NAME(r)),CONST:65536),SEQ(EXP(CALL(NAME(println),MEM(NAME(r)))),SEQ(MOVE(MEM(NAME(p)),NAME(null)),SEQ(EXP(CALL(NAME(println),NAME(p))),EXP(CALL(NAME(println),MEM(NAME(p))))))))))))))))))))))))))))))
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -322,7 +318,7 @@ SEQ(Label(L49),SEQ(CJUMP(0,NAME(y),CONST:5,L50,L51),SEQ(Label(L50),SEQ(SEQ(EXP(C
 * CALL(NAME(println),CONST:-1)
 * MOVE(NAME(x),BINOP(0,NAME(x),CONST:1))
 SEQ(Label(L44),SEQ(CJUMP(0,NAME(x),CONST:10,L45,L46),SEQ(Label(L45),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L47,L48),SEQ(Label(L47),SEQ(SEQ(MOVE(NAME(y),CONST:1),SEQ(Label(L49),SEQ(CJUMP(0,NAME(y),CONST:5,L50,L51),SEQ(Label(L50),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L49),L49),Label(L51))))))),SEQ(Label(L48),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(NAME(x),BINOP(0,NAME(x),CONST:1)))),SEQ(JUMP(NAME(L44),L44),Label(L46))))))
-SEQ(MOVE(NAME(x),CONST:1),SEQ(Label(L44),SEQ(CJUMP(0,NAME(x),CONST:10,L45,L46),SEQ(Label(L45),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L47,L48),SEQ(Label(L47),SEQ(SEQ(MOVE(NAME(y),CONST:1),SEQ(Label(L49),SEQ(CJUMP(0,NAME(y),CONST:5,L50,L51),SEQ(Label(L50),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L49),L49),Label(L51))))))),SEQ(Label(L48),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(NAME(x),BINOP(0,NAME(x),CONST:1)))),SEQ(JUMP(NAME(L44),L44),Label(L46)))))))
+** SEQ(MOVE(NAME(x),CONST:1),SEQ(Label(L44),SEQ(CJUMP(0,NAME(x),CONST:10,L45,L46),SEQ(Label(L45),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L47,L48),SEQ(Label(L47),SEQ(SEQ(MOVE(NAME(y),CONST:1),SEQ(Label(L49),SEQ(CJUMP(0,NAME(y),CONST:5,L50,L51),SEQ(Label(L50),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L49),L49),Label(L51))))))),SEQ(Label(L48),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(NAME(x),BINOP(0,NAME(x),CONST:1)))),SEQ(JUMP(NAME(L44),L44),Label(L46)))))))
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -360,7 +356,7 @@ Intermediate Code:
 * MOVE(NAME(x),CALL(NAME(sum),CONST:3CONST:5))
 * CALL(NAME(sum),CONST:3CONST:5)
 * CALL(NAME(println),CALL(NAME(sum),CONST:3CONST:5))
-SEQ(MOVE(NAME(x),CONST:5),SEQ(MOVE(NAME(x),CALL(NAME(sum),CONST:3CONST:5)),EXP(CALL(NAME(println),CALL(NAME(sum),CONST:3CONST:5)))))
+** SEQ(MOVE(NAME(x),CONST:5),SEQ(MOVE(NAME(x),CALL(NAME(sum),CONST:3CONST:5)),EXP(CALL(NAME(println),CALL(NAME(sum),CONST:3CONST:5)))))
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -431,7 +427,7 @@ Intermediate Code:
 * CALL(NAME(println),CALL(NAME(pair),CONST:1001))
 * CALL(NAME(pair),CONST:1000)
 * CALL(NAME(println),CALL(NAME(pair),CONST:1000))
-SEQ(EXP(CALL(NAME(println),CALL(NAME(fact1),CONST:6))),SEQ(EXP(CALL(NAME(println),CALL(NAME(fact2),CONST:6))),SEQ(EXP(CALL(NAME(hanoi),CONST:-1CONST:-1CONST:-1CONST:4)),SEQ(EXP(CALL(NAME(println),CALL(NAME(pair),CONST:1001))),EXP(CALL(NAME(println),CALL(NAME(pair),CONST:1000)))))))
+** SEQ(EXP(CALL(NAME(println),CALL(NAME(fact1),CONST:6))),SEQ(EXP(CALL(NAME(println),CALL(NAME(fact2),CONST:6))),SEQ(EXP(CALL(NAME(hanoi),CONST:-1CONST:-1CONST:-1CONST:4)),SEQ(EXP(CALL(NAME(println),CALL(NAME(pair),CONST:1001))),EXP(CALL(NAME(println),CALL(NAME(pair),CONST:1000)))))))
 --- CheckType NodeList
 --- CheckType NodeCallFct
 --- CheckType NodeCallFct
@@ -487,7 +483,7 @@ Intermediate Code:
 * CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)))
 * CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:4)))
 * CALL(NAME(println),MEM(BINOP(0,NAME(week),CONST:1)))
-SEQ(MOVE(MEM(BINOP(0,NAME(week),CONST:0)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(week),CONST:1)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(week),CONST:2)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:4)),CONST:22)),CONST:7)),CONST:-1),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:4)))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(week),CONST:1)))))))))))
+** SEQ(MOVE(MEM(BINOP(0,NAME(week),CONST:0)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(week),CONST:1)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(week),CONST:2)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:4)),CONST:22)),CONST:7)),CONST:-1),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:4)))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(week),CONST:1)))))))))))
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeArrayAccess
@@ -556,7 +552,7 @@ Intermediate Code:
 * CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))))
 * CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))))
 * CALL(NAME(println),MEM(BINOP(0,NAME(week),NAME(TUESDAY))))
-SEQ(MOVE(MEM(BINOP(0,NAME(week),NAME(MONDAY))),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(week),NAME(TUESDAY))),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(week),NAME(WEDNESDAY))),CONST:-1),SEQ(MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))),CONST:-1),SEQ(MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))),CONST:-1),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(week),NAME(TUESDAY))))))))))))
+** SEQ(MOVE(MEM(BINOP(0,NAME(week),NAME(MONDAY))),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(week),NAME(TUESDAY))),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(week),NAME(WEDNESDAY))),CONST:-1),SEQ(MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))),CONST:-1),SEQ(MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))),CONST:-1),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(week),NAME(TUESDAY))))))))))))
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeArrayAccess
@@ -619,51 +615,98 @@ $$$
 ** Enregistre types: TypeInt_null
 ** Enregistre types: TypeBoolean
 ** Retrouve types: chaine TypeString
-//named2 = unknown; // error		//UnknownType
+///named2 = unknown; // error		//UnknownType
 $$$ Enum $$$
 ** Enregistre types: TypeString
 ** Enregistre types: (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
-//xxx = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, aa, ab, ac, ad, ae, af, ag, ah); // error
+///xxx = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, aa, ab, ac, ad, ae, af, ag, ah); // error
 ** Enregistre types: (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
 ** Enregistre types: TypeArrayRange[TypeInt_64..TypeInt_81]
 $$ 
 Cas
 D'erreur
 $$
-//range3 = 81 .. 64; //error			//InvalidType
-//range4 = Friday .. Unknown; // error	//NoSuchField
+///range3 = 81 .. 64; //error			//InvalidType
+///range4 = Friday .. Unknown; // error	//NoSuchField
+///range5 = Friday .. Monday; // error	//InvalidType@subrange_type
 ** Enregistre types: TypeArrayRange[TypeInt_1..TypeInt_5]
-[InvalidType@subrange_type] min@[Friday:5] is greater than max@[Monday:1]
-fr.c12.compilator.error.InvalidType
-	at ubordeaux.deptinfo.compilation.project.main.Parser$13.reduce(Unknown Source)
-	at ubordeaux.deptinfo.compilation.project.main.Parser.invokeReduceAction(Unknown Source)
-	at beaver.Parser.reduce(Parser.java:561)
-	at beaver.Parser.parse(Parser.java:468)
-	at beaver.Parser.parse(Parser.java:428)
-	at ubordeaux.deptinfo.compilation.project.main.Main.main(Unknown Source)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.tools.ant.taskdefs.ExecuteJava.run(ExecuteJava.java:223)
-	at org.apache.tools.ant.taskdefs.ExecuteJava.execute(ExecuteJava.java:155)
-	at org.apache.tools.ant.taskdefs.Java.run(Java.java:835)
-	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:227)
-	at org.apache.tools.ant.taskdefs.Java.executeJava(Java.java:135)
-	at org.apache.tools.ant.taskdefs.Java.execute(Java.java:108)
-	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:292)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)
-	at org.apache.tools.ant.Task.perform(Task.java:350)
-	at org.apache.tools.ant.Target.execute(Target.java:448)
-	at org.apache.tools.ant.Target.performTasks(Target.java:469)
-	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1399)
-	at org.apache.tools.ant.Project.executeTarget(Project.java:1370)
-	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
-	at org.eclipse.ant.internal.launching.remote.EclipseDefaultExecutor.executeTargets(EclipseDefaultExecutor.java:36)
-	at org.apache.tools.ant.Project.executeTargets(Project.java:1260)
-	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.run(InternalAntRunner.java:460)
-	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.main(InternalAntRunner.java:142)
+//error	//A GERER
+///range7 = Friday .. Tuesday; // error "range not valid" //InvalidType@subrange_type
+///range8 = Monday .. April; // error "incoherent range" //A GERER
+$$$ Array $$$
+** Enregistre types: TypeArrayRange[TypeInt_1..TypeInt_11]
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)
+** Retrouve types: range1 TypeArrayRange[TypeInt_64..TypeInt_81]
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_64..TypeInt_81], TypeInt_null)
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeInt_null)
+** Retrouve types: DaysOfWeek (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
+$$ 
+Cas
+D'erreur
+$$
+// UNKNWOWN TYPE
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray((TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6), TypeInt_null))
+[UnknownType] type: range3 has not been defined
+// error "Range type expected"
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray(TypeNamed_range3, TypeInt_null))
+$$$ Pointers $$$
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray(TypeArrayRange[TypeInt_3..TypeInt_6], TypeInt_null))
+** Enregistre types: TypePointer(TypeInt_null)
+** Retrouve types: DaysOfWeek (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
+$$$
+Variable declaration part
+$$$
+** Enregistre types: TypePointer(TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray((TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6), TypeInt_null)))
+///x : boolean; // error "Variable x yet declared" // RedefinitionVariable
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Retrouve types: ptr1 TypePointer(TypeInt_null)
+** Retrouve types: Months (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
+** Retrouve types: range1 TypeArrayRange[TypeInt_64..TypeInt_81]
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Retrouve types: Months (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
+** Enregistre fct:goo
+///function goo(i : integer, j : integer) : boolean;//RedefinitionFunctionPrototype //error "procedure or function declared twice"
+** Enregistre fct:foo
+///result^ = hoo(i, j); // error "function not declared" //NoSuchFieldException
+Label(L80)
+* CALL(NAME(goo),NAME(i)NAME(j))
+* MOVE(MEM(NAME(result)),CALL(NAME(goo),NAME(i)NAME(j)))
+** Enregistre fct:goo
+///function goo(i : integer, j : integer) : boolean begin return false; end //RedefinitionFunction // error "function already defined"
+Label(L81)
+///b = 2; // error "Type error in affectation"
+///l = m2; // error "Type error in affectation" //m2 range 4, l range 5
+//b = foo(3); // error "Type error in calling expression"			//PAS GERE Checktype invalid
+//b = foo(3, false); // error "Type error in calling expression"	//PAS GERE Checktype invalid
+//x = foo(3, 7); // error "Type error in calling expression"		//PAS GERE Checktype invalid
+//z2 [ Thursday ] = 36; // error "Type error in array access "		//PAS GERE
+//IL Y AVAIT UN CRASH ICI RIP
+///y = z [ false ]; // error "Type error in array access" 		// InvalidArrayAccess
+///y = z [ 4 ]; // error "Type error in affectation"			//HANDLED
+///b = z [ 4 ]; // error "Type error in affectation"			//HANDLED
+///z = k [ 4 ]; // error "Type error in affectation"			//HANDLED
+///b = z2 [ Thursday ]; // error "Type error in affectation"	//HANDLED
+///z2 = 36; 													// Accessible variable expected
+Size is : 13
+///b = !(2 < false) && (x == 1) && (p == null); // // error "Type error in comparison"
+///b = !(2 < x) && (x == 1) && p ; // // error "Type error in logical expression"
+///b = !(2 < x) && (x == 1 + false) && p ; // // error "Type error in arithmetic expression"
+///p = 0; // error "Type error in affectation" //InvalidAffectation
+//new x; // error "Type error in pointer access expression" //InvalidPointerAccess
+///p^ = false;		//INVALID AFFECTATION OK
+///x^ = null; // error "Type error in pointer access expression"
+///dispose x;  // error "Type error in pointer access expression" //InvalidPointerAccess
+
+Intermediate Code:
+* MOVE(NAME(b),CONST:0)
+* MOVE(MEM(NAME(l)),NAME(l))
+* CALL(NAME(foo),CONST:3CONST:7)
+* MOVE(NAME(b),MEM(CALL(NAME(foo),CONST:3CONST:7)))
+* CALL(NAME(goo),CONST:3CONST:7)
+* MOVE(NAME(b),CALL(NAME(goo),CONST:3CONST:7))
+* MOVE(MEM(BINOP(0,NAME(z2),CONST:1)),CONST:36)
+* MOVE(NAME(x),MEM(BINOP(0,NAME(z2),CONST:1)))
+* CALL(NAME(goo),MEM(BINOP(0,NAME(z2),CONST:1))CONST:1)
+* MOVE(NAME(b),CALL(NAME(goo),MEM(BINOP(0,NAME(z2),CONST:1))CONST:1))

@@ -1,15 +1,17 @@
 package ubordeaux.deptinfo.compilation.project.main;
 
-import java.util.Vector;
 import java.util.Iterator;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 import fr.c12.compilator.error.*;
 import ubordeaux.deptinfo.compilation.project.type.*;
 import fr.c12.compilator.special.*;
+import fr.c12.compilator.converter.AssemblyTable;
 import java.util.HashMap;
 import fr.c12.compilator.environment.*;
-import beaver.*;
+import fr.c12.compilator.converter.code.CodeList;
 import java.util.ArrayList;
+import java.util.Vector;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
+import beaver.*;
 import ubordeaux.deptinfo.compilation.project.node.*;
 
 /**
@@ -91,6 +93,35 @@ public class Parser extends beaver.Parser {
 				Symbol.getLine(token.getStart()),
 				Symbol.getColumn(token.getStart()));
 	}
+	
+	public CodeList generateAssemblyCode(IntermediateCode inter_code){
+
+		AssemblyTable at = new AssemblyTable();
+		CodeList cl = new CodeList ();
+		inter_code.linearize(cl);
+		System.out.println("\n\nLinearized Code: ");
+	      //System.out.format ("Programme code 3 adresses :\n");
+	      //System.out.format ("%s\n", cl.toString ());
+	      
+
+	      ArrayList<String> ac = cl.assemble (at);
+	      ArrayList<String> as = new ArrayList<String> ();
+	      
+
+	      as.add ("\t.pos 0");
+	      as.add ("\tirmovl 0x200,%esp");
+	      as.addAll (at.registerCalleeSave ());
+	      as.addAll (ac);
+	      as.addAll (at.registerCalleeRestore ());
+	      as.add ("\thalt");
+	      as.addAll (at.assemble ());
+	      System.out.format ("Programme y86 :\n");
+	      for (int i = 0; i < as.size (); i ++) {
+	            System.out.format ("%s\n", as.get (i));
+	      }
+	      
+	      return cl;
+	}
 		
 	private TypeEnvironment typeEnvironment = new TypeEnvironment("types");
 	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment("procedures");
@@ -101,7 +132,9 @@ public class Parser extends beaver.Parser {
 	private boolean verbose_mode = true;	
 	private boolean critical_mode = true;
 
+	private boolean generate_progr_tree = false;
 	private boolean generate_intermediate_code = false;
+	private boolean generate_assembly = true;
 
 	private final Action[] actions;
 
@@ -115,10 +148,19 @@ public class Parser extends beaver.Parser {
 					final Symbol _symbol_l = _symbols[offset + 7];
 					final NodeList l = (NodeList) _symbol_l.value;
 					 
+		if(generate_progr_tree) {
+			System.out.println("\n\nArbre Principal: ");
+			System.out.println(l.toString());			
+		}
+
 		if(generate_intermediate_code) {
 			l_res.addAll(l);
-			System.out.println("Intermediate Code:");
+			System.out.println("\n\nIntermediate Code:");
 			System.out.println("** " + l.generateIntermediateCode().toString());
+		}
+
+		if(generate_assembly) {
+			generateAssemblyCode(l.generateIntermediateCode());
 		}
 
 	    return _symbol_l;

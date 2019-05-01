@@ -8,6 +8,28 @@
 
 
 
+* MOVE(NAME(a),CONST:100)
+* MOVE(NAME(a),BINOP(2,CONST:5,CONST:2))
+* CALL(NAME(println),NAME(a))
+* MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))
+SEQ(Label(L0),SEQ(CJUMP(0,NAME(a),CONST:0,L1,L2),SEQ(Label(L1),SEQ(SEQ(CJUMP(13,NAME(a),NAME(a),L3,L4),SEQ(Label(L3),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),Label(L4)))),SEQ(JUMP(NAME(L0),L0),Label(L2))))))
+
+
+Linearized Code: 
+Programme y86 :
+	.pos 0
+	irmovl 0x200,%esp
+	irmovl 5,%eax
+	pushl %eax
+	irmovl 2,%eax
+	pushl %eax
+	call mult
+	iaddl 8,%esp
+	mrmovl la,%eax
+	isubl 1,%eax
+	mrmovl la,%eax
+	halt
+	.align 4
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -23,28 +45,6 @@
 *** Typage correct
 
 
-Arbre Principal: 
-NodeList(NodeAssign(NodeId#a:TypeInt_null#, NodeLiteral#100:TypeInt_null#), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeLiteral#5:TypeInt_null#, NodeLiteral#2:TypeInt_null#)), NodeWhile(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(NodeIf(NodeRel(NodeId#a:TypeInt_null#, NodeLiteral#0:TypeInt_null#), NodeList(NodeList(println_NodeCallFct(NodeList(NodeId#a:TypeInt_null#)), NodeAssign(NodeId#a:TypeInt_null#, NodeOp(NodeId#a:TypeInt_null#, NodeLiteral#1:TypeInt_null#))))))))
-
-
-Intermediate Code: 
-* MOVE(NAME(a),CONST:100)
-* MOVE(NAME(a),BINOP(2,CONST:5,CONST:2))
-* CALL(NAME(println),NAME(a))
-* MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))
-SEQ(Label(L0),SEQ(CJUMP(0,NAME(a),CONST:0,L1,L2),SEQ(Label(L1),SEQ(SEQ(CJUMP(13,NAME(a),NAME(a),L3,L4),SEQ(Label(L3),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),Label(L4)))),SEQ(JUMP(NAME(L0),L0),Label(L2))))))
-** SEQ(MOVE(NAME(a),CONST:100),SEQ(MOVE(NAME(a),BINOP(2,CONST:5,CONST:2)),SEQ(Label(L0),SEQ(CJUMP(0,NAME(a),CONST:0,L1,L2),SEQ(Label(L1),SEQ(SEQ(CJUMP(13,NAME(a),NAME(a),L3,L4),SEQ(Label(L3),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),Label(L4)))),SEQ(JUMP(NAME(L0),L0),Label(L2))))))))
-
-
-Linearized Code: 
-* MOVE(NAME(a),CONST:100)
-* MOVE(NAME(a),BINOP(2,CONST:5,CONST:2))
-* CALL(NAME(println),NAME(a))
-* MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))
-SEQ(Label(L5),SEQ(CJUMP(0,NAME(a),CONST:0,L6,L7),SEQ(Label(L6),SEQ(SEQ(CJUMP(13,NAME(a),NAME(a),L8,L9),SEQ(Label(L8),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(NAME(a),BINOP(1,NAME(a),CONST:1))),Label(L9)))),SEQ(JUMP(NAME(L5),L5),Label(L7))))))
-** null
-
-
 
 *************************************************
 *** Fichier data/progr2.lea
@@ -57,6 +57,27 @@ SEQ(Label(L5),SEQ(CJUMP(0,NAME(a),CONST:0,L6,L7),SEQ(Label(L6),SEQ(SEQ(CJUMP(13,
 //
 // 0x4995F6B5
 
+* MOVE(NAME(x),CONST:1234564789)
+* MOVE(NAME(y),CONST:2147483647)
+* MOVE(NAME(b),CONST:1)
+* MOVE(NAME(c),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1)
+* MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1)
+* CALL(NAME(println),NAME(x))
+* CALL(NAME(println),NAME(y))
+* CALL(NAME(println),NAME(b))
+* CALL(NAME(println),NAME(c))
+* CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
+
+
+Linearized Code: 
+Programme y86 :
+	.pos 0
+	irmovl 0x200,%esp
+	halt
+	.align 4
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -112,44 +133,6 @@ SEQ(Label(L5),SEQ(CJUMP(0,NAME(a),CONST:0,L6,L7),SEQ(Label(L6),SEQ(SEQ(CJUMP(13,
 - NodeCallFct well typed
 - NodeList well typed
 *** Typage correct
-
-
-Arbre Principal: 
-NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#))))
-
-
-Intermediate Code: 
-* MOVE(NAME(x),CONST:1234564789)
-* MOVE(NAME(y),CONST:2147483647)
-* MOVE(NAME(b),CONST:1)
-* MOVE(NAME(c),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1)
-* CALL(NAME(println),NAME(x))
-* CALL(NAME(println),NAME(y))
-* CALL(NAME(println),NAME(b))
-* CALL(NAME(println),NAME(c))
-* CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
-** SEQ(MOVE(NAME(x),CONST:1234564789),SEQ(MOVE(NAME(y),CONST:2147483647),SEQ(MOVE(NAME(b),CONST:1),SEQ(MOVE(NAME(c),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1),SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(EXP(CALL(NAME(println),NAME(y))),SEQ(EXP(CALL(NAME(println),NAME(b))),SEQ(EXP(CALL(NAME(println),NAME(c))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2))))))))))))))))
-
-
-Linearized Code: 
-* MOVE(NAME(x),CONST:1234564789)
-* MOVE(NAME(y),CONST:2147483647)
-* MOVE(NAME(b),CONST:1)
-* MOVE(NAME(c),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1)
-* CALL(NAME(println),NAME(x))
-* CALL(NAME(println),NAME(y))
-* CALL(NAME(println),NAME(b))
-* CALL(NAME(println),NAME(c))
-* CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
-** null
 
 
 
@@ -167,105 +150,6 @@ Linearized Code:
 // resize the heap
 // heap memory error
 
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeCallFct
---- CheckType NodeId
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeId
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeId
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeId
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
---- CheckType NodeNew
---- CheckType NodeAssign
---- CheckType NodePtrAccess
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeCallFct
---- CheckType NodePtrAccess
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeId
-- NodeCallFct well typed
---- CheckType NodeNew
---- CheckType NodeCallFct
---- CheckType NodeId
-- NodeCallFct well typed
---- CheckType NodeAssign
---- CheckType NodePtrAccess
---- CheckType NodeId
-- Assign well typed
---- CheckType NodeCallFct
---- CheckType NodePtrAccess
-- NodeCallFct well typed
---- CheckType NodeNew
---- CheckType NodeAssign
---- CheckType NodePtrAccess
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeCallFct
---- CheckType NodePtrAccess
-- NodeCallFct well typed
---- CheckType NodeDispose
---- CheckType NodeCallFct
---- CheckType NodeId
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodePtrAccess
-- NodeCallFct well typed
-- NodeList well typed
-*** Typage correct
-
-
-Arbre Principal: 
-NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1234564789:TypeInt_null#), NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#2147483647:TypeInt_null#), NodeAssign(NodeId#b:TypeBoolean#, NodeLiteral#true:TypeBoolean#), NodeAssign(NodeId#c:TypeString#, NodeLiteral#"a":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"A":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"B":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#3:TypeInt_null#), NodeLiteral#"C":TypeString#), NodeAssign(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#10:TypeInt_null#), NodeLiteral#"Z":TypeString#), println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#y:TypeInt_null#)), println_NodeCallFct(NodeList(NodeId#b:TypeBoolean#)), println_NodeCallFct(NodeList(NodeId#c:TypeString#)), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#d:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_10], TypeString)#, NodeLiteral#2:TypeInt_null#))), NodeNew(NodeId#q:TypePointer(TypeString)#), NodeAssign(NodePtrAccess(NodeId#q:TypePointer(TypeString)#), NodeLiteral#"A":TypeString#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#q:TypePointer(TypeString)#))), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeNew(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), NodeAssign(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#), NodeId#x:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#))), NodeNew(NodeId#r:TypePointer(TypeInt_null)#), NodeAssign(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#), NodeLiteral#65536:TypeInt_null#), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#r:TypePointer(TypeInt_null)#))), NodeDispose(NodeId#p:TypePointer(TypeInt_null)#), println_NodeCallFct(NodeList(NodeId#p:TypePointer(TypeInt_null)#)), println_NodeCallFct(NodeList(NodePtrAccess(NodeId#p:TypePointer(TypeInt_null)#))))
-
-
-Intermediate Code: 
 * MOVE(NAME(x),CONST:1234564789)
 * MOVE(NAME(y),CONST:2147483647)
 * MOVE(NAME(b),CONST:1)
@@ -289,380 +173,6 @@ Intermediate Code:
 * CALL(NAME(println),MEM(NAME(r)))
 * CALL(NAME(println),NAME(p))
 * CALL(NAME(println),MEM(NAME(p)))
-** SEQ(MOVE(NAME(x),CONST:1234564789),SEQ(MOVE(NAME(y),CONST:2147483647),SEQ(MOVE(NAME(b),CONST:1),SEQ(MOVE(NAME(c),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1),SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(EXP(CALL(NAME(println),NAME(y))),SEQ(EXP(CALL(NAME(println),NAME(b))),SEQ(EXP(CALL(NAME(println),NAME(c))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))),SEQ(MOVE(MEM(NAME(q)),NAME(null)),SEQ(MOVE(MEM(NAME(q)),CONST:-1),SEQ(EXP(CALL(NAME(println),MEM(NAME(q)))),SEQ(EXP(CALL(NAME(println),NAME(p))),SEQ(MOVE(MEM(NAME(p)),NAME(null)),SEQ(EXP(CALL(NAME(println),NAME(p))),SEQ(MOVE(MEM(MEM(NAME(p))),NAME(x)),SEQ(EXP(CALL(NAME(println),MEM(NAME(p)))),SEQ(MOVE(MEM(NAME(r)),NAME(null)),SEQ(MOVE(MEM(NAME(r)),CONST:65536),SEQ(EXP(CALL(NAME(println),MEM(NAME(r)))),SEQ(MOVE(MEM(NAME(p)),NAME(null)),SEQ(EXP(CALL(NAME(println),NAME(p))),EXP(CALL(NAME(println),MEM(NAME(p))))))))))))))))))))))))))))))
 
 
 Linearized Code: 
-* MOVE(NAME(x),CONST:1234564789)
-* MOVE(NAME(y),CONST:2147483647)
-* MOVE(NAME(b),CONST:1)
-* MOVE(NAME(c),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:1)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:2)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:3)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(d),CONST:10)),CONST:-1)
-* CALL(NAME(println),NAME(x))
-* CALL(NAME(println),NAME(y))
-* CALL(NAME(println),NAME(b))
-* CALL(NAME(println),NAME(c))
-* CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
-* MOVE(MEM(NAME(q)),CONST:-1)
-* CALL(NAME(println),MEM(NAME(q)))
-* CALL(NAME(println),NAME(p))
-* CALL(NAME(println),NAME(p))
-* MOVE(MEM(MEM(NAME(p))),NAME(x))
-* CALL(NAME(println),MEM(NAME(p)))
-* MOVE(MEM(NAME(r)),CONST:65536)
-* CALL(NAME(println),MEM(NAME(r)))
-* CALL(NAME(println),NAME(p))
-* CALL(NAME(println),MEM(NAME(p)))
-** null
-
-
-
-*************************************************
-*** Fichier data/progr4.lea
-[INFO] $$  : multiple line comment.
-[INFO] $$$ : documentation comment.
-
-
-//
-// Structure de contrôle
-//
-//
-
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeWhile
-- NodeList well typed
-*** Typage correct
-
-
-Arbre Principal: 
-NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(NodeList(println_NodeCallFct(NodeList(NodeId#x:TypeInt_null#)), NodeIf(NodeRel(NodeId#x:TypeInt_null#, NodeLiteral#10:TypeInt_null#), NodeList(NodeList(NodeAssign(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#), NodeWhile(NodeRel(NodeId#y:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeList(NodeList(println_NodeCallFct(NodeList(NodeOp(NodeOp(NodeLiteral#1000:TypeInt_null#, NULL), NodeId#y:TypeInt_null#))), NodeAssign(NodeId#y:TypeInt_null#, NodeOp(NodeId#y:TypeInt_null#, NodeLiteral#1:TypeInt_null#))))))), NodeList(println_NodeCallFct(NodeList(NodeLiteral#"X":TypeString#)))), NodeAssign(NodeId#x:TypeInt_null#, NodeOp(NodeId#x:TypeInt_null#, NodeLiteral#1:TypeInt_null#))))))
-
-
-Intermediate Code: 
-* MOVE(NAME(x),CONST:1)
-* CALL(NAME(println),NAME(x))
-* MOVE(NAME(y),CONST:1)
-* CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))
-* MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))
-SEQ(Label(L15),SEQ(CJUMP(0,NAME(y),CONST:5,L16,L17),SEQ(Label(L16),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L15),L15),Label(L17))))))
-* CALL(NAME(println),CONST:-1)
-* MOVE(NAME(x),BINOP(0,NAME(x),CONST:1))
-SEQ(Label(L10),SEQ(CJUMP(0,NAME(x),CONST:10,L11,L12),SEQ(Label(L11),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L13,L14),SEQ(Label(L13),SEQ(SEQ(MOVE(NAME(y),CONST:1),SEQ(Label(L15),SEQ(CJUMP(0,NAME(y),CONST:5,L16,L17),SEQ(Label(L16),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L15),L15),Label(L17))))))),SEQ(Label(L14),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(NAME(x),BINOP(0,NAME(x),CONST:1)))),SEQ(JUMP(NAME(L10),L10),Label(L12))))))
-** SEQ(MOVE(NAME(x),CONST:1),SEQ(Label(L10),SEQ(CJUMP(0,NAME(x),CONST:10,L11,L12),SEQ(Label(L11),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L13,L14),SEQ(Label(L13),SEQ(SEQ(MOVE(NAME(y),CONST:1),SEQ(Label(L15),SEQ(CJUMP(0,NAME(y),CONST:5,L16,L17),SEQ(Label(L16),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L15),L15),Label(L17))))))),SEQ(Label(L14),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(NAME(x),BINOP(0,NAME(x),CONST:1)))),SEQ(JUMP(NAME(L10),L10),Label(L12)))))))
-
-
-Linearized Code: 
-* MOVE(NAME(x),CONST:1)
-* CALL(NAME(println),NAME(x))
-* MOVE(NAME(y),CONST:1)
-* CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))
-* MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))
-SEQ(Label(L23),SEQ(CJUMP(0,NAME(y),CONST:5,L24,L25),SEQ(Label(L24),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L23),L23),Label(L25))))))
-* CALL(NAME(println),CONST:-1)
-* MOVE(NAME(x),BINOP(0,NAME(x),CONST:1))
-SEQ(Label(L18),SEQ(CJUMP(0,NAME(x),CONST:10,L19,L20),SEQ(Label(L19),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L21,L22),SEQ(Label(L21),SEQ(SEQ(MOVE(NAME(y),CONST:1),SEQ(Label(L23),SEQ(CJUMP(0,NAME(y),CONST:5,L24,L25),SEQ(Label(L24),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(NAME(y),BINOP(0,NAME(y),CONST:1))),SEQ(JUMP(NAME(L23),L23),Label(L25))))))),SEQ(Label(L22),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(NAME(x),BINOP(0,NAME(x),CONST:1)))),SEQ(JUMP(NAME(L18),L18),Label(L20))))))
-** null
-
-
-
-*************************************************
-*** Fichier data/progr5.lea
-[INFO] $$  : multiple line comment.
-[INFO] $$$ : documentation comment.
-
-
-** Enregistre fct:sum
-** Enregistre fct:pgcd
-//println(pgcd(78, 90));
-
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeCallFct
---- CheckType NodeLiteral
---- CheckType NodeLiteral
-- NodeCallFct well typed
-- Assign well typed
---- CheckType NodeCallFct
---- CheckType NodeCallFct
---- CheckType NodeLiteral
---- CheckType NodeLiteral
-- NodeCallFct well typed
-- NodeCallFct well typed
-- NodeList well typed
-*** Typage correct
-
-
-Arbre Principal: 
-NodeList(NodeAssign(NodeId#x:TypeInt_null#, NodeLiteral#5:TypeInt_null#), NodeAssign(NodeId#x:TypeInt_null#, sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#))), println_NodeCallFct(NodeList(sum_NodeCallFct(NodeList(NodeLiteral#3:TypeInt_null#, NodeLiteral#5:TypeInt_null#)))))
-
-
-Intermediate Code: 
-* MOVE(NAME(x),CONST:5)
-* CALL(NAME(sum),CONST:3CONST:5)
-* MOVE(NAME(x),CALL(NAME(sum),CONST:3CONST:5))
-* CALL(NAME(sum),CONST:3CONST:5)
-* CALL(NAME(println),CALL(NAME(sum),CONST:3CONST:5))
-** SEQ(MOVE(NAME(x),CONST:5),SEQ(MOVE(NAME(x),CALL(NAME(sum),CONST:3CONST:5)),EXP(CALL(NAME(println),CALL(NAME(sum),CONST:3CONST:5)))))
-
-
-Linearized Code: 
-* MOVE(NAME(x),CONST:5)
-* CALL(NAME(sum),CONST:3CONST:5)
-* MOVE(NAME(x),CALL(NAME(sum),CONST:3CONST:5))
-* CALL(NAME(sum),CONST:3CONST:5)
-* CALL(NAME(println),CALL(NAME(sum),CONST:3CONST:5))
-** null
-
-
-
-*************************************************
-*** Fichier data/progr6.lea
-[INFO] $$  : multiple line comment.
-[INFO] $$$ : documentation comment.
-
-
-//
-// gestion complexe de la pile
-// 
-** Enregistre fct:fact1
-** Enregistre fct:fact2
-** Enregistre fct:hanoi
-** Enregistre fct:impair
-** Enregistre fct:pair
-** Enregistre fct:impair
-
---- CheckType NodeList
---- CheckType NodeCallFct
---- CheckType NodeCallFct
---- CheckType NodeLiteral
-- NodeCallFct well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeCallFct
---- CheckType NodeLiteral
-- NodeCallFct well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeLiteral
---- CheckType NodeLiteral
---- CheckType NodeLiteral
---- CheckType NodeLiteral
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeCallFct
---- CheckType NodeLiteral
-- NodeCallFct well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeCallFct
---- CheckType NodeLiteral
-- NodeCallFct well typed
-- NodeCallFct well typed
-- NodeList well typed
-*** Typage correct
-
-
-Arbre Principal: 
-NodeList(println_NodeCallFct(NodeList(fact1_NodeCallFct(NodeList(NodeLiteral#6:TypeInt_null#)))), println_NodeCallFct(NodeList(fact2_NodeCallFct(NodeList(NodeLiteral#6:TypeInt_null#)))), hanoi_NodeCallFct(NodeList(NodeLiteral#"A":TypeString#, NodeLiteral#"B":TypeString#, NodeLiteral#"C":TypeString#, NodeLiteral#4:TypeInt_null#)), println_NodeCallFct(NodeList(pair_NodeCallFct(NodeList(NodeLiteral#1001:TypeInt_null#)))), println_NodeCallFct(NodeList(pair_NodeCallFct(NodeList(NodeLiteral#1000:TypeInt_null#)))))
-
-
-Intermediate Code: 
-* CALL(NAME(fact1),CONST:6)
-* CALL(NAME(println),CALL(NAME(fact1),CONST:6))
-* CALL(NAME(fact2),CONST:6)
-* CALL(NAME(println),CALL(NAME(fact2),CONST:6))
-* CALL(NAME(hanoi),CONST:-1CONST:-1CONST:-1CONST:4)
-* CALL(NAME(pair),CONST:1001)
-* CALL(NAME(println),CALL(NAME(pair),CONST:1001))
-* CALL(NAME(pair),CONST:1000)
-* CALL(NAME(println),CALL(NAME(pair),CONST:1000))
-** SEQ(EXP(CALL(NAME(println),CALL(NAME(fact1),CONST:6))),SEQ(EXP(CALL(NAME(println),CALL(NAME(fact2),CONST:6))),SEQ(EXP(CALL(NAME(hanoi),CONST:-1CONST:-1CONST:-1CONST:4)),SEQ(EXP(CALL(NAME(println),CALL(NAME(pair),CONST:1001))),EXP(CALL(NAME(println),CALL(NAME(pair),CONST:1000)))))))
-
-
-Linearized Code: 
-* CALL(NAME(fact1),CONST:6)
-* CALL(NAME(println),CALL(NAME(fact1),CONST:6))
-* CALL(NAME(fact2),CONST:6)
-* CALL(NAME(println),CALL(NAME(fact2),CONST:6))
-* CALL(NAME(hanoi),CONST:-1CONST:-1CONST:-1CONST:4)
-* CALL(NAME(pair),CONST:1001)
-* CALL(NAME(println),CALL(NAME(pair),CONST:1001))
-* CALL(NAME(pair),CONST:1000)
-* CALL(NAME(println),CALL(NAME(pair),CONST:1000))
-** null
-
-
-
-*************************************************
-*** Fichier data/progr7.lea
-[INFO] $$  : multiple line comment.
-[INFO] $$$ : documentation comment.
-
-
-//
-// tableaux
-// 
-
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
-- NodeList well typed
-*** Typage correct
-
-
-Arbre Principal: 
-NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#0:TypeInt_null#), NodeLiteral#"M":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#), NodeLiteral#"T":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#2:TypeInt_null#), NodeLiteral#"W":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#), NodeLiteral#"X":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#4:TypeInt_null#), NodeLiteral#22:TypeInt_null#), NodeLiteral#7:TypeInt_null#), NodeLiteral#"V":TypeString#), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#3:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_7], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_12], TypeString)))#, NodeLiteral#2:TypeInt_null#), NodeLiteral#17:TypeInt_null#), NodeLiteral#4:TypeInt_null#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeString)#, NodeLiteral#1:TypeInt_null#))))
-
-
-Intermediate Code: 
-* MOVE(MEM(BINOP(0,NAME(week),CONST:0)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(week),CONST:1)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(week),CONST:2)),CONST:-1)
-* MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)),CONST:-1)
-* MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:4)),CONST:22)),CONST:7)),CONST:-1)
-* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)))
-* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:4)))
-* CALL(NAME(println),MEM(BINOP(0,NAME(week),CONST:1)))
-** SEQ(MOVE(MEM(BINOP(0,NAME(week),CONST:0)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(week),CONST:1)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(week),CONST:2)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)),CONST:-1),SEQ(MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:4)),CONST:22)),CONST:7)),CONST:-1),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:4)))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(week),CONST:1)))))))))))
-
-
-Linearized Code: 
-* MOVE(MEM(BINOP(0,NAME(week),CONST:0)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(week),CONST:1)),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(week),CONST:2)),CONST:-1)
-* MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)),CONST:-1)
-* MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:4)),CONST:22)),CONST:7)),CONST:-1)
-* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)))
-* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:4)))
-* CALL(NAME(println),MEM(BINOP(0,NAME(week),CONST:1)))
-** null
-
-
-
-*************************************************
-*** Fichier data/progr8.lea
-[INFO] $$  : multiple line comment.
-[INFO] $$$ : documentation comment.
-
-
-//
-// tableaux et enumérés
-// 
-** Enregistre types: (TypeItemEnum@SUNDAY=0, TypeItemEnum@MONDAY=1, TypeItemEnum@TUESDAY=2, TypeItemEnum@WEDNESDAY=3, TypeItemEnum@THURSDAY=4, TypeItemEnum@FRIDAY=5, TypeItemEnum@SATURDAY=6)
-** Enregistre types: (TypeItemEnum@JANUARY=0, TypeItemEnum@FEBRUARY=1, TypeItemEnum@MARCH=2, TypeItemEnum@APRIL=3, TypeItemEnum@MAY=4, TypeItemEnum@JUNE=5, TypeItemEnum@JULY=6, TypeItemEnum@AUGUST=7, TypeItemEnum@SEPTEMBER=8, TypeItemEnum@OCTOBER=9, TypeItemEnum@NOVEMBER=10, TypeItemEnum@DECEMBER=11)
-
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
-- NodeList well typed
-*** Typage correct
-
-
-Arbre Principal: 
-NodeList(NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#MONDAY:TypeInt_1#), NodeLiteral#"M":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#TUESDAY:TypeInt_2#), NodeLiteral#"T":TypeString#), NodeAssign(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#WEDNESDAY:TypeInt_3#), NodeLiteral#"W":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#17:TypeInt_null#), NodeId#MARCH:TypeInt_2#), NodeLiteral#"X":TypeString#), NodeAssign(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#1:TypeInt_null#), NodeId#MARCH:TypeInt_2#), NodeLiteral#"V":TypeString#), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#1:TypeInt_null#), NodeId#MARCH:TypeInt_2#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeArrayAccess(NodeArrayAccess(NodeId#year:TypeArray(TypeArrayRange[TypeInt_0..TypeInt_6], TypeArray(TypeArrayRange[TypeInt_1..TypeInt_31], TypeArray(TypeArrayRange[TypeInt_0..TypeInt_11], TypeString)))#, NodeId#SATURDAY:TypeInt_6#), NodeLiteral#17:TypeInt_null#), NodeId#MARCH:TypeInt_2#))), println_NodeCallFct(NodeList(NodeArrayAccess(NodeId#week:TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeString)#, NodeId#TUESDAY:TypeInt_2#))))
-
-
-Intermediate Code: 
-* MOVE(MEM(BINOP(0,NAME(week),NAME(MONDAY))),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(week),NAME(TUESDAY))),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(week),NAME(WEDNESDAY))),CONST:-1)
-* MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))),CONST:-1)
-* MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))),CONST:-1)
-* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))))
-* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))))
-* CALL(NAME(println),MEM(BINOP(0,NAME(week),NAME(TUESDAY))))
-** SEQ(MOVE(MEM(BINOP(0,NAME(week),NAME(MONDAY))),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(week),NAME(TUESDAY))),CONST:-1),SEQ(MOVE(MEM(BINOP(0,NAME(week),NAME(WEDNESDAY))),CONST:-1),SEQ(MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))),CONST:-1),SEQ(MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))),CONST:-1),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(week),NAME(TUESDAY))))))))))))
-
-
-Linearized Code: 
-* MOVE(MEM(BINOP(0,NAME(week),NAME(MONDAY))),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(week),NAME(TUESDAY))),CONST:-1)
-* MOVE(MEM(BINOP(0,NAME(week),NAME(WEDNESDAY))),CONST:-1)
-* MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))),CONST:-1)
-* MOVE(MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))),CONST:-1)
-* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))))
-* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))))
-* CALL(NAME(println),MEM(BINOP(0,NAME(week),NAME(TUESDAY))))
-** null

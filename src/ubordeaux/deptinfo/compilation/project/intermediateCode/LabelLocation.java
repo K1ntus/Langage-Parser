@@ -9,7 +9,7 @@ package ubordeaux.deptinfo.compilation.project.intermediateCode;
 public class LabelLocation {
 	private String name;
 	private static int count;
-	private static int casecount;
+	//private static int casecount;
 
 
 	public LabelLocation(String name) {
@@ -31,7 +31,7 @@ public class LabelLocation {
 //		this(s.toString());
 //	}
 	public int getCount() {
-		return this.count;
+		return LabelLocation.count;
 	}
 	
 	/**

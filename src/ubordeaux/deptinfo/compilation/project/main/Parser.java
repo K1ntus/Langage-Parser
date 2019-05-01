@@ -1,19 +1,15 @@
 package ubordeaux.deptinfo.compilation.project.main;
 
+import java.util.Vector;
 import java.util.Iterator;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 import fr.c12.compilator.error.*;
 import ubordeaux.deptinfo.compilation.project.type.*;
 import fr.c12.compilator.special.*;
-import java.util.Scanner;
 import java.util.HashMap;
 import fr.c12.compilator.environment.*;
-import java.util.Stack;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
-import java.util.Map;
 import beaver.*;
+import java.util.ArrayList;
 import ubordeaux.deptinfo.compilation.project.node.*;
 
 /**
@@ -99,7 +95,7 @@ public class Parser extends beaver.Parser {
 	private TypeEnvironment typeEnvironment = new TypeEnvironment("types");
 	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment("procedures");
 	private StackEnvironment stackEnvironment = new StackEnvironment("local variables stack");
-	private String type_declaration_name;
+	//private String type_declaration_name;
 	
 	
 	private boolean verbose_mode = true;	
@@ -112,17 +108,12 @@ public class Parser extends beaver.Parser {
 	public Parser() {
 		super(PARSING_TABLES);
 		actions = new Action[] {
-			new Action() {	// [0] program = constant_declaration_part.l_res type_declaration_part.tp variable_declaration_part.vp procedure_definition_part.pp TOKEN_BEGIN push_stackenv.pu statement_list.l TOKEN_END pop_stackenv.pop
+			new Action() {	// [0] program = constant_declaration_part.l_res type_declaration_part variable_declaration_part procedure_definition_part TOKEN_BEGIN push_stackenv statement_list.l TOKEN_END pop_stackenv
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_l_res = _symbols[offset + 1];
 					final NodeList l_res = (NodeList) _symbol_l_res.value;
-					final Symbol tp = _symbols[offset + 2];
-					final Symbol vp = _symbols[offset + 3];
-					final Symbol pp = _symbols[offset + 4];
-					final Symbol pu = _symbols[offset + 6];
 					final Symbol _symbol_l = _symbols[offset + 7];
 					final NodeList l = (NodeList) _symbol_l.value;
-					final Symbol pop = _symbols[offset + 9];
 					 
 		if(generate_intermediate_code) {
 			l_res.addAll(l);
@@ -534,7 +525,7 @@ public class Parser extends beaver.Parser {
 				public Symbol reduce(Symbol[] _symbols, int offset) {
 					final Symbol _symbol_list = _symbols[offset + 4];
 					final NodeList list = (NodeList) _symbol_list.value;
-					 return _symbol_list;
+					 return list;
 				}
 			},
 			new Action() {	// [55] pop_stackenv = 
@@ -621,7 +612,6 @@ public class Parser extends beaver.Parser {
 					 
 																				try{
 																					stackEnvironment.getEnvironment().push(new HashMap<String, Type>()); //push env
-																					HashMap<String, Type> table = (HashMap<String, Type>) stackEnvironment.getEnvironment().peek();
 																					
 																					TypeFunct fct_type = procedureEnvironment.getTypeFct(func_name);
 																					Iterator<Type> it = fct_type.getParams().iterator();

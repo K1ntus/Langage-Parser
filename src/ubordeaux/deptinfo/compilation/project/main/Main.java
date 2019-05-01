@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import fr.c12.compilator.environment.StackEnvironment;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Y86Converter;
 import ubordeaux.deptinfo.compilation.project.node.Node;
 import ubordeaux.deptinfo.compilation.project.type.Type;
@@ -16,6 +15,7 @@ import ubordeaux.deptinfo.compilation.project.type.TypeInt;
 public class Main {
 	private static boolean checksType;
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws Exception {
 		if (false) {
 			@SuppressWarnings("serial")

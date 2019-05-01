@@ -1,7 +1,5 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
-import ubordeaux.deptinfo.compilation.project.node.*;
-
 public abstract class Exp extends IntermediateCode {
 
 	@Override

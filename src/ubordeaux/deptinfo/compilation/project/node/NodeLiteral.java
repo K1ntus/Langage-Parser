@@ -46,10 +46,13 @@ public final class NodeLiteral extends NodeExp {
 	public Type getType() {
 		return type;
 	}
+
+	@SuppressWarnings("unused")
 	private String stringToHex(String arg) {
 	    return String.format("%040x", new BigInteger(1, arg.getBytes(/*YOUR_CHARSET?*/)));
 	}
 	
+	@SuppressWarnings("unused")
 	private int hexToString(String hexa) {
 		int res = new Integer(Integer.decode (hexa));
 		//BigInteger res = new BigInteger(hexa, 16);

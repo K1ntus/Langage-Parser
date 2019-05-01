@@ -1,7 +1,5 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
-
 public interface NodeInterface {
 	
 	// Cette méthode vérifie le type localement au Node

@@ -7,12 +7,8 @@
 %class "Parser";
 
 %import "java.util.Iterator";
-%import "java.util.List";
 %import "java.util.Vector";
-%import "java.util.Scanner";
 %import "java.util.HashMap";
-%import "java.util.Map";
-%import "java.util.Stack";
 %import "ubordeaux.deptinfo.compilation.project.node.*";
 %import "ubordeaux.deptinfo.compilation.project.type.*";
 %import "ubordeaux.deptinfo.compilation.project.intermediateCode.*";
@@ -54,7 +50,7 @@
 	private TypeEnvironment typeEnvironment = new TypeEnvironment("types");
 	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment("procedures");
 	private StackEnvironment stackEnvironment = new StackEnvironment("local variables stack");
-	private String type_declaration_name;
+	//private String type_declaration_name;
 	
 	
 	private boolean verbose_mode = true;	
@@ -159,14 +155,14 @@
 
 program=
 	constant_declaration_part.l_res
-	type_declaration_part.tp			//Type env
-	variable_declaration_part.vp 		//Type var
-	procedure_definition_part.pp		//Type procedure
+	type_declaration_part			//Type env
+	variable_declaration_part 		//Type var
+	procedure_definition_part		//Type procedure
 	//DEBUG_print_stack
 	//DEBUG_clear_useless_stack
-	TOKEN_BEGIN	push_stackenv.pu		//On empile stackenv
-	statement_list.l 					//Inserer variable dans env
-	TOKEN_END	pop_stackenv.pop 		//On depile stackenv
+	TOKEN_BEGIN	push_stackenv		//On empile stackenv
+	statement_list.l 				//Inserer variable dans env
+	TOKEN_END	pop_stackenv	 	//On depile stackenv
 	{: 
 		if(generate_intermediate_code) {
 			l_res.addAll(l);
@@ -538,7 +534,7 @@ block=
 	TOKEN_BEGIN	push_stackenv		//On empile stackenv
 	statement_list.list 			
 	TOKEN_END	pop_stackenv 		//On depile stackenv et return
-	{: return _symbol_list; :}
+	{: return list; :}
 	;
 pop_stackenv  =		{:	
 						stackEnvironment.getEnvironment().pop(); 
@@ -624,7 +620,6 @@ procedure_expression=
 	TOKEN_IDENTIFIER.func_name TOKEN_LPAR expression_part.args TOKEN_RPAR	{: 
 																				try{
 																					stackEnvironment.getEnvironment().push(new HashMap<String, Type>()); //push env
-																					HashMap<String, Type> table = (HashMap<String, Type>) stackEnvironment.getEnvironment().peek();
 																					
 																					TypeFunct fct_type = procedureEnvironment.getTypeFct(func_name);
 																					Iterator<Type> it = fct_type.getParams().iterator();

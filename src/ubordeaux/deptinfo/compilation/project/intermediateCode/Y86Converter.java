@@ -3,8 +3,8 @@ package ubordeaux.deptinfo.compilation.project.intermediateCode;
 import java.util.Map;
 
 import ubordeaux.deptinfo.compilation.project.type.Type;
-import ubordeaux.deptinfo.compilation.project.type.TypeInt;
 
+@SuppressWarnings("unused")
 public class Y86Converter {
 	
 	private int indent_level = 0;

@@ -2,8 +2,6 @@ package ubordeaux.deptinfo.compilation.project.node;
 
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Binop;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
 
 public class NodeOp extends NodeExp {
 

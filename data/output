@@ -13,17 +13,13 @@
 * CALL(NAME(println),NAME(a))
 * MOVE(BINOP(1,NAME(a),CONST:1),NAME(a))
 SEQ(Label(L0),SEQ(CJUMP(0,NAME(a),CONST:0,L1,L2),SEQ(Label(L1),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(BINOP(1,NAME(a),CONST:1),NAME(a))),SEQ(JUMP(NAME(L0),L0),Label(L2))))))
-Left: a
-Right: 100
-Left: a
-Right: #t0
-Left: a
-Right: #t1
 
 Pre-y86: 
 a = 100
 #t0 = 5 2 2
 a = #t0
+label: L1
+label: L2
 #t1 = a 1 1
 a = #t1
 
@@ -32,8 +28,6 @@ Programme y86 :
 .pos 0
 	irmovl stack,%esp
 	jmp main
-mult:
-	popl %eax
 	popl %eax
 
 div:
@@ -51,10 +45,23 @@ main:
 	call mult
 	iaddl 8,%esp
 	rmmovl %eax,la
+L1:
+L2:
 	isubl 1,%eax
 	rmmovl %eax,la
 	halt
 
+mult:
+	mrmovl 4(%esp), %ecx
+	mrmovl 8(%esp), %edx
+	xorl %eax, %eax
+multbcl:
+	andl %edx, %edx
+	je multfin
+	addl %ecx, %eax
+	isubl 1,%edx
+	jmp multbcl
+multfin: ret
 	.align 4
 la:	.long 0
 --- CheckType NodeList
@@ -97,14 +104,6 @@ la:	.long 0
 * CALL(NAME(println),NAME(b))
 * CALL(NAME(println),NAME(c))
 * CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
-Left: x
-Right: 1234564789
-Left: y
-Right: 2147483647
-Left: b
-Right: 1
-Left: c
-Right: -1
 
 Pre-y86: 
 x = 1234564789
@@ -117,8 +116,6 @@ Programme y86 :
 .pos 0
 	irmovl stack,%esp
 	jmp main
-mult:
-	popl %eax
 	popl %eax
 
 div:
@@ -139,6 +136,17 @@ main:
 	popl ebx
 	halt
 
+mult:
+	mrmovl 4(%esp), %ecx
+	mrmovl 8(%esp), %edx
+	xorl %eax, %eax
+multbcl:
+	andl %edx, %edx
+	je multfin
+	addl %ecx, %eax
+	isubl 1,%edx
+	jmp multbcl
+multfin: ret
 	.align 4
 lb:	.long 0
 lc:	.long 0
@@ -239,19 +247,3 @@ ly:	.long 0
 * CALL(NAME(println),MEM(NAME(r)))
 * CALL(NAME(println),NAME(p))
 * CALL(NAME(println),MEM(NAME(p)))
-Left: x
-Right: 1234564789
-Left: y
-Right: 2147483647
-Left: b
-Right: 1
-Left: c
-Right: -1
-Left: null
-Right: null
-Left: null
-Right: null
-Left: null
-Right: null
-Left: null
-Right: null

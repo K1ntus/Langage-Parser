@@ -12,11 +12,11 @@ public abstract class Code {
     }
 
     public ArrayList<String> assemble (AssemblyTable at) {
-	return new ArrayList<String> ();
+    	return new ArrayList<String> ();
     }
 
     public boolean equals (Code n) {
-	return false;
+    	return false;
     }
 
     abstract public String toString ();

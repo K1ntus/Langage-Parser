@@ -1,6 +1,8 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
 import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeAssignOpBinary;
+import fr.c12.compilator.converter.code.CodeLabel;
 import fr.c12.compilator.converter.code.CodeList;
 
 public class Cjump extends Stm {
@@ -29,18 +31,18 @@ public class Cjump extends Stm {
 
 	public static int notRel(int relop) {
 		switch (relop) {
-		case EQ:
-			return NE;
-		case NE:
-			return EQ;
-		case LT:
-			return GE;
-		case GE:
-			return LT;
-		case GT:
-			return LE;
-		case LE:
-			return GT;
+		case Binop.EQUAL:
+			return Binop.NONEQ;
+		case Binop.NONEQ:
+			return Binop.EQUAL;
+		case Binop.LESST:
+			return Binop.GREAE;
+		case Binop.GREAE:
+			return Binop.LESST;
+		case Binop.GREAT:
+			return Binop.LESSE;
+		case Binop.LESSE:
+			return Binop.GREAT;
 		case ULT:
 			return UGE;
 		case UGE:
@@ -64,7 +66,13 @@ public class Cjump extends Stm {
 
 	@Override
 	public Code linearize(CodeList cl) {
-		// TODO Auto-generated method stub
-		return null;
+		//CodeAssignOpBinary exp = new CodeAssignOpBinary(new TempValue(), relop, left.linearize(cl), right.linearize(cl));
+		
+		//Code exp = new Binop(relop, left, right).linearize(cl);
+		cl.add(new CodeLabel(iftrue.toString()));
+		//left.linearize(cl);
+		cl.add(new CodeLabel(iffalse.toString()));
+		//right.linearize(cl);
+		return null;//exp;
 	}
 }

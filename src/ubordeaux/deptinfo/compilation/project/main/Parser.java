@@ -120,8 +120,6 @@ public class Parser extends beaver.Parser {
 	    as.add ("\tirmovl stack,%esp");
 	    as.add ("\tjmp main");
 	    
-	    as.add ("mult:");
-	    as.add ("\tpopl %eax");
 		as.add ("\tpopl %eax\n");
 	    
 	    as.add ("div:");
@@ -134,6 +132,21 @@ public class Parser extends beaver.Parser {
 	    as.addAll (at.registerCalleeRestore ());
 	    
 	    as.add ("\thalt\n");
+	    
+
+	    as.add ("mult:");
+	    as.add ("\tmrmovl 4(%esp), %ecx");
+	    as.add ("\tmrmovl 8(%esp), %edx");
+	    as.add ("\txorl %eax, %eax");
+
+	    as.add ("multbcl:");
+	    as.add ("\tandl %edx, %edx");
+	    as.add ("\tje multfin");
+	    as.add ("\taddl %ecx, %eax");
+	    as.add ("\tisubl 1,%edx");
+	    as.add ("\tjmp multbcl");
+	    
+	    as.add ("multfin: ret");
 	    
 	    
 	    as.addAll (at.assemble ());

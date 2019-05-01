@@ -9,8 +9,8 @@ public class CodeList {
     private int idnum;
 
     public CodeList () {
-	this.list = new ArrayList<Code> ();
-	this.idnum = 0;
+    	this.list = new ArrayList<Code> ();
+		this.idnum = 0;
     }
 
     public void add (Code c) {
@@ -18,26 +18,26 @@ public class CodeList {
     }
 
     public int getSize () {
-	return (list.size ());
+    	return (list.size ());
     }
 
     public CodeIdent newCodeIdent () {
-	CodeIdent i = new CodeIdent ("#t" + Integer.toString (idnum));
-	idnum += 1;
-	return i;
+		CodeIdent i = new CodeIdent ("#t" + Integer.toString (idnum));
+		idnum += 1;
+		return i;
     }
 
     public ArrayList<String> assemble (AssemblyTable at) {
-	ArrayList<String> s = new ArrayList<String> ();
-	for (int i = 0; i < list.size (); i ++)
-	    s.addAll (list.get (i).assemble (at));
-	return s;
+		ArrayList<String> s = new ArrayList<String> ();
+		for (int i = 0; i < list.size (); i ++)
+		    s.addAll (list.get (i).assemble (at));
+		return s;
     }
 
     public String toString () {
-	String s = "";
-	for (int i = 0; i < list.size (); i ++)
-	    s = s + (list.get (i)).toString () + "\n";
-	return (s);
+		String s = "";
+		for (int i = 0; i < list.size (); i ++)
+		    s = s + (list.get (i)).toString () + "\n";
+		return (s);
     }
 }

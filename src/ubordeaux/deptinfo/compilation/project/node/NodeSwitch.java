@@ -1,6 +1,6 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 
 public final class NodeSwitch extends Node {
 	
@@ -30,7 +30,8 @@ public final class NodeSwitch extends Node {
 		return this.get(0);
 	}
 
-	public IntermediateCode generateIntermediateCodeSwitch() {		
-		return ((NodeCaseList)this.getStm()).generateIntermediateCodeCaseList((NodeExp) this.getExp());	
+	public IntermediateCode generateIntermediateCodeSwitch() {
+		LabelLocation l = new LabelLocation();
+		return ((NodeCaseList)this.getStm()).generateIntermediateCodeCaseList((NodeExp) this.getExp(), l);	
 	}
 }

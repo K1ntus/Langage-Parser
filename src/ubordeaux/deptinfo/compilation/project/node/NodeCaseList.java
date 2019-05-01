@@ -35,8 +35,8 @@ public final class NodeCaseList extends NodeExp {
 		return clone;
 	}
 
-	public IntermediateCode generateIntermediateCodeCaseList(NodeExp exp) {
-		LabelLocation l = new LabelLocation();
+	public IntermediateCode generateIntermediateCodeCaseList(NodeExp exp, LabelLocation l) {
+		
 		NodeCaseList clone = this.clone();
 		
 		

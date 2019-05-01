@@ -28,12 +28,6 @@ Programme y86 :
 .pos 0
 	irmovl stack,%esp
 	jmp main
-	popl %eax
-
-div:
-	popl %eax
-	popl %eax
-
 
 main:
 	irmovl 100,%eax
@@ -62,6 +56,11 @@ multbcl:
 	isubl 1,%edx
 	jmp multbcl
 multfin: ret
+div:
+	popl %eax
+	popl %eax
+
+stack:
 	.align 4
 la:	.long 0
 --- CheckType NodeList
@@ -116,12 +115,6 @@ Programme y86 :
 .pos 0
 	irmovl stack,%esp
 	jmp main
-	popl %eax
-
-div:
-	popl %eax
-	popl %eax
-
 
 main:
 	pushl ebx
@@ -147,6 +140,11 @@ multbcl:
 	isubl 1,%edx
 	jmp multbcl
 multfin: ret
+div:
+	popl %eax
+	popl %eax
+
+stack:
 	.align 4
 lb:	.long 0
 lc:	.long 0

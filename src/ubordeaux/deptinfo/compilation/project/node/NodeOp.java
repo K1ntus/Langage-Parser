@@ -6,25 +6,27 @@ import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
 
 public class NodeOp extends NodeExp {
 
-	private String name;
+	private int op_type;
 
 	// Opération binaire
 	// f : E X F -> F
-	public NodeOp(String name, NodeExp op1, NodeExp op2) {
+	public NodeOp(int name, NodeExp op1, NodeExp op2) {
 		super(op1, op2);
-		this.name = name;
+		this.op_type = name;
 		// le type d'un opérateur 
 		NodeExp exprFct = (NodeExp) this.get(1);
 		type = exprFct.type;
 	}
 
-	public NodeOp(String name, NodeExp op) {
+	public NodeOp(int name, NodeExp op) {
 		super(op, null);
-		this.name = name;
+		this.op_type = name;
 		// le type d'un opérateur 
 		NodeExp exprFct = (NodeExp) this.get(0);
 		type = exprFct.type;
 	}
+	
+	public final static int PLUS = 1, MINUS = -1, DIVIDE = -2, MULTIPLY = 2, UNKNOWN = 0;
 	
 	@Override
 	public boolean checksType() {
@@ -45,53 +47,36 @@ public class NodeOp extends NodeExp {
 		return (NodeExp) this.get(1);
 	}
 	
-	public String getName() {
-		return this.name; 
+	public int getName() {
+		return this.op_type; 
 	}
 
 	@Override
 	public NodeOp clone() {
 		if (this.getOp2() == null)
-			return new NodeOp(name, (NodeExp) getOp1().clone());
+			return new NodeOp(op_type, (NodeExp) getOp1().clone());
 		else if (!(this.getOp2() == null))
-			return new NodeOp(name, (NodeExp) getOp1().clone(), (NodeExp) getOp2().clone());
+			return new NodeOp(op_type, (NodeExp) getOp1().clone(), (NodeExp) getOp2().clone());
 		return null;
 		};
 	
-	public int getCodeOp() {
-		int operation = -1;
-        
-        switch(this.name) {
-            case "plus":
-                operation = 0;
-                break;
-            case "minus":
-                operation = 1;
-                break;
-            case "times":
-                operation = 2;
-                break;
-            case "divide":
-                operation = 3;
-                break;
-        }
-       return operation;
-	}
 		
-        public Binop generateIntermediateCode() { 
-			Binop op = null;
-			if(this.getExp(1) != null) {
-				op = new Binop(this.getCodeOp(), 
-						 	(Exp) this.getExp(0).generateIntermediateCode(), 
-						 		(Exp) this.getExp(1).generateIntermediateCode()
-						 );
-			}else {
-				op = new Binop(2, 
-					 	(Exp) this.getExp(0).generateIntermediateCode(), 
-					 		new Const(-1)
-					 );
-			}
 
-			return op;
-        }
+	
+    public Binop generateIntermediateCode() { 
+		Binop op = null;
+		if(this.getExp(1) != null) {
+			op = new Binop(op_type, 
+					 	(Exp) this.getExp(0).generateIntermediateCode(), 
+					 		(Exp) this.getExp(1).generateIntermediateCode()
+					 );
+		}else {
+			op = new Binop(NodeOp.MULTIPLY, 
+				 	(Exp) this.getExp(0).generateIntermediateCode(), 
+				 		new Const(-1)
+				 );
+		}
+
+		return op;
+    }
 }

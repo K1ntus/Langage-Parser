@@ -1,5 +1,8 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeList;
+
 public class Cjump extends Stm {
 	private int relop;
 	private Exp left, right;
@@ -56,9 +59,12 @@ public class Cjump extends Stm {
        // System.out.println("CJUMP("+ relop +","+ left.toString() +","+ right.toString() +","+ iftrue.toString() +","+ iffalse.toString() + ")");
         return "CJUMP("+ relop +","+ left.toString() +","+ right.toString() +","+ iftrue.toString() +","+ iffalse.toString() + ")";
     }
-	
+
+
+
 	@Override
-	public String toy86() {
-		return "";
+	public Code linearize(CodeList cl) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

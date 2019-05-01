@@ -1,5 +1,7 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeList;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Label;
@@ -53,4 +55,5 @@ public final class NodeCaseList extends NodeExp {
 		System.err.println("errr case list wrong!");
 		return new Const(0);
 	}
+
 }

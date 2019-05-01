@@ -1,5 +1,8 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeList;
+
 public class Mem extends Exp {
 	private Exp exp;
 
@@ -15,10 +18,12 @@ public class Mem extends Exp {
 		}
 		return "MEM("+ exp.toString() + ")";
 	}
-	
+
 	@Override
-	public String toy86() {
-		return "";
+	public Code linearize(CodeList cl) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+	
 	
 }

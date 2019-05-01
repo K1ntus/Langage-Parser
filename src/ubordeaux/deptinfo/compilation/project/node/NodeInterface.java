@@ -1,5 +1,8 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeList;
+
 public interface NodeInterface {
 	
 	// Cette méthode vérifie le type localement au Node
@@ -16,5 +19,5 @@ public interface NodeInterface {
 	// Crée un fichier <file>.dot
 	// usage: dot -Tpng -o <file>.png <file>.dot
 	public void toDot(String file);
-	
+
 }

@@ -1,5 +1,8 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeList;
+
 public class ExpList extends IntermediateCode {
 	private Exp head;
 	private ExpList tail;
@@ -33,10 +36,11 @@ public class ExpList extends IntermediateCode {
 			return this.head.toString();
 		return "Explist(null,null)";
 	}
-	
+
 	@Override
-	public String toy86() {
-		return "";
+	public Code linearize(CodeList cl) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

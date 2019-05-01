@@ -4,7 +4,6 @@ package ubordeaux.deptinfo.compilation.project.node;
 import java.util.ArrayList;
 import java.util.List;
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 
 public abstract class NodeExp extends Node {

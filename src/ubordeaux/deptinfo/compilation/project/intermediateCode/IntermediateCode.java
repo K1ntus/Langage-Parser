@@ -1,5 +1,8 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeList;
+
 public abstract class IntermediateCode {
 
 	// Pour un affichage lisible
@@ -10,6 +13,6 @@ public abstract class IntermediateCode {
 	// Transforme l'arbre pour éliminer les ESEQ locaux
 	public abstract void canonicalTransformation();
 	
-	// Intermediate code -> y86 as String
-	public abstract String toy86();
+
+	public abstract Code linearize(CodeList cl);
 }

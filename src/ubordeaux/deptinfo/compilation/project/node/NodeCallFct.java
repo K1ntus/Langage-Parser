@@ -2,10 +2,16 @@ package ubordeaux.deptinfo.compilation.project.node;
 
 import java.util.Iterator;
 
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeList;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Call;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.LabelLocation;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Name;
+import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypeFeature;
 import ubordeaux.deptinfo.compilation.project.type.TypeFunct;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
-import ubordeaux.deptinfo.compilation.project.type.Type;
 
 public final class NodeCallFct extends NodeExp {
 
@@ -113,5 +119,6 @@ public final class NodeCallFct extends NodeExp {
 		System.out.println("* " + res.toString());
         return res;
     }
+
 
 }

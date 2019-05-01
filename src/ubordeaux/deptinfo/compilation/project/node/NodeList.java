@@ -4,8 +4,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeList;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpStm;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Seq;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Stm;
 import ubordeaux.deptinfo.compilation.project.type.Type;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 
 public final class NodeList extends Node {
 

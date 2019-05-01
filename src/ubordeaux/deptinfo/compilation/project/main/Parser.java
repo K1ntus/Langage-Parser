@@ -101,7 +101,7 @@ public class Parser extends beaver.Parser {
 	private boolean verbose_mode = true;	
 	private boolean critical_mode = true;
 
-	private boolean generate_intermediate_code = true;
+	private boolean generate_intermediate_code = false;
 
 	private final Action[] actions;
 

@@ -1,5 +1,11 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeAssignOpBinary;
+import fr.c12.compilator.converter.code.CodeAssignOpUnary;
+import fr.c12.compilator.converter.code.CodeIdent;
+import fr.c12.compilator.converter.code.CodeList;
+
 public class Binop extends Exp {
 	private int binop;
 	private Exp left, right;
@@ -39,10 +45,18 @@ public class Binop extends Exp {
 		}
 		return "BINOP(" + binop + "," + right.toString() + ")";
 	}
-	
-	@Override
-	public String toy86() {
-		return "";
-	}
 
+
+	@Override
+	public Code linearize(CodeList cl) {
+		CodeIdent d = cl.newCodeIdent ();
+		Code r = right.linearize (cl);
+		if (left != null) {
+		    Code l = left.linearize (cl);
+		    cl.add (new CodeAssignOpBinary (d, binop, l, r));
+		}
+		else
+		    cl.add (new CodeAssignOpUnary (d, binop, r));
+		return (d);
+	}
 } 

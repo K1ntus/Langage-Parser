@@ -1,5 +1,8 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeList;
+
 public class Eseq extends Exp {
 	private Stm stm;
 	private Exp exp;
@@ -23,11 +26,11 @@ public class Eseq extends Exp {
 		return "ESEQ(" + stm.toString() + "," + exp.toString() + ")";
 	}
 
-
 	@Override
-	public String toy86() {
+	public Code linearize(CodeList cl) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

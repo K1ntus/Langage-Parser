@@ -2,6 +2,8 @@ package ubordeaux.deptinfo.compilation.project.node;
 
 import java.math.BigInteger;
 
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeList;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypeBoolean;

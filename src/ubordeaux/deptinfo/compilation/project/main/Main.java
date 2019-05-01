@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
+import fr.c12.compilator.converter.code.CodeList;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Y86Converter;
 import ubordeaux.deptinfo.compilation.project.node.Node;
 import ubordeaux.deptinfo.compilation.project.type.Type;
@@ -52,6 +53,13 @@ public class Main {
 
 					System.out.println("\n\nArbre Principal: ");
 					System.out.println(result.toString());
+
+					System.out.println("\n\nIntermediate Code: ");
+					System.out.println("** " + result.generateIntermediateCode());
+					
+					System.out.println("\n\nLinearized Code: ");
+					System.out.println("** " + result.generateIntermediateCode().linearize(new CodeList()));
+					
 					//result.toDot("data/output_tree");
 					
 					//System.out.println("\n\nCode intermediaire: ");

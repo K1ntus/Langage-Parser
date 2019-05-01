@@ -1,5 +1,8 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeList;
+
 public class Label extends Stm {
 	private LabelLocation label;
 
@@ -12,10 +15,10 @@ public class Label extends Stm {
 		return "Label(" + this.label.toString() + ")";
 	}
 
-
 	@Override
-	public String toy86() {
+	public Code linearize(CodeList cl) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

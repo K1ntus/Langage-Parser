@@ -28,40 +28,20 @@ public final class NodeWhile extends Node {
 	private Node getExp() {
 		return this.get(0);
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see ubordeaux.deptinfo.compilation.project.node.Node#generateIntermediateCode()
+	 * Generation du code intermediaire d un NodeWhile represente par un sequent
+	 * Ressemble au principe du NodeIf, excepte qu ici on ne gere pas les then
+	 */
 	public Seq generateIntermediateCode() {
 
 		LabelLocation debut = new LabelLocation();
 		LabelLocation suite = new LabelLocation();
 		LabelLocation sortie = new LabelLocation();
 		
-		/*
-		if((this.getExp()).getClass().toString() == "class ubordeaux.deptinfo.compilation.project.node.NodeOp") {
-			switch(((NodeRel)this.getExp()).getName()) {
-			case "==":
-				i = 14;
-			case "!=":
-				i =  15;
-			case "<":
-				i =  10;
-			case ">":
-				i =  12;
-			case "<=":
-				i =  11;
-			case ">=":
-				i =  13;
-			case "!<":
-				i =  13;
-			case "!<=":
-				i =  12;
-			case "!>":
-				i =  8;
-			case "!>=":
-				i =  9;
-			default:
-				i = 0;
-			}
-		}*/
+
 		int i = -1;
 		NodeRel rel = null;
 		if (this.getExp() instanceof NodeRel) {

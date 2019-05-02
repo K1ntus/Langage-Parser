@@ -24,8 +24,8 @@ public final class NodeReturn extends NodeExp {
 	}
 
 
-	public IntermediateCode generateIntermediateCode() {// p.186, 174		
-		Temp tmp = new Temp(new TempValue());	//Mettre vers celui qui a call la fct
+	public IntermediateCode generateIntermediateCode() {// p.186, 174 dragon
+		Temp tmp = new Temp(new TempValue());
 		Node n = this.get(0);
 		Move res = new Move(tmp, (Exp) n.generateIntermediateCode());
 		

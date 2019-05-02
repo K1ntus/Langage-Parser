@@ -98,8 +98,8 @@ public class Parser extends beaver.Parser {
 	//private String type_declaration_name;
 	
 	
-	private boolean verbose_mode = false;	
-	private boolean critical_mode = false;
+	private boolean verbose_mode = true;	
+	private boolean critical_mode = true;
 
 	private boolean generate_intermediate_code = true;
 
@@ -119,6 +119,8 @@ public class Parser extends beaver.Parser {
 			l_res.addAll(l);
 			System.out.println("Intermediate Code:");
 			System.out.println("** " + l_res.generateIntermediateCode().toString());
+			System.out.println("");
+
 		}
 
 	    return _symbol_l_res;

@@ -59,6 +59,11 @@ public final class NodeLiteral extends NodeExp {
 		return res;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ubordeaux.deptinfo.compilation.project.node.Node#generateIntermediateCode()
+	 * Generation du code intermediaire d un literal, represente par une constante
+	 */
 	public Const generateIntermediateCode() {
 		Const res = null;
 		
@@ -67,9 +72,9 @@ public final class NodeLiteral extends NodeExp {
 	 	} else if(this.getType() instanceof TypeBoolean) {
 	 		int val = (boolean) (this.getValue()) ? 1 : 0;
 			res = new Const(val);
-		} else if(this.getType() instanceof TypeString) {	//p. 168
+		} else if(this.getType() instanceof TypeString) {	//p. 168 du dragon
 			res = new Const(-1);
-			//res = new Const(this.hexToString(this.stringToHex((String) this.getValue())));
+			
 		}
 		return res;
 	}

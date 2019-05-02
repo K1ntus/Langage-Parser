@@ -35,13 +35,4 @@ public abstract class NodeExp extends Node {
 	public NodeExp getExp(int i) {
 		return ((NodeExp) this.get(i));
 	}
-	/*
-	 public Exp generateIntermediateCode() {
-		Exp resBis = null;
-		resBis = (Exp)this.generateIntermediateCode();
-		return resBis;
-		 
-  
-	 }
-	 */
 }

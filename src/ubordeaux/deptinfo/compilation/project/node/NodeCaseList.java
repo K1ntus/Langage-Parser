@@ -48,9 +48,9 @@ public final class NodeCaseList extends NodeExp {
 		return new Seq((Stm)stat, new Label(l));
 	}
 
-	@Override
+	
 	public IntermediateCode generateIntermediateCode() {
-		System.err.println("errr case list wrong!");
+		System.err.println("Le code intermediaire d'un CaseList ne peut pas être donné dans cette fonction!");
 		return new Const(0);
 	}
 }

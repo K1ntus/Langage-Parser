@@ -55,7 +55,7 @@ public final class NodeArrayAccess extends NodeExp {
 		return new NodeArrayAccess((NodeExp) get(0).clone(), (Node) get(1).clone());
 	}
 
-	@Override
+
 	public Exp generateIntermediateCode() {
 		Exp name = (Exp) this.get(0).generateIntermediateCode();
 		Exp indice = (Exp) ((NodeExp)this.get(1)).generateIntermediateCode();

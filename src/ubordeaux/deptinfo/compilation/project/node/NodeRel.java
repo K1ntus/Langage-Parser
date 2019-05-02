@@ -83,7 +83,7 @@ public class NodeRel extends NodeExp {
         int i = this.getCodeOp();
         
         res = new Binop(i,leftexp,rightexp);
-        //System.out.println(res.toString());
+
         return res;
 	}
 }

@@ -66,10 +66,9 @@ public final class NodeCase extends Node {
 		}	
 	}
 
-	@Override
+
 	public IntermediateCode generateIntermediateCode() {
-		// TODO Auto-generated method stub
-		System.err.println("errr!");
+		System.err.println("Le code intermediaire d'un NodeCase ne peut pas être donné dans cette fonction!");
 		return null;
 	}
 }

@@ -12,9 +12,7 @@ a = 100;
 a = 5 * 2;
 
 while (a >= 0 && t) do
-if ( a >= 0) then
 	begin
-	println (a);
 	a = a - 1;
 	end	
 end

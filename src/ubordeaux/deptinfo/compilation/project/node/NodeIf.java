@@ -47,9 +47,13 @@ public final class NodeIf extends Node {
 	}
 
 	
+	/*
+	 * (non-Javadoc)
+	 * @see ubordeaux.deptinfo.compilation.project.node.Node#generateIntermediateCode()
+	 * Génère le code intermediaire d'un NodeIf représenté sous la forme d un sequent
+	*/
 	public Seq generateIntermediateCode() {
 		
-		//System.out.println("in NodeIf 1 ");
 
         LabelLocation iftrue = new LabelLocation();
         LabelLocation ifFalse= new LabelLocation();
@@ -66,12 +70,12 @@ public final class NodeIf extends Node {
         	rel = new Binop(14, var, t);
         }
         
-    	Cjump c = new Cjump(rel.getBinop(), rel.getLeft(), rel.getRight(), iftrue, ifFalse);
+    	Cjump c = new Cjump(rel.getBinop(), rel.getLeft(), rel.getRight(), iftrue, ifFalse);	//fils gauche du sequent
 
     	Seq s;
     	if(this.getElseNode() != null) {
     		 s = new Seq(c, 
-    			new Seq(l1,
+    			new Seq(l1,																		//fils droit du sequent, d autres sequent composes de statement et de labels
     				new Seq((Stm)((NodeList)this.getThenNode()).generateIntermediateCode(),
     				new Seq(l2,(Stm)((NodeList)this.getElseNode()).generateIntermediateCode()))));
     	}else {

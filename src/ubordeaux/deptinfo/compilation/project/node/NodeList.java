@@ -93,6 +93,8 @@ public final class NodeList extends Node {
 
 		Node clone = this.clone();
 
+		if(clone.get(0) == null)
+			return new Seq(null, null);
 		Node tmp = clone.get(0);
 		IntermediateCode stat = tmp.generateIntermediateCode();
 		

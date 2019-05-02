@@ -1,6 +1,9 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
-public class StmList {
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeList;
+
+public class StmList extends Stm{
 	private Stm head;
 	private StmList tail;
 
@@ -12,5 +15,12 @@ public class StmList {
 	
 	public String toString() {
 		return ("StmList(" + head.toString() + ","+ tail.toString() + ")");
+	}
+
+	@Override
+	public Code linearize(CodeList cl) {
+		head.linearize(cl);
+		tail.linearize(cl);
+		return null;
 	}
 }

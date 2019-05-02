@@ -1,7 +1,12 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
-
-import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Cjump;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Jump;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Label;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.LabelLocation;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Seq;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Stm;
 import ubordeaux.deptinfo.compilation.project.type.TypeBoolean;
 
 public final class NodeWhile extends Node {
@@ -34,34 +39,7 @@ public final class NodeWhile extends Node {
 		LabelLocation debut = new LabelLocation();
 		LabelLocation suite = new LabelLocation();
 		LabelLocation sortie = new LabelLocation();
-		
-		/*
-		if((this.getExp()).getClass().toString() == "class ubordeaux.deptinfo.compilation.project.node.NodeOp") {
-			switch(((NodeRel)this.getExp()).getName()) {
-			case "==":
-				i = 14;
-			case "!=":
-				i =  15;
-			case "<":
-				i =  10;
-			case ">":
-				i =  12;
-			case "<=":
-				i =  11;
-			case ">=":
-				i =  13;
-			case "!<":
-				i =  13;
-			case "!<=":
-				i =  12;
-			case "!>":
-				i =  8;
-			case "!>=":
-				i =  9;
-			default:
-				i = 0;
-			}
-		}*/
+
 		int i = -1;
 		NodeRel rel = null;
 		if (this.getExp() instanceof NodeRel) {
@@ -83,5 +61,6 @@ public final class NodeWhile extends Node {
 								new Seq((Stm) this.getStm().generateIntermediateCode(), new Seq(new Jump(debut), new Label(sortie))))));
 	return s;
 	}
+
 	
 }

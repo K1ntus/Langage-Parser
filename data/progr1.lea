@@ -1,19 +1,16 @@
 var
 a: integer;
-b: string;
-d: string;
-c: string;
-t: boolean;
+
+
+
 
 begin
 
-t = true;
 a = 100;
 a = 5 * 2;
-
-while (a >= 0 && t) do
-if ( a >= 0) then
+while (a >= 0) do
 	begin
+	
 	println (a);
 	a = a - 1;
 	end	

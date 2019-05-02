@@ -1,7 +1,8 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.LabelLocation;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Name;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 
 public final class NodeId extends NodeExp {

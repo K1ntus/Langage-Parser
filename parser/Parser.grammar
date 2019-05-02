@@ -1,4 +1,5 @@
 
+
 //////////////////////////////////////////////////
 // version 20190401
 //////////////////////////////////////////////////
@@ -7,11 +8,18 @@
 %class "Parser";
 
 %import "java.util.Iterator";
+%import "java.util.ArrayList";
 %import "java.util.Vector";
 %import "java.util.HashMap";
 %import "ubordeaux.deptinfo.compilation.project.node.*";
 %import "ubordeaux.deptinfo.compilation.project.type.*";
 %import "ubordeaux.deptinfo.compilation.project.intermediateCode.*";
+
+
+
+%import "fr.c12.compilator.converter.AssemblyTable";
+%import "fr.c12.compilator.converter.AssemblyGenerator";
+%import "fr.c12.compilator.converter.code.*";
 
 %import "fr.c12.compilator.environment.*";
 %import "fr.c12.compilator.special.*";
@@ -46,6 +54,10 @@
 				Symbol.getLine(token.getStart()),
 				Symbol.getColumn(token.getStart()));
 	}
+	
+	
+	
+	
 		
 	private TypeEnvironment typeEnvironment = new TypeEnvironment("types");
 	private ProcedureEnvironment procedureEnvironment = new ProcedureEnvironment("procedures");
@@ -56,7 +68,9 @@
 	private boolean verbose_mode = false;	
 	private boolean critical_mode = false;
 
-	private boolean generate_intermediate_code = true;
+	private boolean generate_progr_tree = true;
+	private boolean generate_intermediate_code = false;
+	private boolean generate_assembly = false;
 	
 	
 :};
@@ -140,7 +154,7 @@
 %typeof case_default = "NodeCase";
 %typeof case_statement = "NodeList";
 
-%typeof constant_declaration_part, statement_list, expression_list, argt_list, block = "NodeList";
+%typeof statement_list, expression_list, argt_list, block = "NodeList";
 %typeof case_statement_list = "NodeCaseList";
 %typeof identifier_list = "IdentifierList";
 
@@ -154,7 +168,6 @@
 
 
 program=
-	constant_declaration_part.l_res
 	type_declaration_part			//Type env
 	variable_declaration_part 		//Type var
 	procedure_definition_part		//Type procedure
@@ -164,38 +177,27 @@ program=
 	statement_list.l 				//Inserer variable dans env
 	TOKEN_END	pop_stackenv	 	//On depile stackenv
 	{: 
-		if(generate_intermediate_code) {
-			l_res.addAll(l);
-			System.out.println("Intermediate Code:");
-			System.out.println("** " + l_res.generateIntermediateCode().toString());
+		if(generate_progr_tree) {
+			System.out.println("\n\nArbre Principal: ");
+			System.out.println(l.toString());			
 		}
 
-	    return _symbol_l_res; 
+		if(generate_intermediate_code) {
+			System.out.println("\n\nIntermediate Code:");
+			System.out.println("** " + l.generateIntermediateCode().toString());
+		}
+
+		if(generate_assembly) {
+			AssemblyGenerator.generateAssemblyCode(l.generateIntermediateCode());
+		}
+
+	    return _symbol_l; 
     :}		
 	;
 	
 /*
 Declaration named type
-
-normalement OK
 */
-constant_declaration_part =
-	{: 
-		return new NodeList(new NodeAssign(new NodeId("null", new TypePointer()), new NodeLiteral(new TypePointer() , null)));	
-	:}
-	;
-
-	/*
-constant_declaration_list =
-	constant_declaration_list constant_declaration
-	|
-	;
-	
-
-constant_declaration =
-	|
-	
-	*/
 	
 type_declaration_part= 
 	/* empty */	
@@ -407,8 +409,13 @@ procedure_definition=
 	{:	
 
 		if(generate_intermediate_code) {
-			System.out.println(new Label(new LabelLocation()));
-			stm.generateIntermediateCode();
+			IntermediateCode it_code = new Seq(new Label(new LabelLocation()), stm.generateIntermediateCode());
+			System.out.println("** " + it_code);
+		}
+		if(generate_assembly) {
+			IntermediateCode it_code = new Seq(new Label(new LabelLocation()), stm.generateIntermediateCode());
+			System.out.println("funct; " + it_code);
+			AssemblyGenerator.generateAssemblyCode(it_code);
 		}
 		stackEnvironment.getEnvironment().pop();
 		return stm; 
@@ -912,9 +919,9 @@ expression=
 					System.exit(0);
 
 				System.err.println("[InvalidBinOperation] Automatically recover from error." );
-				return new NodeOp("invalid expr", e1, e2);
+				return new NodeOp(NodeOp.UNKNOWN, e1, e2);
 			}
-			return new NodeOp("plus", e1, e2); 
+			return new NodeOp(NodeOp.PLUS, e1, e2); 
 		:}
 	| expression.e1 TOKEN_MINUS expression.e2
 		{: 
@@ -928,9 +935,9 @@ expression=
 					System.exit(0);
 
 				System.err.println("[InvalidBinOperation] Automatically recover from error." );
-				return new NodeOp("invalid expr", e1, e2);
+				return new NodeOp(NodeOp.UNKNOWN, e1, e2);
 			}
-			return new NodeOp("minus", e1, e2); 
+			return new NodeOp(NodeOp.MINUS, e1, e2); 
 		:}
 	| expression.e1 TOKEN_TIMES expression.e2
 		{: 
@@ -944,9 +951,9 @@ expression=
 					System.exit(0);
 
 				System.err.println("[InvalidBinOperation] Automatically recover from error." );
-				return new NodeOp("invalid expr", e1, e2);
+				return new NodeOp(NodeOp.UNKNOWN, e1, e2);
 			}
-			return new NodeOp("times", e1, e2); 
+			return new NodeOp(NodeOp.MULTIPLY, e1, e2); 
 		:}
 	| expression.e1 TOKEN_DIV expression.e2
 		{: 
@@ -959,9 +966,9 @@ expression=
 					System.exit(0);
 
 				System.err.println("[InvalidBinOperation] Automatically recover from error." );
-				return new NodeOp("invalid expr", e1, e2);
+				return new NodeOp(NodeOp.UNKNOWN, e1, e2);
 			}
-			return new NodeOp("divide", e1, e2); 
+			return new NodeOp(NodeOp.DIVIDE, e1, e2); 
 		:}
 	| TOKEN_MINUS expression.e
 		{: 
@@ -974,9 +981,9 @@ expression=
 					System.exit(0);
 
 				System.err.println("[InvalidBinOperation] Automatically recover from error." );
-				return new NodeOp("invalid expr", e);
+				return new NodeOp(NodeOp.UNKNOWN, e);
 			}
-			return new NodeOp("u_minus", e); 
+			return new NodeOp(NodeOp.MINUS, e); 
 		:}
 	
 	| expression.e1 TOKEN_OR expression.e2		{: return new NodeRel("or", e1, e2); :}

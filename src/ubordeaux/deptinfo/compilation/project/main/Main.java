@@ -1,9 +1,12 @@
 package ubordeaux.deptinfo.compilation.project.main;
 
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import fr.c12.compilator.converter.AssemblyTable;
+import fr.c12.compilator.converter.code.CodeList;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Y86Converter;
 import ubordeaux.deptinfo.compilation.project.node.Node;
 import ubordeaux.deptinfo.compilation.project.type.Type;
@@ -49,15 +52,9 @@ public class Main {
 						else
 							System.err.println("*** Typage correct");
 					}
-
-					System.out.println("\n\nArbre Principal: ");
-					System.out.println(result.toString());
-					//result.toDot("data/output_tree");
+		
 					
-					//System.out.println("\n\nCode intermediaire: ");
-					//System.out.println(result.generateIntermediateCode().toString()); //null pointer à finir 
-					//result.toDot("data/intermediate_code");
-				
+				      
 				} catch (beaver.Parser.Exception e) {
 					System.err.println("*** Erreur de syntaxe: " + arg + ":" + e.getMessage());
 				}

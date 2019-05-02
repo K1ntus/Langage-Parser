@@ -16,5 +16,5 @@ public interface NodeInterface {
 	// Crée un fichier <file>.dot
 	// usage: dot -Tpng -o <file>.png <file>.dot
 	public void toDot(String file);
-	
+
 }

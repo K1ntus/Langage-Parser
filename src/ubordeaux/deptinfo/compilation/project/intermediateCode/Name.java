@@ -1,5 +1,9 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeIdent;
+import fr.c12.compilator.converter.code.CodeList;
+
 public class Name extends Exp {
 	private LabelLocation label;
 
@@ -16,11 +20,9 @@ public class Name extends Exp {
 	public String toString(){
 		return "NAME("+ label.toString() + ")";
 	}
-	
-	@Override
-	public String toy86() {
-		return "";
-	}
-	
 
+	@Override
+	public Code linearize(CodeList cl) {
+		return (new CodeIdent (label.toString()));
+	}
 }

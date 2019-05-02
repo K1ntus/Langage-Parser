@@ -109,8 +109,8 @@ public class Parser extends beaver.Parser {
 	private boolean critical_mode = true;
 
 	private boolean generate_progr_tree = false;
-	private boolean generate_intermediate_code = false;
-	private boolean generate_assembly = true;
+	private boolean generate_intermediate_code = true;
+	private boolean generate_assembly = false;
 
 	private final Action[] actions;
 
@@ -933,9 +933,9 @@ public class Parser extends beaver.Parser {
 					System.exit(0);
 
 				System.err.println("[InvalidBinOperation] Automatically recover from error." );
-				return new NodeOp("invalid expr", e1, e2);
+				return new NodeOp(NodeOp.UNKNOWN, e1, e2);
 			}
-			return new NodeOp("plus", e1, e2);
+			return new NodeOp(NodeOp.PLUS, e1, e2);
 				}
 			},
 			new Action() {	// [97] expression = expression.e1 TOKEN_MINUS expression.e2
@@ -955,9 +955,9 @@ public class Parser extends beaver.Parser {
 					System.exit(0);
 
 				System.err.println("[InvalidBinOperation] Automatically recover from error." );
-				return new NodeOp("invalid expr", e1, e2);
+				return new NodeOp(NodeOp.UNKNOWN, e1, e2);
 			}
-			return new NodeOp("minus", e1, e2);
+			return new NodeOp(NodeOp.MINUS, e1, e2);
 				}
 			},
 			new Action() {	// [98] expression = expression.e1 TOKEN_TIMES expression.e2
@@ -977,9 +977,9 @@ public class Parser extends beaver.Parser {
 					System.exit(0);
 
 				System.err.println("[InvalidBinOperation] Automatically recover from error." );
-				return new NodeOp("invalid expr", e1, e2);
+				return new NodeOp(NodeOp.UNKNOWN, e1, e2);
 			}
-			return new NodeOp("times", e1, e2);
+			return new NodeOp(NodeOp.MULTIPLY, e1, e2);
 				}
 			},
 			new Action() {	// [99] expression = expression.e1 TOKEN_DIV expression.e2
@@ -998,9 +998,9 @@ public class Parser extends beaver.Parser {
 					System.exit(0);
 
 				System.err.println("[InvalidBinOperation] Automatically recover from error." );
-				return new NodeOp("invalid expr", e1, e2);
+				return new NodeOp(NodeOp.UNKNOWN, e1, e2);
 			}
-			return new NodeOp("divide", e1, e2);
+			return new NodeOp(NodeOp.DIVIDE, e1, e2);
 				}
 			},
 			new Action() {	// [100] expression = TOKEN_MINUS expression.e
@@ -1017,9 +1017,9 @@ public class Parser extends beaver.Parser {
 					System.exit(0);
 
 				System.err.println("[InvalidBinOperation] Automatically recover from error." );
-				return new NodeOp("invalid expr", e);
+				return new NodeOp(NodeOp.UNKNOWN, e);
 			}
-			return new NodeOp("u_minus", e);
+			return new NodeOp(NodeOp.MINUS, e);
 				}
 			},
 			new Action() {	// [101] expression = expression.e1 TOKEN_OR expression.e2

@@ -107,7 +107,7 @@ public final class NodeCallFct extends NodeExp {
 	}
 	
 	
-    public Call generateIntermediateCode() {
+    public Call generateIntermediateCode() {//we create a Call with the function name label and list of args
         LabelLocation label = new LabelLocation(this.getName());
         Name function = new Name(label);
         ExpList largs = this.getArgs().generateIntermediateCodeListArgs();

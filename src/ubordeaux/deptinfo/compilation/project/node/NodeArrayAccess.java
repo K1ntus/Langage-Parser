@@ -54,8 +54,7 @@ public final class NodeArrayAccess extends NodeExp {
 		return new NodeArrayAccess((NodeExp) get(0).clone(), (Node) get(1).clone());
 	}
 
-
-	public Exp generateIntermediateCode() {
+	public Exp generateIntermediateCode() {//we want to access at the memory of the array + the indice
 		Exp name = (Exp) this.get(0).generateIntermediateCode();
 		Exp indice = (Exp) ((NodeExp)this.get(1)).generateIntermediateCode();
 			

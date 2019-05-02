@@ -1,7 +1,6 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
 import fr.c12.compilator.converter.code.Code;
-import fr.c12.compilator.converter.code.CodeAssignOpBinary;
 import fr.c12.compilator.converter.code.CodeLabel;
 import fr.c12.compilator.converter.code.CodeList;
 

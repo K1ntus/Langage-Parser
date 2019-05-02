@@ -106,7 +106,7 @@ public abstract class Node extends ClonableSymbol implements NodeInterface {
 		}
 	}
 
-	
+
 	public abstract IntermediateCode generateIntermediateCode();
 	
 	

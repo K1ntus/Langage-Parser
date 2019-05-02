@@ -44,7 +44,8 @@ public class CodeAssign extends Code {
 	
 		return as;
     }
-
+    
+    
     public String toString () {
 		return (dst.toString () + " = " + src.toString ());
     }

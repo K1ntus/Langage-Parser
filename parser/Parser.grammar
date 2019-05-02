@@ -64,12 +64,29 @@
 	private StackEnvironment stackEnvironment = new StackEnvironment("local variables stack");
 	//private String type_declaration_name;
 	
+	/**
+	 * If enabled, the java compilation stack trace will be print
+	 */
+	private boolean verbose_mode = true;
 	
-	private boolean verbose_mode = true;	
-	private boolean critical_mode = true;
+	/**
+	 * If enabled, the program will System.exit() if any error happen
+	 */
+	private boolean critical_mode = true;   
 
+	/**
+	 * Force the program tree generation
+	 */
 	private boolean generate_progr_tree = false;
+	
+	/**
+	 * Force the program intermediate generation
+	 */
 	private boolean generate_intermediate_code = true;
+	
+	/**
+	 * Force the program assembly generation
+	 */
 	private boolean generate_assembly = false;
 	
 	

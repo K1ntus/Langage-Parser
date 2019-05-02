@@ -32,7 +32,7 @@ public final class NodePtrAccess extends NodeExp {
 		return new NodePtrAccess((NodeExp) this.get(0).clone());
 	}
 
-	public Mem generateIntermediateCode() {	//p. 163
+	public Mem generateIntermediateCode() {	//p. 163 Modern Compiler Implementation in Java, Second Edition
 		Exp name = (Exp) get(0).generateIntermediateCode();
 		
 		return new Mem(name);

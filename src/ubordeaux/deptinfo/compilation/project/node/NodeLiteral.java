@@ -6,7 +6,6 @@ import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypeBoolean;
 import ubordeaux.deptinfo.compilation.project.type.TypeInt;
-import ubordeaux.deptinfo.compilation.project.type.TypeNull;
 import ubordeaux.deptinfo.compilation.project.type.TypeString;
 
 public final class NodeLiteral extends NodeExp {
@@ -64,7 +63,7 @@ public final class NodeLiteral extends NodeExp {
 	 * @see ubordeaux.deptinfo.compilation.project.node.Node#generateIntermediateCode()
 	 * Generation du code intermediaire d un literal, represente par une constante
 	 */
-	public Const generateIntermediateCode() {
+	public Const generateIntermediateCode() {//basic constant build with const
 		Const res = null;
 		
 		if(this.getType() instanceof TypeInt) { 

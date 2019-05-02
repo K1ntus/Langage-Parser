@@ -72,7 +72,7 @@ public final class NodeList extends Node {
 		return node;
 	}
 	
-	public ExpList generateIntermediateCodeListArgs() {
+	public ExpList generateIntermediateCodeListArgs() {//Special generate for arguments of functions
 		
 		Node clone = this.clone();
 		
@@ -89,7 +89,7 @@ public final class NodeList extends Node {
 	}
 
 
-	public Stm generateIntermediateCode() {
+	public Stm generateIntermediateCode() {//link statements with Seq
 
 		Node clone = this.clone();
 

@@ -48,7 +48,7 @@ public final class NodeCase extends Node {
 		return defaultValue;
 	}
 
-	public IntermediateCode generateIntermediateCodeCase(NodeExp e, LabelLocation l) {
+	public IntermediateCode generateIntermediateCodeCase(NodeExp e, LabelLocation l) {//each case is like an else if (the first one is if)
 		
 		if(!defaultValue) {
 			LabelLocation iftrue = new LabelLocation();
@@ -61,15 +61,15 @@ public final class NodeCase extends Node {
 	        NodeRel rel = new NodeRel("==",e,n) ;
 	        Binop b = rel.generateIntermediateCode();
 	        
-			Cjump c = new Cjump(b.getBinop(), b.getLeft(), b.getRight(), iftrue, ifFalse);    //cas erreur, surement buge
+			Cjump c = new Cjump(b.getBinop(), b.getLeft(), b.getRight(), iftrue, ifFalse);   //the c jump who use the expression of switch and the Id of case
 	    	
 			Seq s = new Seq(c, 
 	    				new Seq(l1,
-	    						new Seq((Stm)this.getStm().generateIntermediateCode(), new Seq(new Jump(l),l2))));
+	    						new Seq((Stm)this.getStm().generateIntermediateCode(), new Seq(new Jump(l),l2))));//similar to if in intermediate code
 			
 	    	return s;
 		}else {
-			return new Seq((Stm)this.getStm().generateIntermediateCode(), (Stm)(new Label(l)));
+			return new Seq((Stm)this.getStm().generateIntermediateCode(), (Stm)(new Label(l)));// l at the end is the last label to jump over all case  
 		}	
 	}
 

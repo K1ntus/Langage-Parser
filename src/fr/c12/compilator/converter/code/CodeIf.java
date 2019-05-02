@@ -3,7 +3,6 @@ package fr.c12.compilator.converter.code;
 import java.util.ArrayList;
 
 import fr.c12.compilator.converter.AssemblyTable;
-import ubordeaux.deptinfo.compilation.project.node.Node;
 
 public class CodeIf extends Code {
 	Code boolean_expression;

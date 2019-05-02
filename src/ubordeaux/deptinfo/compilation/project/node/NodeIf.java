@@ -64,31 +64,31 @@ public final class NodeIf extends Node {
 
         LabelLocation iftrue = new LabelLocation();
         LabelLocation ifFalse= new LabelLocation();
-        Label l1 = new Label(iftrue);
-        Label l2 = new Label(ifFalse);
+        Label l1 = new Label(iftrue);//label at the start of statements
+        Label l2 = new Label(ifFalse);//label to jump over those statement
 
         Binop rel = null;
         
-        if (this.getExpNode() instanceof NodeRel) {
+        if (this.getExpNode() instanceof NodeRel) {//if the Exp is a relation, there is no preblem to make Binop
         	rel = (Binop)((NodeRel)this.getExpNode()).generateIntermediateCode();
         }else {
         	Exp t = new Const(1);//"true"
-        	Exp var = (Exp)this.getExpNode().generateIntermediateCode();
+        	Exp var = (Exp)this.getExpNode().generateIntermediateCode();//we have to simulate a Binop by adding "== true"
         	rel = new Binop(14, var, t);
         }
         
-    	Cjump c = new Cjump(rel.getBinop(), rel.getLeft(), rel.getRight(), iftrue, ifFalse);	//fils gauche du sequent
+    	Cjump c = new Cjump(rel.getBinop(), rel.getLeft(), rel.getRight(), iftrue, ifFalse);	//CJUMP of the if
 
     	Seq s;
-    	if(this.getElseNode() != null) {
+    	if(this.getElseNode() != null) {// when there is no else statement
     		 s = new Seq(c, 
-    			new Seq(l1,																		//fils droit du sequent, d autres sequent composes de statement et de labels
+    			new Seq(l1,																		//building of if in intermediate code with Seq and labels
     				new Seq((Stm)((NodeList)this.getThenNode()).generateIntermediateCode(),
     				new Seq(l2,(Stm)((NodeList)this.getElseNode()).generateIntermediateCode()))));
-    	}else {
+    	}else {//only if withou else
     		 s = new Seq(c, 
         			new Seq(l1,
-        				new Seq((Stm)((NodeList)this.getThenNode()).generateIntermediateCode(),
+        				new Seq((Stm)((NodeList)this.getThenNode()).generateIntermediateCode(), //building of if in intermediate code with Seq and labels
         				l2)));
     	}
     	return s;

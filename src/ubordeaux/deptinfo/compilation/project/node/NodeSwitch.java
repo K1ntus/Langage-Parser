@@ -31,7 +31,7 @@ public final class NodeSwitch extends Node {
 		return this.get(0);
 	}
 
-	public IntermediateCode generateIntermediateCode() {
+	public IntermediateCode generateIntermediateCode() {//we just use remember a single label for NodeCaseList and the expression to compare
 		LabelLocation l = new LabelLocation();
 		return ((NodeCaseList)this.getStm()).generateIntermediateCode((NodeExp) this.getExp(), l);	
 	}

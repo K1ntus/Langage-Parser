@@ -48,18 +48,17 @@ public final class NodeWhile extends Node {
 
 		int i = -1;
 		NodeRel rel = null;
-		if (this.getExp() instanceof NodeRel) {
+		if (this.getExp() instanceof NodeRel) {//if the expression is relation we just have to get the operation
 			i = ((NodeRel)this.getExp()).getCodeOp();
 			rel = ((NodeRel)this.getExp()).clone();
 			
-        }else {
+        }else {									//else this is just an expression, we build a new NodeRel wich represent a relation "exp == true"
         	NodeLiteral t = new NodeLiteral(new TypeBoolean(), true);//"true"
         	rel = new NodeRel("eq", this.getExp(), t);
         	i = 14;
         }
-
-		//ce noeud Seq du code interm doit etre modifie sur le stm de gauche
 		
+		//we build the while loop in intermediate code
 		Seq s = new Seq(
 				new Label(debut), 
 				new Seq(new Cjump(i,(Exp)rel.getOp1().generateIntermediateCode(),(Exp)rel.getOp2().generateIntermediateCode(), suite, sortie),

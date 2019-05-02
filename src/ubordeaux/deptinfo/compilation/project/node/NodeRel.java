@@ -78,9 +78,9 @@ public class NodeRel extends NodeExp {
 	}
 	
 
-	public Binop generateIntermediateCode() {
+	public Binop generateIntermediateCode() {//create corresponding Binop of NodeRel
 		Binop res = null;
-        Exp leftexp = (Exp)this.get(0).generateIntermediateCode();
+        Exp leftexp = (Exp)this.get(0).generateIntermediateCode();//decomposition of expression recursively
         Exp rightexp = (Exp)this.get(0).generateIntermediateCode();
         int i = this.getCodeOp();
         

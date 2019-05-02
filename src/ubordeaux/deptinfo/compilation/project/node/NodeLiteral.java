@@ -70,8 +70,6 @@ public final class NodeLiteral extends NodeExp {
 		} else if(this.getType() instanceof TypeString) {	//p. 168
 			res = new Const(-1);
 			//res = new Const(this.hexToString(this.stringToHex((String) this.getValue())));
-		}else if (this.getType() instanceof TypeNull) {
-			res = new Const(0);
 		}
 		return res;
 	}

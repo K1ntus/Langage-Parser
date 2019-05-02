@@ -98,8 +98,8 @@ public class Parser extends beaver.Parser {
 	//private String type_declaration_name;
 	
 	
-	private boolean verbose_mode = true;	
-	private boolean critical_mode = true;
+	private boolean verbose_mode = false;	
+	private boolean critical_mode = false;
 
 	private boolean generate_intermediate_code = true;
 
@@ -615,6 +615,17 @@ public class Parser extends beaver.Parser {
 																					
 																					TypeFunct fct_type = procedureEnvironment.getTypeFct(func_name);
 																					Iterator<Type> it = fct_type.getParams().iterator();
+																					
+																					if(fct_type.getParams().size() != args.size()) {
+																						InvalidCallFunction e = new InvalidCallFunction(func_name + "(" + args + ")", args.size(), fct_type.getParams().size());
+																						if(verbose_mode) {
+																							e.printStackTrace();
+																						}
+																						if(critical_mode)
+																							System.exit(0);
+																					
+																						System.err.println("[InvalidCallFunction] Automatically recover from error." );
+																					}
 																					while(it.hasNext()) {
 																						try {
 																							TypeFeature type_feature= (TypeFeature) it.next();
@@ -627,7 +638,7 @@ public class Parser extends beaver.Parser {
 																						}
 																					}
 																					return new NodeCallFct(func_name, fct_type, args);
-																				
+																					
 																				}catch(UnknownProcedure e){
 																					System.err.println("[UnknownProcedure] line: " + Symbol.getColumn(args.getStart()));
 																					if(verbose_mode) {
@@ -636,6 +647,7 @@ public class Parser extends beaver.Parser {
 
 																					return new NodeCallFct(func_name, new TypeFunct(func_name, new TypeTuple(), new TypeVoid()), args);
 																				}
+																				//TypeFunct fct_type = procedureEnvironment.getTypeFct(func_name);
 				}
 			},
 			Action.NONE,  	// [71] expression_part = 

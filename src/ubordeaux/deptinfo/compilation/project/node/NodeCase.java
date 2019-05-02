@@ -43,8 +43,6 @@ public final class NodeCase extends Node {
 
 	public IntermediateCode generateIntermediateCodeCase(NodeExp e, LabelLocation l) {
 		
-			
-		
 		if(!defaultValue) {
 			LabelLocation iftrue = new LabelLocation();
 	        LabelLocation ifFalse= new LabelLocation();
@@ -65,10 +63,7 @@ public final class NodeCase extends Node {
 	    	return s;
 		}else {
 			return new Seq((Stm)this.getStm().generateIntermediateCode(), (Stm)(new Label(l)));
-		}
-	    	
-	    	
-	 	
+		}	
 	}
 
 	@Override

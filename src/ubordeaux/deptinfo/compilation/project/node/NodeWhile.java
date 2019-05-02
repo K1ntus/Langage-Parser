@@ -81,7 +81,6 @@ public final class NodeWhile extends Node {
 				new Seq(new Cjump(i,(Exp)rel.getOp1().generateIntermediateCode(),(Exp)rel.getOp2().generateIntermediateCode(), suite, sortie),
 						new Seq(new Label(suite),
 								new Seq((Stm) this.getStm().generateIntermediateCode(), new Seq(new Jump(debut), new Label(sortie))))));
-	System.out.println(s.toString());
 	return s;
 	}
 	

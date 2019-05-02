@@ -110,7 +110,6 @@ public final class NodeCallFct extends NodeExp {
         ExpList largs = this.getArgs().generateIntermediateCodeListArgs();
         Call res = new Call((Exp)function, largs);
         
-		System.out.println("* " + res.toString());
         return res;
     }
 

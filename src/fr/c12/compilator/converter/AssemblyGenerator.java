@@ -2,6 +2,7 @@ package fr.c12.compilator.converter;
 
 import java.util.ArrayList;
 
+import fr.c12.compilator.converter.code.CodeLabel;
 import fr.c12.compilator.converter.code.CodeList;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
 
@@ -10,6 +11,11 @@ public final class AssemblyGenerator {
 	
 	public static CodeList generateAssemblyCode(IntermediateCode inter_code){
 
+		if(cl == null)
+			return new CodeList();
+		
+		if(inter_code == null)
+			return cl;
 		AssemblyTable at = new AssemblyTable();
 		inter_code.linearize(cl);
 

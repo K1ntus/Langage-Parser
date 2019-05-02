@@ -29,8 +29,8 @@ public class Seq extends Stm {
 
 	@Override
 	public Code linearize(CodeList cl) {
-		cl.add(left.linearize(cl));
-		cl.add(right.linearize(cl));
+		left.linearize(cl);
+		right.linearize(cl);
 		
 		return null;
 	}

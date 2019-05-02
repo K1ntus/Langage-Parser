@@ -8,5 +8,1235 @@
 
 
 ** Enregistre fct:sum
-** SEQ(Label(L0),MOVE(EXP(t0),BINOP(1,NAME(i),NAME(j))))
-funct; SEQ(Label(L1),MOVE(EXP(t1),BINOP(1,NAME(i),NAME(j))))
+
+* MOVE(CONST:100,NAME(a))
+* MOVE(BINOP(2,CONST:5,CONST:2),NAME(a))
+* CALL(NAME(sum),CONST:3CONST:5)
+* MOVE(CALL(NAME(sum),CONST:3CONST:5),NAME(a))
+* CALL(NAME(println),NAME(a))
+* MOVE(BINOP(-1,NAME(a),CONST:1),NAME(a))
+SEQ(Label(L0),SEQ(CJUMP(13,NAME(a),CONST:0,L1,L2),SEQ(Label(L1),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(BINOP(-1,NAME(a),CONST:1),NAME(a))),SEQ(JUMP(NAME(L0),L0),Label(L2))))))
+Programme y86 :
+
+.pos 0
+	irmovl stack,%esp
+	jmp main
+
+main:
+	irmovl 100,%eax
+	rmmovl %eax,la
+	irmovl #t0 = 5 2 2,%eax
+	rmmovl %eax,la
+	irmovl code call to: NAME(sum), args: [CONST:3],%eax
+	rmmovl %eax,la
+L1:
+L2:
+	irmovl #t1 = a -1 1,%eax
+	rmmovl %eax,la
+	halt
+
+mult:
+	mrmovl 4(%esp), %ecx
+	mrmovl 8(%esp), %edx
+	xorl %eax, %eax
+multbcl:
+	andl %edx, %edx
+	je multfin
+	addl %ecx, %eax
+	isubl 1,%edx
+	jmp multbcl
+multfin: ret
+div:
+	popl %eax
+	popl %eax
+
+	.align 4
+la:	.long 0
+stack:
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeOp
+- NodeOp well typed
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- Assign well typed
+--- CheckType NodeWhile
+- NodeList well typed
+*** Typage correct
+
+
+
+*************************************************
+*** Fichier data/progr2.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// gestion des variables statiques
+//
+// 0x4995F6B5
+
+* MOVE(CONST:1234564789,NAME(x))
+* MOVE(CONST:2147483647,NAME(y))
+* MOVE(CONST:1,NAME(b))
+* MOVE(CONST:-1,NAME(c))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:1)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:2)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:3)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:10)))
+* CALL(NAME(println),NAME(x))
+* CALL(NAME(println),NAME(y))
+* CALL(NAME(println),NAME(b))
+* CALL(NAME(println),NAME(c))
+* CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
+Programme y86 :
+
+.pos 0
+	irmovl stack,%esp
+	jmp main
+
+main:
+	pushl ebx
+	pushl esi
+	irmovl 100,%eax
+	rmmovl %eax,la
+	irmovl #t0 = 5 2 2,%eax
+	rmmovl %eax,la
+	irmovl code call to: NAME(sum), args: [CONST:3],%eax
+	rmmovl %eax,la
+L1:
+L2:
+	irmovl #t1 = a -1 1,%eax
+	rmmovl %eax,la
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	popl esi
+	popl ebx
+	halt
+
+mult:
+	mrmovl 4(%esp), %ecx
+	mrmovl 8(%esp), %edx
+	xorl %eax, %eax
+multbcl:
+	andl %edx, %edx
+	je multfin
+	addl %ecx, %eax
+	isubl 1,%edx
+	jmp multbcl
+multfin: ret
+div:
+	popl %eax
+	popl %eax
+
+	.align 4
+la:	.long 0
+lb:	.long 0
+lc:	.long 0
+lx:	.long 0
+ly:	.long 0
+stack:
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+
+*************************************************
+*** Fichier data/progr3.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+// gestion des variables statiques
+// gestion du tas et des pointeurs
+// 
+// 0x4995F6B5
+// 0x41
+// resize the heap
+// heap memory error
+
+* MOVE(CONST:1234564789,NAME(x))
+* MOVE(CONST:2147483647,NAME(y))
+* MOVE(CONST:1,NAME(b))
+* MOVE(CONST:-1,NAME(c))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:1)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:2)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:3)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:10)))
+* CALL(NAME(println),NAME(x))
+* CALL(NAME(println),NAME(y))
+* CALL(NAME(println),NAME(b))
+* CALL(NAME(println),NAME(c))
+* CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
+* MOVE(CONST:-1,MEM(NAME(q)))
+* CALL(NAME(println),MEM(NAME(q)))
+* CALL(NAME(println),NAME(p))
+* CALL(NAME(println),NAME(p))
+* MOVE(NAME(x),MEM(NAME(p)))
+* CALL(NAME(println),MEM(NAME(p)))
+* MOVE(CONST:65536,MEM(NAME(r)))
+* CALL(NAME(println),MEM(NAME(r)))
+* CALL(NAME(println),NAME(p))
+* CALL(NAME(println),MEM(NAME(p)))
+Programme y86 :
+
+.pos 0
+	irmovl stack,%esp
+	jmp main
+
+main:
+	pushl ebx
+	pushl esi
+	pushl edi
+	irmovl 100,%eax
+	rmmovl %eax,la
+	irmovl #t0 = 5 2 2,%eax
+	rmmovl %eax,la
+	irmovl code call to: NAME(sum), args: [CONST:3],%eax
+	rmmovl %eax,la
+L1:
+L2:
+	irmovl #t1 = a -1 1,%eax
+	rmmovl %eax,la
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	popl edi
+	popl esi
+	popl ebx
+	halt
+
+mult:
+	mrmovl 4(%esp), %ecx
+	mrmovl 8(%esp), %edx
+	xorl %eax, %eax
+multbcl:
+	andl %edx, %edx
+	je multfin
+	addl %ecx, %eax
+	isubl 1,%edx
+	jmp multbcl
+multfin: ret
+div:
+	popl %eax
+	popl %eax
+
+	.align 4
+la:	.long 0
+lb:	.long 0
+lnull:	.long 0
+lc:	.long 0
+lx:	.long 0
+ly:	.long 0
+stack:
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+--- CheckType NodeNew
+--- CheckType NodeAssign
+--- CheckType NodePtrAccess
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodePtrAccess
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeNew
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeAssign
+--- CheckType NodePtrAccess
+--- CheckType NodeId
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodePtrAccess
+- NodeCallFct well typed
+--- CheckType NodeNew
+--- CheckType NodeAssign
+--- CheckType NodePtrAccess
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodePtrAccess
+- NodeCallFct well typed
+--- CheckType NodeDispose
+--- CheckType NodeCallFct
+--- CheckType NodeId
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodePtrAccess
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+
+*************************************************
+*** Fichier data/progr4.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// Structure de contrôle
+//
+//
+
+* MOVE(CONST:1,NAME(x))
+* CALL(NAME(println),NAME(x))
+* MOVE(CONST:1,NAME(y))
+* CALL(NAME(println),BINOP(-1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))
+* MOVE(BINOP(1,NAME(y),CONST:1),NAME(y))
+SEQ(Label(L8),SEQ(CJUMP(11,NAME(y),CONST:5,L9,L10),SEQ(Label(L9),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(-1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(BINOP(1,NAME(y),CONST:1),NAME(y))),SEQ(JUMP(NAME(L8),L8),Label(L10))))))
+* CALL(NAME(println),CONST:-1)
+* MOVE(BINOP(1,NAME(x),CONST:1),NAME(x))
+SEQ(Label(L3),SEQ(CJUMP(11,NAME(x),CONST:10,L4,L5),SEQ(Label(L4),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L6,L7),SEQ(Label(L6),SEQ(SEQ(MOVE(CONST:1,NAME(y)),SEQ(Label(L8),SEQ(CJUMP(11,NAME(y),CONST:5,L9,L10),SEQ(Label(L9),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(-1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(BINOP(1,NAME(y),CONST:1),NAME(y))),SEQ(JUMP(NAME(L8),L8),Label(L10))))))),SEQ(Label(L7),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(BINOP(1,NAME(x),CONST:1),NAME(x)))),SEQ(JUMP(NAME(L3),L3),Label(L5))))))
+Programme y86 :
+
+.pos 0
+	irmovl stack,%esp
+	jmp main
+
+main:
+	pushl ebx
+	pushl esi
+	pushl edi
+	irmovl 100,%eax
+	rmmovl %eax,la
+	irmovl #t0 = 5 2 2,%eax
+	rmmovl %eax,la
+	irmovl code call to: NAME(sum), args: [CONST:3],%eax
+	rmmovl %eax,la
+L1:
+L2:
+	irmovl #t1 = a -1 1,%eax
+	rmmovl %eax,la
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl 1,%ecx
+	rmmovl %ecx,lx
+L4:
+L5:
+L6:
+L7:
+	irmovl 1,%edx
+	rmmovl %edx,ly
+L9:
+L10:
+	irmovl #t2 = y 1 1,%edx
+	rmmovl %edx,ly
+	irmovl #t3 = x 1 1,%ecx
+	rmmovl %ecx,lx
+	popl edi
+	popl esi
+	popl ebx
+	halt
+
+mult:
+	mrmovl 4(%esp), %ecx
+	mrmovl 8(%esp), %edx
+	xorl %eax, %eax
+multbcl:
+	andl %edx, %edx
+	je multfin
+	addl %ecx, %eax
+	isubl 1,%edx
+	jmp multbcl
+multfin: ret
+div:
+	popl %eax
+	popl %eax
+
+	.align 4
+la:	.long 0
+lb:	.long 0
+lnull:	.long 0
+lc:	.long 0
+lx:	.long 0
+ly:	.long 0
+stack:
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeWhile
+- NodeList well typed
+*** Typage correct
+
+
+
+*************************************************
+*** Fichier data/progr5.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+** Enregistre fct:sum
+** Enregistre fct:pgcd
+//println(pgcd(78, 90));
+
+* MOVE(CONST:5,NAME(x))
+* CALL(NAME(sum),CONST:3CONST:5)
+* MOVE(CALL(NAME(sum),CONST:3CONST:5),NAME(x))
+* CALL(NAME(sum),CONST:3CONST:5)
+* CALL(NAME(println),CALL(NAME(sum),CONST:3CONST:5))
+Programme y86 :
+
+.pos 0
+	irmovl stack,%esp
+	jmp main
+
+main:
+	pushl ebx
+	pushl esi
+	pushl edi
+	irmovl 100,%eax
+	rmmovl %eax,la
+	irmovl #t0 = 5 2 2,%eax
+	rmmovl %eax,la
+	irmovl code call to: NAME(sum), args: [CONST:3],%eax
+	rmmovl %eax,la
+L1:
+L2:
+	irmovl #t1 = a -1 1,%eax
+	rmmovl %eax,la
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl 1,%ecx
+	rmmovl %ecx,lx
+L4:
+L5:
+L6:
+L7:
+	irmovl 1,%edx
+	rmmovl %edx,ly
+L9:
+L10:
+	irmovl #t2 = y 1 1,%edx
+	rmmovl %edx,ly
+	irmovl #t3 = x 1 1,%ecx
+	rmmovl %ecx,lx
+	irmovl 5,%ecx
+	rmmovl %ecx,lx
+	irmovl code call to: NAME(sum), args: [CONST:3],%ecx
+	rmmovl %ecx,lx
+	popl edi
+	popl esi
+	popl ebx
+	halt
+
+mult:
+	mrmovl 4(%esp), %ecx
+	mrmovl 8(%esp), %edx
+	xorl %eax, %eax
+multbcl:
+	andl %edx, %edx
+	je multfin
+	addl %ecx, %eax
+	isubl 1,%edx
+	jmp multbcl
+multfin: ret
+div:
+	popl %eax
+	popl %eax
+
+	.align 4
+la:	.long 0
+lb:	.long 0
+lnull:	.long 0
+lc:	.long 0
+lx:	.long 0
+ly:	.long 0
+stack:
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+
+*************************************************
+*** Fichier data/progr6.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// gestion complexe de la pile
+// 
+** Enregistre fct:fact1
+** Enregistre fct:fact2
+** Enregistre fct:hanoi
+** Enregistre fct:impair
+** Enregistre fct:pair
+** Enregistre fct:impair
+
+* CALL(NAME(fact1),CONST:6)
+* CALL(NAME(println),CALL(NAME(fact1),CONST:6))
+* CALL(NAME(fact2),CONST:6)
+* CALL(NAME(println),CALL(NAME(fact2),CONST:6))
+* CALL(NAME(hanoi),CONST:-1CONST:-1CONST:-1CONST:4)
+* CALL(NAME(pair),CONST:1001)
+* CALL(NAME(println),CALL(NAME(pair),CONST:1001))
+* CALL(NAME(pair),CONST:1000)
+* CALL(NAME(println),CALL(NAME(pair),CONST:1000))
+Programme y86 :
+
+.pos 0
+	irmovl stack,%esp
+	jmp main
+
+main:
+	pushl ebx
+	pushl esi
+	pushl edi
+	irmovl 100,%eax
+	rmmovl %eax,la
+	irmovl #t0 = 5 2 2,%eax
+	rmmovl %eax,la
+	irmovl code call to: NAME(sum), args: [CONST:3],%eax
+	rmmovl %eax,la
+L1:
+L2:
+	irmovl #t1 = a -1 1,%eax
+	rmmovl %eax,la
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl 1,%ecx
+	rmmovl %ecx,lx
+L4:
+L5:
+L6:
+L7:
+	irmovl 1,%edx
+	rmmovl %edx,ly
+L9:
+L10:
+	irmovl #t2 = y 1 1,%edx
+	rmmovl %edx,ly
+	irmovl #t3 = x 1 1,%ecx
+	rmmovl %ecx,lx
+	irmovl 5,%ecx
+	rmmovl %ecx,lx
+	irmovl code call to: NAME(sum), args: [CONST:3],%ecx
+	rmmovl %ecx,lx
+	popl edi
+	popl esi
+	popl ebx
+	halt
+
+mult:
+	mrmovl 4(%esp), %ecx
+	mrmovl 8(%esp), %edx
+	xorl %eax, %eax
+multbcl:
+	andl %edx, %edx
+	je multfin
+	addl %ecx, %eax
+	isubl 1,%edx
+	jmp multbcl
+multfin: ret
+div:
+	popl %eax
+	popl %eax
+
+	.align 4
+la:	.long 0
+lb:	.long 0
+lnull:	.long 0
+lc:	.long 0
+lx:	.long 0
+ly:	.long 0
+stack:
+--- CheckType NodeList
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+- NodeCallFct well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+
+*************************************************
+*** Fichier data/progr7.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// tableaux
+// 
+
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(week),CONST:0)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(week),CONST:1)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(week),CONST:2)))
+* MOVE(CONST:-1,MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)))
+* MOVE(CONST:-1,MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:4)),CONST:22)),CONST:7)))
+* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)))
+* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:4)))
+* CALL(NAME(println),MEM(BINOP(0,NAME(week),CONST:1)))
+Programme y86 :
+
+.pos 0
+	irmovl stack,%esp
+	jmp main
+
+main:
+	pushl ebx
+	pushl esi
+	pushl edi
+	irmovl 100,%eax
+	rmmovl %eax,la
+	irmovl #t0 = 5 2 2,%eax
+	rmmovl %eax,la
+	irmovl code call to: NAME(sum), args: [CONST:3],%eax
+	rmmovl %eax,la
+L1:
+L2:
+	irmovl #t1 = a -1 1,%eax
+	rmmovl %eax,la
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl 1,%ecx
+	rmmovl %ecx,lx
+L4:
+L5:
+L6:
+L7:
+	irmovl 1,%edx
+	rmmovl %edx,ly
+L9:
+L10:
+	irmovl #t2 = y 1 1,%edx
+	rmmovl %edx,ly
+	irmovl #t3 = x 1 1,%ecx
+	rmmovl %ecx,lx
+	irmovl 5,%ecx
+	rmmovl %ecx,lx
+	irmovl code call to: NAME(sum), args: [CONST:3],%ecx
+	rmmovl %ecx,lx
+	popl edi
+	popl esi
+	popl ebx
+	halt
+
+mult:
+	mrmovl 4(%esp), %ecx
+	mrmovl 8(%esp), %edx
+	xorl %eax, %eax
+multbcl:
+	andl %edx, %edx
+	je multfin
+	addl %ecx, %eax
+	isubl 1,%edx
+	jmp multbcl
+multfin: ret
+div:
+	popl %eax
+	popl %eax
+
+	.align 4
+la:	.long 0
+lb:	.long 0
+lnull:	.long 0
+lc:	.long 0
+lx:	.long 0
+ly:	.long 0
+stack:
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+
+*************************************************
+*** Fichier data/progr8.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+//
+// tableaux et enumérés
+// 
+** Enregistre types: (TypeItemEnum@SUNDAY=0, TypeItemEnum@MONDAY=1, TypeItemEnum@TUESDAY=2, TypeItemEnum@WEDNESDAY=3, TypeItemEnum@THURSDAY=4, TypeItemEnum@FRIDAY=5, TypeItemEnum@SATURDAY=6)
+** Enregistre types: (TypeItemEnum@JANUARY=0, TypeItemEnum@FEBRUARY=1, TypeItemEnum@MARCH=2, TypeItemEnum@APRIL=3, TypeItemEnum@MAY=4, TypeItemEnum@JUNE=5, TypeItemEnum@JULY=6, TypeItemEnum@AUGUST=7, TypeItemEnum@SEPTEMBER=8, TypeItemEnum@OCTOBER=9, TypeItemEnum@NOVEMBER=10, TypeItemEnum@DECEMBER=11)
+
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(week),NAME(MONDAY))))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(week),NAME(TUESDAY))))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(week),NAME(WEDNESDAY))))
+* MOVE(CONST:-1,MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))))
+* MOVE(CONST:-1,MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))))
+* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))))
+* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))))
+* CALL(NAME(println),MEM(BINOP(0,NAME(week),NAME(TUESDAY))))
+Programme y86 :
+
+.pos 0
+	irmovl stack,%esp
+	jmp main
+
+main:
+	pushl ebx
+	pushl esi
+	pushl edi
+	irmovl 100,%eax
+	rmmovl %eax,la
+	irmovl #t0 = 5 2 2,%eax
+	rmmovl %eax,la
+	irmovl code call to: NAME(sum), args: [CONST:3],%eax
+	rmmovl %eax,la
+L1:
+L2:
+	irmovl #t1 = a -1 1,%eax
+	rmmovl %eax,la
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl 1,%ecx
+	rmmovl %ecx,lx
+L4:
+L5:
+L6:
+L7:
+	irmovl 1,%edx
+	rmmovl %edx,ly
+L9:
+L10:
+	irmovl #t2 = y 1 1,%edx
+	rmmovl %edx,ly
+	irmovl #t3 = x 1 1,%ecx
+	rmmovl %ecx,lx
+	irmovl 5,%ecx
+	rmmovl %ecx,lx
+	irmovl code call to: NAME(sum), args: [CONST:3],%ecx
+	rmmovl %ecx,lx
+	popl edi
+	popl esi
+	popl ebx
+	halt
+
+mult:
+	mrmovl 4(%esp), %ecx
+	mrmovl 8(%esp), %edx
+	xorl %eax, %eax
+multbcl:
+	andl %edx, %edx
+	je multfin
+	addl %ecx, %eax
+	isubl 1,%edx
+	jmp multbcl
+multfin: ret
+div:
+	popl %eax
+	popl %eax
+
+	.align 4
+la:	.long 0
+lb:	.long 0
+lnull:	.long 0
+lc:	.long 0
+lx:	.long 0
+ly:	.long 0
+stack:
+--- CheckType NodeList
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+--- CheckType NodeLiteral
+- Assign well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+--- CheckType NodeCallFct
+--- CheckType NodeArrayAccess
+- ArrayAccess well typed
+- NodeCallFct well typed
+- NodeList well typed
+*** Typage correct
+
+
+
+*************************************************
+*** Fichier data/progr9.lea
+[INFO] $$  : multiple line comment.
+[INFO] $$$ : documentation comment.
+
+
+$$ **************************************************
+ ************************************************** $$
+$$$
+Type declaration part
+$$$
+** Enregistre types: TypeString
+** Enregistre types: TypeInt_null
+** Enregistre types: TypeBoolean
+** Retrouve types: chaine TypeString
+///named2 = unknown; // error		//UnknownType
+$$$ Enum $$$
+** Enregistre types: TypeString
+** Enregistre types: (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
+///xxx = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, aa, ab, ac, ad, ae, af, ag, ah); // error
+** Enregistre types: (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
+** Enregistre types: TypeArrayRange[TypeInt_64..TypeInt_81]
+$$ 
+Cas
+D'erreur
+$$
+///range3 = 81 .. 64; //error			//InvalidType
+///range4 = Friday .. Unknown; // error	//NoSuchField
+///range5 = Friday .. Monday; // error	//InvalidType@subrange_type
+** Enregistre types: TypeArrayRange[TypeInt_1..TypeInt_5]
+///range7 = Friday .. Tuesday; // error "range not valid" //InvalidType@subrange_type
+///range8 = Monday .. April; // error "incoherent range" //A GERER
+$$$ Array $$$
+** Enregistre types: TypeArrayRange[TypeInt_1..TypeInt_11]
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)
+** Retrouve types: range1 TypeArrayRange[TypeInt_64..TypeInt_81]
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_64..TypeInt_81], TypeInt_null)
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeInt_null)
+** Retrouve types: DaysOfWeek (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
+$$ 
+Cas
+D'erreur
+$$
+// UNKNWOWN TYPE
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray((TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6), TypeInt_null))
+[UnknownType] type: range3 has not been defined
+// error "Range type expected"
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray(TypeNamed_range3, TypeInt_null))
+$$$ Pointers $$$
+** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray(TypeArrayRange[TypeInt_3..TypeInt_6], TypeInt_null))
+** Enregistre types: TypePointer(TypeInt_null)
+** Retrouve types: DaysOfWeek (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
+$$$
+Variable declaration part
+$$$
+** Enregistre types: TypePointer(TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray((TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6), TypeInt_null)))
+///x : boolean; // error "Variable x yet declared" // RedefinitionVariable
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Retrouve types: ptr1 TypePointer(TypeInt_null)
+** Retrouve types: Months (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
+** Retrouve types: range1 TypeArrayRange[TypeInt_64..TypeInt_81]
+** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
+** Retrouve types: Months (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
+** Enregistre fct:goo
+///function goo(i : integer, j : integer) : boolean;//RedefinitionFunctionPrototype //error "procedure or function declared twice"
+** Enregistre fct:foo
+///result^ = hoo(i, j); // error "function not declared" //NoSuchFieldException
+** Enregistre fct:goo
+///function goo(i : integer, j : integer) : boolean begin return false; end //RedefinitionFunction // error "function already defined"
+///b = 2; // error "Type error in affectation"
+///l = m2; // error "Type error in affectation" //m2 range 4, l range 5
+//b = foo(3); // error "Type error in calling expression"			//PAS GERE Checktype invalid
+//b = foo(3, false); // error "Type error in calling expression"	//PAS GERE Checktype invalid
+//x = foo(3, 7); // error "Type error in calling expression"		//PAS GERE Checktype invalid
+//z2 [ Thursday ] = 36; // error "Type error in array access "		//PAS GERE
+//IL Y AVAIT UN CRASH ICI RIP
+///y = z [ false ]; // error "Type error in array access" 		// InvalidArrayAccess
+///y = z [ 4 ]; // error "Type error in affectation"			// HANDLED
+///b = z [ 4 ]; // error "Type error in affectation"			// HANDLED
+///z = k [ 4 ]; // error "Type error in affectation"			// HANDLED
+///b = z2 [ Thursday ]; // error "Type error in affectation"	// HANDLED
+///z2 = 36; 													// Accessible variable expected
+Size is : 13
+///b = !(2 < false) && (x == 1) && (p == null); // // error "Type error in comparison"
+///b = !(2 < x) && (x == 1) && p ; // // error "Type error in logical expression"
+///b = !(2 < x) && (x == 1 + false) && p ; // // error "Type error in arithmetic expression"
+///p = 0; // error "Type error in affectation" //InvalidAffectation
+//new x; // error "Type error in pointer access expression" //InvalidPointerAccess
+///p^ = false;		//INVALID AFFECTATION OK
+///x^ = null; // error "Type error in pointer access expression"
+///dispose x;  // error "Type error in pointer access expression" //InvalidPointerAccess
+
+* MOVE(CONST:0,NAME(b))
+* MOVE(NAME(l),NAME(l))
+* CALL(NAME(foo),CONST:3CONST:7)
+* MOVE(MEM(CALL(NAME(foo),CONST:3CONST:7)),NAME(b))
+* CALL(NAME(goo),CONST:3CONST:7)
+* MOVE(CALL(NAME(goo),CONST:3CONST:7),NAME(b))
+* MOVE(CONST:36,MEM(BINOP(0,NAME(z2),CONST:1)))
+* MOVE(MEM(BINOP(0,NAME(z2),CONST:1)),NAME(x))
+* CALL(NAME(goo),MEM(BINOP(0,NAME(z2),CONST:1))CONST:1)
+* MOVE(CALL(NAME(goo),MEM(BINOP(0,NAME(z2),CONST:1))CONST:1),NAME(b))
+* MOVE(CONST:1,NAME(x))
+* MOVE(CONST:1,NAME(x))
+* MOVE(CONST:2,NAME(x))
+* MOVE(CONST:1,NAME(x))
+* MOVE(CONST:1,NAME(x))
+SEQ(Label(L17),SEQ(CJUMP(14,MEM(BINOP(0,NAME(z2),CONST:7)),CONST:1,L18,L19),SEQ(Label(L18),SEQ(MOVE(CONST:1,NAME(x)),SEQ(JUMP(NAME(L17),L17),Label(L19))))))
+* MOVE(CONST:1,NAME(x))
+* MOVE(CONST:2,NAME(x))
+* CALL(NAME(println),NAME(x))
+* CALL(NAME(readln), void )
+SEQ(Label(L20),SEQ(CJUMP(14,MEM(BINOP(0,NAME(z2),CONST:7)),CONST:1,L21,L22),SEQ(Label(L21),SEQ(SEQ(SEQ(CJUMP(14,MEM(BINOP(0,NAME(l),NAME(Monday))),CONST:1,L23,L24),SEQ(Label(L23),SEQ(MOVE(CONST:1,NAME(x)),SEQ(Label(L24),MOVE(CONST:2,NAME(x)))))),SEQ(EXP(CALL(NAME(println),NAME(x))),EXP(CALL(NAME(readln), void )))),SEQ(JUMP(NAME(L20),L20),Label(L22))))))
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* CALL(NAME(println),CONST:-1)
+* MOVE(BINOP(2,BINOP(-2,BINOP(1,CONST:36,CONST:45),CONST:7),CONST:-1),NAME(x))

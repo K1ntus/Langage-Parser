@@ -109,7 +109,7 @@ public class Parser extends beaver.Parser {
 	private boolean critical_mode = true;
 
 	private boolean generate_progr_tree = false;
-	private boolean generate_intermediate_code = true;
+	private boolean generate_intermediate_code = false;
 	private boolean generate_assembly = true;
 
 	private final Action[] actions;
@@ -398,9 +398,9 @@ public class Parser extends beaver.Parser {
 			System.out.println("** " + it_code);
 		}
 		if(generate_assembly) {
-			IntermediateCode it_code = new Seq(new Label(new LabelLocation()), stm.generateIntermediateCode());
-			System.out.println("funct; " + it_code);
-			AssemblyGenerator.generateAssemblyCode(it_code);
+			//IntermediateCode it_code = new Seq(new Label(new LabelLocation()), stm.generateIntermediateCode());
+			//System.out.println("funct; " + it_code);
+			//AssemblyGenerator.generateAssemblyCode(it_code);
 		}
 		stackEnvironment.getEnvironment().pop();
 		return stm;

@@ -28,7 +28,7 @@ public class CodeList extends Code{
     }
 
     public ArrayList<String> assemble (AssemblyTable at) {
-    	System.out.println(this);
+    	//System.out.println(this);
 		ArrayList<String> s = new ArrayList<String> ();
 		for (int i = 0; i < list.size (); i ++)
 		    s.addAll (list.get (i).assemble (at));

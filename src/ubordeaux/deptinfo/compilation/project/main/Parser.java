@@ -398,9 +398,9 @@ public class Parser extends beaver.Parser {
 			System.out.println("** " + it_code);
 		}
 		if(generate_assembly) {
-			//IntermediateCode it_code = new Seq(new Label(new LabelLocation()), stm.generateIntermediateCode());
-			//System.out.println("funct; " + it_code);
-			//AssemblyGenerator.generateAssemblyCode(it_code);
+			IntermediateCode it_code = new Seq(new Label(new LabelLocation()), stm.generateIntermediateCode());
+			System.out.println("funct; " + it_code);
+			AssemblyGenerator.generateAssemblyCode(it_code);
 		}
 		stackEnvironment.getEnvironment().pop();
 		return stm;

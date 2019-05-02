@@ -97,7 +97,7 @@ begin
 	
 	b = foo(3, 7)^;
 	b = goo(3, 7);
-	b = foo(3); // error "Type error in calling expression"			//PAS GERE Checktype invalid
+	//b = foo(3); // error "Type error in calling expression"			//PAS GERE Checktype invalid
 	//b = foo(3, false); // error "Type error in calling expression"	//PAS GERE Checktype invalid
 	//x = foo(3, 7); // error "Type error in calling expression"		//PAS GERE Checktype invalid
 	

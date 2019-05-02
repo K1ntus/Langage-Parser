@@ -53,4 +53,5 @@ public final class NodeCaseList extends NodeExp {
 		System.err.println("Le code intermediaire d'un CaseList ne peut pas être donné dans cette fonction!");
 		return new Const(0);
 	}
+
 }

@@ -1,7 +1,12 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
-
-import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Cjump;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Jump;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Label;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.LabelLocation;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Seq;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Stm;
 import ubordeaux.deptinfo.compilation.project.type.TypeBoolean;
 
 public final class NodeWhile extends Node {
@@ -40,7 +45,6 @@ public final class NodeWhile extends Node {
 		LabelLocation debut = new LabelLocation();
 		LabelLocation suite = new LabelLocation();
 		LabelLocation sortie = new LabelLocation();
-		
 
 		int i = -1;
 		NodeRel rel = null;
@@ -63,5 +67,6 @@ public final class NodeWhile extends Node {
 								new Seq((Stm) this.getStm().generateIntermediateCode(), new Seq(new Jump(debut), new Label(sortie))))));
 	return s;
 	}
+
 	
 }

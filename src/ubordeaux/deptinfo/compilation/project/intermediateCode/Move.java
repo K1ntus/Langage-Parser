@@ -1,5 +1,10 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeAssign;
+import fr.c12.compilator.converter.code.CodeIdent;
+import fr.c12.compilator.converter.code.CodeList;
+
 public class Move extends Stm {
 	private Exp dst, src;
 
@@ -10,6 +15,7 @@ public class Move extends Stm {
 	}
 	
 	public String toString() {
+		System.out.println("dst: " + dst + " - src: " + src);
 		
 		if(src != null)
 			return "MOVE(" + dst.toString() + "," + src.toString() + ")";
@@ -18,10 +24,13 @@ public class Move extends Stm {
 	}
 
 	@Override
-	public String toy86() {
-
-		System.out.println("TODO: Move (y86)");
-		// TODO Auto-generated method stub
-		return null;
+	public Code linearize(CodeList cl) {
+		Code r = dst.linearize (cl);
+		Code l = src.linearize (cl);
+		if (! (l instanceof CodeIdent))
+		    return (null);
+		
+		cl.add (new CodeAssign ((CodeIdent) l, r));
+		return (l);
 	}
 }

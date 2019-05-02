@@ -2,7 +2,6 @@ package ubordeaux.deptinfo.compilation.project.node;
 
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Binop;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Mem;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypeArray;

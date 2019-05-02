@@ -1,5 +1,8 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeList;
+
 public class Seq extends Stm {
 	private Stm left, right;
 
@@ -15,10 +18,6 @@ public class Seq extends Stm {
 		return "SEQ("+ left.toString() + "," + right.toString() + ")";
 	}
 	
-	@Override
-	public String toy86() {
-		return "";
-	}
 	
 	public Stm getRight() {
 		return right;
@@ -26,6 +25,14 @@ public class Seq extends Stm {
 	
 	public Stm getLeft() {
 		return left;
+	}
+
+	@Override
+	public Code linearize(CodeList cl) {
+		left.linearize(cl);
+		right.linearize(cl);
+		
+		return null;
 	}
 	
 

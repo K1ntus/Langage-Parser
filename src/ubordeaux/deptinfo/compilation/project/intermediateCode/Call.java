@@ -1,5 +1,12 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
+import java.util.ArrayList;
+
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeCall;
+import fr.c12.compilator.converter.code.CodeIdent;
+import fr.c12.compilator.converter.code.CodeList;
+
 public class Call extends Exp {
 	private Exp func;
 	private ExpList args;
@@ -12,14 +19,21 @@ public class Call extends Exp {
 	
 	@Override
 	public String toString() {
-		return "CALL(" + func.toString() + "," + args.toString() + ")";
+		if(args != null)
+			return "CALL(" + func.toString() + "," + args.toString() + ")";
+		return "CALL(" + func.toString() + ", void )";
 	}
 
+	public Code linearize(CodeList cl) {
+		
+//		CodeList args_array = new CodeList();
 
-	@Override
-	public String toy86() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<CodeIdent> args_array = new ArrayList<>();
+		args_array.add(new CodeIdent(args.getHead().toString()));
+		
+		CodeCall res = new CodeCall(func.toString(), args_array);
+		return res;
 	}
+
 
 }

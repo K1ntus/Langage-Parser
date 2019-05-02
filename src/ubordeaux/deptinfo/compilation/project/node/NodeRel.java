@@ -1,7 +1,9 @@
 package ubordeaux.deptinfo.compilation.project.node;
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
-import ubordeaux.deptinfo.compilation.project.type.*;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Binop;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
+import ubordeaux.deptinfo.compilation.project.type.TypeBoolean;
+import ubordeaux.deptinfo.compilation.project.type.TypeInt;
 
 public class NodeRel extends NodeExp {
 

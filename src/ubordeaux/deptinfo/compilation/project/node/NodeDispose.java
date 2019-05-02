@@ -27,5 +27,6 @@ public final class NodeDispose extends Node {
 	public Move generateIntermediateCode() {
 		return new Move(new Mem( (Exp) this.get(0).generateIntermediateCode() ),new Name( new LabelLocation("null")));
 	}
+
 	
 }

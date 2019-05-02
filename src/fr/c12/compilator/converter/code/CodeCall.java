@@ -30,22 +30,25 @@ public class CodeCall extends Code{
 
     public ArrayList<String> assemble (AssemblyTable at) {
 		ArrayList<String> as = new ArrayList<String> ();
-		for(CodeIdent elt : elts) {
-			int rdst;
-			
-			CodeIdent isrc = null;
-			
-		    rdst = at.registerFind (elt);
-		    if (rdst == -1)
-		    	rdst = at.registerGive (elt, isrc, null);
-		    as.add("\tpushl"+isrc.getLabel());
-		    
-		    //as.addAll (at.registerLoad (rdst, src));
-		    
-		    
+		
+		boolean hasSave = false;
+		int rdst = at.registerGive(null, null);
+		if (rdst == -1) {
+			rdst = 0;
+			as.add("\tpushl " + at.registerName(rdst));
+			hasSave = true;
 		}
 		
-		as.add("\tjmp " + funct_name);
+		for(CodeIdent elt : elts) {
+			as.add("\rmrmovl " + elt.getLabel() + ", " + at.registerName(rdst));
+		    as.add("\tpushl " + at.registerName(rdst));
+		}
+		
+		as.add("\tcall " + funct_name);
+		
+		if (hasSave) {
+			as.add("\tpopl " + at.registerName(rdst));
+		}
 		return as;
     }
 

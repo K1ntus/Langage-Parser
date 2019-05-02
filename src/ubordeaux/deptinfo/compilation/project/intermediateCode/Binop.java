@@ -59,10 +59,10 @@ public class Binop extends Exp {
 		Code r = right.linearize (cl);
 		if (left != null) {
 		    Code l = left.linearize (cl);
-		    cl.add (new CodeAssignOpBinary (d, binop, l, r));
+		    return (new CodeAssignOpBinary (d, binop, l, r));
 		}
 		else
-		    cl.add (new CodeAssignOpUnary (d, binop, r));
-		return (d);
+		    return (new CodeAssignOpUnary (d, binop, r));
+		//return cl;
 	}
 } 

@@ -58,28 +58,6 @@ public class CodeAssignOpBinary extends Code {
 	    as.add ("\tiaddl 8,%esp");
 	    rdst = 0;
 	    at.registerSet (rdst, dst);
-	}else if (op == Binop.DIV) {
-	    if (rsrcl == -1) {
-		rsrcl = at.registerGive (dst, isrcr);
-		as.addAll (at.registerLoad (rsrcl, srcl));
-	    }
-	    as.add ("\tpushl " + at.registerName (rsrcl));
-	    if ((isrcl != null) && isrcl.isTemp ())
-		at.registerRelease (isrcl);
-
-	    if (rsrcr == -1) {
-		rsrcr = at.registerGive (dst, isrcl);
-		as.addAll (at.registerLoad (rsrcr, srcr));
-	    }
-	    as.add ("\tpushl " + at.registerName (rsrcr));
-	    if ((isrcr != null) && isrcr.isTemp ())
-		at.registerRelease (isrcr);
-
-	    as.addAll (at.registerCallerPurge ());
-	    as.add ("\tcall div");
-	    as.add ("\tiaddl 8,%esp");
-	    rdst = 0;
-	    at.registerSet (rdst, dst);
 	}
 	else {
 	    if (rsrcl != -1) {

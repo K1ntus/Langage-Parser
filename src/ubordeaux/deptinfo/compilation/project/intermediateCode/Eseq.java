@@ -28,8 +28,10 @@ public class Eseq extends Exp {
 
 	@Override
 	public Code linearize(CodeList cl) {
-		// TODO Auto-generated method stub
-		return null;
+		stm.linearize(cl);
+		exp.linearize(cl);
+		
+		return cl;
 	}
 
 

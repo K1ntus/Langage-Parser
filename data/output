@@ -7,16 +7,99 @@
 [INFO] $$$ : documentation comment.
 
 
+** Enregistre fct:sum
+** SEQ(Label(L0),MOVE(EXP(t0),BINOP(1,NAME(i),NAME(j))))
+funct; SEQ(Label(L1),MOVE(EXP(t1),BINOP(1,NAME(i),NAME(j))))
+
+Programme y86 :
+
+.pos 0
+	irmovl stack,%esp
+	jmp main
+
+main:
+	halt
+
+mult:
+	mrmovl 4(%esp), %ecx
+	mrmovl 8(%esp), %edx
+	xorl %eax, %eax
+multbcl:
+	andl %edx, %edx
+	je multfin
+	addl %ecx, %eax
+	isubl 1,%edx
+	jmp multbcl
+multfin: ret
+div:
+	popl %eax
+	popl %eax
+
+	.align 4
+stack:
 
 
 
 Intermediate Code:
 * MOVE(CONST:100,NAME(a))
 * MOVE(BINOP(2,CONST:5,CONST:2),NAME(a))
+* CALL(NAME(sum),CONST:3CONST:5)
+* MOVE(CALL(NAME(sum),CONST:3CONST:5),NAME(a))
 * CALL(NAME(println),NAME(a))
 * MOVE(BINOP(-1,NAME(a),CONST:1),NAME(a))
-SEQ(Label(L0),SEQ(CJUMP(0,NAME(a),CONST:0,L1,L2),SEQ(Label(L1),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(BINOP(-1,NAME(a),CONST:1),NAME(a))),SEQ(JUMP(NAME(L0),L0),Label(L2))))))
-** SEQ(MOVE(CONST:100,NAME(a)),SEQ(MOVE(BINOP(2,CONST:5,CONST:2),NAME(a)),SEQ(Label(L0),SEQ(CJUMP(0,NAME(a),CONST:0,L1,L2),SEQ(Label(L1),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(BINOP(-1,NAME(a),CONST:1),NAME(a))),SEQ(JUMP(NAME(L0),L0),Label(L2))))))))
+SEQ(Label(L2),SEQ(CJUMP(13,NAME(a),CONST:0,L3,L4),SEQ(Label(L3),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(BINOP(-1,NAME(a),CONST:1),NAME(a))),SEQ(JUMP(NAME(L2),L2),Label(L4))))))
+** SEQ(MOVE(CONST:100,NAME(a)),SEQ(MOVE(BINOP(2,CONST:5,CONST:2),NAME(a)),SEQ(MOVE(CALL(NAME(sum),CONST:3CONST:5),NAME(a)),SEQ(Label(L2),SEQ(CJUMP(13,NAME(a),CONST:0,L3,L4),SEQ(Label(L3),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(BINOP(-1,NAME(a),CONST:1),NAME(a))),SEQ(JUMP(NAME(L2),L2),Label(L4)))))))))
+* MOVE(CONST:100,NAME(a))
+* MOVE(BINOP(2,CONST:5,CONST:2),NAME(a))
+* CALL(NAME(sum),CONST:3CONST:5)
+* MOVE(CALL(NAME(sum),CONST:3CONST:5),NAME(a))
+* CALL(NAME(println),NAME(a))
+* MOVE(BINOP(-1,NAME(a),CONST:1),NAME(a))
+SEQ(Label(L5),SEQ(CJUMP(13,NAME(a),CONST:0,L6,L7),SEQ(Label(L6),SEQ(SEQ(EXP(CALL(NAME(println),NAME(a))),MOVE(BINOP(-1,NAME(a),CONST:1),NAME(a))),SEQ(JUMP(NAME(L5),L5),Label(L7))))))
+a = 100
+a = #t1 = 5 2 2
+a = code call to: NAME(sum), args: 
+label: L6
+label: L7
+a = #t2 = a -1 1
+
+Programme y86 :
+
+.pos 0
+	irmovl stack,%esp
+	jmp main
+
+main:
+	irmovl 100,%eax
+	rmmovl %eax,la
+	irmovl #t1 = 5 2 2,%eax
+	rmmovl %eax,la
+	irmovl code call to: NAME(sum), args: ,%eax
+	rmmovl %eax,la
+L6:
+L7:
+	irmovl #t2 = a -1 1,%eax
+	rmmovl %eax,la
+	halt
+
+mult:
+	mrmovl 4(%esp), %ecx
+	mrmovl 8(%esp), %edx
+	xorl %eax, %eax
+multbcl:
+	andl %edx, %edx
+	je multfin
+	addl %ecx, %eax
+	isubl 1,%edx
+	jmp multbcl
+multfin: ret
+div:
+	popl %eax
+	popl %eax
+
+	.align 4
+la:	.long 0
+stack:
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -26,6 +109,13 @@ SEQ(Label(L0),SEQ(CJUMP(0,NAME(a),CONST:0,L1,L2),SEQ(Label(L1),SEQ(SEQ(EXP(CALL(
 --- CheckType NodeId
 --- CheckType NodeOp
 - NodeOp well typed
+- Assign well typed
+--- CheckType NodeAssign
+--- CheckType NodeId
+--- CheckType NodeCallFct
+--- CheckType NodeLiteral
+--- CheckType NodeLiteral
+- NodeCallFct well typed
 - Assign well typed
 --- CheckType NodeWhile
 - NodeList well typed
@@ -61,6 +151,83 @@ Intermediate Code:
 * CALL(NAME(println),NAME(c))
 * CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
 ** SEQ(MOVE(CONST:1234564789,NAME(x)),SEQ(MOVE(CONST:2147483647,NAME(y)),SEQ(MOVE(CONST:1,NAME(b)),SEQ(MOVE(CONST:-1,NAME(c)),SEQ(MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:1))),SEQ(MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:2))),SEQ(MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:3))),SEQ(MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:10))),SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(EXP(CALL(NAME(println),NAME(y))),SEQ(EXP(CALL(NAME(println),NAME(b))),SEQ(EXP(CALL(NAME(println),NAME(c))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2))))))))))))))))
+* MOVE(CONST:1234564789,NAME(x))
+* MOVE(CONST:2147483647,NAME(y))
+* MOVE(CONST:1,NAME(b))
+* MOVE(CONST:-1,NAME(c))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:1)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:2)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:3)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:10)))
+* CALL(NAME(println),NAME(x))
+* CALL(NAME(println),NAME(y))
+* CALL(NAME(println),NAME(b))
+* CALL(NAME(println),NAME(c))
+* CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
+a = 100
+a = #t1 = 5 2 2
+a = code call to: NAME(sum), args: 
+label: L6
+label: L7
+a = #t2 = a -1 1
+x = 1234564789
+y = 2147483647
+b = 1
+c = -1
+
+Programme y86 :
+
+.pos 0
+	irmovl stack,%esp
+	jmp main
+
+main:
+	pushl ebx
+	pushl esi
+	irmovl 100,%eax
+	rmmovl %eax,la
+	irmovl #t1 = 5 2 2,%eax
+	rmmovl %eax,la
+	irmovl code call to: NAME(sum), args: ,%eax
+	rmmovl %eax,la
+L6:
+L7:
+	irmovl #t2 = a -1 1,%eax
+	rmmovl %eax,la
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	popl esi
+	popl ebx
+	halt
+
+mult:
+	mrmovl 4(%esp), %ecx
+	mrmovl 8(%esp), %edx
+	xorl %eax, %eax
+multbcl:
+	andl %edx, %edx
+	je multfin
+	addl %ecx, %eax
+	isubl 1,%edx
+	jmp multbcl
+multfin: ret
+div:
+	popl %eax
+	popl %eax
+
+	.align 4
+la:	.long 0
+lb:	.long 0
+lc:	.long 0
+lx:	.long 0
+ly:	.long 0
+stack:
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -160,6 +327,120 @@ Intermediate Code:
 * CALL(NAME(println),NAME(p))
 * CALL(NAME(println),MEM(NAME(p)))
 ** SEQ(MOVE(CONST:1234564789,NAME(x)),SEQ(MOVE(CONST:2147483647,NAME(y)),SEQ(MOVE(CONST:1,NAME(b)),SEQ(MOVE(CONST:-1,NAME(c)),SEQ(MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:1))),SEQ(MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:2))),SEQ(MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:3))),SEQ(MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:10))),SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(EXP(CALL(NAME(println),NAME(y))),SEQ(EXP(CALL(NAME(println),NAME(b))),SEQ(EXP(CALL(NAME(println),NAME(c))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))),SEQ(MOVE(MEM(NAME(q)),NAME(null)),SEQ(MOVE(CONST:-1,MEM(NAME(q))),SEQ(EXP(CALL(NAME(println),MEM(NAME(q)))),SEQ(EXP(CALL(NAME(println),NAME(p))),SEQ(MOVE(MEM(NAME(p)),NAME(null)),SEQ(EXP(CALL(NAME(println),NAME(p))),SEQ(MOVE(NAME(x),MEM(NAME(p))),SEQ(EXP(CALL(NAME(println),MEM(NAME(p)))),SEQ(MOVE(MEM(NAME(r)),NAME(null)),SEQ(MOVE(CONST:65536,MEM(NAME(r))),SEQ(EXP(CALL(NAME(println),MEM(NAME(r)))),SEQ(MOVE(MEM(NAME(p)),NAME(null)),SEQ(EXP(CALL(NAME(println),NAME(p))),EXP(CALL(NAME(println),MEM(NAME(p))))))))))))))))))))))))))))))
+* MOVE(CONST:1234564789,NAME(x))
+* MOVE(CONST:2147483647,NAME(y))
+* MOVE(CONST:1,NAME(b))
+* MOVE(CONST:-1,NAME(c))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:1)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:2)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:3)))
+* MOVE(CONST:-1,MEM(BINOP(0,NAME(d),CONST:10)))
+* CALL(NAME(println),NAME(x))
+* CALL(NAME(println),NAME(y))
+* CALL(NAME(println),NAME(b))
+* CALL(NAME(println),NAME(c))
+* CALL(NAME(println),MEM(BINOP(0,NAME(d),CONST:2)))
+* MOVE(CONST:-1,MEM(NAME(q)))
+* CALL(NAME(println),MEM(NAME(q)))
+* CALL(NAME(println),NAME(p))
+* CALL(NAME(println),NAME(p))
+* MOVE(NAME(x),MEM(NAME(p)))
+* CALL(NAME(println),MEM(NAME(p)))
+* MOVE(CONST:65536,MEM(NAME(r)))
+* CALL(NAME(println),MEM(NAME(r)))
+* CALL(NAME(println),NAME(p))
+* CALL(NAME(println),MEM(NAME(p)))
+a = 100
+a = #t1 = 5 2 2
+a = code call to: NAME(sum), args: 
+label: L6
+label: L7
+a = #t2 = a -1 1
+x = 1234564789
+y = 2147483647
+b = 1
+c = -1
+x = 1234564789
+y = 2147483647
+b = 1
+c = -1
+null = label: sss
+null = label: sss
+null = label: sss
+null = label: sss
+
+Programme y86 :
+
+.pos 0
+	irmovl stack,%esp
+	jmp main
+
+main:
+	pushl ebx
+	pushl esi
+	pushl edi
+	irmovl 100,%eax
+	rmmovl %eax,la
+	irmovl #t1 = 5 2 2,%eax
+	rmmovl %eax,la
+	irmovl code call to: NAME(sum), args: ,%eax
+	rmmovl %eax,la
+L6:
+L7:
+	irmovl #t2 = a -1 1,%eax
+	rmmovl %eax,la
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	popl edi
+	popl esi
+	popl ebx
+	halt
+
+mult:
+	mrmovl 4(%esp), %ecx
+	mrmovl 8(%esp), %edx
+	xorl %eax, %eax
+multbcl:
+	andl %edx, %edx
+	je multfin
+	addl %ecx, %eax
+	isubl 1,%edx
+	jmp multbcl
+multfin: ret
+div:
+	popl %eax
+	popl %eax
+
+	.align 4
+la:	.long 0
+lb:	.long 0
+lnull:	.long 0
+lc:	.long 0
+lx:	.long 0
+ly:	.long 0
+stack:
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -274,11 +555,135 @@ Intermediate Code:
 * MOVE(CONST:1,NAME(y))
 * CALL(NAME(println),BINOP(-1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))
 * MOVE(BINOP(1,NAME(y),CONST:1),NAME(y))
-SEQ(Label(L8),SEQ(CJUMP(0,NAME(y),CONST:5,L9,L10),SEQ(Label(L9),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(-1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(BINOP(1,NAME(y),CONST:1),NAME(y))),SEQ(JUMP(NAME(L8),L8),Label(L10))))))
+SEQ(Label(L13),SEQ(CJUMP(11,NAME(y),CONST:5,L14,L15),SEQ(Label(L14),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(-1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(BINOP(1,NAME(y),CONST:1),NAME(y))),SEQ(JUMP(NAME(L13),L13),Label(L15))))))
 * CALL(NAME(println),CONST:-1)
 * MOVE(BINOP(1,NAME(x),CONST:1),NAME(x))
-SEQ(Label(L3),SEQ(CJUMP(0,NAME(x),CONST:10,L4,L5),SEQ(Label(L4),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L6,L7),SEQ(Label(L6),SEQ(SEQ(MOVE(CONST:1,NAME(y)),SEQ(Label(L8),SEQ(CJUMP(0,NAME(y),CONST:5,L9,L10),SEQ(Label(L9),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(-1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(BINOP(1,NAME(y),CONST:1),NAME(y))),SEQ(JUMP(NAME(L8),L8),Label(L10))))))),SEQ(Label(L7),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(BINOP(1,NAME(x),CONST:1),NAME(x)))),SEQ(JUMP(NAME(L3),L3),Label(L5))))))
-** SEQ(MOVE(CONST:1,NAME(x)),SEQ(Label(L3),SEQ(CJUMP(0,NAME(x),CONST:10,L4,L5),SEQ(Label(L4),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L6,L7),SEQ(Label(L6),SEQ(SEQ(MOVE(CONST:1,NAME(y)),SEQ(Label(L8),SEQ(CJUMP(0,NAME(y),CONST:5,L9,L10),SEQ(Label(L9),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(-1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(BINOP(1,NAME(y),CONST:1),NAME(y))),SEQ(JUMP(NAME(L8),L8),Label(L10))))))),SEQ(Label(L7),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(BINOP(1,NAME(x),CONST:1),NAME(x)))),SEQ(JUMP(NAME(L3),L3),Label(L5)))))))
+SEQ(Label(L8),SEQ(CJUMP(11,NAME(x),CONST:10,L9,L10),SEQ(Label(L9),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L11,L12),SEQ(Label(L11),SEQ(SEQ(MOVE(CONST:1,NAME(y)),SEQ(Label(L13),SEQ(CJUMP(11,NAME(y),CONST:5,L14,L15),SEQ(Label(L14),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(-1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(BINOP(1,NAME(y),CONST:1),NAME(y))),SEQ(JUMP(NAME(L13),L13),Label(L15))))))),SEQ(Label(L12),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(BINOP(1,NAME(x),CONST:1),NAME(x)))),SEQ(JUMP(NAME(L8),L8),Label(L10))))))
+** SEQ(MOVE(CONST:1,NAME(x)),SEQ(Label(L8),SEQ(CJUMP(11,NAME(x),CONST:10,L9,L10),SEQ(Label(L9),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L11,L12),SEQ(Label(L11),SEQ(SEQ(MOVE(CONST:1,NAME(y)),SEQ(Label(L13),SEQ(CJUMP(11,NAME(y),CONST:5,L14,L15),SEQ(Label(L14),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(-1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(BINOP(1,NAME(y),CONST:1),NAME(y))),SEQ(JUMP(NAME(L13),L13),Label(L15))))))),SEQ(Label(L12),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(BINOP(1,NAME(x),CONST:1),NAME(x)))),SEQ(JUMP(NAME(L8),L8),Label(L10)))))))
+* MOVE(CONST:1,NAME(x))
+* CALL(NAME(println),NAME(x))
+* MOVE(CONST:1,NAME(y))
+* CALL(NAME(println),BINOP(-1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))
+* MOVE(BINOP(1,NAME(y),CONST:1),NAME(y))
+SEQ(Label(L21),SEQ(CJUMP(11,NAME(y),CONST:5,L22,L23),SEQ(Label(L22),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(-1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(BINOP(1,NAME(y),CONST:1),NAME(y))),SEQ(JUMP(NAME(L21),L21),Label(L23))))))
+* CALL(NAME(println),CONST:-1)
+* MOVE(BINOP(1,NAME(x),CONST:1),NAME(x))
+SEQ(Label(L16),SEQ(CJUMP(11,NAME(x),CONST:10,L17,L18),SEQ(Label(L17),SEQ(SEQ(EXP(CALL(NAME(println),NAME(x))),SEQ(SEQ(CJUMP(14,NAME(x),NAME(x),L19,L20),SEQ(Label(L19),SEQ(SEQ(MOVE(CONST:1,NAME(y)),SEQ(Label(L21),SEQ(CJUMP(11,NAME(y),CONST:5,L22,L23),SEQ(Label(L22),SEQ(SEQ(EXP(CALL(NAME(println),BINOP(-1,BINOP(2,CONST:1000,CONST:-1),NAME(y)))),MOVE(BINOP(1,NAME(y),CONST:1),NAME(y))),SEQ(JUMP(NAME(L21),L21),Label(L23))))))),SEQ(Label(L20),EXP(CALL(NAME(println),CONST:-1)))))),MOVE(BINOP(1,NAME(x),CONST:1),NAME(x)))),SEQ(JUMP(NAME(L16),L16),Label(L18))))))
+a = 100
+a = #t1 = 5 2 2
+a = code call to: NAME(sum), args: 
+label: L6
+label: L7
+a = #t2 = a -1 1
+x = 1234564789
+y = 2147483647
+b = 1
+c = -1
+x = 1234564789
+y = 2147483647
+b = 1
+c = -1
+null = label: sss
+null = label: sss
+null = label: sss
+null = label: sss
+x = 1
+label: L17
+label: L18
+label: L19
+label: L20
+y = 1
+label: L22
+label: L23
+y = #t3 = y 1 1
+x = #t4 = x 1 1
+
+Programme y86 :
+
+.pos 0
+	irmovl stack,%esp
+	jmp main
+
+main:
+	pushl ebx
+	pushl esi
+	pushl edi
+	irmovl 100,%eax
+	rmmovl %eax,la
+	irmovl #t1 = 5 2 2,%eax
+	rmmovl %eax,la
+	irmovl code call to: NAME(sum), args: ,%eax
+	rmmovl %eax,la
+L6:
+L7:
+	irmovl #t2 = a -1 1,%eax
+	rmmovl %eax,la
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl 1,%ecx
+	rmmovl %ecx,lx
+L17:
+L18:
+L19:
+L20:
+	irmovl 1,%edx
+	rmmovl %edx,ly
+L22:
+L23:
+	irmovl #t3 = y 1 1,%edx
+	rmmovl %edx,ly
+	irmovl #t4 = x 1 1,%ecx
+	rmmovl %ecx,lx
+	popl edi
+	popl esi
+	popl ebx
+	halt
+
+mult:
+	mrmovl 4(%esp), %ecx
+	mrmovl 8(%esp), %edx
+	xorl %eax, %eax
+multbcl:
+	andl %edx, %edx
+	je multfin
+	addl %ecx, %eax
+	isubl 1,%edx
+	jmp multbcl
+multfin: ret
+div:
+	popl %eax
+	popl %eax
+
+	.align 4
+la:	.long 0
+lb:	.long 0
+lnull:	.long 0
+lc:	.long 0
+lx:	.long 0
+ly:	.long 0
+stack:
 --- CheckType NodeList
 --- CheckType NodeAssign
 --- CheckType NodeId
@@ -297,365 +702,131 @@ SEQ(Label(L3),SEQ(CJUMP(0,NAME(x),CONST:10,L4,L5),SEQ(Label(L4),SEQ(SEQ(EXP(CALL
 
 
 ** Enregistre fct:sum
-Label(L11)
+** SEQ(Label(L24),MOVE(EXP(t2),BINOP(1,NAME(i),NAME(j))))
+funct; SEQ(Label(L25),MOVE(EXP(t3),BINOP(1,NAME(i),NAME(j))))
+a = 100
+a = #t1 = 5 2 2
+a = code call to: NAME(sum), args: 
+label: L6
+label: L7
+a = #t2 = a -1 1
+x = 1234564789
+y = 2147483647
+b = 1
+c = -1
+x = 1234564789
+y = 2147483647
+b = 1
+c = -1
+null = label: sss
+null = label: sss
+null = label: sss
+null = label: sss
+x = 1
+label: L17
+label: L18
+label: L19
+label: L20
+y = 1
+label: L22
+label: L23
+y = #t3 = y 1 1
+x = #t4 = x 1 1
+
+Programme y86 :
+
+.pos 0
+	irmovl stack,%esp
+	jmp main
+
+main:
+	pushl ebx
+	pushl esi
+	pushl edi
+	irmovl 100,%eax
+	rmmovl %eax,la
+	irmovl #t1 = 5 2 2,%eax
+	rmmovl %eax,la
+	irmovl code call to: NAME(sum), args: ,%eax
+	rmmovl %eax,la
+L6:
+L7:
+	irmovl #t2 = a -1 1,%eax
+	rmmovl %eax,la
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl 1234564789,%ecx
+	rmmovl %ecx,lx
+	irmovl 2147483647,%edx
+	rmmovl %edx,ly
+	irmovl 1,%ebx
+	rmmovl %ebx,lb
+	irmovl -1,%esi
+	rmmovl %esi,lc
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl label: sss,%edi
+	rmmovl %edi,lnull
+	irmovl 1,%ecx
+	rmmovl %ecx,lx
+L17:
+L18:
+L19:
+L20:
+	irmovl 1,%edx
+	rmmovl %edx,ly
+L22:
+L23:
+	irmovl #t3 = y 1 1,%edx
+	rmmovl %edx,ly
+	irmovl #t4 = x 1 1,%ecx
+	rmmovl %ecx,lx
+	popl edi
+	popl esi
+	popl ebx
+	halt
+
+mult:
+	mrmovl 4(%esp), %ecx
+	mrmovl 8(%esp), %edx
+	xorl %eax, %eax
+multbcl:
+	andl %edx, %edx
+	je multfin
+	addl %ecx, %eax
+	isubl 1,%edx
+	jmp multbcl
+multfin: ret
+div:
+	popl %eax
+	popl %eax
+
+	.align 4
+la:	.long 0
+lb:	.long 0
+lnull:	.long 0
+lc:	.long 0
+lx:	.long 0
+ly:	.long 0
+stack:
 ** Enregistre fct:pgcd
-Label(L12)
 * MOVE(CONST:0,NAME(i))
-SEQ(Label(L13),SEQ(CJUMP(0,NAME(i),NAME(j),L14,L15),SEQ(Label(L14),SEQ(MOVE(CONST:0,NAME(i)),SEQ(JUMP(NAME(L13),L13),Label(L15))))))
+SEQ(Label(L27),SEQ(CJUMP(15,NAME(i),NAME(j),L28,L29),SEQ(Label(L28),SEQ(MOVE(CONST:0,NAME(i)),SEQ(JUMP(NAME(L27),L27),Label(L29))))))
 * MOVE(BINOP(-1,NAME(i),NAME(j)),NAME(i))
 * MOVE(BINOP(-1,NAME(j),NAME(i)),NAME(j))
-//println(pgcd(78, 90));
-
-
-
-Intermediate Code:
-* MOVE(CONST:5,NAME(x))
-* CALL(NAME(sum),CONST:3CONST:5)
-* MOVE(CALL(NAME(sum),CONST:3CONST:5),NAME(x))
-* CALL(NAME(sum),CONST:3CONST:5)
-* CALL(NAME(println),CALL(NAME(sum),CONST:3CONST:5))
-** SEQ(MOVE(CONST:5,NAME(x)),SEQ(MOVE(CALL(NAME(sum),CONST:3CONST:5),NAME(x)),EXP(CALL(NAME(println),CALL(NAME(sum),CONST:3CONST:5)))))
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeId
---- CheckType NodeCallFct
---- CheckType NodeLiteral
---- CheckType NodeLiteral
-- NodeCallFct well typed
-- Assign well typed
---- CheckType NodeCallFct
---- CheckType NodeCallFct
---- CheckType NodeLiteral
---- CheckType NodeLiteral
-- NodeCallFct well typed
-- NodeCallFct well typed
-- NodeList well typed
-*** Typage correct
-
-
-
-*************************************************
-*** Fichier data/progr6.lea
-[INFO] $$  : multiple line comment.
-[INFO] $$$ : documentation comment.
-
-
-//
-// gestion complexe de la pile
-// 
-** Enregistre fct:fact1
-Label(L18)
-* CALL(NAME(fact1),BINOP(-1,NAME(k),CONST:1))
-** Enregistre fct:fact2
-Label(L21)
-* CALL(NAME(fact2),BINOP(-1,NAME(k),CONST:1))
-** Enregistre fct:hanoi
-Label(L24)
-* CALL(NAME(hanoi),NAME(a)NAME(c)NAME(b)BINOP(-1,NAME(k),CONST:1))
-* CALL(NAME(println),NAME(a))
-* CALL(NAME(println),CONST:-1)
-* CALL(NAME(println),NAME(c))
-* CALL(NAME(hanoi),NAME(b)NAME(a)NAME(c)BINOP(-1,NAME(k),CONST:1))
-** Enregistre fct:impair
-** Enregistre fct:pair
-Label(L29)
-* MOVE(CONST:0,NAME(b))
-* MOVE(CONST:1,NAME(b))
-* CALL(NAME(impair),BINOP(-1,NAME(i),CONST:1))
-* MOVE(CALL(NAME(impair),BINOP(-1,NAME(i),CONST:1)),NAME(b))
-** Enregistre fct:impair
-Label(L34)
-* CALL(NAME(pair),BINOP(-1,NAME(i),CONST:1))
-
-
-
-Intermediate Code:
-* CALL(NAME(fact1),CONST:6)
-* CALL(NAME(println),CALL(NAME(fact1),CONST:6))
-* CALL(NAME(fact2),CONST:6)
-* CALL(NAME(println),CALL(NAME(fact2),CONST:6))
-* CALL(NAME(hanoi),CONST:-1CONST:-1CONST:-1CONST:4)
-* CALL(NAME(pair),CONST:1001)
-* CALL(NAME(println),CALL(NAME(pair),CONST:1001))
-* CALL(NAME(pair),CONST:1000)
-* CALL(NAME(println),CALL(NAME(pair),CONST:1000))
-** SEQ(EXP(CALL(NAME(println),CALL(NAME(fact1),CONST:6))),SEQ(EXP(CALL(NAME(println),CALL(NAME(fact2),CONST:6))),SEQ(EXP(CALL(NAME(hanoi),CONST:-1CONST:-1CONST:-1CONST:4)),SEQ(EXP(CALL(NAME(println),CALL(NAME(pair),CONST:1001))),EXP(CALL(NAME(println),CALL(NAME(pair),CONST:1000)))))))
---- CheckType NodeList
---- CheckType NodeCallFct
---- CheckType NodeCallFct
---- CheckType NodeLiteral
-- NodeCallFct well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeCallFct
---- CheckType NodeLiteral
-- NodeCallFct well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeLiteral
---- CheckType NodeLiteral
---- CheckType NodeLiteral
---- CheckType NodeLiteral
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeCallFct
---- CheckType NodeLiteral
-- NodeCallFct well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeCallFct
---- CheckType NodeLiteral
-- NodeCallFct well typed
-- NodeCallFct well typed
-- NodeList well typed
-*** Typage correct
-
-
-
-*************************************************
-*** Fichier data/progr7.lea
-[INFO] $$  : multiple line comment.
-[INFO] $$$ : documentation comment.
-
-
-//
-// tableaux
-// 
-
-
-
-Intermediate Code:
-* MOVE(CONST:-1,MEM(BINOP(0,NAME(week),CONST:0)))
-* MOVE(CONST:-1,MEM(BINOP(0,NAME(week),CONST:1)))
-* MOVE(CONST:-1,MEM(BINOP(0,NAME(week),CONST:2)))
-* MOVE(CONST:-1,MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)))
-* MOVE(CONST:-1,MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:4)),CONST:22)),CONST:7)))
-* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)))
-* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:4)))
-* CALL(NAME(println),MEM(BINOP(0,NAME(week),CONST:1)))
-** SEQ(MOVE(CONST:-1,MEM(BINOP(0,NAME(week),CONST:0))),SEQ(MOVE(CONST:-1,MEM(BINOP(0,NAME(week),CONST:1))),SEQ(MOVE(CONST:-1,MEM(BINOP(0,NAME(week),CONST:2))),SEQ(MOVE(CONST:-1,MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3))),SEQ(MOVE(CONST:-1,MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:4)),CONST:22)),CONST:7))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:3)))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),CONST:2)),CONST:17)),CONST:4)))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(week),CONST:1)))))))))))
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
-- NodeList well typed
-*** Typage correct
-
-
-
-*************************************************
-*** Fichier data/progr8.lea
-[INFO] $$  : multiple line comment.
-[INFO] $$$ : documentation comment.
-
-
-//
-// tableaux et enumérés
-// 
-** Enregistre types: (TypeItemEnum@SUNDAY=0, TypeItemEnum@MONDAY=1, TypeItemEnum@TUESDAY=2, TypeItemEnum@WEDNESDAY=3, TypeItemEnum@THURSDAY=4, TypeItemEnum@FRIDAY=5, TypeItemEnum@SATURDAY=6)
-** Enregistre types: (TypeItemEnum@JANUARY=0, TypeItemEnum@FEBRUARY=1, TypeItemEnum@MARCH=2, TypeItemEnum@APRIL=3, TypeItemEnum@MAY=4, TypeItemEnum@JUNE=5, TypeItemEnum@JULY=6, TypeItemEnum@AUGUST=7, TypeItemEnum@SEPTEMBER=8, TypeItemEnum@OCTOBER=9, TypeItemEnum@NOVEMBER=10, TypeItemEnum@DECEMBER=11)
-
-
-
-Intermediate Code:
-* MOVE(CONST:-1,MEM(BINOP(0,NAME(week),NAME(MONDAY))))
-* MOVE(CONST:-1,MEM(BINOP(0,NAME(week),NAME(TUESDAY))))
-* MOVE(CONST:-1,MEM(BINOP(0,NAME(week),NAME(WEDNESDAY))))
-* MOVE(CONST:-1,MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))))
-* MOVE(CONST:-1,MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))))
-* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))))
-* CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))))
-* CALL(NAME(println),MEM(BINOP(0,NAME(week),NAME(TUESDAY))))
-** SEQ(MOVE(CONST:-1,MEM(BINOP(0,NAME(week),NAME(MONDAY)))),SEQ(MOVE(CONST:-1,MEM(BINOP(0,NAME(week),NAME(TUESDAY)))),SEQ(MOVE(CONST:-1,MEM(BINOP(0,NAME(week),NAME(WEDNESDAY)))),SEQ(MOVE(CONST:-1,MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH)))),SEQ(MOVE(CONST:-1,MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH)))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:1)),NAME(MARCH))))),SEQ(EXP(CALL(NAME(println),MEM(BINOP(0,MEM(BINOP(0,MEM(BINOP(0,NAME(year),NAME(SATURDAY))),CONST:17)),NAME(MARCH))))),EXP(CALL(NAME(println),MEM(BINOP(0,NAME(week),NAME(TUESDAY))))))))))))
---- CheckType NodeList
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeAssign
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
---- CheckType NodeLiteral
-- Assign well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
---- CheckType NodeCallFct
---- CheckType NodeArrayAccess
-- ArrayAccess well typed
-- NodeCallFct well typed
-- NodeList well typed
-*** Typage correct
-
-
-
-*************************************************
-*** Fichier data/progr9.lea
-[INFO] $$  : multiple line comment.
-[INFO] $$$ : documentation comment.
-
-
-$$ **************************************************
- ************************************************** $$
-$$$
-Type declaration part
-$$$
-** Enregistre types: TypeString
-** Enregistre types: TypeInt_null
-** Enregistre types: TypeBoolean
-** Retrouve types: chaine TypeString
-///named2 = unknown; // error		//UnknownType
-$$$ Enum $$$
-** Enregistre types: TypeString
-** Enregistre types: (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
-///xxx = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, aa, ab, ac, ad, ae, af, ag, ah); // error
-** Enregistre types: (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
-** Enregistre types: TypeArrayRange[TypeInt_64..TypeInt_81]
-$$ 
-Cas
-D'erreur
-$$
-///range3 = 81 .. 64; //error			//InvalidType
-///range4 = Friday .. Unknown; // error	//NoSuchField
-///range5 = Friday .. Monday; // error	//InvalidType@subrange_type
-** Enregistre types: TypeArrayRange[TypeInt_1..TypeInt_5]
-///range7 = Friday .. Tuesday; // error "range not valid" //InvalidType@subrange_type
-///range8 = Monday .. April; // error "incoherent range" //A GERER
-$$$ Array $$$
-** Enregistre types: TypeArrayRange[TypeInt_1..TypeInt_11]
-** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeInt_null)
-** Retrouve types: range1 TypeArrayRange[TypeInt_64..TypeInt_81]
-** Enregistre types: TypeArray(TypeArrayRange[TypeInt_64..TypeInt_81], TypeInt_null)
-** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
-** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_5], TypeInt_null)
-** Retrouve types: DaysOfWeek (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
-$$ 
-Cas
-D'erreur
-$$
-// UNKNWOWN TYPE
-** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray((TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6), TypeInt_null))
-[UnknownType] type: range3 has not been defined
-// error "Range type expected"
-** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray(TypeNamed_range3, TypeInt_null))
-$$$ Pointers $$$
-** Enregistre types: TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray(TypeArrayRange[TypeInt_3..TypeInt_6], TypeInt_null))
-** Enregistre types: TypePointer(TypeInt_null)
-** Retrouve types: DaysOfWeek (TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6)
-$$$
-Variable declaration part
-$$$
-** Enregistre types: TypePointer(TypeArray(TypeArrayRange[TypeInt_1..TypeInt_32], TypeArray((TypeItemEnum@Sunday=0, TypeItemEnum@Monday=1, TypeItemEnum@Tuesday=2, TypeItemEnum@Wednesday=3, TypeItemEnum@Thursday=4, TypeItemEnum@Friday=5, TypeItemEnum@Saturday=6), TypeInt_null)))
-///x : boolean; // error "Variable x yet declared" // RedefinitionVariable
-** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
-** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
-** Retrouve types: ptr1 TypePointer(TypeInt_null)
-** Retrouve types: Months (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
-** Retrouve types: range1 TypeArrayRange[TypeInt_64..TypeInt_81]
-** Retrouve types: range2 TypeArrayRange[TypeInt_1..TypeInt_5]
-** Retrouve types: Months (TypeItemEnum@January=0, TypeItemEnum@February=1, TypeItemEnum@March=2, TypeItemEnum@April=3, TypeItemEnum@May=4, TypeItemEnum@June=5, TypeItemEnum@July=6, TypeItemEnum@August=7, TypeItemEnum@September=8, TypeItemEnum@October=9, TypeItemEnum@November=10, TypeItemEnum@December=11)
-** Enregistre fct:goo
-///function goo(i : integer, j : integer) : boolean;//RedefinitionFunctionPrototype //error "procedure or function declared twice"
-** Enregistre fct:foo
-///result^ = hoo(i, j); // error "function not declared" //NoSuchFieldException
-Label(L39)
-* CALL(NAME(goo),NAME(i)NAME(j))
-* MOVE(CALL(NAME(goo),NAME(i)NAME(j)),MEM(NAME(result)))
-** Enregistre fct:goo
-///function goo(i : integer, j : integer) : boolean begin return false; end //RedefinitionFunction // error "function already defined"
-Label(L40)
-///b = 2; // error "Type error in affectation"
-///l = m2; // error "Type error in affectation" //m2 range 4, l range 5
-//b = foo(3); // error "Type error in calling expression"			//PAS GERE Checktype invalid
-//b = foo(3, false); // error "Type error in calling expression"	//PAS GERE Checktype invalid
-//x = foo(3, 7); // error "Type error in calling expression"		//PAS GERE Checktype invalid
-//z2 [ Thursday ] = 36; // error "Type error in array access "		//PAS GERE
-//IL Y AVAIT UN CRASH ICI RIP
-///y = z [ false ]; // error "Type error in array access" 		// InvalidArrayAccess
-///y = z [ 4 ]; // error "Type error in affectation"			// HANDLED
-///b = z [ 4 ]; // error "Type error in affectation"			// HANDLED
-///z = k [ 4 ]; // error "Type error in affectation"			// HANDLED
-///b = z2 [ Thursday ]; // error "Type error in affectation"	// HANDLED
-///z2 = 36; 													// Accessible variable expected
-Size is : 13
-///b = !(2 < false) && (x == 1) && (p == null); // // error "Type error in comparison"
-///b = !(2 < x) && (x == 1) && p ; // // error "Type error in logical expression"
-///b = !(2 < x) && (x == 1 + false) && p ; // // error "Type error in arithmetic expression"
-///p = 0; // error "Type error in affectation" //InvalidAffectation
-//new x; // error "Type error in pointer access expression" //InvalidPointerAccess
-///p^ = false;		//INVALID AFFECTATION OK
-///x^ = null; // error "Type error in pointer access expression"
-///dispose x;  // error "Type error in pointer access expression" //InvalidPointerAccess
-
-
-
-Intermediate Code:
-* MOVE(CONST:0,NAME(b))
-* MOVE(NAME(l),NAME(l))
-* CALL(NAME(foo),CONST:3CONST:7)
-* MOVE(MEM(CALL(NAME(foo),CONST:3CONST:7)),NAME(b))
-* CALL(NAME(goo),CONST:3CONST:7)
-* MOVE(CALL(NAME(goo),CONST:3CONST:7),NAME(b))
-* MOVE(CONST:36,MEM(BINOP(0,NAME(z2),CONST:1)))
-* MOVE(MEM(BINOP(0,NAME(z2),CONST:1)),NAME(x))
-* CALL(NAME(goo),MEM(BINOP(0,NAME(z2),CONST:1))CONST:1)
-* MOVE(CALL(NAME(goo),MEM(BINOP(0,NAME(z2),CONST:1))CONST:1),NAME(b))
+** SEQ(Label(L26),SEQ(SEQ(Label(L27),SEQ(CJUMP(15,NAME(i),NAME(j),L28,L29),SEQ(Label(L28),SEQ(MOVE(CONST:0,NAME(i)),SEQ(JUMP(NAME(L27),L27),Label(L29)))))),SEQ(SEQ(CJUMP(12,NAME(i),NAME(i),L30,L31),SEQ(Label(L30),SEQ(MOVE(BINOP(-1,NAME(i),NAME(j)),NAME(i)),SEQ(Label(L31),MOVE(BINOP(-1,NAME(j),NAME(i)),NAME(j)))))),MOVE(EXP(t4),NAME(i)))))
+* MOVE(CONST:0,NAME(i))
+SEQ(Label(L33),SEQ(CJUMP(15,NAME(i),NAME(j),L34,L35),SEQ(Label(L34),SEQ(MOVE(CONST:0,NAME(i)),SEQ(JUMP(NAME(L33),L33),Label(L35))))))
+* MOVE(BINOP(-1,NAME(i),NAME(j)),NAME(i))
+* MOVE(BINOP(-1,NAME(j),NAME(i)),NAME(j))
+funct; SEQ(Label(L32),SEQ(SEQ(Label(L33),SEQ(CJUMP(15,NAME(i),NAME(j),L34,L35),SEQ(Label(L34),SEQ(MOVE(CONST:0,NAME(i)),SEQ(JUMP(NAME(L33),L33),Label(L35)))))),SEQ(SEQ(CJUMP(12,NAME(i),NAME(i),L36,L37),SEQ(Label(L36),SEQ(MOVE(BINOP(-1,NAME(i),NAME(j)),NAME(i)),SEQ(Label(L37),MOVE(BINOP(-1,NAME(j),NAME(i)),NAME(j)))))),MOVE(EXP(t5),NAME(i)))))

@@ -1,6 +1,9 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
-public class LabelLocationList {
+import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeList;
+
+public class LabelLocationList extends IntermediateCode{
 	private LabelLocation head;
 	private LabelLocationList tail;
 
@@ -16,6 +19,18 @@ public class LabelLocationList {
 			return head.toString() + "," + tail.toString();
 		return head.toString();
 
+	}
+
+	@Override
+	public void canonicalTransformation() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Code linearize(CodeList cl) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

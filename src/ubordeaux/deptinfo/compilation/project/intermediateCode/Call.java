@@ -19,20 +19,17 @@ public class Call extends Exp {
 	
 	@Override
 	public String toString() {
-		return "CALL(" + func.toString() + "," + args.toString() + ")";
+		if(args != null)
+			return "CALL(" + func.toString() + "," + args.toString() + ")";
+		return "CALL(" + func.toString() + ", void )";
 	}
 
 	public Code linearize(CodeList cl) {
-		ArrayList<CodeIdent> args_array = new ArrayList<>();
 		
-		args_array.add(new CodeIdent(args.getHead().toString()));
-		//for()
+		CodeList args_array = new CodeList();
 
 		CodeCall res = new CodeCall(func.toString(), args_array);
-		cl.add(res);
 		return res;
-		
-		//cl.add(new CodeCall(func.linearize(cl), args.linearize(cl)));
 	}
 
 

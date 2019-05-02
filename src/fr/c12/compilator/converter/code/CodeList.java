@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import fr.c12.compilator.converter.AssemblyTable;
 
-public class CodeList {
+public class CodeList extends Code{
     private ArrayList<Code> list;
     private int idnum;
 
@@ -28,6 +28,7 @@ public class CodeList {
     }
 
     public ArrayList<String> assemble (AssemblyTable at) {
+    	System.out.println(this);
 		ArrayList<String> s = new ArrayList<String> ();
 		for (int i = 0; i < list.size (); i ++)
 		    s.addAll (list.get (i).assemble (at));

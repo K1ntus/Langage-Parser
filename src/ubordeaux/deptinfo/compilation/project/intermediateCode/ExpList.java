@@ -37,10 +37,10 @@ public class ExpList extends IntermediateCode {
 		return "Explist(null,null)";
 	}
 
-	@Override
 	public Code linearize(CodeList cl) {
-		// TODO Auto-generated method stub
-		return null;
+		head.linearize(cl);
+		tail.linearize(cl);
+		return cl;
 	}
 
 }

@@ -1,17 +1,26 @@
 var
 a: integer;
-b: string;
+b: integer;
 d: string;
 c: string;
+
+
+function sum(i : integer, j : integer) : integer
+var k:integer;
+begin
+  return (i+j);
+end
+
 
 begin
 
 
 a = 100;
 a = 5 * 2;
-
+a = sum(3, 5);
 while (a >= 0) do
 	begin
+	
 	println (a);
 	a = a - 1;
 	end	

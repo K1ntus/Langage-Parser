@@ -118,10 +118,10 @@ public class Parser extends beaver.Parser {
 		if(generate_intermediate_code) {
 			l_res.addAll(l);
 			System.out.println("Intermediate Code:");
-			System.out.println("** " + l.generateIntermediateCode().toString());
+			System.out.println("** " + l_res.generateIntermediateCode().toString());
 		}
 
-	    return _symbol_l;
+	    return _symbol_l_res;
 				}
 			},
 			new Action() {	// [1] constant_declaration_part = 
@@ -712,17 +712,27 @@ public class Parser extends beaver.Parser {
 						new NodeList(args));
 				}
 			},
-			new Action() {	// [78] readln_statement = TOKEN_READLN expression.e TOKEN_SEMIC
+			new Action() {	// [78] readln_statement = TOKEN_READLN expression.args TOKEN_SEMIC
 				public Symbol reduce(Symbol[] _symbols, int offset) {
-					final Symbol _symbol_e = _symbols[offset + 2];
-					final NodeExp e = (NodeExp) _symbol_e.value;
+					final Symbol _symbol_args = _symbols[offset + 2];
+					final NodeExp args = (NodeExp) _symbol_args.value;
 					 
+			
+
+			TypeTuple params_tuple = null;
+
+			if(args instanceof NodeCallFct) {
+				NodeCallFct tmp = (NodeCallFct) args;
+				params_tuple= new TypeTuple(new TypeFeature(tmp.getName(), tmp.getType()));
+			} else {
+				params_tuple= new TypeTuple(new TypeFeature("readln nodelist", args.getType()));
+			}
+
+			
 			return new NodeCallFct(
-				"readln", 
-				new TypeFunct("readln", 
-					new TypeTuple(e.getType()), 
-					e.getType()),
-				new NodeList());
+					"readln",
+					new TypeFunct("readln", new TypeTuple(), args.getType()),
+					new NodeList());
 				}
 			},
 			new Action() {	// [79] return_statement = TOKEN_RETURN expression.node TOKEN_SEMIC

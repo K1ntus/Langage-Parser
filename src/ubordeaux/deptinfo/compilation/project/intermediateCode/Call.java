@@ -12,6 +12,7 @@ public class Call extends Exp {
 	
 	@Override
 	public String toString() {
+		System.out.println("BUG HAPPER NOW ! "+func + "  " + args);
 		return "CALL(" + func.toString() + "," + args.toString() + ")";
 	}
 

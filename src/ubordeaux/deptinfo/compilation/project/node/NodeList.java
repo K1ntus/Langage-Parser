@@ -74,17 +74,15 @@ public final class NodeList extends Node {
 	
 	public ExpList generateIntermediateCodeListArgs() {
 		
-		if (this.size() > 0) {
-			Node head = this.getList().get(0);
-				this.elts.remove(0);
-				if(this.size() > 0)
-					return new ExpList((Exp)head.generateIntermediateCode(), ((NodeList)this).generateIntermediateCodeListArgs());
-				else
-					return new ExpList((Exp)head.generateIntermediateCode(), null);
-		}
+		Node clone = this.clone();
 		
+		if (clone.size() > 0) {
+				Node head = clone.getList().get(0);
+				clone.elts.remove(0);
+				return new ExpList((Exp)head.generateIntermediateCode(), ((NodeList)clone).generateIntermediateCodeListArgs());
+			}
 		
-		return new ExpList(this.generateIntermediateCodeListArgs().getHead(), null);
+		return null;
 
 		
 		

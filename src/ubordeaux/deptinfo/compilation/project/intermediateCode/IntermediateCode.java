@@ -11,5 +11,5 @@ public abstract class IntermediateCode {
 	public abstract void canonicalTransformation();
 	
 	// Intermediate code -> y86 as String
-	public abstract String toy86();
+	public String toy86() {return "";}
 }

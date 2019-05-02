@@ -10,7 +10,11 @@ public class Move extends Stm {
 	}
 	
 	public String toString() {
-		return "MOVE(" + dst.toString() + "," + src.toString() + ")";
+		
+		if(src != null)
+			return "MOVE(" + dst.toString() + "," + src.toString() + ")";
+		
+		return "MOVE(" + dst.toString() + "," + src + ")";
 	}
 
 	@Override

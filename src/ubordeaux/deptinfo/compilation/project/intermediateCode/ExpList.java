@@ -27,10 +27,14 @@ public class ExpList extends IntermediateCode {
 
 	@Override
 	public String toString() {
-		if(this.tail != null && this.head != null)
+		if(this.tail != null && this.head != null) {
+			System.out.println("tail and head not null");
 			return this.head.toString() + this.tail.toString();
-		else if(this.head != null)
+		}
+		else if(this.head != null) {
+			System.out.println("head not null");
 			return this.head.toString();
+		}
 		return "Explist(null,null)";
 	}
 	

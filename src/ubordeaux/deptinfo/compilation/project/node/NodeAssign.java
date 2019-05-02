@@ -6,6 +6,8 @@ import ubordeaux.deptinfo.compilation.project.intermediateCode.Mem;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Move;
 import ubordeaux.deptinfo.compilation.project.type.Type;
 import ubordeaux.deptinfo.compilation.project.type.TypeFunct;
+import ubordeaux.deptinfo.compilation.project.type.TypePointer;
+import ubordeaux.deptinfo.compilation.project.type.TypeVoid;
 
 public final class NodeAssign extends Node {
 
@@ -23,7 +25,7 @@ public final class NodeAssign extends Node {
 			return false;
 		Type lhsType = this.getLhs().getType();
 		Type rhsType = this.getRhs().getType();
-		if (lhsType == null || rhsType == null || !lhsType.equals(rhsType)) {
+		if ((lhsType == null || rhsType == null || !lhsType.equals(rhsType)) && !(lhsType instanceof TypePointer && rhsType instanceof TypeVoid)) {
 			System.err.println("- NodeAssign not well typed");
 			try {
 				System.err.println("- LeftType: " + lhsType.toString());				

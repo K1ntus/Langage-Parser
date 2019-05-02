@@ -167,10 +167,10 @@ program=
 		if(generate_intermediate_code) {
 			l_res.addAll(l);
 			System.out.println("Intermediate Code:");
-			System.out.println("** " + l.generateIntermediateCode().toString());
+			System.out.println("** " + l_res.generateIntermediateCode().toString());
 		}
 
-	    return _symbol_l; 
+	    return _symbol_l_res; 
     :}		
 	;
 	
@@ -722,14 +722,25 @@ println_statement=
 
 //TODO!!!!
 readln_statement=
-	TOKEN_READLN expression.e TOKEN_SEMIC	
+	TOKEN_READLN expression.args TOKEN_SEMIC	
 		{: 
+			
+
+			TypeTuple params_tuple = null;
+
+			if(args instanceof NodeCallFct) {
+				NodeCallFct tmp = (NodeCallFct) args;
+				params_tuple= new TypeTuple(new TypeFeature(tmp.getName(), tmp.getType()));
+			} else {
+				params_tuple= new TypeTuple(new TypeFeature("readln nodelist", args.getType()));
+			}
+
+			
 			return new NodeCallFct(
-				"readln", 
-				new TypeFunct("readln", 
-					new TypeTuple(e.getType()), 
-					e.getType()),
-				new NodeList());
+					"readln",
+					new TypeFunct("readln", new TypeTuple(), args.getType()),
+					new NodeList());
+		
 		:}
 	;
 

@@ -21,7 +21,7 @@ public abstract class Type extends ClonableSymbol implements Comparable<Type>, T
 	public abstract Type mapping(Subst subst);
 	
 	// Renvoie la déclaration en y86
-	public abstract String declarey86();
+	public String declarey86() {return "";};
 
 	/*
 	 * Algorithme d’unification: Soit A et B deux expressions de type \theta est le

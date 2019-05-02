@@ -57,7 +57,14 @@ public final class NodeIf extends Node {
         Label l2 = new Label(ifFalse);
 
         Binop rel = null;
-        rel = (Binop)((NodeRel)this.getExpNode()).generateIntermediateCode();
+        
+        if (this.getExpNode() instanceof NodeRel) {
+        	rel = (Binop)((NodeRel)this.getExpNode()).generateIntermediateCode();
+        }else {
+        	Exp t = new Const(1);//"true"
+        	Exp var = (Exp)this.getExpNode().generateIntermediateCode();
+        	rel = new Binop(14, var, t);
+        }
         
     	Cjump c = new Cjump(rel.getBinop(), rel.getLeft(), rel.getRight(), iftrue, ifFalse);
 

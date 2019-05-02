@@ -7,28 +7,25 @@ import fr.c12.compilator.converter.AssemblyTable;
 
 public class CodeCall extends Code{
 	private String funct_name;
-	private List<CodeIdent> elts;
+	private List<CodeIdent> args;
 	
 	private CodeCall() {
-		this.elts = new ArrayList<CodeIdent>();
-		
+		args = new ArrayList<>();
 	}
 	public CodeCall(String func_label, CodeIdent ... args ) {
 		this();
-		for (CodeIdent elt : args) {
-			elts.add(elt);
-		}
 		this.funct_name = func_label;
 		
 	}
 	public CodeCall(String func_label, List<CodeIdent> args ) {
-		elts = args;
+		this.args = args;
 		this.funct_name = func_label;
 		
 	}
 	
 
     public ArrayList<String> assemble (AssemblyTable at) {
+    	//System.out.println("CodeCall: " + this);
 		ArrayList<String> as = new ArrayList<String> ();
 		
 		boolean hasSave = false;
@@ -39,7 +36,7 @@ public class CodeCall extends Code{
 			hasSave = true;
 		}
 		
-		for(CodeIdent elt : elts) {
+		for(CodeIdent elt : args) {
 			as.add("\rmrmovl " + elt.getLabel() + ", " + at.registerName(rdst));
 		    as.add("\tpushl " + at.registerName(rdst));
 		}
@@ -54,7 +51,7 @@ public class CodeCall extends Code{
 
 	@Override
 	public String toString() {
-		return "code call to: " + this.funct_name + ", args: " + this.elts;
+		return "code call to: " + this.funct_name + ", args: " + this.args;
 	}
 
 }

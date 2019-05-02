@@ -70,9 +70,8 @@ public class Cjump extends Stm {
 		
 		//Code exp = new Binop(relop, left, right).linearize(cl);
 		cl.add(new CodeLabel(iftrue.toString()));
-		//left.linearize(cl);
 		cl.add(new CodeLabel(iffalse.toString()));
-		//right.linearize(cl);
-		return null;//exp;
+		
+		return null;
 	}
 }

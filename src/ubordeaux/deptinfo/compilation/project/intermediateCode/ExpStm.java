@@ -23,8 +23,9 @@ public class ExpStm extends Stm {
 
 	@Override
 	public Code linearize(CodeList cl) {
-		// TODO Auto-generated method stub
-		return null;
+		if(e != null)
+		e.linearize(cl);
+		return cl;
 	}
 
 

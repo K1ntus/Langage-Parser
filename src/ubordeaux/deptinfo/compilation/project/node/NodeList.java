@@ -4,13 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpList;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.ExpStm;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.IntermediateCode;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Seq;
-import ubordeaux.deptinfo.compilation.project.intermediateCode.Stm;
 import ubordeaux.deptinfo.compilation.project.type.Type;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.*;
 
 public final class NodeList extends Node {
 
@@ -79,17 +74,15 @@ public final class NodeList extends Node {
 	
 	public ExpList generateIntermediateCodeListArgs() {
 		
-		if (this.size() > 0) {
-			Node head = this.getList().get(0);
-				this.elts.remove(0);
-				if(this.size() > 0)
-					return new ExpList((Exp)head.generateIntermediateCode(), ((NodeList)this).generateIntermediateCodeListArgs());
-				else
-					return new ExpList((Exp)head.generateIntermediateCode(), null);
-		}
+		Node clone = this.clone();
 		
+		if (clone.size() > 0) {
+				Node head = clone.getList().get(0);
+				clone.elts.remove(0);
+				return new ExpList((Exp)head.generateIntermediateCode(), ((NodeList)clone).generateIntermediateCodeListArgs());
+			}
 		
-		return new ExpList(this.generateIntermediateCodeListArgs().getHead(), null);
+		return null;
 
 		
 		

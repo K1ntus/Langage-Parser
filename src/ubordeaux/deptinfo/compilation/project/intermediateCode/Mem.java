@@ -1,6 +1,7 @@
 package ubordeaux.deptinfo.compilation.project.intermediateCode;
 
 import fr.c12.compilator.converter.code.Code;
+import fr.c12.compilator.converter.code.CodeLabel;
 import fr.c12.compilator.converter.code.CodeList;
 
 public class Mem extends Exp {
@@ -22,7 +23,9 @@ public class Mem extends Exp {
 	@Override
 	public Code linearize(CodeList cl) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return new CodeLabel("sss");
+		//return null;
 	}
 	
 	

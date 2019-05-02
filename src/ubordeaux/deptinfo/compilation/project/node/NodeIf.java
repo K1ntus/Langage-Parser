@@ -2,6 +2,8 @@ package ubordeaux.deptinfo.compilation.project.node;
 
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Binop;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Cjump;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Const;
+import ubordeaux.deptinfo.compilation.project.intermediateCode.Exp;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Label;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.LabelLocation;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Seq;
@@ -62,7 +64,14 @@ public final class NodeIf extends Node {
         Label l2 = new Label(ifFalse);
 
         Binop rel = null;
-        rel = (Binop)((NodeRel)this.getExpNode()).generateIntermediateCode();
+        
+        if (this.getExpNode() instanceof NodeRel) {
+        	rel = (Binop)((NodeRel)this.getExpNode()).generateIntermediateCode();
+        }else {
+        	Exp t = new Const(1);//"true"
+        	Exp var = (Exp)this.getExpNode().generateIntermediateCode();
+        	rel = new Binop(14, var, t);
+        }
         
     	Cjump c = new Cjump(rel.getBinop(), rel.getLeft(), rel.getRight(), iftrue, ifFalse);
 
@@ -79,6 +88,6 @@ public final class NodeIf extends Node {
         				l2)));
     	}
     	return s;
-    }
+}
 
 }

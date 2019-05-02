@@ -8,6 +8,7 @@ import ubordeaux.deptinfo.compilation.project.intermediateCode.Label;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.LabelLocation;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Seq;
 import ubordeaux.deptinfo.compilation.project.intermediateCode.Stm;
+import ubordeaux.deptinfo.compilation.project.type.TypeBoolean;
 
 public final class NodeWhile extends Node {
 
@@ -39,38 +40,24 @@ public final class NodeWhile extends Node {
 		LabelLocation debut = new LabelLocation();
 		LabelLocation suite = new LabelLocation();
 		LabelLocation sortie = new LabelLocation();
-		int i = 0;
-		if((this.getExp()).getClass().toString() == "class ubordeaux.deptinfo.compilation.project.node.NodeOp") {
-			switch(((NodeRel)this.getExp()).getName()) {
-			case "==":
-				i = 0;
-			case "!=":
-				i =  1;
-			case "<":
-				i =  2;
-			case ">":
-				i =  3;
-			case "<=":
-				i =  4;
-			case ">=":
-				i =  5;
-			case "!<":
-				i =  6;
-			case "!<=":
-				i =  7;
-			case "!>":
-				i =  8;
-			case "!>=":
-				i =  9;
-			default:
-				i = 0;
-			}
-		}
+		
+		int i = -1;
+		NodeRel rel = null;
+		if (this.getExp() instanceof NodeRel) {
+			i = ((NodeRel)this.getExp()).getCodeOp();
+			rel = ((NodeRel)this.getExp()).clone();
+			
+        }else {
+        	NodeLiteral t = new NodeLiteral(new TypeBoolean(), true);//"true"
+        	rel = new NodeRel("eq", this.getExp(), t);
+        	i = 14;
+        }
 
 		//ce noeud Seq du code interm doit etre modifie sur le stm de gauche
+		
 		Seq s = new Seq(
 				new Label(debut), 
-				new Seq(new Cjump(i,(Exp)((NodeRel)this.getExp()).getOp1().generateIntermediateCode(),(Exp)((NodeRel)this.getExp()).getOp2().generateIntermediateCode(), suite, sortie),
+				new Seq(new Cjump(i,(Exp)rel.getOp1().generateIntermediateCode(),(Exp)rel.getOp2().generateIntermediateCode(), suite, sortie),
 						new Seq(new Label(suite),
 								new Seq((Stm) this.getStm().generateIntermediateCode(), new Seq(new Jump(debut), new Label(sortie))))));
 	System.out.println(s.toString());
